@@ -61,6 +61,10 @@
             Route::delete('/add-admin/{id}', 'AdminController@destroy')->name('admin.destroy');
             Route::get('/add-admin/{id}', 'AdminController@show')->name('admin.show');
             Route::get('/add-admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
+            Route::get('/medical','AdminController@medicalindex')->name('medical.list');
+            Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
+            // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
+            // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
     });
 
     Route::get('/medical-center', 'Auth\MedicalCenterRegisterController@showMedicalRegistrationForm')->name('medical.center.regester');

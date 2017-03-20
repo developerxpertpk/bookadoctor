@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Admin;
+use App\Medicalcenter;
 
 
 class AdminController extends Controller
@@ -129,6 +130,33 @@ class AdminController extends Controller
          * @param  \Illuminate\Http\Request  $request
          * @return \Illuminate\Http\Response
          */
+
+        public function medicalindex()
+        {
+
+           $medicallist = Medicalcenter::all();
+           // echo "<pre>";
+           // print_r($medicallist);
+         return view('admin.add-medical', compact('medicallist'));
+        }
+
+        public function medicalshow($id)
+        {
+            $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
+            // echo "<pre>";
+            // print_r($medicaldetail);
+            return view('admin.detail-medical', compact('medicaldetail'));
+        }
+
+        public function medicaledit()
+        {
+            return view('admin.add-medical');
+        }
+
+        public function medicaldestroy()
+        {
+            return view('admin.add-medical');
+        }
 
 
 

@@ -66,18 +66,46 @@
                             <a href="{{ route('admin.add') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Admin</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo" class="collapse">
+                                <li>
+                                    <a href="{{ route('medical.list') }}">Medical Center</a>
+                                </li>
+                                <li>
+                                    <a href="#">Schedule</a>
+                                </li>
+                                <!--<li>
+                                    <a href="#">View</a>
+                                </li>
+                                <li>
+                                    <a href="#">view</a>
+                                </li>-->
+                            </ul>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
                         </li>
                         <li>
-                            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
                         </li>
                         <li>
-                            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-wrench"></i> Manage Content<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo1" class="collapse">
+                                <li>
+                                    <a href="#">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#">Social Network Links</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="demo" class="collapse">
                                 <li>
@@ -93,7 +121,7 @@
                         </li>
                         <li>
                             <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

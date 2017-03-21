@@ -45,7 +45,7 @@ body{
 }
 #footer {
     border-top: 1px solid #ccc;
-    position: absolute;
+    position: relative;
     bottom: 0;
 
   }
@@ -424,3 +424,6 @@ padding: 7px 0;
 .form-horizontal .form-group .col-md-4:last-child{
     padding-right: 0;
 }
+
+
+/*admin side bar style*/

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use Illuminate\Http\Request;
 use Auth;
@@ -52,5 +53,6 @@ class DoctorController extends Controller
                  
          
          }
+
 
 }

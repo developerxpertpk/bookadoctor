@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $admin->save();
 
         $this->call(RoleTableSeeder::class);
+        $this->call(medicalcentersTableSeeder::class);
+        $this->call(DoctorTableSeeder::class);
     }
 }

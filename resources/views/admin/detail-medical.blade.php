@@ -40,7 +40,11 @@
       {{ $medicaldetail->working_hours }}<br/>
       {{ $medicaldetail->web_url }}<br/>
   </div>
-  <div class="col-md-5 medic-content"></div>     
+  <div class="col-md-5 medic-content">
+    {{ $medicaldetail->doctor()->where('medic_id',1)->get() }}
+    
+
+  </div>     
 </div>
 </div>       
 

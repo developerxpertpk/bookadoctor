@@ -23,6 +23,9 @@ class CreateDoctorsTable extends Migration
             $table->string('lname');
             $table->timestamps();
             $table->foreign('medic_id')->references('id')->on('medicalcenters');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('specilization_id')->references('id')->on('medicalcenterspecilazition');
+
         });
     }
 

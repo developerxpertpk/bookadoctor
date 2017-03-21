@@ -4,7 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+
 use Laravel\Cashier\Billable;
+
+use App\Doctor;
+
 
 
 class Medicalcenter extends Model
@@ -15,6 +19,10 @@ class Medicalcenter extends Model
     protected $primaryKey='user_id';
 
     public function getUser(){
-        return $this->belongsTo('User','user_id');
+        return $this->belongsTo('App\User');
+    }
+
+    public function doctor(){
+        return $this->hasmany('App\Doctor');
     }
 }

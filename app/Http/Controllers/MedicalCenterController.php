@@ -52,7 +52,7 @@ class MedicalCenterController extends Controller
      return redirect()->route('medical.center.profile')
          ->with('success', 'New Admin Regester successfully');
 
-     //ssreturn $profile->profilepic;
+     //return $profile->profilepic;
 
  }
  public function contact_insert(Request $request){
@@ -105,6 +105,23 @@ public function imageUpload(){
     return view('medicalcenter.image-upload');
 }
 
+
+      if($request['role']==2){
+             $patient_center = new doctors;
+             $patient_center->id = $adminnew->id;
+              $patient_center->fname ='';
+              $patient_center->lname ='';
+              $patient_center->medical_center_id ='';
+              $patient_center->specialization_id ='';
+              $patient_center->status ='';
+              
+
+             $patient_center->save();
+                  if(Auth::user()->role_id) {
+             return redirect()->route('doctor.register.info.form')
+                 ->with('success', 'New Admin Regester successfully');
+                  }
+          }
 
  }
 

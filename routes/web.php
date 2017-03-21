@@ -63,6 +63,7 @@
             Route::get('/add-admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
             Route::get('/medical','AdminController@medicalindex')->name('medical.list');
             Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
+            Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
             // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
             // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
     });
@@ -110,4 +111,11 @@ Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('
 //    else
 //        return view ( 'homenew' )->withMessage ( 'No Details found. Try to search again !' );
 //} );
-Auth::routes();
+
+    Route::get('/drregistration','DoctorController@index');
+    Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
+    Route::get('/dr_login','DoctorController@Showlogin');
+    
+    Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
+     Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+

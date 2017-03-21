@@ -53,7 +53,10 @@
             @else
                 {{-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                    <?
+                    die('aaaaaaa');
+                    ?>
+                        {{ Auth::user()->first_name }} <span class="caret"></span>
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
@@ -70,9 +73,10 @@
                         </li>
                     </ul>
                 </li> --}}
-<li> <img id="profile_avatar" src="http://drbooking/images/profile_pic/{{Auth::user()->is_MedicalCenter->profilepic}}"></li>
+<li> <img id="profile_avatar" src="http://drbooking/images/profile_pic/"></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->first_name }}&nbsp;{{ Auth::user()->last_name }}  <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ 
+                     Auth::user()->first_name }}&nbsp;{{ Auth::user()->last_name }}  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>

@@ -23,7 +23,17 @@
 
 </head>
 <body>
+@if(Auth::user()->role_id=1)
  @include('layouts.header')
+ @endif
+
+@if(Auth::user()->role_id=2)
+    @include('layouts.header')
+    @endif
+
+@if(Auth::user()->role_id=3)
+    @include('layouts.medical-header')
+    @endif
 
   <div id="home-wrapper">
 

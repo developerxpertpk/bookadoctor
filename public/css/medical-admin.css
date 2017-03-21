@@ -1,0 +1,137 @@
+
+/*medical center dashboard custom style sheet*/
+.medical-dashboard-header {
+    float: left;
+    width: 100%;
+}
+.medical-center-logo > img {
+    float: left;
+    height: 96px;
+    width: 200px;
+}
+.page-header {
+    float: left;
+    width: 100%;
+    margin: 20px 0 22px!important;
+}
+
+.side-nav {
+    background-color: #fff;
+    border: medium none;
+    border-radius: 0;
+    left: 225px;
+    margin-left: -225px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 410px!important;
+    position: fixed;
+    top: 51px;
+    width: 225px;
+}
+
+
+
+/* image preview on form css */
+
+#preview {
+    height: 180px;
+    width: 180px;
+    text-align: center;
+    margin: 20px;
+    display: none
+}
+
+.pre {
+    margin-right: 20px;
+    font-size: 13px
+}
+
+#previewimg {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-bottom: 1px solid #e4d3c3;
+    border-image: none;
+    border-left: 1px solid #e4d3c3;
+    border-radius: 100%;
+    border-top: 1px solid #e4d3c3;
+    float: left;
+    height: 140px;
+    margin-bottom: 5px;
+    padding: 8px;
+    width: 100%;
+}
+
+#file {
+    opacity: 0;
+    width: 115px;
+    height: 115px
+}
+
+.upload-section {
+    padding: 0 33%;
+}
+
+#upload {
+    background-image: url("img/abc.png");
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 10px grey;
+    cursor: pointer;
+    height: 115px;
+    margin-left: 35px;
+    margin-top: 31px;
+    width: 115px;
+}
+
+#message {
+    width: 100%;
+    font-size: 14px;
+    color: #123456;
+    margin-top: -90px;
+    float: left;
+    margin: 15px
+}
+
+#message span {
+    color: red;
+    font-size: 15px
+}
+
+#detail {
+    line-height: 20px;
+    float: left;
+    width: 270px;
+    font-size: 14px
+}
+
+ul {
+    margin-left: -25px
+}
+
+#textmessage {
+    float: right;
+    width: 50%;
+    margin: 15px 85px 0 0
+}
+
+div#img {
+    width: 200px;
+    height: 200px
+}
+
+#imageupload {
+    width: 150px;
+    height: 150px
+}
+
+#deleteimg {
+    cursor: pointer;
+    float: left;
+    margin-right: 6px;
+    margin-top: -1px;
+    width: 21px;
+}

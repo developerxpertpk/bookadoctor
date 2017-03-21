@@ -1,5 +1,5 @@
 {{-- @extends('layouts.app') --}}
-@extends('layouts.homeLayout')
+@extends('layouts.medicalCenterLayout')
 @section('content')
     <div class="container">
         <div class="row">
@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"> Medical Center Contact Information</div>
                     <div class="panel-body">
-                        {{Form::open(['route' => 'medical.center.info.submit','method'=>'POST','class'=>'form-horizontal', 'role'=>'form', 'files' => true])}}
+                        {{Form::open(['route' => 'medical.center.contact.info.submit','method'=>'POST','class'=>'form-horizontal', 'role'=>'form', 'files' => true])}}
                         {{ csrf_field() }}
                         <div class="col-md-12">
                             <div class="form-group{{ $errors->has('medical_center_email') ? ' has-error' : '' }}">
@@ -34,7 +34,7 @@
                                         {{--<strong>{{ $errors->first('title') }}</strong>--}}
                                     {{--</span>--}}
                                 {{--@endif--}}
-                                {{Form::text('contact_no', null, ['class' => 'form-control','id'=>'medical_center_contact_no','placeholder'=>'Medical Center COntact Number'])}}
+                                {{Form::text('contact_no', null, ['class' => 'form-control','id'=>'medical_center_contact_no','placeholder'=>'Medical Center Contact Number'])}}
                                 @if ($errors->has('contact_no'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('contact_no') }}</strong>
@@ -53,28 +53,41 @@
                                 @endif
                             </div>
 
-                            <div class="form-group col-md-4{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-4{{ $errors->has('country') ? ' has-error' : '' }}">
 
-                                <select id="countryId" class="countries form-control" name="country">
 
-                                    <option value="">Select Country</option>
-                                </select>
-
-                            </div>
-                            <div class="form-group col-md-4{{ $errors->has('address') ? ' has-error' : '' }}">
-
-                                <select id="stateId" class="states form-control" name="state">
-                                    <option value="">Select State</option>
-                                </select>
+                                {{Form::text('country', null, ['class' => 'form-control','id'=>'medical_center_country','placeholder'=>'Country'])}}
+                                @if ($errors->has('country'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
+                                @endif
 
                             </div>
-                            <div class="form-group col-md-4{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-4{{ $errors->has('state') ? ' has-error' : '' }}">
 
-                                <select id="cityId" class="cities form-control" name="city">
-                                    <option value="">Select City</option>
-                                </select>
 
-                            </div>
+                            {{Form::text('state', null, ['class' => 'form-control','id'=>'medical_center_state','placeholder'=>'State'])}}
+                            @if ($errors->has('state'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('state') }}</strong>
+                                    </span>
+                            @endif
+
+                        </div>
+                        <div class="form-group col-md-4{{ $errors->has('city') ? ' has-error' : '' }}">
+
+
+                        {{Form::text('city', null, ['class' => 'form-control','id'=>'medical_center_city','placeholder'=>'City'])}}
+                        @if ($errors->has('city'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                        @endif
+
+                    </div>
+
+
                             <div class="form-group{{ $errors->has('pincode') ? ' has-error' : '' }}">
 
 
@@ -86,6 +99,7 @@
                                 @endif
 
                             </div>
+
                             <div class="form-group{{ $errors->has('working_hours') ? ' has-error' : '' }}">
 
 

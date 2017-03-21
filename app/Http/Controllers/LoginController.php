@@ -31,7 +31,7 @@ return redirect()->intended(route('admin.dashboard'));
 
 
     public function showMedicalDashboard(){
-        return view('medicalcenter.home');
+        return view('medicalcenter.dashboard.home');
     }
 
     public function showPatientDashboard(){

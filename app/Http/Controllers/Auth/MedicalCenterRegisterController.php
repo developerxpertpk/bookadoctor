@@ -73,7 +73,7 @@ class MedicalCenterRegisterController extends Controller
 
                   $medical_center->save();
 //                  if(Auth::user()->role_id) {
-                      return redirect()->route('medical.center.info.form')
+                      return redirect()->route('medical.center.subscription.form')
                           ->with('success', 'New Admin Regester successfully');
 //                  }
               }

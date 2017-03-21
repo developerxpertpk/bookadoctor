@@ -27,7 +27,16 @@ body{
     float: left;
   width: 100%;
   }
-
+#home-wrapper {
+    float: left;
+    margin-top: 50px;
+    width: 100%;
+}
+#admin-wrapper {
+    float: left;
+    margin-top: 50px;
+    width: 100%;
+}
   #header {
   border-bottom: 1px solid #ccc;
     position: fixed;
@@ -45,7 +54,7 @@ body{
 }
 #footer {
     border-top: 1px solid #ccc;
-    position: relative;
+    /*position: absolute;*/
     bottom: 0;
 
   }

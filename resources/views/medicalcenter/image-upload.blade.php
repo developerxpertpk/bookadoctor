@@ -1,4 +1,3 @@
-{{-- @extends('layouts.app') --}}
 @extends('layouts.medicalCenterLayout')
 @section('content')
     <div class="container">
@@ -8,7 +7,11 @@
                     <div class="panel-heading">Medical Dashboard</div>
 
                     <div class="panel-body">
-                        You are logged in!
+                        {!! Form::open(array('url'=>'apply/multiple_upload','method'=>'POST', 'files'=>true)) !!}
+                        {!! Form::file('images[]', array('multiple'=>true)) !!}
+
+                        {!! Form::submit('Upload', array('class'=>'send-btn')) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-{{-- @extends('layouts.app') --}}
 @extends('layouts.medicalCenterLayout')
 @section('content')
     <div class="container">
@@ -8,7 +7,7 @@
                     <div class="panel-heading">Medical Dashboard</div>
 
                     <div class="panel-body">
-                        You are logged in!
+                       profile
                     </div>
                 </div>
             </div>

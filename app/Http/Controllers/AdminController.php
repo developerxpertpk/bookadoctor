@@ -148,9 +148,10 @@ class AdminController extends Controller
             return view('admin.detail-medical', compact('medicaldetail'));
         }
 
-        public function medicaledit()
+        public function medicaledit($id)
         {
-            return view('admin.add-medical');
+            $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
+            return view('admin.edit-medical',compact('medicaldetail'));
         }
 
         public function medicaldestroy()

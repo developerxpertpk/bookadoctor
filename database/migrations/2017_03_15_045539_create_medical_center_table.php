@@ -17,10 +17,13 @@ class CreateMedicalCenterTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->default(0);
             $table->integer('subscription_id')->unsigned()->default(0);
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('profilepic')->default('Anony.png');
             $table->string('medical_center_info');
             $table->string('title');
             $table->text('description');
+            $table->text('sub_domain_name')->nullable();
 //            contact info of medical center
             $table->string('medical_center_email');
             $table->string('web_url');
@@ -42,17 +45,6 @@ class CreateMedicalCenterTable extends Migration
 
         });
 
-        Schema::create('subscriptions', function ($table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->string('name');
-            $table->string('stripe_id');
-            $table->string('stripe_plan');
-            $table->integer('quantity');
-            $table->timestamp('trial_ends_at')->nullable();
-            $table->timestamp('ends_at')->nullable();
-            $table->timestamps();
-        });
     }
 
     /**

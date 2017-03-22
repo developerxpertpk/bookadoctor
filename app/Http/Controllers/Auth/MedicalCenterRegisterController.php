@@ -40,8 +40,7 @@ class MedicalCenterRegisterController extends Controller
       // echo $adminnew->all();
       
        $adminnew->role_id = $request['role'];
-       $adminnew->first_name = $request['first_name'];
-       $adminnew->last_name = $request['last_name'];
+
        $adminnew->email = $request['email'];
        $adminnew->password = bcrypt($request['password']);
                      $adminnew->save() ;
@@ -57,10 +56,14 @@ class MedicalCenterRegisterController extends Controller
 
               if($request['role']==3){
                   $medical_center = new Medicalcenter;
+
                   $medical_center->user_id = $adminnew->id;
+                  $medical_center->first_name = $request['first_name'];
+                  $medical_center->last_name = $request['last_name'];
                   $medical_center->medical_center_info ='';
                   $medical_center->title ='';
                   $medical_center->description ='';
+                  $medical_center->sub_domain_name =$request['sub_domain_name'];
                   $medical_center->medical_center_email ='';
                   $medical_center->web_url ='';
                   $medical_center->contact_no =0000000000;

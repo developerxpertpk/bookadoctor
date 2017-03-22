@@ -68,10 +68,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="/medical-center-info"><i class="fa fa-fw fa-user"></i>Edit Profile</a>
+                                <a href="/medical-center-info"><i class="fa fa-fw fa-edit"></i> Edit Basic Information</a>
                             </li>
                             <li>
-                                <a href="{{route('medical.center.contact.info.form')}}"><i class="fa fa-fw fa-user"></i>Edit Contact Information</a>
+                                <a href="{{route('medical.center.contact.info.form')}}"><i class="fa fa-fw fa-edit"></i> Edit Contact Information</a>
                             </li>
                             <li>
                                 <a href="{{route('medical.center.image.upload.form')}}"><i class="fa fa-fw fa-user"></i>Upload Images</a>
@@ -117,8 +117,8 @@
                         {{--Dr. Booking --}}
                         {{--</h1>--}}
                         <section class="page-header">
-                            <div class="medical-center-logo col-md-3"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_MedicalCenter->profilepic}}"></div>
-                            <div class="medical-center-tagline col-md-9"> <span class="page-tagline">
+                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_MedicalCenter->profilepic}}"></div>
+                            <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
                             <h1>{{Auth::user()->is_MedicalCenter->title}}</h1>
                         </span></div>
                         </section>

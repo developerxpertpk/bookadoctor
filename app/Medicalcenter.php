@@ -25,4 +25,7 @@ class Medicalcenter extends Model
     public function doctor(){
         return $this->hasmany('App\Doctor');
     }
+    public function is_gallery(){
+        return $this->hasmany('App\Medicalcenterimage');
+    }
 }

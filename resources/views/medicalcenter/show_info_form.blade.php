@@ -15,7 +15,8 @@
                                 <?php
                                 $fileN=Auth::user()->is_MedicalCenter->profilepic;
                                 ?>
-                                {{Form::file('profilepic', ['class' => 'form-control','id'=>'profilepic',$value=$fileN])}}
+                                    <input type="file" name="profilepic" class="form-control" id="profilepic" value="{{$fileN}}">
+                                {{--{{Form::file('profilepic', ['class' => 'form-control','id'=>'profilepic',$value=$fileN])}}--}}
                                 @if ($errors->has('profilepic'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('profilepic') }}</strong>

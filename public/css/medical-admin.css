@@ -4,15 +4,25 @@
     float: left;
     width: 100%;
 }
-.medical-center-logo > img {
+.medical-center-logo > img ,.profile-basic-info .image img{
+    border: 1px solid #000;
+    border-radius: 100%;
     float: left;
-    height: 96px;
-    width: 200px;
+    height: 118px;
+    padding: 4px;
+    width: 124px;
 }
 .page-header {
     float: left;
     width: 100%;
     margin: 20px 0 22px!important;
+}
+
+.page-header  .medical-center-tagline .page-tagline h1{
+    color: #000;
+    font-size: 38px !important;
+    margin-bottom: 11px;
+    margin-top: 31px;
 }
 
 .side-nav {
@@ -134,4 +144,21 @@ div#img {
     margin-right: 6px;
     margin-top: -1px;
     width: 21px;
+}
+
+
+/*profile page style*/
+.medical-center-profile-view .panel-body {
+    padding: 0!important;
+}
+.profile-headding {
+    border-bottom: 1px solid #ccc;
+    float: left;
+    padding: 16px;
+    width: 100%;
+    /*margin-bottom: 12px;*/
+}
+.profile-basic-info {
+    background: #ccc none repeat scroll 0 0;
+    padding: 12px 0;
 }

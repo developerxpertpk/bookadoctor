@@ -86,6 +86,8 @@ Route::get('/medical-center-contact-info', 'MedicalCenterController@show_contact
 Route::post('/medical-center-contact-info', 'MedicalCenterController@contact_insert')->name('medical.center.contact.info.submit');
 Route::get('/medical-center-profile','MedicalCenterController@getProfile')->name('medical.center.profile');
 Route::get('/medical-center-image-upload','MedicalCenterController@imageUpload')->name('medical.center.image.upload.form');
+Route::post('/medical-center-image-upload','MedicalcenterimageController@multiple_upload')->name('medical.center.image.upload.submit');
+Route::get('/medical-center-image-gallery','MedicalcenterimageController@gallery_images')->name('medical.center.image.gallery');
 
 Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
 //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');

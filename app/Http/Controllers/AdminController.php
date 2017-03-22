@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Admin;
 use App\Medicalcenter;
+use App\Doctor;
 
 
 class AdminController extends Controller
@@ -142,7 +143,10 @@ class AdminController extends Controller
 
         public function medicalshow($id)
         {
-            $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
+           // $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
+            $medicaldetail = Medicalcenter::find($id);
+            // $doc=$medicaldetail->doctor->fname;
+            // $doc= Doctor::medicalcenters();
             // echo "<pre>";
             // print_r($medicaldetail);
             return view('admin.detail-medical', compact('medicaldetail'));
@@ -154,9 +158,11 @@ class AdminController extends Controller
             return view('admin.edit-medical',compact('medicaldetail'));
         }
 
-        public function medicaldestroy()
+        public function medicaldestroy($id)
         {
-            return view('admin.add-medical');
+             Medicalcenter::find($id)->delete();
+            return redirect()->route('admin.detail-medical')
+                            ->with('success','Medical Center Deleted');
         }
 
 

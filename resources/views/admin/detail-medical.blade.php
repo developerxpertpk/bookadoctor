@@ -1,19 +1,10 @@
 @extends('layouts.adminLayout')
 @section('content')
-<div id="admin-content">
-         {!! Form::open(['route' => 'admin.add.submit','class' => 'add-admin-form','method'=>'POST','files'=> true]) !!}
-               @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-            {!! Form::close() !!}  
-    </div>
 <div class="show-admin">
     <?php $i=0;?>
   <div class="row">
-    <div class="col-md-8 medic"><h4>Medicalcenter Details</h4></div>
-    <div class="col-md-3 medic"><h4>Doctor's List</h4></div>
+    <div class="col-md-6 medic"><h4>Medicalcenter Details</h4></div>
+    <div class="col-md-5 medic"><h4>Doctor's List</h4></div>
     <div class="col-md-1"><a href="{{route('medical.list')}}" class="btn btn-info btn-sm">
           <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </a></div>
@@ -30,7 +21,7 @@
       <Strong>Timings:</Strong><br/>
       <Strong>Contact:</Strong>
       </div>
-      <div class="col-md-3 mediccontent">
+      <div class="col-md-5 mediccontent">
       {{ $medicaldetail->title }}<br/>
       {{ $medicaldetail->medical_center_info }}<br/>
       {{ $medicaldetail->description }}<br/>
@@ -40,11 +31,15 @@
       {{ $medicaldetail->working_hours }}<br/>
       {{ $medicaldetail->web_url }}<br/>
   </div>
-  <div class="col-md-5 medic-content">
-    {{ $medicaldetail->doctor()->where('medic_id',1)->get() }}
-    
+  <div class="col-md-3 mediccontent">
+  <div class="aligndoc">
+  @foreach($medicaldetail->doctors as $doctor)
 
-  </div>     
+  {{$doctor->fname}} {{$doctor->lname}}<br/>
+
+  @endforeach
+  </div>
+  </div>   
 </div>
 </div>       
 

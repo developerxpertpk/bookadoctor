@@ -29,7 +29,7 @@
        <td>
           <a class="btn btn-info" href="{{ route('medical.show',$item->id) }}">Show</a>
           <a class="btn btn-primary" href="{{ route('medical.edit',$item->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['admin.destroy', $item->id],'style'=>'display:inline']) !!}
+        {!! Form::open(['method' => 'DELETE','route' => ['medical.destroy', $item->id],'style'=>'display:inline']) !!}
         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
         </td>
 

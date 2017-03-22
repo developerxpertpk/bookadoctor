@@ -64,6 +64,7 @@ Auth::routes();
             Route::get('/medical','AdminController@medicalindex')->name('medical.list');
             Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
             Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
+            Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
             // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
             // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
     });

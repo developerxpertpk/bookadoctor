@@ -1,4 +1,4 @@
-@extends('layouts.homeLayout')
+@extends('layouts.default')
 
 @section('content')
  @include('slider.slider1')

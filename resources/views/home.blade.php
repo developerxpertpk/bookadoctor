@@ -1,5 +1,5 @@
 
-@extends('layouts.homeLayout')
+@extends('layouts.default')
 @section('content')
 <div class="container">
     <div class="row">

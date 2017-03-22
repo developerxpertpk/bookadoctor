@@ -23,6 +23,7 @@
 
 </head>
 <body>
+
 @if(Auth::user()->role_id=1)
  @include('layouts.header')
  @endif

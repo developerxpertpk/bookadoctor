@@ -12,25 +12,24 @@ use App\Medicalcenterspecilazition;
 class Doctor extends Model
 {
     use Notifiable;
+    protected $table = 'doctors';
 
     protected $fillable = [
-        'fname','lname','medical_center_id','specialization_id', 'status','user_id',
+        'fname','lname','medic_id','specialization_id', 'status','user_id',
     ];
 
      protected $hidden = [
          'role_id','remember_token',
     ];
-
-    //protected $fillable=array('user_id','medic_id','specilization_id','status','fname','lname');
-
+    
     public function user()
     {
-    	$this->belongsTo('User','user_id');
+    	$this->belongsTo(User::class);
     }
 
-    public function medical()
+     public function medicalcenters()
     {
-    	$this->hasOne('App\Medicalcenter');
+        return $this->belongsTo('App\Medicalcenter', 'medic_id');
     }
 
     public function special()

@@ -46,13 +46,13 @@ class DoctorController extends Controller
         }
 
 
-         public function show_doctor_dashboard(){
-
-          
-                    return view('doctor.showInfo'); 
-                 
-         
+         public function show_doctor_dashboard(Request $request){
+                    return view('doctor.showinfo'); 
          }
+         
+          public function showInfo(Request $request){
+            return view('doctor.showinfo');
+          }
 
 
 }

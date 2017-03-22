@@ -40,7 +40,6 @@
                                 @endif
                             </div>
 
-
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 {{Form::textarea('description', Auth::user()->is_MedicalCenter->description , ['class' => 'form-control','id'=>'description','cols'=>'30','rows'=>'6','placeholder'=>'Medical Center Description'])}}
                                 @if ($errors->has('description'))

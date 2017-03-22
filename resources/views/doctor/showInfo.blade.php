@@ -1,19 +1,29 @@
 {{-- @extends('layouts.app') --}}
-@extends('layouts.homeLayout')
+@extends('layouts.default')
 @section('content')
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading"> Doctor Profile</div>
                 <div class="panel-body">
-                     {{Form::open(['route' => 'medical.center.info.submit','method'=>'POST','class'=>'form-horizontal', 'role'=>'form', 'files' => true])}}
+                <?php
+                die('aaa');
+                ?>
+                
+                            {{Form::open(['route' => 'doctor.register.submit','method'=>'POST','class'=>'form-horizontal', 'role'=>'form', 'files' => true])}}
                             {{ csrf_field() }}
-                        <div class="col-md-3"> <img id="previewimg" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_doctor->profilepic}}" alt=""></div>
+ <div class="col-md-2 medic "><img src="{{asset('/images/profile_pic/'.$medicaldetail->profilepic)}}" alt="Profile Pic"/></div>
+                        <div class="col-md-3"> <img id="previewimg" src={{asset('/images/profile_pic/'}}" alt=""></div>
                         <div class="col-md-9">
                             <div class="form-group{{ $errors->has('profilepic') ? ' has-error' : '' }}">
+
+
                                 <?php
-                                $fileN=Auth::user()->is_doctor->profilepic;
+                              $fileN=Auth::user()->is_doctor->profilepic;
                                 ?>
                                 {{Form::file('profilepic', ['class' => 'form-control','id'=>'profilepic',$value=$fileN])}}
                                 @if ($errors->has('profilepic'))
@@ -22,6 +32,8 @@
                                     </span>
                                 @endif
                             </div>
+
+                   
 
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 {{Form::text('title', Auth::user()->is_doctor->title, ['class' => 'form-control','id'=>'medical_center_title','placeholder'=>'Doctors Name'])}}

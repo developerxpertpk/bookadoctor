@@ -24,6 +24,7 @@ class CreateMedicalCenterTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('sub_domain_name')->nullable();
+
 //            contact info of medical center
             $table->string('medical_center_email');
             $table->string('web_url');
@@ -44,6 +45,7 @@ class CreateMedicalCenterTable extends Migration
             $table->foreign('subscription_id')->references('id')->on('subscriptions')->onDelete('cascade');
 
         });
+
     }
 
     /**

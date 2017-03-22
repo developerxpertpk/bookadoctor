@@ -27,9 +27,12 @@ class medicalcentersTableSeeder extends Seeder
         $Medical1->save();
 
         $Medical2= new App\MedicalCenter;
+        $Medical2->first_name = 'Test';
+        $Medical2->last_name = 'test';
         $Medical2->medical_center_info="Medical-2";
         $Medical2->title="PGC";
         $Medical2->description="Something Something";
+        $Medical2->description="test.drbooking.com";
         $Medical2->medical_center_email="medic2@gmail.com";
         $Medical2->contact_no="9495969899";
         $Medical2->address="Somethig,Somethig,Somethig";

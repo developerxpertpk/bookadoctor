@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Lasta Name</label>
+                            <label for="username" class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
                                 <input id="lastname" type="text" class="form-control" name="last_name" value="{{ old('username') }}" required autofocus>
@@ -36,7 +36,39 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('domain_name') ? ' has-error' : '' }}">
+                            <label for="username" class="col-md-4 control-label">Sub Domain Name</label>
 
+                            <div class="col-md-6">
+                                <input id="domain_name" type="text" class="form-control" name="domain_name" value="{{ old('domain_name') }}" required autofocus>
+
+                                @if ($errors->has('domain_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('domain_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('sub_domain_name') ? ' has-error' : '' }}">
+                            <label for="username" class="col-md-4 control-label">Sub Domain</label>
+
+                            <div class="col-md-6">
+                                <input id="sub_domain_name" type="text" class="form-control" name="sub_domain_name" value="{{ old('sub_domain_name') }}" disabled autofocus>
+
+                                @if ($errors->has('sub_domain_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sub_domain_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function() {
+                                $('#domain_name').change(function () {
+                                    $('#sub_domain_name').val($(this).val() + '.drbooking.com');
+                                });
+                            });
+                        </script>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 

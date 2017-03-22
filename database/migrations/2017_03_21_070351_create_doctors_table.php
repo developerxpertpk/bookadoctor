@@ -29,6 +29,8 @@ class CreateDoctorsTable extends Migration
         });
     }
 
+    
+
     /**
      * Reverse the migrations.
      *

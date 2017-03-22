@@ -56,7 +56,8 @@ jQuery(document).ready(function() {
         $('#preview').css("display", "none");
         $('#message').css("display", "block");
     });
+
+    //function for creating sub domaib
+
+
 });
-
-
-

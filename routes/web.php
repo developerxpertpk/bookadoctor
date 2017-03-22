@@ -118,5 +118,8 @@ Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('
     Route::get('/dr_login','DoctorController@Showlogin');
     
     Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
-     Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+    Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+
+    //Route::get('/dr_login','DoctorController@showInfo');
+    Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
 

@@ -65,6 +65,45 @@
                             </div>
                             <div class="profile-headding"><span>Center Gallary</span> <a class="edit_pro_btn pull-right" href="{{route('medical.center.image.upload.form')}}"><i class="fa fa-picture-o"></i>Upload Images</a></div>
                             <div class="profile-body">
+
+                                        @foreach ($images_gallery as $key => $gallery_img)
+
+
+                                         <div class="col-md-3">
+
+
+
+
+
+
+                                            <a data-toggle="lightbox" href="#gal_{{$gallery_img->medical_center_id}}_{{$gallery_img->id}}">
+
+                                                <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}" class="small-img">
+
+                                            </a>
+
+                                            <div id="gal_{{$gallery_img->medical_center_id}}_{{$gallery_img->id}}" class="lightbox fade"  tabindex="-1" role="dialog" aria-hidden="true">
+
+                                                <div class='lightbox-dialog'>
+
+                                                    <div class='lightbox-content'>
+                                                        <button type="button" class="close" data-dismiss="lightbox" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}">
+
+                                                        <div class='lightbox-caption'>
+
+                                                            Write here your caption heress
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        @endforeach
+
                             </div>
                         </div>
                         </div>

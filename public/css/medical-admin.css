@@ -162,3 +162,26 @@ div#img {
     background: #ccc none repeat scroll 0 0;
     padding: 12px 0;
 }
+.profile-body {
+    float: left;
+    width: 100%;
+}
+.lightbox{
+
+    z-index: 1041;
+
+}
+
+.small-img{
+
+    height: 210px;
+    width: 100%;
+
+}
+
+.modal-backdrop {
+
+    position: absolute!important;
+    z-index: -1!important;
+
+}

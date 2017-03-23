@@ -14,7 +14,7 @@ class DoctorTableSeeder extends Seeder
         $Doctor1= new App\Doctor;
         $Doctor1->user_id="0";
         $Doctor1->medic_id="1";
-        $Doctor1->specilization_id="1";
+        $Doctor1->speciality_id="1";
         $Doctor1->status="1";
         $Doctor1->fname="Prashant";
         $Doctor1->lname="Singh";
@@ -23,7 +23,7 @@ class DoctorTableSeeder extends Seeder
         $Doctor2= new App\Doctor;
         $Doctor2->user_id="0";
         $Doctor2->medic_id="1";
-        $Doctor2->specilization_id="1";
+        $Doctor2->speciality_id="1";
         $Doctor2->status="1";
         $Doctor2->fname="Susheel";
         $Doctor2->lname="Singh";
@@ -32,7 +32,7 @@ class DoctorTableSeeder extends Seeder
         $Doctor3= new App\Doctor;
         $Doctor3->user_id="0";
         $Doctor3->medic_id="2";
-        $Doctor3->specilization_id="1";
+        $Doctor3->speciality_id="1";
         $Doctor3->status="1";
         $Doctor3->fname="Sumit";
         $Doctor3->lname="Singh";

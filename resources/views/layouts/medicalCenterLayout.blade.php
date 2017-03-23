@@ -17,12 +17,14 @@
     <link rel="stylesheet" href="{{ asset('css/medical-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
 
     {{-- flot js include for admin dashboard --}}
 
@@ -62,6 +64,18 @@
                         <a href="{{ route('home1.home1') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-sliders" aria-hidden="true"></i> Manage Service/Speciality <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-fw fa-edit"></i> Add Speciality</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                   <li>
                         <a href=""><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor
                     </li>
                     <li>

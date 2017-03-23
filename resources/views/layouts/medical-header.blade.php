@@ -74,7 +74,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_MedicalCenter->first_name }}&nbsp;{{ Auth::user()->is_MedicalCenter->last_name }}  <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/medical-center-profile"><i class="fa fa-fw fa-user"></i>Show Profile</a></li>
+                                        <li><a href="{{route('medical.center.image.gallery')}}"><i class="fa fa-fw fa-user"></i>Show Profile</a></li>
 
 
                                         <li>

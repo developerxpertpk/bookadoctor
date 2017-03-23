@@ -33,14 +33,24 @@
     margin-left: -225px !important;
     overflow-x: hidden;
     overflow-y: auto;
-    padding-bottom: 410px!important;
+    padding-bottom: 260px!important;
     position: fixed;
     top: 51px;
-    width: 225px;
+    width: 260px;
 }
 
 
+#wrapper {
+    padding-left: 260px;
+}
 
+.side-nav li ul li:hover a:hover,
+.side-nav li ul li:hover a:focus,
+.side-nav li ul li:hover a:active {
+    outline: none;
+    background-color: #c82506 !important;
+    color: #fff!important;
+}
 /* image preview on form css */
 
 #preview {
@@ -184,4 +194,8 @@ div#img {
     position: absolute!important;
     z-index: -1!important;
 
+}
+.side-nav li , .side-nav li a{
+    float: left!important;
+    width: 100%!important;
 }

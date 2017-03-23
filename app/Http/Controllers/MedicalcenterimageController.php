@@ -7,8 +7,9 @@ use App\Medicalcenter;
 use Auth;
 use Validator;
 use Redirect;
-//use Request;
+use File;
 use Session;
+
 use App\Medicalcenterimage;
 
 class MedicalcenterimageController extends Controller
@@ -25,7 +26,7 @@ class MedicalcenterimageController extends Controller
                 $validator = Validator::make(array('file'=> $file), $rules);
                 if($validator->passes()){
                     $destinationPath = public_path().'/images/gallery_pic/' ;
-                    $fileName = $file->getClientOriginalName() ;
+                    $fileName = rand(5,8).$file->getClientOriginalName();
                 $upload_success = $file->move($destinationPath, $fileName);
                 $uploadcount ++;
                 }
@@ -53,4 +54,23 @@ class MedicalcenterimageController extends Controller
 //            dd('hell');
             return view('medicalcenter.profile',compact('images_gallery'));
         }
+
+    public function destroy1($id)
+    {
+
+        $news = Medicalcenterimage::findOrFail($id);
+        $image_path = app_path("images/gallery_pic/{$news->images}");
+
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+          //  unlink($image_path);
+        }
+        $news->delete();
+
+
+
+//        Medicalcenterimage::find($id)->delete();
+        return redirect()->route('medical.center.image.gallery')
+            ->with('success','Image deleted successfully');
+    }
 }

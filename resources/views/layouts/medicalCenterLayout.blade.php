@@ -64,6 +64,18 @@
                         <a href="{{ route('home1.home1') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-sliders" aria-hidden="true"></i> Manage Service/Speciality <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-fw fa-edit"></i> Add Speciality</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                   <li>
                         <a href=""><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor
                     </li>
                     <li>

@@ -87,6 +87,9 @@
                                                 <div class='lightbox-dialog'>
 
                                                     <div class='lightbox-content'>
+                                                        {!! Form::open(['method' => 'DELETE','route' => ['image.destroy', $gallery_img->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                                        {!! Form::close() !!}
                                                         <button type="button" class="close" data-dismiss="lightbox" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                         <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}">
 

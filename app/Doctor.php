@@ -12,6 +12,9 @@ use App\Medicalcenterspecilazition;
 class Doctor extends Model
 {
     use Notifiable;
+
+   
+
     protected $table = 'doctors';
 
     protected $fillable = [
@@ -36,4 +39,9 @@ class Doctor extends Model
     {
     	$this->belongsTo('medicalcenterspecilazition','specilization_id');
     }
+
+     public function profile()
+     {
+        return $this->hasOne('App\User','user_id');
+    } 
 }

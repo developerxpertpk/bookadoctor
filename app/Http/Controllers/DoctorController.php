@@ -31,14 +31,51 @@ $doctor = Doctor::create([
 ]);
 return redirect('/dr_login');
 }
-public function Showlogin(){
-return view('doctor.dr_login');
-}
-public function show_doctor_dashboard(Request $request){
-return view('auth.login');
-}
 
-// public function showInfo(Request $request){
-//   return view('doctor.showinfo');
+ public function Showlogin()
+ {
+ 	return  view('doctor.dr_login');
+
+ }
+
+ public function login(Request $request){
+ 	 
+ 	 $email = $request['email'];
+ 	 $password = $request ['password'];
+	 Auth::attempt(['email'=> $request['email'],'password'=> $request ['password']]);
+
+
+ 	 if(Auth::check()){
+ 	 	
+ 	 	
+ 	 	$details = Doctor::where('user_id','=',Auth::User()->id )->first();
+ 	 	print_r($details);
+// dd($details);
+ 	 	
+ 	 	 	return view('doctor.showInfo',compact('details'));
+ 	 }
+
+ 	 else{
+
+ 	 	die('ssss');
+ 	 };
+ 	 //  {
+ 	 //   	
+
+ 	 //   }
+
+ }
+
+
+
+
+ 	
+// echo "hello";
 // }
+// public function show_doctor_dashboard(Request $request){
+	
+// return view('doctor.showinfo');
+
+
+
 }

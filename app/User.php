@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Medicalcenter', 'user_id');
 
     }
+
+    public function showInfo(){
+        return $this->belongsTo('App\Doctors', 'user_id');
+    }
 }
 
 

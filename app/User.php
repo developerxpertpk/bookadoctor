@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Profile;
 use App\Medicalcenter;
+use Mail;
 
 class User extends Authenticatable
 {
@@ -49,7 +50,31 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Medicalcenter', 'user_id');
 
+    }public function is_Doctor()
+    {
+        return $this->hasOne('App\Doctor', 'user_id');
+
     }
+
+
+
+    public static function generatePassword()
+    {
+        // Generate random string and encrypt it.
+        return bcrypt(str_random(35));
+    }
+    public static function sendWelcomeEmail($user)
+    {
+        // Generate a new reset password token
+        $token = app('auth.password.broker')->createToken($user);
+
+        // Send email
+        Mail::send('emails.welcome', ['user' => $user, 'token' => $token], function ($m) use ($user) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $m->to($user->email, $user->name)->subject('Welcome to APP');
+        });
+    }
+
 }
 
 

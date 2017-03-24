@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-use App\User;
-use App\Medicalcenter;
+//use App\User;
+//use App\Medicalcenter;
 use App\Medicalcenterspecilazition;
 
 class Doctor extends Model
@@ -35,5 +35,9 @@ class Doctor extends Model
     public function special()
     {
     	$this->belongsTo('medicalcenterspecilazition','specilization_id');
+    }
+    public function user_doctors()
+    {
+        return $this->belongsTo('App\User', 'id');
     }
 }

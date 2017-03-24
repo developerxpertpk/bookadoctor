@@ -60,6 +60,7 @@ Auth::routes();
                     Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
                     Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
                     Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
+
                     // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
                     // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
             });
@@ -85,7 +86,9 @@ Route::prefix('medical')->group(function(){
                     Route::post('/medical-center-image-upload','MedicalcenterimageController@multiple_upload')->name('medical.center.image.upload.submit');
                     Route::get('/medical-center-image-gallery','MedicalcenterimageController@gallery_images')->name('medical.center.image.gallery');
                     Route::delete('/medical-center-image-delete/{id}','MedicalcenterimageController@destroy1')->name('image.destroy');
-                    Route::get('/medical-center-add-service','MedicalcenterServiceController@index')->name('service.show.form');
+                    Route::get('/medical-center-add-service','MedicalcenterServiceController@add_services')->name('service.show.form');
+//                    Route::get('/add-doctor', 'MedicalcenterServiceController@index')->name('add.doctor.form');
+                    Route::resource('/add-doctor','MedicalcenterServiceController');
 
                     Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
             //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');

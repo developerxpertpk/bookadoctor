@@ -18,6 +18,6 @@ class Profile extends Model
 //    }
 
 public function getUser(){
-    return $this->belongsTo('User','user_id');
+    return $this->belongsTo('App\User','id');
 }
 }

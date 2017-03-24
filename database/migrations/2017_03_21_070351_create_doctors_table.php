@@ -15,18 +15,18 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('medic_id');
-            $table->integer('specilization_id')->default(1);
-            $table->integer('speciality_id')->default(3);
-            $table->string('status');
-            $table->string('fname');
-            $table->string('lname');
+            $table->integer('user_id')->unsigned();
+            $table->integer('medic_id')->unsigned();
+
+
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('status')->default(1);
             $table->timestamps();
             $table->foreign('medic_id')->references('id')->on('medicalcenters');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('specilization_id')->references('id')->on('medicalcenterspecilazition');
-            $table->foreign('speciality_id')->references('id')->on('speciality');
+//            $table->foreign('specilization_id')->references('id')->on('medicalcenterspecilazition');
+//            $table->foreign('speciality_id')->references('id')->on('speciality');
 
 
         });

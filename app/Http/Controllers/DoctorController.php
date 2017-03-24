@@ -48,8 +48,7 @@ return redirect('/dr_login');
  	 if(Auth::check()){
  	 	
  	 	
- 	 	$details = Doctor::where('user_id','=',Auth::User()->id )->first();
- 	 	print_r($details);
+ 	 	$details = Doctor::where('user_id','=',Auth::User()->id )->get();
 // dd($details);
  	 	
  	 	 	return view('doctor.showInfo',compact('details'));

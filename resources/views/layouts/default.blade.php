@@ -23,7 +23,6 @@
         <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/dropdown.js') }}" type="text/javascript"></script>
         <script src="http://igniteui.com/js/modernizr.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
         <script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
         <script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
     </head>

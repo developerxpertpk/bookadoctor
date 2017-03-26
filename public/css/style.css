@@ -14,6 +14,10 @@
 body{
       background-color: #ccc!important;
 }
+a{
+    outline: 0!important;
+
+}
 #wrapper {
     background: #fff none repeat scroll 0 0 !important;
     float: left;
@@ -434,5 +438,39 @@ padding: 7px 0;
     padding-right: 0;
 }
 
+.modal-backdrop {
+    position: static!important;
+    z-index: 0!important;
+}
+.modal-open .modal {
+    background: rgba(0,0,255,0.8);
+}
+#search {
+    margin-left: 18px;
+}
+.user {
+    float: left;
+    width: 100%;
+}
+.user-icon {
+    float: left;
+    width: 100%;
+}
+.user-icon .fa-user::before {
+    background: rgba(255,0,0,1);
+    border-radius: 100%;
+    color: #fff;
+    float: left;
+    font-size: 135px;
+    margin-top: -97px;
+    padding: 15px;
+    width: 176px;
+}
 
+@media (min-width: 768px) {
+    .modal-dialog {
+
+        margin: 179px auto !important;
+    }
+}
 /*admin side bar style*/

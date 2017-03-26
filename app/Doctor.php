@@ -15,11 +15,11 @@ class Doctor extends Model
     protected $table = 'doctors';
 
     protected $fillable = [
-        'fname','lname','medic_id','specialization_id', 'status','user_id',
+        'fname','lname','medic_id','specialization_id', 'status','user_id','role_id',
     ];
 
      protected $hidden = [
-         'role_id','remember_token',
+         'remember_token',
     ];
     
     public function user()

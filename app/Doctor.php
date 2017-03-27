@@ -5,7 +5,7 @@ namespace App;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-//use App\User;
+use App\User;
 //use App\Medicalcenter;
 use App\Medicalcenterspecilazition;
 
@@ -18,7 +18,7 @@ class Doctor extends Model
     protected $table = 'doctors';
 
     protected $fillable = [
-        'fname','lname','medic_id','specialization_id', 'status','user_id',
+        'fname','lname','medic_id','specialization_id', 'status','user_id','profile_pic',
     ];
 
      protected $hidden = [

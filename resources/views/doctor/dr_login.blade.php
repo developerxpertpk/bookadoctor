@@ -1,5 +1,5 @@
 {{-- @extends('layouts.app') --}}
-@extends('layouts.default')
+@extends('layouts.doctorLayout')
 @section('content')
 <div class="container">
     <div class="row">

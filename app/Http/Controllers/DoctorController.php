@@ -12,10 +12,9 @@ public function index(){
     return view('doctor.drregistration');
 }
 public function insert(Request $request ){
+	
 
     // echo ($request['first_name']);
-    
-
 $user = new User;
 	$user->email=$request['email'];
 	$user->password=bcrypt($request['password']);
@@ -27,14 +26,13 @@ $doctor = new Doctor;
 	$doctor->medic_id=1;
 	$doctor->user_id=$user->id;
 	$doctor->status=$request['status'];
-	$doctor->profile_pic='_DSC0188.jpg';
+	$doctor->profile_pic=$fileName;
+
+
+	 
+         // return view('doctor.show_profile');
+
 	$doctor->save();
-
-
-
-
-
-
 
 // $user = User::create([
 
@@ -53,8 +51,32 @@ $doctor = new Doctor;
 return redirect('/dr_login');
 }
 
+ public function update(Request $request){
+
+ 		$user  = new User;
+ 		$doctor = new Doctor;
+		$doctor->user_id=$user->id;
+	    //print_r($doctor);
+		//die('aaaaa');
+		 return redirect ('doctor.show_profile');
+	}
+
+ 	// if($file = $request->hasFile('profile_pic1')) {
+	 	
+  //        $file = $request->file('profile_pic1') ;
+  //        $fileName = $file->getClientOriginalName() ;
+  //        $extention = $file->getClientOriginalExtension();
+  //        $destinationPath = public_path().'/images/profile_pic/' ;
+  //        $file->move($destinationPath,$fileName);
+
+	
+	
+
+
+
  public function Showlogin()
  {
+ 	
  	return  view('doctor.dr_login');
 
  }
@@ -91,8 +113,10 @@ return redirect('/dr_login');
 
  }
  public function show_doctor_profile(){
- 	// echo "hello";
+
+ 	
  	return view('doctor.show_profile');
+
 
  }
  public function edit(Request $Request){
@@ -103,7 +127,7 @@ return redirect('/dr_login');
 
 
 
-
+// Auth::user()->is_Doctor->profile_pic
  	
 // echo "hello";
 // }

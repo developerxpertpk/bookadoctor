@@ -24,7 +24,7 @@
                             <li><a href="{{ route('login') }}">About Us</a></li>
                             <li><a href="{{ route('login') }}">Contact Us</a></li>
                             <li>
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">Regester</a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">Register</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ route('patient.regester')}}"><i class="fa fa-user" aria-hidden="true"></i> Patient</a></li>
                                     <li><a href="{{ route('medical.center.regester')}}"><i class="fa fa-user" aria-hidden="true"></i> Medical enter</a></li>
@@ -62,7 +62,7 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                            <li> <img id="profile_avatar" src="{{asset('images/profile_pic/{{Auth::user()->is_MedicalCenter->profilepic')}}"></li>
+                            <li> <img id="profile_avatar" src="{{asset('images/profile_pic')}}/{{Auth::user()->is_Doctor->profile_pic}}"></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_Doctor->first_name }}&nbsp;{{ Auth::user()->is_Doctor->last_name }}  <b class="caret"></b></a>
                                 <ul class="dropdown-menu">

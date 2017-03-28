@@ -60,6 +60,7 @@
                                 <i class="fa fa-bars" aria-hidden="true"></i>
                               </span>
             </button>
+            @section('sidebar')
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
@@ -120,10 +121,12 @@
 
                 </ul>
             </div>
+
         </div>
     </div>
     <div id="wrapper">
         <div id="bodder">
+        @endsection
             <section class="container-fluid">
 
                 <!-- Page Heading -->

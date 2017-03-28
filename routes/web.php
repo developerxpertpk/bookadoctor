@@ -124,4 +124,6 @@ Route::prefix('medical')->group(function(){
                     Route::post('/show-doctor-info','DoctorController@show_doctor_profile')->name('Doctor.show.profile');
                     //Route::get('/showInfo','DoctorController@ShowEdit');
                     Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
+                    Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');
+                    //Route::get('/doctor.show-profile','DoctorController@update');
                     //Doctors Module

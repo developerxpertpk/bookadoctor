@@ -25,8 +25,15 @@
 
             <!-- Authentication Links -->
             @if (Auth::guest())
+            @if(isset($page))
+
+              @foreach($page as $tabs)
+                <li><a href="{{ $tabs->slug }}"> {{ $tabs->title }}</a></li>
+                @endforeach
+              @else
                 <li><a href="{{ route('login') }}">About Us</a></li>
-                <li><a href="{{ route('login') }}">Contact Us</a></li>
+                <li><a href="{{ route('login') }}">Contact Us</a></li> 
+                @endif
                 <li>
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">Regester</a>
                   <ul class="dropdown-menu">

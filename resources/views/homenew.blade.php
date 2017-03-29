@@ -2,6 +2,7 @@
 
 @section('content')
  @include('slider.slider1')
+
  {{-- offer section start --}}
 <section class="offer-wrapper text-center">
   <a class="offer-btn" href="#"><span class="offer">Offer</span></a><a class="offer-tagline" href="#">Full Body Checkup + FREE doctor consultation starting at Rs. 599 only! Limited offer. Book Now!</a>

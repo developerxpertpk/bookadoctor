@@ -38,6 +38,7 @@
   {{$doctor->fname}} {{$doctor->lname}}<br/>
 
   @endforeach
+  {!! $medicaldetail->doctors->render() !!}
   </div>
   </div>   
 </div>

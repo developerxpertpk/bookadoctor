@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use App\Medicalcenter;
 use App\Doctor;
+use App\Page;
 
 
 class AdminController extends Controller
@@ -145,6 +146,7 @@ class AdminController extends Controller
         {
            // $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
             $medicaldetail = Medicalcenter::find($id);
+            $medicaldetail->setRelation('doctors', $medicaldetail->doctors()->paginate(8));
             // $doc=$medicaldetail->doctor->fname;
             // $doc= Doctor::medicalcenters();
             // echo "<pre>";
@@ -163,6 +165,56 @@ class AdminController extends Controller
              Medicalcenter::find($id)->delete();
             return redirect()->route('admin.detail-medical')
                             ->with('success','Medical Center Deleted');
+        }
+
+        public function showcmsfaq()
+        {
+            $pagelist = Page::all();
+            return view('admin.crudcms',compact('pagelist'));
+        }
+
+        public function createcmsfaq()
+        {
+            
+        }
+
+        public function editcms($id)
+        {
+            $pagedetail = Page::find($id);
+            return view('admin.editcms',compact('pagedetail','id'));
+        }
+
+        public function cmsstatus($id)
+        {
+            $pagedetail = Page::find($id);
+            if($pagedetail->status=="Inactive")
+            {
+                $pagedetail->status="Active";
+                $pagedetail->save();
+            }
+            else
+            {
+                $pagedetail->status="Inactive";
+                $pagedetail->save();
+            }
+            return $this->showcmsfaq();
+            
+        }
+
+        public function cmsupdate(Request $request,$id)
+        {
+            $this->validate($request, [
+          'title' => 'required',
+          'slug' => 'required',
+          'body' => 'required',
+
+            ]);
+            
+            Page::find($id)->update($request->all());
+            return redirect()->route('add.faq.show')
+                            ->with('success','Page record updated');
+
+
         }
 
 

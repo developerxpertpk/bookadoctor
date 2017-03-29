@@ -41,13 +41,13 @@ Auth::routes();
 //     return view('welcome');
 //   });
 
-    Route::get('/', function () {
-    return view('homenew');
-});
-    Route::post('/', 'HomenewController@index')->name('home1.home1');
+//     Route::get('/', function () {
+//     return view('homenew');
+// });
+    Route::get('/', 'HomenewController@index')->name('home1.home1');
+    
 // Route::get('/','AdminController@index')->name('admin.dashboard');
-
-
+    
 
     Route::get('/home', 'HomeController@index');
 
@@ -65,6 +65,12 @@ Auth::routes();
             Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
             Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
             Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
+            Route::get('/add-faq', 'AdminController@showcmsfaq')->name('add.faq.show');
+            Route::post('/add-faq', 'PageController@create')->name('add.faq.submit');
+            Route::get('/add-faq/{id}','AdminController@cmsstatus')->name('cms.status');
+            Route::get('/add-faq/{id}/edit','AdminController@editcms')->name('cms.edit');
+            Route::post('/add-faq/{id}/edit','AdminController@cmsupdate')->name('cms.edit.update');
+            Route::post('/add-faq/{id}/delete','AdminController@cmsdelete')->name('cms.destroy');
             // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
             // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
     });
@@ -124,4 +130,7 @@ Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('
 
     //Route::get('/dr_login','DoctorController@showInfo');
     Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
+
+
+    Route::get('/{page}','HomenewController@show')->name('dynamic');
 

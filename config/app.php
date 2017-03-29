@@ -180,6 +180,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //C-K Editor
+        Unisharp\Ckeditor\ServiceProvider::class,
+
     ],
 
     /*

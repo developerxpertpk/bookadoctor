@@ -7,9 +7,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"> Doctor Profile</div>
 					<div class="panel-body">
+						 <h4> You Are Logged In!!</h4>
 
-
-					{!!Form::open(array('file' => true, 'class' => 'form-horizontal' , 'method' => 'post' , 'route' => 'Doctor.show.info')) !!}
+					{!!Form::open(array('file' => true, 'class' => 'form-horizontal' , 'method' => 'post','route' => 'Doctor.show.profile' )) !!}
 
 					{{ csrf_field()}}
 
@@ -19,7 +19,7 @@
 
 					{{Form::text('status', Auth::user()->is_Doctor->status)}}
 
-					{!! Form::file('profile_pic1',null, array('class' => 'form-control')) !!}
+				
 
 					{{ Form::submit('Save') }}
 

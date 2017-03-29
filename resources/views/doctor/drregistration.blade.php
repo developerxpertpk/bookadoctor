@@ -36,7 +36,8 @@
                         <div class="form-group{{ $errors->has('speciality') ? ' has-error' : '' }}">
                             <label for="username" class="col-md-4 control-label">Specialization</label>
                             <div class="col-md-6">
-                                <input id="checkboxSelectCombo" type="text" class="form-control" name="speciality" value="{{ old('speciality') }}" required autofocus>
+
+                               <div id="magicsuggest">specialities</div>
                                 @if ($errors->has('speciality'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('speciality') }}</strong>

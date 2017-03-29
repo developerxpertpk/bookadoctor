@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
+    <link rel="stylesheet" href="{{asset('nicolasbize-magicsuggest-230b08b/magicsuggest-min.css') }}">
+    <script src="{{asset('nicolasbize-magicsuggest-230b08b/magicsuggest-min.js' )}}"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
@@ -27,6 +29,7 @@
     <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/dropdown.js') }}" type="text/javascript"></script>
 
     {{-- flot js include for admin dashboard --}}
 
@@ -127,6 +130,7 @@
     <div id="wrapper">
         <div id="bodder">
         @endsection
+        @section('Annoy')
             <section class="container-fluid">
 
                 <!-- Page Heading -->
@@ -143,6 +147,8 @@
                         </section>
                     </div>
                 </section>
+                </section>
+                @endsection
             @yield('content')
         </div>
     </div>

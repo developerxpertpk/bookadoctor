@@ -4,7 +4,8 @@ use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
-use App\Doctor;
+use App\Doctor; 
+use Image;
 class DoctorController extends Controller
 {
 
@@ -26,11 +27,8 @@ $doctor = new Doctor;
 	$doctor->medic_id=1;
 	$doctor->user_id=$user->id;
 	$doctor->status=$request['status'];
-	$doctor->profile_pic=$fileName;
-
-
-	 
-         // return view('doctor.show_profile');
+	//$doctor->profile_pic=$fileName;
+    // return view('doctor.show_profile');
 
 	$doctor->save();
 
@@ -62,18 +60,11 @@ return redirect('/dr_login');
 	}
 
  	// if($file = $request->hasFile('profile_pic1')) {
-	 	
   //        $file = $request->file('profile_pic1') ;
   //        $fileName = $file->getClientOriginalName() ;
   //        $extention = $file->getClientOriginalExtension();
   //        $destinationPath = public_path().'/images/profile_pic/' ;
   //        $file->move($destinationPath,$fileName);
-
-	
-	
-
-
-
  public function Showlogin()
  {
  	
@@ -82,7 +73,7 @@ return redirect('/dr_login');
  }
 
  public function login(Request $request){
- 	 
+ 
  	 $email = $request['email'];
  	 $password = $request ['password'];
 	 Auth::attempt(['email'=> $request['email'],'password'=> $request ['password']]);
@@ -107,26 +98,23 @@ return redirect('/dr_login');
  	 
 
  }
- public function ShowEdit()
- {
- 	return  view('doctor.showEdit');
+ // public function ShowEdit()
+ // {
+ // 	return  view('doctor.showEdit');
 
- }
- public function show_doctor_profile(){
+ // }
+ // public function show_doctor_profile(){
 
  	
- 	return view('doctor.show_profile');
+ // 	return view('doctor.show_profile');
 
 
- }
+ // }
  public function edit(Request $Request){
  	// echo "<pre>";
  	//  print_r($Request);
  	 return view('doctor.home');
  }
-
-
-
 // Auth::user()->is_Doctor->profile_pic
  	
 // echo "hello";
@@ -135,6 +123,29 @@ return redirect('/dr_login');
 	
 // return view('doctor.showinfo');
 
+public function profile(){
+	//die('hghghghhggh');
+	 return view ('doctor.profile', array('user' => Auth::User()) );
+}
+ public function update_profile(Request $request){
+ 	
+ 	if($request->hasFile('profile_image')){
 
 
+ 		$profile_image = $request->file('profile_image');
+ 		//echo $profile_image; die;
+ 		$filename = time() . '.' . $profile_image->getClientOriginalExtension();
+ 		Image::make($profile_image)->resize(300,300)->save(public_path('/images/profile_pic/' . $filename ));
+
+ 		$user  = Auth::user();
+ 		$user->is_doctor->profile_pic=$filename;
+ 		
+ 		$user->save();
+ 		Doctor::where('user_id',$user->id)->update(['profile_pic'=>$filename]);
+ 		
+
+ 	}
+ 		//echo "<pre>"; print_r(Auth::user()); die;
+ 	 return view ('doctor.profile', array('user' => Auth::User()) );
+ }
 }

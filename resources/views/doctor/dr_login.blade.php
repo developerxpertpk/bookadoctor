@@ -7,8 +7,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading"> Doctor Login</div>
                 <div class="panel-body">
+               
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('Doctor.login.submit') }}">
                         {!!csrf_field() !!}
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 

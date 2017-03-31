@@ -39,11 +39,7 @@ Auth::routes();
             // Route::get('/', function () {
             //     return view('welcome');
             //   });
-
-                    Route::get('/', function () {
-                    return view('homenew');
-                });
-                    Route::post('/', 'HomenewController@index')->name('home1.home1');
+                    Route::get('/', 'HomenewController@index')->name('home1.home1');
                 // Route::get('/','AdminController@index')->name('admin.dashboard');
 
 

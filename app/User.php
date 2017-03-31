@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use App\Doctor;
 use App\Profile;
 use App\Medicalcenter;
 use Mail;
@@ -54,6 +55,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Doctor', 'user_id');
 
+    }
+
+    public function showInfo(){
+        return $this->belongsTo('App\Doctors', 'user_id');
     }
 
 

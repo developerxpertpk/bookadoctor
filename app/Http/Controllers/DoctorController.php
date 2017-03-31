@@ -6,6 +6,8 @@ use Auth;
 use App\User;
 use App\Doctor; 
 use Image;
+use App\speciality;
+
 class DoctorController extends Controller
 {
 
@@ -148,4 +150,18 @@ public function profile(){
  		//echo "<pre>"; print_r(Auth::user()); die;
  	 return view ('doctor.profile', array('user' => Auth::User()) );
  }
+    
+    public function speciality(){
+    	  $specialities = speciality::all();
+    	  // print_r($specialities);
+    	  // die('jhsdvhjVHVHQSVXHJQVCVHVHVC');
+
+    	  return  view('doctor.drregistration',compact('specialities'));
+    }
 }
+
+// Auth::check($request);
+//     {
+//       $details='App/Doctor',"where('user_id','=', 'Auth:user_id') compact('details')";
+
+//      }

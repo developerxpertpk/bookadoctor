@@ -90,6 +90,9 @@ Route::prefix('medical')->group(function(){
                     Route::get('/medical-center-image-gallery','MedicalcenterimageController@gallery_images')->name('medical.center.image.gallery');
                     Route::delete('/medical-center-image-delete/{id}','MedicalcenterimageController@destroy1')->name('image.destroy');
                     Route::get('/medical-center-add-service','MedicalcenterServiceController@add_services')->name('service.show.form');
+                    Route::post('/medical-center-add-service','MedicalcenterServiceController@assign_service')->name('service.form.submit');
+                    Route::get('/medical-center-setting','MedicalcenterServiceController@show_setting_page')->name('medical.center.settings');
+                    Route::post('/medical-center-change-password','MedicalcenterServiceController@pwdchange')->name('medical.center.postpwd');
 //                    Route::get('/add-doctor', 'MedicalcenterServiceController@index')->name('add.doctor.form');
                     Route::resource('/add-doctor','MedicalcenterServiceController');
 

@@ -9,9 +9,11 @@ use App\Profile;
 use App\Medicalcenter;
 use Mail;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -50,7 +52,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Medicalcenter', 'user_id');
 
-    }public function is_Doctor()
+    }
+    public function is_Doctor()
     {
         return $this->hasOne('App\Doctor', 'user_id');
 
@@ -72,7 +75,11 @@ class User extends Authenticatable
         Mail::send('emails.welcome', ['user' => $user, 'token' => $token], function ($m) use ($user) {
 //            $m->from('hello@appsite.com', 'Your App Name');
             $m->to($user->email, $user->name)->subject('Welcome to APP');
+
+
         });
+
+
     }
 
 }

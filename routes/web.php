@@ -91,6 +91,8 @@ Route::prefix('medical')->group(function(){
                     Route::post('/medical-center-add-service','MedicalcenterServiceController@assign_service')->name('service.form.submit');
                     Route::get('/medical-center-setting','MedicalcenterServiceController@show_setting_page')->name('medical.center.settings');
                     Route::post('/medical-center-change-password','MedicalcenterServiceController@pwdchange')->name('medical.center.postpwd');
+                    Route::post('/working-hours-and-days','ScheduleController@insert')->name('doctor.schedule.create');
+//
 //                    Route::get('/add-doctor', 'MedicalcenterServiceController@index')->name('add.doctor.form');
                     Route::resource('/add-doctor','MedicalcenterServiceController');
 

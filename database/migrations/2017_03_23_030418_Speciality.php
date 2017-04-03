@@ -29,6 +29,5 @@ $table->timestamps();
 public function down()
 {
 Schema::dropIfExists('speciality');
-
 }
 }

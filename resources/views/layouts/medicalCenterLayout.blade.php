@@ -18,13 +18,17 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ asset('js/location.js') }}" type="text/javascript"></script>--}}
     <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
+
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
 
@@ -94,6 +98,7 @@
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
                     </li>

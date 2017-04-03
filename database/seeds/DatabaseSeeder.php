@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         //$this->call(ServiceTableSeeder::class);
 //        $this->call(medicalcentersTableSeeder::class);
+<<<<<<< HEAD
 //       $this->call(DoctorTableSeeder::class);
 //        $this->call(speciality_table_seeder::class);
 
@@ -53,5 +54,9 @@ class DatabaseSeeder extends Seeder
 
 
 
+=======
+        // $this->call(DoctorTableSeeder::class);
+        $this->call(speciality_table_seeder::class);
+>>>>>>> 7d5e3221c593dbaa53917950e28fba5a70c4c89a
     }
 }

@@ -1,27 +1,22 @@
-$(function () {
-var colors = [
-            { Name: "Psychologist",},
-            { Name: "Gynalogist" },
-            { Name: "Dermotologist" },
-            { Name: "Sexologist" },
-            { Name: "Dietition" },
-            { Name: "Ayurveda" },
-            { Name: "Homeopath" },
-            
-        ];
+// $(function() {
+//     $('#magicsuggest').magicSuggest({
+// 		data: 'DoctorController@speciality',		// call  controller  
+//         valueField: 'idspeciality',
+//         displayField: 'specialityName'
+//     });
+// });
 
 
-  $(function () {
-  	$("#checkboxSelectCombo").igCombo({
-                width: "100%",
-                dataSource: colors,
-                textKey: "Name",
-                valueKey: "Name",
-                multiSelection: {
-                enabled: true,
-                showCheckboxes: true
-                }
-            });
+import vSelect from "vue-select"
+  export default {
+    components: {vSelect},
 
-        });
-	});
+    data() {
+      return {
+        selected: null,
+        options: ['foo','bar','baz']
+      }
+    }
+  }
+
+

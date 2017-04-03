@@ -5,17 +5,22 @@ namespace App;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-//use App\User;
+use App\User;
 //use App\Medicalcenter;
 use App\Medicalcenterspecilazition;
 
 class Doctor extends Model
 {
     use Notifiable;
+
+   
+
     protected $table = 'doctors';
 
     protected $fillable = [
-        'fname','lname','medic_id','specialization_id', 'status','user_id','role_id',
+
+        'fname','lname','medic_id','specialization_id', 'status','user_id','role_id','profile_pic',
+
     ];
 
      protected $hidden = [
@@ -36,8 +41,20 @@ class Doctor extends Model
     {
     	$this->belongsTo('medicalcenterspecilazition','specilization_id');
     }
+
+
+     public function profile()
+     {
+        return $this->hasOne('App\User','user_id');
+    } 
+
     public function user_doctors()
     {
         return $this->belongsTo('App\User', 'id');
     }
+  public function doctor_speciality()
+    {
+        return $this->hasMany('App\Doctor_Speciality', 'doctors_id');
+    }
+
 }

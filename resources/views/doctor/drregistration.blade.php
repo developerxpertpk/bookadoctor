@@ -1,5 +1,5 @@
-{{-- @extends('layouts.app') --}}
-@extends('layouts.default')
+
+@extends('layouts.doctorLayout')
 @section('content')
 <div class="container">
     <div class="row">
@@ -36,13 +36,22 @@
                         <div class="form-group{{ $errors->has('speciality') ? ' has-error' : '' }}">
                             <label for="username" class="col-md-4 control-label">Specialization</label>
                             <div class="col-md-6">
-                                <input id="checkboxSelectCombo" type="text" class="form-control" name="speciality" value="{{ old('speciality') }}" required autofocus>
+                          <div class="dropdown">
+                          @foreach($specialities as $key)
+                           <label control-label">{{$key->name}}</label>
+                          <input type="checkbox" name="speciality[]" value="{{$key->id}}">
+                          @endforeach
+                         <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button -->
+                          </button>
+                               
                                 @if ($errors->has('speciality'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('speciality') }}</strong>
                                 </span>
                                 @endif
                             </div>
+                        </div>
                         </div>
                         
 

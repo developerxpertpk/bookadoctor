@@ -11,7 +11,11 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
+<<<<<<< HEAD
         "way/generators": "3.0.*"
+=======
+        "unisharp/laravel-ckeditor": "^4.6"
+>>>>>>> 7d5e3221c593dbaa53917950e28fba5a70c4c89a
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

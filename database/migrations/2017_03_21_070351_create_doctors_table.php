@@ -17,11 +17,10 @@ class CreateDoctorsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('medic_id')->unsigned();
-
-
             $table->string('first_name');
             $table->string('last_name');
             $table->string('status')->default(1);
+            $table->string('profile_pic')->default('Anony.png');
             $table->timestamps();
             $table->foreign('medic_id')->references('id')->on('medicalcenters');
             $table->foreign('user_id')->references('id')->on('users');

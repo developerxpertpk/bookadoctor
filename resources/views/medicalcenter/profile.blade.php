@@ -11,8 +11,13 @@
 
                     <div class="panel-body">
                         <div class="profile-headding"><span>Basic Information</span>
+<<<<<<< HEAD
                             <a class="edit_pro_btn pull-right" href="{{route('medical.center.info.form')}}"><i class="fa fa-fw fa-edit"></i> Edit Basic Information</a>
                             </div>
+=======
+                            <a class="edit_pro_btn pull-right" href="/medical-center-info"><i class="fa fa-fw fa-edit"></i> Edit Basic Information</a>
+                            </div> 
+>>>>>>> 7d5e3221c593dbaa53917950e28fba5a70c4c89a
                         <div class="profile-body">
 
                             <div class="col-md-12 profile-basic-info">

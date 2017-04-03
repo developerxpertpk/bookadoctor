@@ -32,41 +32,39 @@ Auth::routes();
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
             // Route::get('/', function () {
             //     return view('welcome');
             //   });
-
-                    Route::get('/', function () {
-                    return view('homenew');
-                });
-                    Route::post('/', 'HomenewController@index')->name('home1.home1');
+                    Route::get('/', 'HomenewController@index')->name('home1.home1');
                 // Route::get('/','AdminController@index')->name('admin.dashboard');
 
 
 
-                    Route::get('/home', 'HomeController@index');
 
+             Route::get('/home', 'HomeController@index');
             Route::prefix('admin')->group(function(){
-                    Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
-                    Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
-                    Route::get('/','AdminController@index')->name('admin.dashboard');
-                    // Route::post('/', 'AdminController@index')->name('home1.home1');
-                    Route::get('/add-admin', 'AdminController@add')->name('admin.add');
-                    Route::post('/add-admin', 'AdminController@insert')->name('admin.add.submit');
-                    Route::delete('/add-admin/{id}', 'AdminController@destroy')->name('admin.destroy');
-                    Route::get('/add-admin/{id}', 'AdminController@show')->name('admin.show');
-                    Route::get('/add-admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
-                    Route::get('/medical','AdminController@medicalindex')->name('medical.list');
-                    Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
-                    Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
-                    Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
-
-                    // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
-                    // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
-            });
+            Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
+            Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
+            Route::get('/','AdminController@index')->name('admin.dashboard');
+            // Route::post('/', 'AdminController@index')->name('home1.home1');
+            Route::get('/add-admin', 'AdminController@add')->name('admin.add');
+            Route::post('/add-admin', 'AdminController@insert')->name('admin.add.submit');
+            Route::delete('/add-admin/{id}', 'AdminController@destroy')->name('admin.destroy');
+            Route::get('/add-admin/{id}', 'AdminController@show')->name('admin.show');
+            Route::get('/add-admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
+            Route::get('/medical','AdminController@medicalindex')->name('medical.list');
+            Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
+            Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
+            Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
+            Route::get('/add-faq', 'AdminController@showcmsfaq')->name('add.faq.show');
+            Route::post('/add-faq', 'PageController@create')->name('add.faq.submit');
+            Route::get('/add-faq/{id}','AdminController@cmsstatus')->name('cms.status');
+            Route::get('/add-faq/{id}/edit','AdminController@editcms')->name('cms.edit');
+            Route::post('/add-faq/{id}/edit','AdminController@cmsupdate')->name('cms.edit.update');
+            Route::post('/add-faq/{id}/delete','AdminController@cmsdelete')->name('cms.destroy');
+            // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
+            // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
+    });
 
 
             //medical center routes
@@ -122,13 +120,33 @@ Route::prefix('medical')->group(function(){
             //    else
             //        return view ( 'homenew' )->withMessage ( 'No Details found. Try to search again !' );
             //} );
-
+                        //Doctors Module
                     Route::get('/drregistration','DoctorController@index');
                     Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
+                    Route::get('/drregistration','DoctorController@speciality');
                     Route::get('/dr_login','DoctorController@Showlogin');
 
-                    Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
-                    Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+                    Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                    Route::get('/show-doctor-info','DoctorController@profile');
+                    Route::post('/show-doctor-info','DoctorController@profile')->name('Doctor.show.profile');
+                    Route::post('/profile','DoctorController@update_profile');
+                    //Route::get('/showInfo','DoctorController@ShowEdit');
+                   // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
+                    //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');
+                    //Route::get('/doctor.show-profile','DoctorController@update');
+                    //Doctors Module
+
+
+                    //Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
+                   //Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+
+
+
+                     Route::get('/{page}','HomenewController@show')->name('dynamic');
+
 
                     //Route::get('/dr_login','DoctorController@showInfo');
-                    Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
+                    //Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
+
+                    //booking
+                    //Route::get('/booking','BookingController@')

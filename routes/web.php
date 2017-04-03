@@ -134,8 +134,8 @@ Route::prefix('medical')->group(function(){
                     //Doctors Module
 
 
-                    Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
-                    Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+                    //Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
+                   //Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
 
 
 
@@ -143,6 +143,7 @@ Route::prefix('medical')->group(function(){
 
 
                     //Route::get('/dr_login','DoctorController@showInfo');
-                    Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
+                    //Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
 
-
+                    //booking
+                    //Route::get('/booking','BookingController@')

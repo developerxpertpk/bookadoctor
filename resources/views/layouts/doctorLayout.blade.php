@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
     <link rel="stylesheet" href="{{asset('nicolasbize-magicsuggest-230b08b/magicsuggest-min.css') }}">
+    <script src="https://unpkg.com/vue-select@latest"></script>
     
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{asset('nicolasbize-magicsuggest-230b08b/magicsuggest-min.js' )}}"></script>

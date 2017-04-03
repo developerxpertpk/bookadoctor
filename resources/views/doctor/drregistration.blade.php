@@ -37,17 +37,12 @@
                             <label for="username" class="col-md-4 control-label">Specialization</label>
                             <div class="col-md-6">
                           <div class="dropdown">
+                          @foreach($specialities as $key)
+                           <label control-label">{{$key->name}}</label>
+                          <input type="checkbox" name="speciality[]" value="{{$key->id}}">
+                          @endforeach
                          <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown button -->
-
-                            <div id="myApp">
-                            <v-select multiple:value.sync="selected" :options="options"></v-select>
-                            </div>
-
-                            
-                            <input type = "checkbox" name="speciality[]" >
-                                
-                            </div>
                           </button>
                                
                                 @if ($errors->has('speciality'))

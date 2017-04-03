@@ -17,7 +17,8 @@ class DoctorSpeciality extends Migration
             
             $table->increments('id');
             $table->integer('doctors_id')->unsigned();
-            $table->integer('speciality_id')->default(3);
+            $table->integer('speciality_id');
+            $table->timestamps();
             $table->foreign('speciality_id')->references('id')->on('speciality');
             $table->foreign('doctors_id')->references('id')->on('doctors');
           

@@ -52,5 +52,9 @@ class Doctor extends Model
     {
         return $this->belongsTo('App\User', 'id');
     }
+  public function doctor_speciality()
+    {
+        return $this->hasMany('App\Doctor_Speciality', 'doctors_id');
+    }
 
 }

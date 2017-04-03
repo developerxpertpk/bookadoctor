@@ -7,6 +7,8 @@ use App\User;
 use App\Doctor; 
 use Image;
 use App\speciality;
+use App\Doctor_Speciality;
+
 
 class DoctorController extends Controller
 {
@@ -29,26 +31,22 @@ $doctor = new Doctor;
 	$doctor->medic_id=1;
 	$doctor->user_id=$user->id;
 	$doctor->status=$request['status'];
+	
 	//$doctor->profile_pic=$fileName;
     // return view('doctor.show_profile');
 
 	$doctor->save();
 
-// $user = User::create([
+	//Pivot table
+	foreach($request->speciality as $key)
+	{
+	$speciality = new  Doctor_Speciality;
+		$speciality->speciality_id=$key;
+		$speciality->doctors_id=$doctor->id;
+		$speciality->save();
+	}
 
-// 'email' => $request['email'],
-// 'password'=>bcrypt($request['password']),
-// 'role_id' => 2,
-// ]);
-// $doctor = Doctor::create([
-// 'fname' => $request['first_name'],
-// 'lname' => $request['last_name'],
-// 'medic_id'=> 1,
-// 'speciality_id' =>$request['speciality'],
-// 'status'=>'available',
-// 'user_id'=>1,
-// ]);
-return redirect('/dr_login');
+return view('doctor.dr_login');
 }
 
  public function update(Request $request){
@@ -126,8 +124,23 @@ return redirect('/dr_login');
 // return view('doctor.showinfo');
 
 public function profile(){
-	//die('hghghghhggh');
-	 return view ('doctor.profile', array('user' => Auth::User()) );
+	
+$user = Auth::User();
+
+	 $userr = $user->is_doctor->doctor_speciality;
+	 foreach ($userr as $key) {
+
+	 	$doe= speciality::where('id','=',$key->speciality_id)->get();
+	 	//echo $doe->name;
+	 	foreach($doe as $key2 )
+	 	{
+	 		$treat[]=$key2->name;
+	 	//die('doe');
+	 }
+
+	 }
+	 //die('here');
+	 return view ('doctor.profile', compact('user','treat') );
 }
  public function update_profile(Request $request){
  	

@@ -15,6 +15,12 @@
 					<div clo-md-12>
 					<label col-md-4>Status : </label><h4>{{ $user->is_doctor->status}} </h4>
 					</div>
+					<div clo-md-12>
+					<label col-md-4>Specialities : </label>
+							@foreach($treat as $key)
+							{{ $key }}
+							@endforeach
+					</div>
 					<form enctype="multipart/form-data" action="/profile" method="post" >
 						<label>Update profile picture</label>
 						<input type="file" name="profile_image">

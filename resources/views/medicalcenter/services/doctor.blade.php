@@ -137,6 +137,10 @@
 
                                             <a class="btn btn-primary" href="" data-toggle="modal" data-target=".bs-assign-speciality">Assign speciality</a>
 
+                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp">Add Doctor Schedule</a>
+
+
+
                                             <div class="modal fade bs-assign-speciality" data-easein="tada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
@@ -163,6 +167,79 @@
                                                 </div>
                                             </div>
 
+                                            <div id="myModelkkklpp" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Modal Header</h4>
+                                                        </div>
+                                                        {!! Form::open(['route' => 'doctor.schedule.create','method'=>'POST','files'=> true]) !!}
+                                                        <input type="hidden" name="user_id" value="{{$item->id }}">
+                                                        <div class="modal-body">
+                                                            <p>Select Working Days </p>
+                                                            <div class="weekDays-selector">
+                                                                <input type="checkbox" id="weekday-mon" class="weekday" name="weekdays[]" value="mon"/>
+                                                                <label for="weekday-mon">Monday</label>
+                                                                <input type="checkbox" id="weekday-tue" class="weekday" name="weekdays[]" value="tue"/>
+                                                                <label for="weekday-tue">Tuesday</label>
+                                                                <input type="checkbox" id="weekday-wed" class="weekday" name="weekdays[]" value="wed"/>
+                                                                <label for="weekday-wed">Wednesday</label>
+                                                                <input type="checkbox" id="weekday-thu" class="weekday" name="weekdays[]" value="thu"/>
+                                                                <label for="weekday-thu">Thursday</label>
+                                                                <input type="checkbox" id="weekday-fri" class="weekday" name="weekdays[]" value="fri"/>
+                                                                <label for="weekday-fri">Friday</label>
+                                                                <input type="checkbox" id="weekday-sat" class="weekday" name="weekdays[]" value="sat"/>
+                                                                <label for="weekday-sat">Saturday</label>
+                                                                <input type="checkbox" id="weekday-sun" class="weekday" name="weekdays[]" value="sun"/>
+                                                                <label for="weekday-sun">Sunday</label>
+                                                            </div>
+
+                                                        </div>
+                                                        <p> Select Your Working Hour's</p>
+                                                        <div class="col-md-2">
+                                                            <p>From </p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group clockpicker">
+
+                                                                <input type="text" class="form-control" name="from_time" value="09:30" >
+                                                                <span class="input-group-addon">
+										<span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+									</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <p>To</p>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <div class="input-group clockpicker">
+
+                                                                <input type="text" class="form-control" name="to_time" value="09:30" >
+                                                                <span class="input-group-addon">
+										<span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+									</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Clock script -->
+                                                        <script type="text/javascript">
+                                                            $('.clockpicker').clockpicker({
+                                                                placement: 'top',
+                                                                align: 'left',
+                                                                donetext: 'Done'
+                                                            });
+                                                        </script>
+                                                        <!-- End Clock Script -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-default">Submit</button>
+                                                            {{ Form::close() }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
 

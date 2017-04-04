@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
         $admin->save();
 
         $this->call(RoleTableSeeder::class);
-        //$this->call(ServiceTableSeeder::class);
-//        $this->call(medicalcentersTableSeeder::class);
 
-//       $this->call(DoctorTableSeeder::class);
-//        $this->call(speciality_table_seeder::class);
+         $this->call(medicalcentersTableSeeder::class);
+         $this->call(DoctorTableSeeder::class);
+        $this->call(speciality_table_seeder::class);
+        $this->call(UserSeeder::class);
 
         $speciality1= new App\Service;
         $speciality1->name="MRI";
@@ -57,6 +57,5 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(DoctorTableSeeder::class);
         $this->call(speciality_table_seeder::class);
-
-    }
+   }
 }

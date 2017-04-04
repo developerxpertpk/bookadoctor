@@ -6,47 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use App\Doctor;
 use App\User;
+use App\Service;
+use App\Medical_service;
+Use App\Medicalcenter;
 use Validator;
 use Redirect;
 use Auth;
 use DB;
+use Hash;
 
 class MedicalcenterServiceController extends Controller
 {
 
-    public function add_services(){
-        return view('medicalcenter.services.add-services');
-    }
-//    public function add_doctor(){
-//        $doctors=User::with('is_Doctor')->get();
-////
-////        echo "<pre>";
-////       // dd($doctors);
-////     print_r($doctors);
+
 //
-//
-//
-//        return view('medicalcenter.services.doctor',compact('doctors'))
-//            ->with('i', ($request->input('page', 1) - 1) * 5);
-//
-//    }
-
-    /**
-
-     * Display a listing of the resource.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
-
     public function index(Request $request)
 
     {
-
-
-
 
         $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->get();
 //        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->with('User')->get();
@@ -237,7 +213,88 @@ class MedicalcenterServiceController extends Controller
 
 
     }
+    public function add_services(){
+        $services=Service::get();
+        //print_r($services);
+        // dd($services);
+        return view('medicalcenter.services.add-services',compact('services'));
+    }
+    public function assign_service(Request $request){
+        $service_id=Auth::user()->is_MedicalCenter;
+       // echo $service_id;
 
+        //$name=$request['service'];
+        foreach($request->service as $key)
+        {
+
+          //  echo $key;
+            $service = new  Medical_service;
+            $service->service_id=$key;
+            $service->medical_center_id=$service_id->id;
+            $service->save();
+
+//
+           return view('medicalcenter.services.show-services',compact('checked_service','newservices'));
+        }
+
+
+    }
+
+public function show_setting_page(){
+        return view('medicalcenter.settings');
+}
+    public function pwdchange(Request $request)
+    {
+
+        $rules = array(
+            'current-password' => 'required',
+            'password' => 'required|between:6,16|confirmed',
+            'password_confirmation' => 'required'
+        );
+        // VALIDATING THE INPUT
+        $validator = Validator::make($request->all(), $rules);
+
+
+        if ($validator->fails()) {
+
+            return redirect()->route('medical.center.settings')->withErrors($validator);
+
+        } else {
+
+            if (Auth::check()) {
+                $request_data = $request->All();
+                $old_pwd = $request_data['current-password'];
+                $new_pwd = $request_data['password'];
+                $confirm_pwd = $request_data['password_confirmation'];
+                $current_password = Auth::User()->password;
+
+                if (Hash::check($old_pwd, $current_password)) {
+
+                    $user_id = Auth::User()->id;
+                    $obj_user = User::find($user_id);
+
+                    if ($new_pwd == $confirm_pwd) {
+
+                        $new_pwd = Hash::make($request_data['password']);
+                        $obj_user->password = $new_pwd;
+                        $obj_user->save();
+
+                        return redirect()->route('medical.center.settings')
+                            ->with('success', 'Password changed successfully');
+
+                    } else {
+
+                        return redirect()->route('medical.center.settings')
+                            ->withErrors('Your New Password and confirm password are not match');
+                    }
+
+                } else {
+                    return redirect()->route('medical.center.settings')
+                        ->withErrors('Your old password does not match');
+                }
+            }
+        }
+    }
 
 
 

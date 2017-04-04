@@ -466,6 +466,19 @@ padding: 7px 0;
     padding: 15px;
     width: 176px;
 }
+.user-icon img#logo-img{
+    /*background: rgba(255,0,0,1);*/
+    border-radius: 100%;
+    color: #fff;
+    font-size: 135px;
+    margin-top: -97px;
+    /*padding: 15px;*/
+    width: 176px;
+    text-align: center;
+    height: 176px;
+    border: 1px solid #fff;
+
+}
 
 @media (min-width: 768px) {
     .modal-dialog {

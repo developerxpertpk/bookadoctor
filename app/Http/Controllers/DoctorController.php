@@ -131,15 +131,15 @@ $user = Auth::User();
 	 foreach ($userr as $key) {
 
 	 	$doe= speciality::where('id','=',$key->speciality_id)->get();
-	 	//echo $doe->name;
+
 	 	foreach($doe as $key2 )
 	 	{
 	 		$treat[]=$key2->name;
-	 	//die('doe');
+
 	 }
 
 	 }
-	 //die('here');
+
 	 return view ('doctor.profile', compact('user','treat') );
 }
  public function update_profile(Request $request){
@@ -160,8 +160,8 @@ $user = Auth::User();
  		
 
  	}
- 		//echo "<pre>"; print_r(Auth::user()); die;
- 	 return view ('doctor.profile', array('user' => Auth::User()) );
+
+ 	 return $this->profile();
  }
     
     public function speciality(){

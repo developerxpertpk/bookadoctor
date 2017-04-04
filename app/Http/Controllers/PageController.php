@@ -31,7 +31,8 @@ class PageController extends Controller
     	$page->meta_description=$request['meta_description'];
     	$page->meta_keywords=$request['meta_keywords'];
     	$page->save();
-    	return route('add.faq.show');
+    	$pagelist = Page::all();
+        return view('admin.crudcms',compact('pagelist'));
     } 
 
 

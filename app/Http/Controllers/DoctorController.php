@@ -124,19 +124,19 @@ return view('doctor.dr_login');
 // return view('doctor.showinfo');
 
 public function profile(){
+
 	
 $user = Auth::User();
 
+	
 	 $userr = $user->is_doctor->doctor_speciality;
 	 foreach ($userr as $key) {
-
 	 	$doe= speciality::where('id','=',$key->speciality_id)->get();
 
 	 	foreach($doe as $key2 )
 	 	{
 	 		$treat[]=$key2->name;
-
-	 }
+ }
 
 	 }
 

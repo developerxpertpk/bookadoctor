@@ -466,6 +466,19 @@ padding: 7px 0;
     padding: 15px;
     width: 176px;
 }
+.user-icon img#logo-img{
+    /*background: rgba(255,0,0,1);*/
+    border-radius: 100%;
+    color: #fff;
+    font-size: 135px;
+    margin-top: -97px;
+    /*padding: 15px;*/
+    width: 176px;
+    text-align: center;
+    height: 176px;
+    border: 1px solid #fff;
+
+}
 
 @media (min-width: 768px) {
     .modal-dialog {
@@ -474,3 +487,25 @@ padding: 7px 0;
     }
 }
 /*admin side bar style*/
+
+/*Doctor Schedule*/
+.weekDays-selector input {
+  display: none!important;
+}
+
+.weekDays-selector input[type=checkbox] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 40px;
+  width: 80px;
+  margin-right: 3px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type=checkbox]:checked + label {
+  background: #2AD705;
+  color: #ffffff;
+}

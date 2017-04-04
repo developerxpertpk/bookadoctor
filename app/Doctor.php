@@ -57,4 +57,8 @@ class Doctor extends Model
         return $this->hasMany('App\Doctor_Speciality', 'doctors_id');
     }
 
+    public function schedule()
+    {
+        return $this->hasOne('App\Schedule', 'user_id');
+    }
 }

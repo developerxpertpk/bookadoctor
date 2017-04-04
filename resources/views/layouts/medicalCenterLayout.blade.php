@@ -18,31 +18,35 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ asset('js/location.js') }}" type="text/javascript"></script>--}}
     <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
+
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
 
     {{-- flot js include for admin dashboard --}}
 
-    <script src="{{ asset('js/plugins/flot/excanvas.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/plugins/flot/flot-data.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/plugins/flot/jquery.flot.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/plugins/flot/jquery.flot.pie.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/flot/jquery.flot.resize.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/flot/jquery.flot.tooltip.min.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ asset('js/plugins/flot/excanvas.min.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/plugins/flot/flot-data.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/plugins/flot/jquery.flot.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/plugins/flot/jquery.flot.pie.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/flot/jquery.flot.resize.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/flot/jquery.flot.tooltip.min.js') }}" type="text/javascript"></script>--}}
 
     {{-- flot js include for admin dashboard --}}
 
 
-    <script src="{{ asset('js/plugins/morris/morris-data.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/morris/raphael.min.js') }}" type="text/javascript"></script>
+    {{--<script src="{{ asset('js/plugins/morris/morris-data.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/plugins/morris/morris.min.js') }}" type="text/javascript"></script>--}}
+    {{--<script src="{{ asset('js/morris/raphael.min.js') }}" type="text/javascript"></script>--}}
 </head>
 <body>
 @include('layouts.medical-header')
@@ -63,7 +67,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="{{ route('home1.home1') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="{{ route('medical.center.dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#services-speciality"><i class="fa fa-sliders" aria-hidden="true"></i> Manage Service/Speciality <i class="fa fa-fw fa-caret-down"></i></a>
@@ -84,7 +88,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="profile-medical-center" class="collapse">
                             <li>
-                                <a href="/medical-center-info"><i class="fa fa-fw fa-edit"></i> Edit Basic Information</a>
+                                <a href="{{route('medical.center.info.form')}}"><i class="fa fa-fw fa-edit"></i> Edit Basic Information</a>
                             </li>
                             <li>
                                 <a href="{{route('medical.center.contact.info.form')}}"><i class="fa fa-fw fa-edit"></i> Edit Contact Information</a>
@@ -94,6 +98,7 @@
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
                     </li>

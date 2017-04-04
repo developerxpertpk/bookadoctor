@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RoleTableSeeder::class);
 
+        $this->call(medicalcentersTableSeeder::class);
+        $this->call(DoctorTableSeeder::class);
          $this->call(medicalcentersTableSeeder::class);
          $this->call(DoctorTableSeeder::class);
         $this->call(speciality_table_seeder::class);
@@ -50,12 +52,6 @@ class DatabaseSeeder extends Seeder
         $speciality4->description="Emergency";
         $speciality4->price=2500;
         $speciality4->save();
-
-
-
-
-
-        // $this->call(DoctorTableSeeder::class);
         $this->call(speciality_table_seeder::class);
    }
 }

@@ -30,12 +30,13 @@
       {{ $medicaldetail->address }},{{$medicaldetail->city}},{{$medicaldetail->state}},{{$medicaldetail->country}},<br/>pincode:{{$medicaldetail->pincode}}<br/>
       {{ $medicaldetail->working_hours }}<br/>
       {{ $medicaldetail->web_url }}<br/>
+      {{ $medicaldetail->created_at->totimestring() }}
   </div>
   <div class="col-md-3 mediccontent">
   <div class="aligndoc">
   @foreach($medicaldetail->doctors as $doctor)
 
-  {{$doctor->fname}} {{$doctor->lname}}<br/>
+  {{$doctor->first_name}} {{$doctor->last_name}}<br/>
 
   @endforeach
   {!! $medicaldetail->doctors->render() !!}

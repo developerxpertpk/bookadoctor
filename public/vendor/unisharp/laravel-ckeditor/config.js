@@ -40,4 +40,6 @@ CKEDITOR.editorConfig = function( config ) {
 	//Removes the tags of body
 	config.removePlugins = 'elementspath';
 	config.resize_enabled = false;
+	CKEDITOR.config.autoParagraph = false;
+	CKEDITOR.config.allowedContent = true;
 };

@@ -474,3 +474,25 @@ padding: 7px 0;
     }
 }
 /*admin side bar style*/
+
+/*Doctor Schedule*/
+.weekDays-selector input {
+  display: none!important;
+}
+
+.weekDays-selector input[type=checkbox] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 40px;
+  width: 80px;
+  margin-right: 3px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type=checkbox]:checked + label {
+  background: #2AD705;
+  color: #ffffff;
+}

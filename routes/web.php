@@ -126,7 +126,9 @@ Route::prefix('medical')->group(function(){
                     Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
                     Route::get('/show-doctor-info','DoctorController@profile');
                     Route::post('/show-doctor-info','DoctorController@profile')->name('Doctor.show.profile');
-                    Route::post('/profile','DoctorController@update_profile');
+                    Route::post('/profile','DoctorController@update_profile')->name('Doctor.image');
+                    Route::post('/profile/s','ScheduleController@insert')->name('Doctor.schedule.create');
+                    Route::get('/booking','DoctorBookingController@index');
                     //Route::get('/showInfo','DoctorController@ShowEdit');
                    // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
                     //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');

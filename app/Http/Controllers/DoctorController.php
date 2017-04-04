@@ -124,21 +124,23 @@ return view('doctor.dr_login');
 // return view('doctor.showinfo');
 
 public function profile(){
+
 	
 $user = Auth::User();
 
+	
 	 $userr = $user->is_doctor->doctor_speciality;
 	 foreach ($userr as $key) {
-
 	 	$doe= speciality::where('id','=',$key->speciality_id)->get();
 	 	//echo $doe->name;
 	 	foreach($doe as $key2 )
 	 	{
 	 		$treat[]=$key2->name;
-	 	//die('doe');
+	 	    // die('doe');
 	 }
 
 	 }
+
 	 //die('here');
 	 return view ('doctor.profile', compact('user','treat') );
 }
@@ -161,7 +163,7 @@ $user = Auth::User();
 
  	}
  		//echo "<pre>"; print_r(Auth::user()); die;
- 	 return view ('doctor.profile', array('user' => Auth::User()) );
+ 	 return $this->profile();
  }
     
     public function speciality(){

@@ -17,23 +17,24 @@
     <link rel="stylesheet" href="{{ asset('css/medical-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
-    <link rel="stylesheet" href="{{asset('nicolasbize-magicsuggest-230b08b/magicsuggest-min.css') }}">
     <script src="https://unpkg.com/vue-select@latest"></script>
     
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-    <script src="{{asset('nicolasbize-magicsuggest-230b08b/magicsuggest-min.js' )}}"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('js/location.js') }}" type="text/javascript"></script> -->
     <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/dropdown.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('js/dropdown.js') }}" type="text/javascript"></script> -->
 
-    {{-- flot js include for admin dashboard --}}
+   <!--   flot js include for admin dashboard 
 
     <script src="{{ asset('js/plugins/flot/excanvas.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/plugins/flot/flot-data.js') }}" type="text/javascript"></script>
@@ -42,12 +43,12 @@
     <script src="{{ asset('js/flot/jquery.flot.resize.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/flot/jquery.flot.tooltip.min.js') }}" type="text/javascript"></script>
 
-    {{-- flot js include for admin dashboard --}}
+    flot js include for admin dashboard  -->
 
 
-    <script src="{{ asset('js/plugins/morris/morris-data.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('js/plugins/morris/morris-data.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/morris/raphael.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/morris/raphael.min.js') }}" type="text/javascript"></script> -->
 </head>
 <body>
 @include('layouts.doctor-header')

@@ -36,7 +36,7 @@
   <div class="aligndoc">
   @foreach($medicaldetail->doctors as $doctor)
 
-  {{$doctor->fname}} {{$doctor->lname}}<br/>
+  {{$doctor->first_name}} {{$doctor->last_name}}<br/>
 
   @endforeach
   {!! $medicaldetail->doctors->render() !!}

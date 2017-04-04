@@ -51,8 +51,8 @@
 	height: 200px;
 	overflow: visible;
 	position: relative;
-/ Disable text selection highlighting. Thanks to Hermanya /
--webkit-touch-callout: none;
+	/* Disable text selection highlighting. Thanks to Hermanya */
+	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -158,7 +158,7 @@
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: 4px;
-
+	
 }
 .clockpicker-button.pm-button {
 	margin: 1px 1px 1px 136px;
@@ -166,6 +166,3 @@
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: 4px;
 }
-/*.clockpicker-popover {
-    z-index: 111000000000000000;
-}*/

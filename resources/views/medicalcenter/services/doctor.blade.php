@@ -134,6 +134,38 @@
                                         <td>
                                             <a class="btn btn-info" href="{{ route('add-doctor.show',$item->id) }}">Show</a>
                                             <a class="btn btn-primary" href="{{ route('medical.edit',$item->id) }}">Edit</a>
+
+                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target=".bs-assign-speciality">Assign speciality</a>
+
+                                            <div class="modal fade bs-assign-speciality" data-easein="tada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">Add Specilaty with {{ $item->first_name }}&nbsp;&nbsp;{{ $item->last_name }}</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{route('specilaty.form.submit')}}" method="post">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" value="{{$item->id}}" name="doc_id">
+                                                                <table>
+                                                                    <tr><th>Specilaty</th></tr>
+                                                                    @foreach($specilaty as $key => $doc_specilaty)
+
+                                                                        <tr><td colspan="2"> <input type="checkbox" value="{{$doc_specilaty->id}}" name="specilaty[{{$doc_specilaty->name}}]">&nbsp;{{$doc_specilaty->name}}</td></tr>
+                                                                    @endforeach
+
+                                                                </table>
+                                                                <input type="submit" value="Add Specilaty to {{ $item->first_name }}" class="edit_pro_btn">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
                                             {!! Form::open(['method' => 'DELETE','route' => ['add-doctor.destroy', $item->user_id],'style'=>'display:inline']) !!}
                                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                         </td>

@@ -128,7 +128,7 @@
     {{--model for opening closeing hours or day--}}
 
 
-    <div class="modal fade" id="opening_closing_hour" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="opening_closing_hour" data-easein="tada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -139,7 +139,7 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(['route' => 'doctor.schedule.create','method'=>'POST','files'=> true]) !!}
-                    <input type="hidden" name="medical_center_id" value="{{$medical_center->id }}">
+                    <input type="hidden" name="user_id" value="{{$medical_center->id }}">
                     <div class="modal-body">
                         <p>Select Working Days </p>
                         <div class="weekDays-selector">
@@ -178,7 +178,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <div class="input-group clockpicker">
+                        <div class="input-group clockpicker1">
 
                             <input type="text" class="form-control" name="to_time" value="09:30" >
                             <span class="input-group-addon">
@@ -188,7 +188,11 @@
                     </div>
                     <!-- Clock script -->
                     <script type="text/javascript">
-                        $('.clockpicker').clockpicker();
+                        $('.clockpicker').clockpicker({
+                            placement: 'top',
+                            align: 'left',
+                            donetext: 'Done'
+                        });
                     </script>
                     <!-- End Clock Script -->
                     <div class="modal-footer">

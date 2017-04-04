@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Doctor_Speciality;
+use App\speciality;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use App\Doctor;
@@ -27,11 +29,12 @@ class MedicalcenterServiceController extends Controller
         $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->get();
 //        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->with('User')->get();
        $users=User::with('is_Doctor')->get();
+        $specilaty=speciality::get();
 //
 //        echo "<pre>";
 //
 
-        return view('medicalcenter.services.doctor',compact('doctors','users'))
+        return view('medicalcenter.services.doctor',compact('doctors','users','specilaty'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
 //
 
@@ -234,12 +237,40 @@ class MedicalcenterServiceController extends Controller
             $service->save();
 
 //
-           return view('medicalcenter.services.show-services',compact('checked_service','newservices'));
+        }
+
+        return view('medicalcenter.services.show-services');
+
+    }
+    public function add_specilaty(){
+        $specilaty=speciality::get();
+        //print_r($services);
+        // dd($services);
+        return view('medicalcenter.services.doctor',compact('specilaty'));
+    }
+
+    public function assign_specilaty(Request $request)
+    {
+
+        foreach ($request->specilaty as $key) {
+            $doc_id = $request['doc_id'];
+            //  echo $key;
+            $specilaty = new  Doctor_Speciality;
+            $specilaty->speciality_id = $key;
+            $specilaty->doctors_id = $doc_id;
+
+            $specilaty->save();
+
+//            return redirect()->view('medicalcenter.services.add-doctor',compact('specilaty'));
+
+
+           return redirect()->route('add-doctor.index');
         }
 
 
-    }
 
+
+    }
 public function show_setting_page(){
         return view('medicalcenter.settings');
 }

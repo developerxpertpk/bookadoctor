@@ -58,10 +58,16 @@ Auth::routes();
             Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
             Route::get('/add-faq', 'AdminController@showcmsfaq')->name('add.faq.show');
             Route::post('/add-faq', 'PageController@create')->name('add.faq.submit');
+            Route::get('/add-faq/createnewpage','AdminController@createnewpage')->name('cms.create');
             Route::get('/add-faq/{id}','AdminController@cmsstatus')->name('cms.status');
             Route::get('/add-faq/{id}/edit','AdminController@editcms')->name('cms.edit');
             Route::post('/add-faq/{id}/edit','AdminController@cmsupdate')->name('cms.edit.update');
             Route::post('/add-faq/{id}/delete','AdminController@cmsdelete')->name('cms.destroy');
+            Route::get('/subscription','SubscriptionController@index')->name('subscription.list');
+            Route::get('/subscription/create','SubscriptionController@create')->name('plan.create');
+            Route::post('/subscription/create','SubscriptionController@store')->name('plan.create.submit');
+            Route::get('/subscription/{id}/edit','SubscriptionController@edit')->name('plan.edit');
+            Route::get('/subscription/{id}','SubscriptionController@delete')->name('plan.destroy');
             // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
             // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
     });
@@ -91,8 +97,14 @@ Route::prefix('medical')->group(function(){
                     Route::post('/medical-center-add-service','MedicalcenterServiceController@assign_service')->name('service.form.submit');
                     Route::get('/medical-center-setting','MedicalcenterServiceController@show_setting_page')->name('medical.center.settings');
                     Route::post('/medical-center-change-password','MedicalcenterServiceController@pwdchange')->name('medical.center.postpwd');
-                    Route::post('/working-hours-and-days','ScheduleController@insert')->name('doctor.schedule.create');
+                    Route::post('/doctor-working-hours-and-days','ScheduleController@doctor_schedule')->name('doctor.schedule.create');
+                    Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedule')->name('medical.schedule.create');
 //
+
+  // Route::get('/medical-center-add-specilaty','MedicalcenterServiceController@add_specilaty')->name('speciality.show.form');
+   Route::post('/medical-center-add-specilaty','MedicalcenterServiceController@assign_specilaty')->name('specilaty.form.submit');
+
+
 //                    Route::get('/add-doctor', 'MedicalcenterServiceController@index')->name('add.doctor.form');
                     Route::resource('/add-doctor','MedicalcenterServiceController');
 

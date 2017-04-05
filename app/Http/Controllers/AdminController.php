@@ -173,11 +173,6 @@ class AdminController extends Controller
             return view('admin.crudcms',compact('pagelist'));
         }
 
-        public function createcmsfaq()
-        {
-            
-        }
-
         public function editcms($id)
         {
             $pagedetail = Page::find($id);
@@ -187,6 +182,8 @@ class AdminController extends Controller
         public function cmsstatus($id)
         {
             $pagedetail = Page::find($id);
+            if($pagedetail != null)
+            {
             if($pagedetail->status=="Inactive")
             {
                 $pagedetail->status="Active";
@@ -197,6 +194,7 @@ class AdminController extends Controller
                 $pagedetail->status="Inactive";
                 $pagedetail->save();
             }
+        }
             return $this->showcmsfaq();
             
         }
@@ -215,6 +213,10 @@ class AdminController extends Controller
                             ->with('success','Page record updated');
 
 
+        }
+        function createnewpage()
+        {
+            return view('admin.faq-editor');
         }
 
 

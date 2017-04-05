@@ -19,7 +19,7 @@ class Doctor extends Model
 
     protected $fillable = [
 
-        'fname','lname','medic_id','specialization_id', 'status','user_id','role_id','profile_pic',
+        'first_name','last_name','medic_id','specialization_id', 'status','user_id','role_id','profile_pic',
 
     ];
 

@@ -59,9 +59,9 @@
                                 <li class="active">
                                     <a href="{{ route('home1.home1') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="{{ route('admin.add') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Admin</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                                     <ul id="demo" class="collapse">
@@ -80,27 +80,13 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
+                                    <a href="{{ route('subscription.list') }}"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
                                 </li>
                                 <li>
                                     <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-wrench"></i> Manage Content<i class="fa fa-fw fa-caret-down"></i></a>
-                                    <ul id="demo1" class="collapse">
-                                        <li>
-                                            <a href="#">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('add.faq.show') }}">FAQ</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Privacy Policy</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Social Network Links</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ route('add.faq.show') }}" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-wrench"></i> Manage Content</a>
                                 </li>
                                 <!--<li>
                                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>

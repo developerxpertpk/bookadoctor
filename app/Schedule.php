@@ -13,4 +13,9 @@ class Schedule extends Model
     {
         return $this->belongsTo('App\Doctor','user_id');
     } 
+
+     public function booker()
+    {
+        return $this->belongsTo('App\Booking', 'schedule_id');
+    }
 }

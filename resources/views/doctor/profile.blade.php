@@ -66,8 +66,12 @@
 								</div>
 								 <!-- Clock script -->
 								<script type="text/javascript">
-								$('.clockpicker').clockpicker();
-								</script>
+                            $('.clockpicker').clockpicker({
+                                placement: 'top',
+                                align: 'left',
+                                donetext: 'Done'
+                            });
+                        </script>
 								<!-- End Clock Script -->
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -95,13 +99,13 @@
 							@endforeach
 
 						</div>
-						<div col-md-12>
+						<!-- <div col-md-12>
 							<label col-md-4>  Your Schedule :</label><br/>
 							<p><b>Days:</b>{{ $user->is_doctor->schedule->days }}</p> 
 							<p><b>From:</b>{{ date('H:i:s',strtotime($user->is_doctor->schedule->from)) }}</p>
 							<p><b>To:</b>{{ date('H:i:s',strtotime($user->is_doctor->schedule->to)) }}</p>
 
-						</div>
+						</div> -->
 						{!! Form::open(['route' => 'Doctor.image','method'=>'POST','files'=> true]) !!}
 							<label>Update profile picture</label>
 							<input type="file" name="profile_image">

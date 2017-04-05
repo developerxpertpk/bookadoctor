@@ -15,7 +15,13 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('doctor_id');
+            $table->integer('user_id');
+            $table->boolean('status');
             $table->timestamps();
+            
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

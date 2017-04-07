@@ -22,7 +22,7 @@
 									<p> Booking List</p>
 									<table class="table table-bordered" id="patient">
 										<thead>
-											
+											<th> ID </th>
 											<th>  Patient's Name </th>
 											<th> Date & Time </th>
 											<th> Age </th>
@@ -30,76 +30,69 @@
 											<th> Action </th>
 										</thead>
 									</tr>
-									@foreach($s as $key=>$value)
+									@foreach($booking as $key=>$value)
 									<tr>
-										<td>
-										
-											@foreach($k as $key=>$value1)
-											{{$value1}}
+									<td>
+										@foreach($s as $key=>$id)
+											{{$id->user_id}}           <!--  Id -->
 											@endforeach
-											
-											
-										</td>
-										
-										
-										
+									</td>
 										<td>
-											@foreach($booking as $key1)
-											{{$key1->date_test }}
+											@foreach($s as $key=>$name)
+											{{$name->first_name}}  {{$name->last_name}}          <!--  First Name -->
 											@endforeach
 										</td>
-									</td>
-									
-									
-									
-									
-									<td>
-										{{$value}}
-									</td>
-									<td>
-										
-										@foreach($booking as $key2)
-										{{$key2->problem }}
+										<td>
+											@foreach($booking as $key=>$value)
+											{{$value->date_test}}           <!-- date and time -->
+										</td>
+										<td>
+											@foreach($s as $key=>$age)
+											{{$age->age}}           <!--  age -->
+											@endforeach
+										</td>
+										<td>
+											{{$value->problem}} <!-- Issue -->
+										</td>
 										@endforeach
-										
+										<td>
+
+									<button type="button" class="btn btn-default" data-dismiss="modal">Edit </button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel </button>
 									</td>
-									<td>
-										<button type="button " class="btn btn-default" data-dismiss="modal">Edit</button>
-										<button type="button " class="btn btn-default" data-dismiss="modal">Cancel</button>
 										
-									</td>
-									
-								</tr>
-								@endforeach
-							</table>
-							
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-							
-							{{ Form::close() }}
+									</tr>
+									@endforeach
+
+								</table>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+								
+								{{ Form::close() }}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			<!-- Modal end-->
-			<div class="panel-body">
-				<img src="images/profile_pic/{{$user->is_doctor->profile_pic}}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">  <!-- DSC_0022.jpg -->
-				<h4>{{ $user->is_doctor->first_name}} {{ $user->is_doctor->last_name}}'s Profile</h4>
-				<div clo-md-12>
-					<label col-md-4>Email : </label><h4>{{ $user->email}} </h4>
-				</div>
 				
-				{!! Form::open(['route' => 'Doctor.image','method'=>'POST','files'=> true]) !!}
-				<label>Update profile picture</label>
-				<input type="file" name="profile_image">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<input type="submit" class="pull-right btn btn-sm btn-primary">
-				{{ Form::close() }}
+				<!-- Modal end-->
+				<div class="panel-body">
+					<img src="images/profile_pic/{{$user->is_doctor->profile_pic}}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">  <!-- DSC_0022.jpg -->
+					<h4>{{ $user->is_doctor->first_name}} {{ $user->is_doctor->last_name}}'s Profile</h4>
+					<div clo-md-12>
+						<label col-md-4>Email : </label><h4>{{ $user->email}} </h4>
+					</div>
+					
+					{!! Form::open(['route' => 'Doctor.image','method'=>'POST','files'=> true]) !!}
+					<label>Update profile picture</label>
+					<input type="file" name="profile_image">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="submit" class="pull-right btn btn-sm btn-primary">
+					{{ Form::close() }}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 @endsection

@@ -95,17 +95,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                            <label for="status" class="col-md-4 control-label">Status</label>
-                            <div class="col-md-6">
-                                <input id="status" type="text" class="form-control" name="status" value="{{ old('status') }}" required autofocus>
-                                @if ($errors->has('status'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
+                       
                     <input id="role" type="hidden" class="form-control" name="role" value="2" required autofocus>
                     <input id="medic" type="hidden" class="form-control" name="medic" value="1" required autofocus>
 

@@ -27,9 +27,10 @@ $user = new User;
 	$user->password=bcrypt($request['password']);
 	$user->role_id=$request['role'];
 	$user->save();
-$doctor = new Doctor;
+$doctor = new Userprofile;
 	$doctor->first_name=$request['first_name'];
 	$doctor->last_name=$request['last_name'];
+	$doctor->role_id=2;
 	$doctor->medic_id=1;
 	$doctor->user_id=$user->id;
 	$doctor->status=$request['status'];
@@ -146,15 +147,20 @@ $user = Auth::User();
 // Bookings Function start
 	 //$booking = Booking::where('doctor_id','=',$user->is_doctor->id)->fir();
 	  $booking = Booking::all()->where('doctor_id','=',$user->is_doctor->id);
-	  //$profile = Profile::all()->where('user_id','=',8);
-	  foreach($booking as $key=>$value)
+	  	  foreach($booking as $key=>$value)
 	  {
+
 	  	//print_r($value->user_id);
 	  	$userr=User::find($value->user_id);
-	  	// $s[]=$userr->profile->age;
+	  	$userr->profile;
+	  	$userr->booking;
+	  	echo "<pre>";
+	  	print_r($userr);
+	  	die('vhgh');
+	  
 	  	// $k[]=$userr->profile->first_name;
 	  	// $i[]=$userr->profile->last_name;
-	  	$s=$userr->profile->age;
+	  	//$s=$userr->profile->age;
 	  	 //$first_name[]=$userr->profile->first_name;
 	  	 //$last_name[]=$userr->profile->last_name;
 	  	 //$age[]=$userr->profile->age;
@@ -165,14 +171,14 @@ $user = Auth::User();
 
 
 	    //  echo "<pre>";
-	    print_r($s);
+	    //  print_r($s);
 	    //  print_r($k);
 	    //  print_r($i);
-	   die('bcmchjghjw');
+	    // die('bcmchjghjw');
 	  // print_r($booking->user_id);die('hhhchghgcc');
 	 //die($user->is_Doctor);
 
-	 return view ('doctor.profile', compact('user','treat','booking','s','k') );
+	 return view ('doctor.profile', compact('user','treat','booking'));
 }
  public function update_profile(Request $request){
  	

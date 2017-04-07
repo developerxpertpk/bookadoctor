@@ -9,7 +9,7 @@ class Profile extends Model
 {
 
   //  protected $table='profile';
-    protected $fillable=array('user_id','about');
+    protected $fillable=array('user_id','issue');
     protected $primaryKey='user_id';
 //    public function users()
 //    {
@@ -20,4 +20,9 @@ class Profile extends Model
 public function getUser(){
     return $this->belongsTo('App\User','id');
 }
+
+public function user(){
+	return $this->belongsTo('App\User','user_id');
 }
+}
+

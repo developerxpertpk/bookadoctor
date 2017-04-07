@@ -31,9 +31,5 @@ class Medicalcenter extends Model
         return $this->belongsToMany('App\Service','medical_services','service_id','medical_center_id');
     }
 
-     public function medic()
-    {
-        return $this->belongsTo('App\Booking', 'medicalcenter_id');
-    }
-
+   
 }

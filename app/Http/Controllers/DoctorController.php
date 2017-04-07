@@ -8,6 +8,8 @@ use App\Doctor;
 use Image;
 use App\speciality;
 use App\Doctor_Speciality;
+use App\Booking;
+use App\Profile;
 
 
 class DoctorController extends Controller
@@ -83,12 +85,13 @@ return view('doctor.dr_login');
  	 	
  	 	//die('hhhhh');
  	 	$details = Doctor::where('user_id','=',Auth::User()->id )->first();
- 	 	//print_r('user_id');
+ 	 	 //print_r('user_id');
  	 	 //die('kkkkk');
- 	 // 	print_r(Auth::User()->id);	
- 		// print_r($details);
+ 		 //print_r(Auth::User()->id);	
+ 		 // print_r($details);
  	 	
- 	 	 	return view('doctor.showInfo');  //,compact('details')
+ 	 	 //return view('doctor.showInfo');  //,compact('details')
+ 	 	return redirect('/profile');
  	 }
 
  	 else{
@@ -140,7 +143,36 @@ $user = Auth::User();
 
 	 }
 
-	 return view ('doctor.profile', compact('user','treat') );
+// Bookings Function start
+	 //$booking = Booking::where('doctor_id','=',$user->is_doctor->id)->fir();
+	  $booking = Booking::all()->where('doctor_id','=',$user->is_doctor->id);
+	  //$profile = Profile::all()->where('user_id','=',8);
+	  foreach($booking as $key=>$value)
+	  {
+	  	//print_r($value->user_id);
+	  	$userr=User::find($value->user_id);
+	  	// $s[]=$userr->profile->age;
+	  	// $k[]=$userr->profile->first_name;
+	  	// $i[]=$userr->profile->last_name;
+	  	$s=$userr->profile->age;
+	  	 //$first_name[]=$userr->profile->first_name;
+	  	 //$last_name[]=$userr->profile->last_name;
+	  	 //$age[]=$userr->profile->age;
+	  	
+	  }
+	 // array_combine($first_name, $last_name);
+	 // $output = array_combine($first_name,$last_name);
+
+
+	    //  echo "<pre>";
+	    print_r($s);
+	    //  print_r($k);
+	    //  print_r($i);
+	   die('bcmchjghjw');
+	  // print_r($booking->user_id);die('hhhchghgcc');
+	 //die($user->is_Doctor);
+
+	 return view ('doctor.profile', compact('user','treat','booking','s','k') );
 }
  public function update_profile(Request $request){
  	
@@ -157,7 +189,6 @@ $user = Auth::User();
  		
  		$user->save();
  		Doctor::where('user_id',$user->id)->update(['profile_pic'=>$filename]);
- 		
 
  	}
 

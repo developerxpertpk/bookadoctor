@@ -28,7 +28,7 @@ class ProfileController extends Controller
         $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
-            'aboutMe' => 'required',
+            'issue' => 'required',
             'profilePicture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
 
@@ -36,6 +36,7 @@ class ProfileController extends Controller
 
         //$profile= new Profile();
         $profile=Profile::Where('user_id','=',Auth::user()->id)->first();
+        
 
         if($file = $request->hasFile('profilePicture')) {
             $file = $request->file('profilePicture') ;
@@ -48,7 +49,7 @@ class ProfileController extends Controller
 
              $profile->first_name=$request['firstName'];
              $profile->last_name=$request['lastName'];
-             $profile->about=$request['aboutMe'];
+             $profile->issue=$request['issue'];
              $profile->profilepic=$fileName;
            //  $profile->Auth::User();
              $profile->save();

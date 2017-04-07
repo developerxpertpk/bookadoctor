@@ -11,15 +11,15 @@ use App\Schedule;
 class Booking extends Model
 {
    public function book(){
-   	 return $this->hasOne('App\Doctor','doctor_id');
+   	 return $this->hasOne('App\Doctor','id');
    }
 
-   public function medic(){
-   	 return $this->hasOne('App\Medicalcenter','medicalcenter_id');
+   public function user(){
+   	 return $this->hasMany('App\User','user_id');
    }
 
-   public function sche(){
-   	 return $this->hasOne('App\Schedule','schedule_id');
-   }
+   
+
+   
 }
  

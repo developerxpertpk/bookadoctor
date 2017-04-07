@@ -118,7 +118,7 @@ Route::prefix('medical')->group(function(){
 
                     Route::get('/patient', 'Auth\MedicalCenterRegisterController@showPatientRegistrationForm')->name('patient.regester');
                     Route::post('/patient', 'Auth\MedicalCenterRegisterController@register')->name('patient.regester.submit');
-                    Route::get('/parient-dashboard', 'LoginController@showPatientDashboard')->name('patient.dashboard')->middleware('auth');
+                    Route::get('/patient-dashboard', 'LoginController@showPatientDashboard')->name('patient.dashboard')->middleware('auth');
                     Route::get('/doctor-dashboard', 'LoginController@showDoctorDashboard')->name('doctor.dashboard')->middleware('auth');
                     Route::get('/profile',array('as'=>'profile','before'=>'auth','uses'=>'ProfileController@getProfile'));
                     Route::get('/editProfile',array('as'=>'editProfile','before'=>'auth','uses'=>'ProfileController@editProfile'));
@@ -141,11 +141,11 @@ Route::prefix('medical')->group(function(){
                     Route::get('/dr_login','DoctorController@Showlogin');
 
                     Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
-                    Route::get('/show-doctor-info','DoctorController@profile');
-                    Route::post('/show-doctor-info','DoctorController@profile')->name('Doctor.show.profile');
+                    Route::get('/profile','DoctorController@profile');
+                    //Route::post('/show-doctor-info','DoctorController@profile')->name('Doctor.show.profile');
                     Route::post('/profile','DoctorController@update_profile')->name('Doctor.image');
                     Route::post('/profile/s','ScheduleController@insert')->name('Doctor.schedule.create');
-                    Route::get('/booking','DoctorBookingController@index');
+                    Route::get('/booking/{id}','DoctorBookingController@index');
                     //Route::get('/showInfo','DoctorController@ShowEdit');
                    // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
                     //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');

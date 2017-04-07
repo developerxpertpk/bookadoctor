@@ -11,7 +11,7 @@
                         {{ csrf_field() }}
                         <input id="role" type="hidden" class="form-control" name="role" value="1" required autofocus>
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label"> First Name</label>
 
                             <div class="col-md-6">
                                 <input id="firstname" type="text" class="form-control" name="first_name" value="{{ old('name') }}" required autofocus>
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">User Name</label>
+                            <label for="username" class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
                                 <input id="lastname" type="text" class="form-control" name="last_name" value="{{ old('username') }}" required autofocus>

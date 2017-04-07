@@ -19,7 +19,6 @@ class CreateProfileTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('profilepic')->default('Anony.png');
-            $table->text('about');
             $table->timestamps();
 //            $table->foreign('user_id')->refrence('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

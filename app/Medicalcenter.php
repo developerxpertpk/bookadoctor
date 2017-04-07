@@ -31,4 +31,5 @@ class Medicalcenter extends Model
         return $this->belongsToMany('App\Service');
     }
 
+   
 }

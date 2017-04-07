@@ -12,7 +12,7 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $patient= new App\Role;
-        $patient->role="patient";
+        $patient->role="users";
         $patient->description="Patient Role";
         $patient->save();
 

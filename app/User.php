@@ -64,9 +64,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Doctors', 'user_id');
     }
 
-
-
-    public static function generatePassword()
+      public static function generatePassword()
     {
         // Generate random string and encrypt it.
         return bcrypt(str_random(35));
@@ -87,6 +85,20 @@ class User extends Authenticatable
 
     }
 
+    public function bookings(){
+        return $this->belongsTo('App\Booking', 'user_id');
+    }
+
+
+    public function schedule()
+    {
+       return $this->hasOne('App\Schedule', 'user_id');   
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Profile','user_id');
+    }
 }
 
 

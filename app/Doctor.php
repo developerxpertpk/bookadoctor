@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 //use App\Medicalcenter;
 use App\Medicalcenterspecilazition;
-
+use App\Booking;
 class Doctor extends Model
 {
     use Notifiable;
@@ -52,7 +52,7 @@ class Doctor extends Model
     {
         return $this->belongsTo('App\User', 'id');
     }
-  public function doctor_speciality()
+    public function doctor_speciality()
     {
         return $this->hasMany('App\Doctor_Speciality', 'doctors_id');
     }
@@ -60,5 +60,10 @@ class Doctor extends Model
     public function schedule()
     {
         return $this->hasOne('App\Schedule', 'user_id');
+    }
+
+     public function booki()
+    {
+        return $this->belongsTo('App\Booking', 'doctor_id');
     }
 }

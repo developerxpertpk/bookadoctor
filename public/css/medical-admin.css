@@ -222,3 +222,35 @@ div#img {
     background: #2AD705;
     color: #ffffff;
 }
+.medical-center-subscription #admin-wrapper #admin-sidebar .side-nav{
+    display: none;
+}
+.medical-center-subscription #header .custom-navi ul.navbar-nav li.dropdown.open ul.dropdown-menu > li{
+    display: none!important;
+}
+.medical-center-subscription #header .custom-navi ul.navbar-nav li.dropdown.open ul.dropdown-menu > li:last-child{
+    display: block!important;
+}
+.medical-center-subscription #admin-wrapper #admin-sidebar .side-nav1{
+    display: block;
+}
+.side-nav1{
+    display: none;
+}
+@-webkit-keyframes blinker {
+    from { opacity: 1.0; }
+    to { opacity: 0.0; }
+}
+
+.medical-center-subscription #admin-wrapper #admin-sidebar .side-nav1 .full-access{
+    margin-top: 34px;
+    margin-left: 24px;
+    float: left;
+    text-align: center;
+    font-size: 39px;
+    color: red;
+    -webkit-animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -webkit-animation-duration: 1.7s;
+}

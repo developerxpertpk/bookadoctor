@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
          $this->call(DoctorTableSeeder::class);
         $this->call(speciality_table_seeder::class);
         $this->call(UserSeeder::class);
+        $this->call(PlanTableSeeder::class);
 
         $speciality1= new App\Service;
         $speciality1->name="MRI";

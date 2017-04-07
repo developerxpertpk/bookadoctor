@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
-protected $fillable=array( 'name','cost','details');
+protected $fillable=array( 'plan_type','plan_cost','description');
 }
+
+
+

@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"> Medical Center Register</div>
                 <div class="panel-body">
+                   
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('medical.center.regester.submit') }}">
                         {{ csrf_field() }}
                         <input id="role" type="hidden" class="form-control" name="role" value="3" required autofocus>
@@ -53,7 +54,7 @@
                             <label for="username" class="col-md-4 control-label">Sub Domain</label>
 
                             <div class="col-md-6">
-                                <input id="sub_domain_name" type="text" class="form-control" name="sub_domain_name" value="{{ old('sub_domain_name') }}" disabled autofocus>
+                                <input id="sub_domain_name" type="text" class="form-control" name="sub_domain_name1" disabled>
 
                                 @if ($errors->has('sub_domain_name'))
                                     <span class="help-block">
@@ -65,7 +66,7 @@
                         <script type="text/javascript">
                             jQuery(document).ready(function() {
                                 $('#domain_name').change(function () {
-                                    $('#sub_domain_name').val($(this).val() + '.drbooking.com');
+                                    $('#sub_domain_name1').val($(this).val() + '.drbooking.com');
                                 });
                             });
                         </script>

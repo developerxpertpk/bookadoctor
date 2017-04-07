@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\User;
 use App\UserRegisters;
 use App\UserProfiles;
+use App\Subscription;
 use Validator;
 use View;
 use Auth;
@@ -49,13 +50,6 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    //Below is a temporary function implimentation trial
-
-    // public function authenticated($request , $user)
-    // {
-        
-    // }
-
     public function login(){
         //print_r($_POST);
         $email=$_POST['email'];
@@ -72,13 +66,15 @@ class LoginController extends Controller
                 }
                 if(Auth::user()->role_id == 3)
                 {
-                    return redirect(route('medical.center.dashboard'));
-
+                    $status2=Subscription::where('user_id','=',Auth::user()->id)->first();
+                    if( $status2->status == 0){
+                        return redirect()->route('medical.center.subscription.form')
+                            ->with('success', 'New Admin Regester successfully');
+                    }
+                    if( $status2->status == 1){
+                        return redirect(route('medical.center.dashboard'));
+                    }
                 }
-
             }
-        //die('hahaha');
     }
-
-
 }

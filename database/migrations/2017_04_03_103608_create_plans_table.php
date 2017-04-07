@@ -15,9 +15,9 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('cost');
-            $table->text('details');
+            $table->string('plan_type');
+            $table->Integer('plan_cost');
+            $table->text('description');
             $table->enum('status',['Active', 'Inactive'])->default('Inactive');
             $table->timestamps();
         });

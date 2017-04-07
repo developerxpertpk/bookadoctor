@@ -189,7 +189,7 @@
                                               <label for="username" class="col-md-4 control-label">Sub Domain</label>
 
                                               <div class="col-md-6">
-                                                  <input id="sub_domain_name" type="text" class="form-control" name="sub_domain_name" value="{{ old('sub_domain_name') }}" disabled autofocus>
+                                                  <input id="sub_domain_name" type="text" class="form-control" name="sub_domain_name1" value="" disabled autofocus>
 
                                                   @if ($errors->has('sub_domain_name'))
                                                       <span class="help-block">

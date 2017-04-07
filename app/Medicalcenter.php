@@ -28,7 +28,7 @@ class Medicalcenter extends Model
         return $this->hasmany('App\Medicalcenterimage');
     }
     public function services(){
-        return $this->belongsToMany('App\Service','medical_services','service_id','medical_center_id');
+        return $this->belongsToMany('App\Service');
     }
 
 }

@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use App\User;
 use App\Medicalcenter;
+use App\Subscription;
+Use App\Plan;
 use Auth;
 
 
 class MedicalCenterController extends Controller
 {
          public function index(){
-            return view('medicalcenter.medical-center-subscription');
+          $plan_info=Plan::all();
+//             echo "<pre>";
+//             print_r($plan_info);
+//             die('llop');
+
+            return view('medicalcenter.medical-center-subscription',compact('plan_info'));
          }
          public function show_info_form(){
              return view('medicalcenter.show_info_form');
@@ -90,9 +97,15 @@ class MedicalCenterController extends Controller
                 return view('medicalcenter.show_contact_form');
             }
             public  function payment_success(Request $request){
-            //    echo "<pre>";
-            //     print_r($request);
-            //     die('hello');
+                echo "<pre>";
+
+
+
+                $medical_subscription=Subscription::Where('user_id','=',Auth::user()->id)->first();
+                $medical_subscription->plan_type = $request['plan_type'];
+                $medical_subscription->plan_amount = $request['plan_amount'];
+                $medical_subscription->status = $request['plan_status'];
+                $medical_subscription->save();
 
                 return redirect()->route('medical.center.dashboard');
 

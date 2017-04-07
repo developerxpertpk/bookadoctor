@@ -135,13 +135,13 @@
                                             <a class="btn btn-info" href="{{ route('add-doctor.show',$item->id) }}">Show</a>
                                             <a class="btn btn-primary" href="{{ route('medical.edit',$item->id) }}">Edit</a>
 
-                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target=".bs-assign-speciality">Assign speciality</a>
+                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target=".bs-assign-speciality{{$item->id }}">Assign speciality</a>
 
-                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp">Add Doctor Schedule</a>
+                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp{{$item->id }}">Add Doctor Schedule</a>
 
 
 
-                                            <div class="modal fade bs-assign-speciality" data-easein="tada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                            <div class="modal fade bs-assign-speciality{{$item->id }}" data-easein="tada" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -167,7 +167,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="myModelkkklpp" class="modal fade" role="dialog">
+                                            <div id="myModelkkklpp{{$item->id }}" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <!-- Modal content-->
                                                     <div class="modal-content">

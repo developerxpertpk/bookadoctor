@@ -35,6 +35,7 @@ class CreateMedicalCenterTable extends Migration
             $table->string('city');
             $table->bigInteger('pincode');
             $table->string('working_hours');
+            $table->enum('status',['Active', 'Inactive'])->default('Inactive');
             $table->timestamps();
             $table->string('stripe_id')->nullable();
             $table->string('card_brand')->nullable();

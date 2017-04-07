@@ -13,11 +13,14 @@ class ServiceMedicalcenter extends Migration
      */
     public function up()
     {
-        Schema::create('medical_services', function (Blueprint $table) {
+        Schema::create('medicalcenter_service', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('medical_center_id')->unsigned();
+            $table->integer('medicalcenter_id')->unsigned();
             $table->integer('service_id')->unsigned();
             $table->timestamps();
+            $table->foreign('medicalcenter_id')->references('id')->on('medicalcenters');
+            $table->foreign('service_id')->references('id')->on('services');
+            $table->unique(array('medicalcenter_id', 'service_id'));
         });
     }
 

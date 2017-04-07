@@ -5,9 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use App\Doctor;
-use App\Profile;
-use App\Medicalcenter;
+use App\Userprofile;
 use Mail;
 
 
@@ -36,9 +34,9 @@ class User extends Authenticatable
 
     //Custom code below
 
-    public function role()
+    public function has_role()
     {
-        return $this->belongsTo('App\Role', 'role_id');
+        return $this->belongsTo('App\Role', 'id');
         //matches the model
         //Structure for above foreign key will have belongs and has 2 parameters ('NAme of model', 'connection collumn name of the current model')
         // Second parameter takes the value of the collumn and matches it to the id of the stated model 
@@ -49,17 +47,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Profile', 'user_id');
 
     }
-    public function is_MedicalCenter()
-    {
-        return $this->hasOne('App\Medicalcenter', 'user_id');
-
-    }
-    public function is_Doctor()
-    {
-        return $this->hasOne('App\Doctor', 'user_id');
-
-    }
-
     public function showInfo(){
         return $this->belongsTo('App\Doctors', 'user_id');
     }

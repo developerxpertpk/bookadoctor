@@ -53,9 +53,12 @@ class MedicalCenterController extends Controller
                  $medical_info->medical_center_info=$request['medical_center_info'];
                  $medical_info->title=$request['title'];
                  $medical_info->description=$request['description'];
-                 $medical_info->profilepic=$fileName;
+                 $medical_info->
                  //  $profile->Auth::User();
                  $medical_info->save();
+                 $profile =new Profile;
+                 $profile->profilepic=$fileName;
+                 $profile->save();
                  return redirect()->route('medical.center.image.gallery')
                      ->with('success', 'New Admin Regester successfully');
 

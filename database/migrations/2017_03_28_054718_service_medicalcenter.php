@@ -31,6 +31,6 @@ class ServiceMedicalcenter extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_services');
+        Schema::dropIfExists('medicalcenter_service ');
     }
 }

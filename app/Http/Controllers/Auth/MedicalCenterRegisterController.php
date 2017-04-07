@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
-//use App\Profile;
 use App\Medicalcenter;
 use App\Subscription;
 
@@ -60,8 +60,6 @@ class MedicalCenterRegisterController extends Controller
                   $medical_center = new Medicalcenter;
 
                   $medical_center->user_id = $adminnew->id;
-                  $medical_center->first_name = $request['first_name'];
-                  $medical_center->last_name = $request['last_name'];
                   $medical_center->medical_center_info ='';
                   $medical_center->title ='';
                   $medical_center->description ='';
@@ -78,6 +76,13 @@ class MedicalCenterRegisterController extends Controller
                   $medical_center->working_hours =0;
 
                   $medical_center->save();
+
+                  $profile =new Profile;
+                  $profile->user_id = $adminnew->id;
+                  $profile->first_name = $request['first_name'];
+                  $profile->last_name = $request['last_name'];
+                  $profile->save();
+
 
                   $medical_subscription = new Subscription;
                   $medical_subscription->user_id = $adminnew->id;

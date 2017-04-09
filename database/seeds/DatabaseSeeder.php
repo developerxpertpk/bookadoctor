@@ -20,14 +20,8 @@ class DatabaseSeeder extends Seeder
         $admin->password=bcrypt('admin12#');
         $admin->save();
 
-        $this->call(RoleTableSeeder::class);
-
-        $this->call(medicalcentersTableSeeder::class);
-        $this->call(medicalcentersTableSeeder::class);
-        $this->call(DoctorTableSeeder::class);
-        $this->call(speciality_table_seeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(BookingSeeder::class);
+       
+        
 
         $speciality1= new App\Service;
         $speciality1->name="MRI";
@@ -52,6 +46,9 @@ class DatabaseSeeder extends Seeder
         $speciality4->description="Emergency";
         $speciality4->price=2500;
         $speciality4->save();
+
+
+         $this->call(RoleTableSeeder::class);
 
    }
 }

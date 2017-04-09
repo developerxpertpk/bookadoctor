@@ -8,88 +8,12 @@
 					<button type="button" class="pull-right btn btn-sm btn-danger" data-toggle="modal" data-target="#myModelkkkl"> View Bookings
 					</button>
 					<!-- MODAL -->
-					<div id="myModelkkkl" class="modal fade" role="dialog">
-						<div class="modal-dialog">
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Bookings</h4>
-								</div>
-								{!! Form::open() !!}
-								<input type="hidden" name="user_id" value="{{$user->id }}">
-								<div class="modal-body">
-									<p> Booking List</p>
-									<table class="table table-bordered" id="patient">
-										<thead>
-											<th> ID </th>
-											<th>  Patient's Name </th>
-											<th> Date & Time </th>
-											<th> Age </th>
-											<th> Issue </th>
-											<th> Action </th>
-										</thead>
-									</tr>
-									@foreach($booking as $key=>$value)
-									<tr>
-									<td>
-										@foreach($s as $key=>$id)
-											{{$id->user_id}}           <!--  Id -->
-											@endforeach
-									</td>
-										<td>
-											@foreach($s as $key=>$name)
-											{{$name->first_name}}  {{$name->last_name}}          <!--  First Name -->
-											@endforeach
-										</td>
-										<td>
-											@foreach($booking as $key=>$value)
-											{{$value->date_test}}           <!-- date and time -->
-										</td>
-										<td>
-											@foreach($s as $key=>$age)
-											{{$age->age}}           <!--  age -->
-											@endforeach
-										</td>
-										<td>
-											{{$value->problem}} <!-- Issue -->
-										</td>
-										@endforeach
-										<td>
-
-									<button type="button" class="btn btn-default" data-dismiss="modal">Edit </button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel </button>
-									</td>
-										
-									</tr>
-									@endforeach
-
-								</table>
-								
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-								
-								{{ Form::close() }}
-							</div>
-						</div>
-					</div>
-				</div>
+					
 				
 				<!-- Modal end-->
 				<div class="panel-body">
-					<img src="images/profile_pic/{{$user->is_doctor->profile_pic}}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">  <!-- DSC_0022.jpg -->
-					<h4>{{ $user->is_doctor->first_name}} {{ $user->is_doctor->last_name}}'s Profile</h4>
-					<div clo-md-12>
-						<label col-md-4>Email : </label><h4>{{ $user->email}} </h4>
-					</div>
 					
-					{!! Form::open(['route' => 'Doctor.image','method'=>'POST','files'=> true]) !!}
-					<label>Update profile picture</label>
-					<input type="file" name="profile_image">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="submit" class="pull-right btn btn-sm btn-primary">
-					{{ Form::close() }}
+					<p> Your Profile</p>
 				</div>
 			</div>
 		</div>

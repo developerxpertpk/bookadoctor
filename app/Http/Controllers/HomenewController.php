@@ -10,15 +10,17 @@ class HomenewController extends Controller
   public function index()
   {
 
-  	$page = Page::where('status','Active')->get();
-      return view('homenew', compact('page'));
+  	// $page = Page::where('status','Active')->get();
+      return view('homenew');   
+
+      // , compact('page')
   }
 
-  public function show($page)
-  {
-  	$pagedata=Page::where([['slug','=','/'.$page],['status','=','Active']])->get();
-  	$pagedata= $pagedata['0'];
-  	$page = Page::where('status','Active')->get();
-  	return view('page',compact('pagedata','page'));
-  }
+  // public function show($page)
+  // {
+  // 	$pagedata=Page::where([['slug','=','/'.$page],['status','=','Active']])->get();
+  // 	$pagedata= $pagedata['0'];
+  // 	$page = Page::where('status','Active')->get();
+  // 	return view('page',compact('pagedata','page'));
+  // }
 }

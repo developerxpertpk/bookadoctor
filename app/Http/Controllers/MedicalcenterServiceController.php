@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use App\Doctor;
 use App\User;
 use App\Service;
-use App\Medical_service;
+use App\Medicalcenter_service;
 Use App\Medicalcenter;
 use Validator;
 use Redirect;
@@ -222,6 +222,11 @@ class MedicalcenterServiceController extends Controller
         // dd($services);
         return view('medicalcenter.services.add-services',compact('services'));
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function assign_service(Request $request){
         $service_id=Auth::user()->is_MedicalCenter;
        // echo $service_id;
@@ -231,15 +236,15 @@ class MedicalcenterServiceController extends Controller
         {
 
           //  echo $key;
-            $service = new  Medical_service;
+            $service = new Medicalcenter_service;
             $service->service_id=$key;
-            $service->medical_center_id=$service_id->id;
+            $service->medicalcenter_id=$service_id->id;
             $service->save();
 
 //
         }
-
-        return view('medicalcenter.services.show-services');
+        $medicaldetail = Medicalcenter::find($service_id->id);
+        return view('medicalcenter.services.show-services',compact('medicaldetail'));
 
     }
     public function add_specilaty(){

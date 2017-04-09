@@ -137,7 +137,7 @@ Route::prefix('medical')->group(function(){
                         //Doctors Module
                     Route::get('/drregistration','DoctorController@index');
                     Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
-                    Route::get('/drregistration','DoctorController@speciality');
+                    //Route::get('/drregistration','DoctorController@speciality');
                     Route::get('/dr_login','DoctorController@Showlogin');
 
                     Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');

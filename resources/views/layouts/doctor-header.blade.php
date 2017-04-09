@@ -62,9 +62,9 @@
                                     </li>
                                 </ul>
                             </li> --}}
-                            <li> <img id="profile_avatar" src="{{asset('images/profile_pic/'.Auth::user()->is_doctor->profile_pic) }} "></li>
+                           
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_doctor->first_name }}&nbsp;{{ Auth::user()->is_doctor->last_name }}  <b class="caret"></b></a>
+                               
                                 <ul class="dropdown-menu">
                                     <li><a href="{{route('medical.center.image.gallery')}}"><i class="fa fa-fw fa-user"></i>Show Profile</a></li>
                                     <li>
@@ -74,9 +74,7 @@
                                         <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                                     </li>
                                     <li class="divider"></li>
-                                    {{--<li>--}}
-                                        {{--{{ Auth::user()->email }}--}}
-                                    {{--</li>--}}
+                                    
                                     <li>
                                         <li>
                                             <a href="{{ route('logout') }}"

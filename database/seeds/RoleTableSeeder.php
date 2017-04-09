@@ -11,19 +11,20 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $patient= new App\Role;
-        $patient->role="users";
-        $patient->description="Patient Role";
-        $patient->save();
+        $role1= new App\Role;
+        $role1->role="users";
+        $role1->save();
 
-        $doctor= new App\Role;
-        $doctor->role="doctor";
-        $doctor->description="Doctor Role";
-        $doctor->save();
+        
 
-        $medical_center= new App\Role;
-        $medical_center->role="medicalcenter";
-        $medical_center->description="Medical Center Role";
-        $medical_center->save();
+        $role2= new App\Role;
+        $role2->role="doctor";
+        $role2->save();
+
+        $role3= new App\Role;
+        $role3->role="medicalcenter";
+        $role3->save();
     }
-}
+} 
+//hang dhk liya   kk hai?
+

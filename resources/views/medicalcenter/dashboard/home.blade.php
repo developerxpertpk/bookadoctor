@@ -33,8 +33,8 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
-                        <div>New Tasks!</div>
+                        <div class="huge">$ {{ App\Subscription::where('user_id','=',Auth::user()->id)->first()->plan_amount}}</div>
+                        <div>Subscription Type {{ App\Subscription::where('user_id','=',Auth::user()->id)->first()->plan_type}}</div>
                     </div>
                 </div>
             </div>

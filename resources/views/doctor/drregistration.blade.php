@@ -37,19 +37,12 @@
                             <label for="username" class="col-md-4 control-label">Specialization</label>
                             <div class="col-md-6">
                           <div class="dropdown">
-                          @foreach($specialities as $key)
-                           <label control-label">{{$key->name}}</label>
-                          <input type="checkbox" name="speciality[]" value="{{$key->id}}">
-                          @endforeach
+                         
                          <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown button -->
                           </button>
                                
-                                @if ($errors->has('speciality'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('speciality') }}</strong>
-                                </span>
-                                @endif
+                               
                             </div>
                         </div>
                         </div>

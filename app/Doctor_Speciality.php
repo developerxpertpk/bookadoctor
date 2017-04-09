@@ -8,10 +8,7 @@ class Doctor_Speciality extends Model
 {
         protected $table = 'doctor_speciality';
 
-         public function Doctor()
-    {
-        return $this->belongsToMany('App\Doctor', 'doctors_id');
-    }
+        
 
      public function speciality()
     {

@@ -48,7 +48,17 @@
     {{--<script src="{{ asset('js/plugins/morris/morris.min.js') }}" type="text/javascript"></script>--}}
     {{--<script src="{{ asset('js/morris/raphael.min.js') }}" type="text/javascript"></script>--}}
 </head>
-<body>
+<?php
+
+
+
+$widget_text= Request::path();
+
+$body_class = str_replace(array('medical/'), '',$widget_text);
+
+
+?>
+<body class="{{$body_class}}">
 @include('layouts.medical-header')
 
 <div id="admin-wrapper">
@@ -65,6 +75,10 @@
                               </span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+                <ul class="nav navbar-nav side-nav1">
+                    <div class="full-access">Get Full Access Purchage A plan !!!</div>
+                </ul>
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="{{ route('medical.center.dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
@@ -75,14 +89,12 @@
                             <li>
                                 <a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>
                             </li>
-                            <li>
-                                <a href=""><i class="fa fa-fw fa-edit"></i> Add Speciality</a>
-                            </li>
+
 
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor
+                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
@@ -98,18 +110,11 @@
                             </li>
                         </ul>
                     </li>
-
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-wrench"></i> Manage Content<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-handshake-o" aria-hidden="true"></i> Manage Bookings<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li>
-                                <a href="#">About Us</a>
+                                <a href="#">List Of Booking</a>
                             </li>
                             <li>
                                 <a href="#">FAQ</a>
@@ -122,6 +127,14 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
+                    </li>
+                    <li>
+                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
+                    </li>
+
 
                 </ul>
             </div>
@@ -138,7 +151,7 @@
                         {{--Dr. Booking --}}
                         {{--</h1>--}}
                         <section class="page-header">
-                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_MedicalCenter->profilepic}}"></div>
+                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->profile->profilepic}}"></div>
                             <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
                             <h1>{{Auth::user()->is_MedicalCenter->title}}</h1>
                         </span></div>

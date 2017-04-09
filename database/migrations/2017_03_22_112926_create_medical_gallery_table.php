@@ -15,9 +15,9 @@ class CreateMedicalGalleryTable extends Migration
     {
         Schema::create('medicalcenterimages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('medical_center_id')->unsigned()->default(0);
+            $table->integer('user_id')->unsigned()->default(0);
             $table->string('images')->default('Anony.png');
-            $table->foreign('medical_center_id')->references('id')->on('medicalcenters');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

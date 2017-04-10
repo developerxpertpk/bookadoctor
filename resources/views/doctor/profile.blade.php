@@ -5,6 +5,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-heading"> Doctor Profile
+				{!! csrf_field() !!}
 					<button type="button" class="pull-right btn btn-sm btn-danger" data-toggle="modal" data-target="#myModelkkkl"> View Bookings
 					</button>
 					<!-- MODAL -->

@@ -12,10 +12,8 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $role1= new App\Role;
-        $role1->role="users";
+        $role1->role="admin";
         $role1->save();
-
-        
 
         $role2= new App\Role;
         $role2->role="doctor";
@@ -24,7 +22,13 @@ class RoleTableSeeder extends Seeder
         $role3= new App\Role;
         $role3->role="medicalcenter";
         $role3->save();
+
+
+        $role4= new App\Role;
+        $role4->role="user";
+        $role4->save();
     }
 } 
-//hang dhk liya   kk hai?
+
+
 

@@ -13,13 +13,16 @@ class BookingDocuments extends Migration
      */
     public function up()
     {
-        Schema::create('booking_documents', function (Blueprint $table){
+        Schema::create('bookingDocuments', function (Blueprint $table){
 
 
             $table->increments('id');
             $table->integer('booking_id');
             $table->integer('document_id');
             $table->timestamps();
+
+            $table->foreign('booking_id')->references('id')->on('booking');
+           // $table->foreign('document_id')->references('id')->on('document');
         });
     }
 
@@ -30,6 +33,6 @@ class BookingDocuments extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('booking_documents');
+         Schema::dropIfExists('bookingDocuments');
     }
 }

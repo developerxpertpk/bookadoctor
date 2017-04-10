@@ -24,20 +24,17 @@ public function insert(Request $request ){
 $user = new User;
 	$user->email=$request['email'];
 	$user->password=bcrypt($request['password']);
-	$user->role_id=$request['role'];
+	$user->role_id=2;
+	$user->status=1;
 	$user->save();
 $doctor = new Userprofile;
 	$doctor->first_name=$request['first_name'];
 	$doctor->last_name=$request['last_name'];
-	$doctor->userrole_id=2;
 	$doctor->user_id=$user->id;
-	$doctor->status="Active";
-	
+	$doctor->save();
+		
 	//$doctor->profile_pic=$fileName;
     // return view('doctor.show_profile');
-
-	$doctor->save();
-
 	//Pivot table
 	// foreach($request->speciality as $key)
 	// {
@@ -93,7 +90,7 @@ return view('doctor.dr_login');
  		 //die('kkkkk');
  	 	
  	 	 //return view('doctor.showInfo');  //,compact('details')
-
+ 
  	 	return redirect('/profile');
  	 }
 
@@ -122,14 +119,12 @@ return view('doctor.dr_login');
 // // public function show_doctor_dashboard(Request $request){
 	
 // // return view('doctor.showinfo');
-
- public function profile(){
- 
- $user = Auth::User();
-// print_r($user);
-
-
 	
+ public function profile(){
+
+ $user = Auth::User();
+ 
+
 	//  $userr = $user->speciality_user->doctor_speciality;
 	//  foreach ($userr as $key) {
 	//  	$doe= speciality::where('id','=',$key->speciality_id)->get();
@@ -145,28 +140,28 @@ return view('doctor.dr_login');
 	 //$booking = Booking::where('doctor_id','=',$user->is_doctor->id)->fir();
 
 
-	  $booking = Booking::where('user_id','=',$user->is_Profile->id);
+	  //$booking = Booking::where('user_id','=',$user->is_Profile->id);
 	  // print_r($booking);
 	 
-	  	  foreach($booking as $key=>$value)
-	  {
+	  // 	  foreach($booking as $key=>$value)
+	  // {
 
-	  	//print_r($value->user_id);
-	  	$userr=User::find($value->user_id);
-	  	$userr->profile;
-	  	$userr->booking;
-	  	// echo "<pre>";
-	  	// print_r($userr);
-	  	// die('vhgh');
+	  // 	//print_r($value->user_id);
+	  // 	$userr=User::find($value->user_id);
+	  // 	$userr->profile;
+	  // 	$userr->booking;
+	  // 	// echo "<pre>";
+	  // 	// print_r($userr);
+	  // 	// die('vhgh');
 	  
-	  	// $k[]=$userr->profile->first_name;
-	  	// $i[]=$userr->profile->last_name;
-	  	//$s=$userr->profile->age;
-	  	 //$first_name[]=$userr->profile->first_name;
-	  	 //$last_name[]=$userr->profile->last_name;
-	  	 //$age[]=$userr->profile->age;
+	  // 	// $k[]=$userr->profile->first_name;
+	  // 	// $i[]=$userr->profile->last_name;
+	  // 	//$s=$userr->profile->age;
+	  // 	 //$first_name[]=$userr->profile->first_name;
+	  // 	 //$last_name[]=$userr->profile->last_name;
+	  // 	 //$age[]=$userr->profile->age;
 	  	
-	  }
+	  // }
 	 // array_combine($first_name, $last_name);
 	 // $output = array_combine($first_name,$last_name);
 
@@ -178,8 +173,9 @@ return view('doctor.dr_login');
 	    // die('bcmchjghjw');
 	  // print_r($booking->user_id);die('hhhchghgcc');
 	 //die($user->is_Doctor);
+ //die('dhdhhdhdh');
 
-	 return view ('doctor.profile', compact('user','treat','booking'));
+	 return view ('doctor.profile', compact('user'));
 }
 }
 

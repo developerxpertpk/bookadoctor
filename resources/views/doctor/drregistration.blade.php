@@ -37,19 +37,19 @@
                             <label for="username" class="col-md-4 control-label">Specialization</label>
                             <div class="col-md-6">
                           <div class="dropdown">
-                          @foreach($specialities as $key)
-                           <label control-label">{{$key->name}}</label>
-                          <input type="checkbox" name="speciality[]" value="{{$key->id}}">
-                          @endforeach
+
+                          <input type="checkbox" name="speciality" value="gynecologist"> Gynecologist
+                          <input type="checkbox" name="speciality" value="dermtologist" > Dermatologist
+                          <input type="checkbox" name="speciality" value="sexologist">  Sexologist 
+                          <input type="checkbox" name="speciality" value="cardiologist" > Cardiologist
+                          <input type="checkbox" name="speciality" value="ayurveda"> Ayurveda
+                          <input type="checkbox" name="speciality" value="homeopathy" > Homeopathy
+                         
                          <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown button -->
                           </button>
                                
-                                @if ($errors->has('speciality'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('speciality') }}</strong>
-                                </span>
-                                @endif
+                               
                             </div>
                         </div>
                         </div>
@@ -95,17 +95,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                            <label for="status" class="col-md-4 control-label">Status</label>
-                            <div class="col-md-6">
-                                <input id="status" type="text" class="form-control" name="status" value="{{ old('status') }}" required autofocus>
-                                @if ($errors->has('status'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
+                       
                     <input id="role" type="hidden" class="form-control" name="role" value="2" required autofocus>
                     <input id="medic" type="hidden" class="form-control" name="medic" value="1" required autofocus>
 

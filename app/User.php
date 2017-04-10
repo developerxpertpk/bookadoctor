@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Userprofile;
+use App\role;
 use Mail;
 
 
@@ -36,7 +37,7 @@ class User extends Authenticatable
 
     public function has_role()
     {
-        return $this->belongsTo('App\Role', 'id');
+        return $this->belongsTo('App\role', 'user_id');
         //matches the model
         //Structure for above foreign key will have belongs and has 2 parameters ('NAme of model', 'connection collumn name of the current model')
         // Second parameter takes the value of the collumn and matches it to the id of the stated model 
@@ -44,7 +45,7 @@ class User extends Authenticatable
 
     public function is_Profile()
     {
-        return $this->hasMany('App\Profile', 'user_id');
+        return $this->hasMany('App\Userprofile', 'user_id');
 
     }
     public function showInfo(){
@@ -78,13 +79,12 @@ class User extends Authenticatable
 
 
     public function schedule()
-    {
+    { 
        return $this->hasOne('App\Schedule', 'user_id');   
     }
 
-    public function profile()
-    {
-        return $this->hasOne('App\Profile','user_id');
+    public function is_speciality(){
+        return $this->belongsTo('App\speciality','user_id');
     }
 }
 

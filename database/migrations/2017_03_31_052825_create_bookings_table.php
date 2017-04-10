@@ -13,10 +13,20 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('booking_documents', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('booking_id');
-            $table->integer('document_id');
+            $table->integer('doctor_id');
+            $table->integer('user_id');
+            $table->integer('speciality_id');
+            $table->datetime('Appoitment_timings')->nullable();
+            $table->boolean('payment_status')->comment("0=pending","1=complete");
+            $table->string('status')->comment('0=pending',"1=complete","2=cancel","3=reshedule");
+            $table->timestamps();
+            
+            
+            $table->foreign('user_id')->references('id')->on('users');
+             $table->foreign('speciality_id')->references('id')->on('speciality');
+
         });
     }
 

@@ -12,4 +12,9 @@ class speciality extends Model
     {
         return $this->hasMany('App\Doctor_Speciality', 'speciality_id');
     }
+
+    public function speciality_user()
+    {
+    	return $this->hasMany('App\User','user_id');
+    }
 }

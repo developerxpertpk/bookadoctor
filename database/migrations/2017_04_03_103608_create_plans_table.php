@@ -15,10 +15,10 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('plan_type');
-            $table->Integer('plan_cost');
+            $table->string('name');
             $table->text('description');
-            $table->enum('status',['Active', 'Inactive'])->default('Inactive');
+            $table->Integer('amount');
+            //$table->enum('status',['Active', 'Inactive'])->default('Inactive');
             $table->timestamps();
         });
     }

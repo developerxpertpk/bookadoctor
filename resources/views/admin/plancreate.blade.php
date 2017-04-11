@@ -15,7 +15,7 @@
       <strong>Plan Cost:</strong>
     </div>
     <div class="col-md-10">
-      {!! Form::text('cost',null,array('placeholder' => 'Excerpt','class' => 'form-control ckeditor')) !!}
+      {!! Form::text('cost',null,array('placeholder' => 'Cost','class' => 'form-control ckeditor')) !!}
     </div>
   </div>
   <div class="row form-group">
@@ -29,7 +29,7 @@
   <div class="form-group">
     <div class="">
       <button type="submit" class="btn btn-primary">
-      Add Page
+      Add Plan
       </button>
     </div>
   </div>

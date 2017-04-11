@@ -10,16 +10,13 @@ use App\Schedule;
 
 class Booking extends Model
 {
-   public function book(){
-   	 return $this->hasOne('App\Doctor','id');
-   }
+   
 
-   public function user(){
-   	 return $this->hasMany('App\User','user_id');
+   public function is_users(){
+   	 return $this->belongsTo('App\User','user_id');
    }
 
    
-
    
 }
  

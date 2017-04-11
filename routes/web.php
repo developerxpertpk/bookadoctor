@@ -97,42 +97,55 @@ Route::resource('/add-doctor','MedicalcenterServiceController');
 Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
 //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');
 });
-//patients Routes
-Route::get('/patient', 'Auth\MedicalCenterRegisterController@showPatientRegistrationForm')->name('patient.regester');
-Route::post('/patient', 'Auth\MedicalCenterRegisterController@register')->name('patient.regester.submit');
-Route::get('/patient-dashboard', 'LoginController@showPatientDashboard')->name('patient.dashboard')->middleware('auth');
-Route::get('/doctor-dashboard', 'LoginController@showDoctorDashboard')->name('doctor.dashboard')->middleware('auth');
-Route::get('/profile',array('as'=>'profile','before'=>'auth','uses'=>'ProfileController@getProfile'));
-Route::get('/editProfile',array('as'=>'editProfile','before'=>'auth','uses'=>'ProfileController@editProfile'));
-Route::post('/updateProfile',array('as'=>'updateProfile','before'=>'auth','uses'=>'ProfileController@updateProfile'));
-//    Route::any ( '/search', function () {
-//    $q = Input::get ( 'search' );
-//    $user = Admin::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->get ();
-//    if (count ( $user ) > 0)
-//        return view ( 'homenew' )->withDetails ( $user )->withQuery ( $q );
-//    else
-//        return view ( 'homenew' )->withMessage ( 'No Details found. Try to search again !' );
-//} );
-//Doctors Module
-Route::get('/drregistration','DoctorController@index');
-Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
-//Route::get('/drregistration','DoctorController@speciality');
-Route::get('/dr_login','DoctorController@Showlogin');
-Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
-Route::get('/profile','DoctorController@profile');
-//Route::post('/show-doctor-info','DoctorController@profile')->name('Doctor.show.profile');
-Route::post('/profile','DoctorController@update_profile')->name('Doctor.image');
-Route::post('/profile/s','ScheduleController@insert')->name('Doctor.schedule.create');
-Route::get('/booking/{id}','DoctorBookingController@index');
-//Route::get('/showInfo','DoctorController@ShowEdit');
-// Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
-//Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');
-//Route::get('/doctor.show-profile','DoctorController@update');
-//Doctors Module
-//Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
-//Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
-//Route::get('/{page}','HomenewController@index');
-//Route::get('/dr_login','DoctorController@showInfo');
-//Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
-//booking
-//Route::get('/booking','BookingController@')
+            //patients Routes
+
+                    Route::get('/patient', 'Auth\MedicalController@showPatientRegistrationForm')->name('patient.regester');
+                    Route::post('/patient', 'Auth\MedicalCenterRegisterController@register')->name('patient.regester.submit');
+                    Route::get('/patient-dashboard', 'LoginController@showPatientDashboard')->name('patient.dashboard')->middleware('auth');
+                    Route::get('/doctor-dashboard', 'LoginController@showDoctorDashboard')->name('doctor.dashboard')->middleware('auth');
+                    Route::get('/profile',array('as'=>'profile','before'=>'auth','uses'=>'ProfileController@getProfile'));
+                    Route::get('/editProfile',array('as'=>'editProfile','before'=>'auth','uses'=>'ProfileController@editProfile'));
+                    Route::post('/updateProfile',array('as'=>'updateProfile','before'=>'auth','uses'=>'ProfileController@updateProfile'));
+
+
+
+            //    Route::any ( '/search', function () {
+            //    $q = Input::get ( 'search' );
+            //    $user = Admin::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->get ();
+            //    if (count ( $user ) > 0)
+            //        return view ( 'homenew' )->withDetails ( $user )->withQuery ( $q );
+            //    else
+            //        return view ( 'homenew' )->withMessage ( 'No Details found. Try to search again !' );
+            //} );
+                        //Doctors Module
+                    Route::get('/drregistration','DoctorController@index');
+                    Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
+                    //Route::get('/drregistration','DoctorController@speciality');
+                    Route::get('/dr_login','DoctorController@Showlogin');
+
+                    Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                    Route::get('/profile','DoctorController@profile');
+                    // /Route::post('/profile','DoctorController@profile')->name('Doctor.show.profile');
+                    Route::post('/profile','DoctorController@update_profile')->name('Doctor.image');
+                    //Route::post('/profile/s','ScheduleController@insert')->name('Doctor.schedule.create');
+                    Route::get('/bookings','DoctorController@viewBookings')->name('Doctor.booking');
+                    //Route:get('/showInfo','DoctorController@ShowEdit');
+                   // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
+                    //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');
+                    //Route::get('/doctor.show-profile','DoctorController@update');
+                    //Doctors Module
+
+
+                    //Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
+                   //Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
+
+
+
+                     Route::get('/{page}','HomenewController@show')->name('dynamic');
+
+
+                    //Route::get('/dr_login','DoctorController@showInfo');
+                    //Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
+
+                    //booking
+                    //Route::get('/booking','BookingController@')

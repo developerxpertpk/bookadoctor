@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use Illuminate\Http\Request;
+use file;
 use Auth;
 use App\User;
 use Image;
@@ -24,7 +27,7 @@ public function insert(Request $request ){
 $user = new User;
 	$user->email=$request['email'];
 	$user->password=bcrypt($request['password']);
-	$user->role_id=2;
+	$user->role_id=3;
 	$user->status=1;
 	$user->save();
 $doctor = new Userprofile;
@@ -95,137 +98,60 @@ return view('doctor.dr_login');
  	 }
 
 
-//  // public function ShowEdit()
-//  // {
-//  // 	return  view('doctor.showEdit');
-
-//  // }
-//  // public function show_doctor_profile(){
-
- 	
-//  // 	return view('doctor.show_profile');
-
-
-//  // }
-//  public function edit(Request $Request){
-//  	// echo "<pre>";
-//  	//  print_r($Request);
-//  	 return view('doctor.home');
-//  }
-// // Auth::user()->is_Doctor->profile_pic
- 	
-// // echo "hello";
-// // }
-// // public function show_doctor_dashboard(Request $request){
-	
-// // return view('doctor.showinfo');
 	
  public function profile(){
-
- $user = Auth::User();
  
-
-	//  $userr = $user->speciality_user->doctor_speciality;
-	//  foreach ($userr as $key) {
-	//  	$doe= speciality::where('id','=',$key->speciality_id)->get();
-
-	//  	foreach($doe as $key2 )
-	//  	{
-	//  		$treat[]=$key2->name;
- // }
-
-	//  }
-
- // Bookings Function start
-	 //$booking = Booking::where('doctor_id','=',$user->is_doctor->id)->fir();
+  $user = Auth::User();
+  // print_r(Auth::User());
+  // die();
 
 
-	  //$booking = Booking::where('user_id','=',$user->is_Profile->id);
-	  // print_r($booking);
-	 
-	  // 	  foreach($booking as $key=>$value)
-	  // {
-
-	  // 	//print_r($value->user_id);
-	  // 	$userr=User::find($value->user_id);
-	  // 	$userr->profile;
-	  // 	$userr->booking;
-	  // 	// echo "<pre>";
-	  // 	// print_r($userr);
-	  // 	// die('vhgh');
-	  
-	  // 	// $k[]=$userr->profile->first_name;
-	  // 	// $i[]=$userr->profile->last_name;
-	  // 	//$s=$userr->profile->age;
-	  // 	 //$first_name[]=$userr->profile->first_name;
-	  // 	 //$last_name[]=$userr->profile->last_name;
-	  // 	 //$age[]=$userr->profile->age;
-	  	
-	  // }
-	 // array_combine($first_name, $last_name);
-	 // $output = array_combine($first_name,$last_name);
+  $userr = $user->is_Profile;
+  // echo "<pre>";
+  // print_r($userr);
+  // die('cdcdddccddcd');
 
 
-	    //  echo "<pre>";
-	    //  print_r($s);
-	    //  print_r($k);
-	    //  print_r($i);
-	    // die('bcmchjghjw');
-	  // print_r($booking->user_id);die('hhhchghgcc');
-	 //die($user->is_Doctor);
- //die('dhdhhdhdh');
-
-	 return view ('doctor.profile', compact('user'));
-}
+	 return view ('doctor.profile', compact('userr'));
 }
 
-//  public function update_profile(Request $request){
+
+ public function update_profile(Request $request){
+
+ $user=Userprofile::Where('user_id','=',Auth::user()->id)->first();
  	
-//  	if($request->hasFile('profile_image')){
+ 	 if($file = $request->hasFile('image')) {
+                     $file = $request->file('image') ;
+                     $fileName = $file->getClientOriginalName() ;
+                     // echo "<pre>";
+                     // print_r($fileName);
+                     // die('sbsbsb');
+                     $extention = $file->getClientOriginalExtension();
+                     $destinationPath = public_path().'/images/profile_pic/' ;
+                     $file->move($destinationPath,$fileName);
+
+                 }
 
 
-//  		$profile_image = $request->file('profile_image');
-//  		//echo $profile_image; die;
-//  		$filename = time() . '.' . $profile_image->getClientOriginalExtension();
-//  		Image::make($profile_image)->resize(300,300)->save(public_path('/images/profile_pic/' . $filename ));
-
-//  		$user  = Auth::user();
-//  		$user->is_doctor->profile_pic=$filename;
- 		
-//  		$user->save();
-//  		Doctor::where('user_id',$user->id)->update(['profile_pic'=>$filename]);
-
-//  	}
-
-//  	 return $this->profile();
-//  }
-
-   
-//     public function speciality(){
-//     	die('ffffff');
-//     	  $specialities = speciality::all();
-//     	  // print_r($specialities);
-//     	  // die('jhsdvhjVHVHQSVXHJQVCVHVHVC');
-    
-
-//     	  return  view('doctor.drregistration',compact('specialities'));
-   
-// }
-
+ 	$user->images=$fileName;
+ 	$user->save();
+ 	return $this->profile();
  
 
-// // Auth::check($request);
-// //     {
-// //       $details='App/Doctor',"where('user_id','=', 'Auth:user_id') compact('details')";
+ 	 
 
-   
+ }
+
+   public function viewBookings(){
+
+   //$user = Auth::user()->bookings;
+
+   $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
+   echo "<pre>";
+   print_r($booking);
+   die('jkjk');
+      return view('doctor.booking');
+   }
 
 
-       // <li> <img id="profile_avatar" src="{{asset('images/profile_pic/'.Auth::user()->is_Profile->profilepic) }} "></li>  header-blade image upload code
-
-
-       // <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_Profile->first_name }}&nbsp;{{ Auth::user()->is_Profile->last_name }}  <b class="caret"></b></a>    header-blade first name and last name k liye
-
-         // {{--<li>--}}
-         // {{--{{ Auth::user()->email }}--}}
-         // {{--</li>--}}         User ki email
+}

@@ -35,9 +35,9 @@ class User extends Authenticatable
 
     //Custom code below
 
-    public function has_role()
+    public function hasrole()
     {
-        return $this->belongsTo('App\role', 'user_id');
+        return $this->belongsTo('App\role', 'role_id');
         //matches the model
         //Structure for above foreign key will have belongs and has 2 parameters ('NAme of model', 'connection collumn name of the current model')
         // Second parameter takes the value of the collumn and matches it to the id of the stated model 
@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function is_Profile()
     {
-        return $this->hasMany('App\Userprofile', 'user_id');
+        return $this->hasOne('App\Userprofile', 'user_id');
 
     }
     public function showInfo(){
@@ -74,7 +74,7 @@ class User extends Authenticatable
     }
 
     public function bookings(){
-        return $this->belongsTo('App\Booking', 'user_id');
+        return $this->hasMany('App\Booking', 'user_id');
     }
 
 

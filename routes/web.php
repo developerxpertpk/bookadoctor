@@ -38,6 +38,8 @@ Auth::routes();
 Route::get('/', 'HomenewController@index')->name('home1.home1');
 // Route::get('/','AdminController@index')->name('admin.dashboard');
 Route::get('/home', 'HomeController@index');
+
+
 Route::prefix('admin')->group(function(){
 Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -57,14 +59,15 @@ Route::get('/add-faq', 'AdminController@showcmsfaq')->name('add.faq.show');
 Route::post('/add-faq', 'PageController@create')->name('add.faq.submit');
 Route::get('/add-faq/createnewpage','AdminController@createnewpage')->name('cms.create');
 Route::get('/add-faq/{id}','AdminController@cmsstatus')->name('cms.status');
+Route::get('/add-faq/{id}/delete','AdminController@cmsdelete')->name('cms.destroy');
 Route::get('/add-faq/{id}/edit','AdminController@editcms')->name('cms.edit');
 Route::post('/add-faq/{id}/edit','AdminController@cmsupdate')->name('cms.edit.update');
-Route::post('/add-faq/{id}/delete','AdminController@cmsdelete')->name('cms.destroy');
-Route::get('/subscription','SubscriptionController@index')->name('subscription.list');
-Route::get('/subscription/create','SubscriptionController@create')->name('plan.create');
-Route::post('/subscription/create','SubscriptionController@store')->name('plan.create.submit');
-Route::get('/subscription/{id}/edit','SubscriptionController@edit')->name('plan.edit');
-Route::get('/subscription/{id}','SubscriptionController@delete')->name('plan.destroy');
+Route::get('/plan','SubscriptionController@index')->name('subscription.list');
+Route::get('/plan/create','SubscriptionController@create')->name('plan.create');
+Route::post('/plan/create','SubscriptionController@store')->name('plan.create.submit');
+ Route::get('/plan/{id}/edit','SubscriptionController@edit')->name('plan.edit.show');
+Route::post('/plan/{id}/edit','SubscriptionController@update1')->name('plan.edit.submit');
+Route::get('/plan/{id}/delete','SubscriptionController@delete')->name('plan.destroy');
 // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
 // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
 });

@@ -18,6 +18,7 @@
                 <th>Description</th>
                 <th>Contact Number</th>
                 <th>Address</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -45,6 +46,7 @@ $(function() {
             { data: 'description', name: 'description' },
             { data: 'contact_no', name: 'contact_no' },
             { data: 'address', name: 'address' },
+            { data: 'status', name: 'status' },
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
 

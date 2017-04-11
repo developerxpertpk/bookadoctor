@@ -65,9 +65,9 @@
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="nav navbar-nav side-nav">
                                 <li class="active">
-                                    <a href="{{ route('home1.home1') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                                    <a href="{{ route('admin.dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                                
-                                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
+                                    <li><a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                                     <ul id="demo" class="collapse">
                                         <li>
                                             <a href="{{ route('medical.list') }}">Medical Center</a>

@@ -39,11 +39,11 @@ class AdminController extends Controller
             $users = DB::table('users')
             ->join('userprofiles', 'users.id', '=', 'userprofiles.user_id')
             ->join('roles', 'users.role_id', '=', 'roles.id')
-            ->select('userprofiles.id','userprofiles.user_id','userprofiles.title','userprofiles.description','userprofiles.medical_center_email','userprofiles.contact_no','userprofiles.address')
+            ->select('userprofiles.id','userprofiles.user_id','userprofiles.title','userprofiles.description','userprofiles.medical_center_email','userprofiles.contact_no','userprofiles.address','users.status')
             ->where('users.role_id','=','2')
             ->get();
          
-            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
+            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'/status" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Status</a><a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
         }
 
         public function medicalshow($id)
@@ -121,6 +121,12 @@ class AdminController extends Controller
                             ->with('success','Page record updated');
 
 
+        }
+        public function cmsdelete($id)
+        {
+             Page::find($id)->delete();
+            return redirect()->route('add.faq.show')
+                            ->with('success','Page Deleted');
         }
         function createnewpage()
         {

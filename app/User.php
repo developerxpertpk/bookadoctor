@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function is_Profile()
     {
-        return $this->hasMany('App\Userprofile', 'user_id');
+        return $this->hasOne('App\Userprofile', 'user_id');
 
     }
     public function showInfo(){

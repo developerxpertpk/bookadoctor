@@ -15,4 +15,7 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+
 });
+Route::middleware('auth:api')->get('/medical','AdminController@medicalindex')->name('medical.list');
+Route::middleware('auth:api')->get('/medical/list','AdminController@medicallist')->name('admin.datatable.list');

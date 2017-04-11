@@ -18,11 +18,11 @@ class Userprofile extends Model
 //    }
 
 public function getUser(){
-    return $this->belongsTo('App\User','id');
+    return $this->belongsTo('App\User','user_id');
 }
 
 public function user(){
-	return $this->belongsTo('App\User','user_id');
+	return $this->hasOne('App\User','user_id');
 }
 }
 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Admin;
-use App\Medicalcenter;
-use App\Doctor;
 use App\Page;
-
+use App\User;
+use Datatables;
+use App\Userprofile;
 
 class AdminController extends Controller
 {
@@ -30,134 +30,42 @@ class AdminController extends Controller
     {
         return view('admin.admin');
     }
-    public function add()
-    {
-      $adminnew = Admin::orderBy('id', 'desc')->get();
-      return view('admin.add-admin',compact('adminnew'));
-        // return view('add-admin');
-    }
-
-
-    public function insert(Request $request)
-  {
-      $this->validate($request, [
-          'name' => 'required',
-          'username' => 'required',
-          'email' => 'required',
-          'password' => 'required',
-
-      ]);
-
-
-         $adminnew = new Admin;
-         $adminnew->name = $request['name'];
-         $adminnew->username = $request['username'];
-         $adminnew->email = $request['email'];
-         $adminnew->password = bcrypt($request['password']);
-
-
-
-                       $adminnew->save() ;
-      return redirect()->route('admin.add')
-                     ->with('success','New Admin Regester successfully');
-
-
-  }
-
-
-
-        /**
-         * Display the specified resource.
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function show($id)
-        {
-            $admins = Admin::find($id);
-            return view('show-admin',compact('admins'));
-        }
-
-        /**
-         * Show the form for editing the specified resource.
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function edit($id)
-        {
-            $admins = Admin::find($id);
-            return view('edit-admin',compact('admins'));
-        }
-
-        /**
-         * Update the specified resource in storage.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function update(Request $request, $id)
-        {
-            $this->validate($request, [
-              'sku_code' => 'required',
-              'product_name' => 'required',
-              'price' => 'required',
-              'categorie' => 'required',
-              'product_img' => 'required',
-              'product_description' => 'required',
-              'weight' => 'required',
-            ]);
-
-            Admin::find($id)->update($request->all());
-            return redirect()->route('admin.add')
-                            ->with('success','Admin updated successfully');
-        }
-
-        /**
-         * Remove the specified resource from storage.
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function destroy($id)
-        {
-            Admin::find($id)->delete();
-            return redirect()->route('admin.add')
-                            ->with('success','Admin deleted successfully');
-        }
-        /**
-         * Store a newly created resource in storage.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @return \Illuminate\Http\Response
-         */
-
         public function medicalindex()
         {
-
-           $medicallist = Medicalcenter::all();
-           // echo "<pre>";
-           // print_r($medicallist);
-         return view('admin.add-medical', compact('medicallist'));
+            return view('admin.add-medical');
+        }
+        public function medicallist()
+        {
+            $users = DB::table('users')
+            ->join('userprofiles', 'users.id', '=', 'userprofiles.user_id')
+            ->join('roles', 'users.role_id', '=', 'roles.id')
+            ->select('userprofiles.id','userprofiles.user_id','userprofiles.title','userprofiles.description','userprofiles.medical_center_email','userprofiles.contact_no','userprofiles.address')
+            ->where('users.role_id','=','2')
+            ->get();
+         
+            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
         }
 
         public function medicalshow($id)
         {
            // $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
-            $medicaldetail = Medicalcenter::find($id);
-            $medicaldetail->setRelation('doctors', $medicaldetail->doctors()->paginate(8));
+            $medicaldetail = Userprofile::where('id','=',$id)->get();
+            // $medicaldetail->setRelation('doctors', $medicaldetail->doctors()->paginate(8));
             // $doc=$medicaldetail->doctor->fname;
             // $doc= Doctor::medicalcenters();
-            // echo "<pre>";
-            // print_r($medicaldetail);
             return view('admin.detail-medical', compact('medicaldetail'));
         }
 
         public function medicaledit($id)
         {
-            $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
+            $medicaldetail = Userprofile::where('id', '=', $id)->first();
             return view('admin.edit-medical',compact('medicaldetail'));
+        }
+        public function medicalStore(Request $request)
+        {
+            Userprofile::find($request->id)->update($request->all());
+            return redirect()->route('medical.list')
+                            ->with('success','Page record updated');
         }
 
         public function medicaldestroy($id)

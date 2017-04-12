@@ -16,6 +16,10 @@ class Booking extends Model
    	 return $this->belongsTo('App\User','user_id');
    }
 
+   public function is_doctors(){
+   	 return $this->belongsTo('App\User','doctor_id');
+   }
+
    
    
 }

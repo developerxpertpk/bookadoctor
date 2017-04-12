@@ -8,6 +8,7 @@ use App\Page;
 use App\User;
 use Datatables;
 use App\Userprofile;
+use App\Booking;
 
 class AdminController extends Controller
 {
@@ -40,7 +41,7 @@ class AdminController extends Controller
             ->join('userprofiles', 'users.id', '=', 'userprofiles.user_id')
             ->join('roles', 'users.role_id', '=', 'roles.id')
             ->select('userprofiles.id','userprofiles.user_id','userprofiles.title','userprofiles.description','userprofiles.medical_center_email','userprofiles.contact_no','userprofiles.address','users.status')
-            ->where('users.role_id','=','2')
+            ->where('users.role_id','=','4')
             ->get();
          
             return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'/status" class="btn btn-xs btn-primary"><i class="fa fa-television"></i>Status</a><a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
@@ -48,12 +49,13 @@ class AdminController extends Controller
 
         public function medicalshow($id)
         {
-           // $medicaldetail = Medicalcenter::where('id', '=', $id)->first();
-            $medicaldetail = Userprofile::where('id','=',$id)->get();
-            // $medicaldetail->setRelation('doctors', $medicaldetail->doctors()->paginate(8));
-            // $doc=$medicaldetail->doctor->fname;
-            // $doc= Doctor::medicalcenters();
-            return view('admin.detail-medical', compact('medicaldetail'));
+            $medicaldetail = Userprofile::all()->where('user_id','=',$id);
+            $booking=Booking::where('medic_id','=',$id)->get();
+            // foreach ($booking as $key =>$value) {
+            //     echo($value->is_doctors->is_profile);
+            // }
+            // die();
+            return view('admin.detail-medical', compact('medicaldetail','booking'));
         }
 
         public function medicaledit($id)
@@ -132,10 +134,5 @@ class AdminController extends Controller
         {
             return view('admin.faq-editor');
         }
-
-
-
-
-
-
 }
+   

@@ -43,10 +43,73 @@
   @endforeach
   {!! $medicaldetail->doctors->render() !!} --}}
   </div>
-  </div>   
+  </div> 
 </div>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bookings">Open Modal</button> 
 </div>       
 
+</div>
+<!-- Modal -->
+  <div class="modal fade" id="bookings" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Booking Details</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover">
+            <caption>Booking List</caption>
+            <thead>
+              <tr>
+                <th>Booking Id</th>
+                <th>Doctor Name</th>
+                <th>Patient Name</th>
+                <th>Patient Issue</th>
+                <th>Appointment Timings</th>
+                <th>Booking Status</th>
+                <th>Payment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach($booking as $key=>$value)
+              <tr>
+                <td>{{$value->id}}</td>
+                <td>{{$value->is_doctors->is_profile->first_name}} {{$value->is_doctors->is_profile->last_name}}</td>
+                <td>{{$value->is_users->is_profile->first_name}} {{$value->is_users->is_profile->last_name}}</td>
+                <td>{{$value->reason}}</td>
+                <td>{{$value->Appoitment_timings}}</td>
+                <td>@if($value->status=='1')
+                {{'Complete'}}
+                @elseif($value->status=='2')
+                {{'Cancel'}}
+                @elseif($value->status=='3')
+                {{'Rescheduled'}}
+                @else
+                {{'pending'}}
+                @endif
+               </td>
+               <td>@if($value->payment_status=='1')
+                {{'Complete'}}
+                @else
+                {{'pending'}}
+                @endif
+               </td> 
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+        {{-- {{ $booking->links() }} --}}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 </div>
 
 @endsection

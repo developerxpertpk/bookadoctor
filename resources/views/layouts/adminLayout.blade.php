@@ -33,7 +33,7 @@
         <script src="{{ asset('js/bootstrap-tagsinput.js') }}"></script>
         <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+        {{-- <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script> --}}
         {{-- <script src="{{ asset('js/location.js') }}" type="text/javascript"></script> --}}
         {{-- flot js include for admin dashboard --}}
         {{--  <script src="{{ asset('js/plugins/flot/excanvas.min.js') }}" type="text/javascript"></script>

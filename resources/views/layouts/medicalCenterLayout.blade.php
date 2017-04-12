@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">
+    {{--<link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>

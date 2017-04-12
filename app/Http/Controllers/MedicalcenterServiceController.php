@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Doctor_Speciality;
+use App\Schedule;
 use App\speciality;
 use App\Userprofile;
 use App\medicalcenter_doctor;
@@ -20,23 +21,10 @@ use Hash;
 class MedicalcenterServiceController extends Controller
 {
 
-
-//
     public function index(Request $request)
 
     {
-
-//        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->get();
-////        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->with('User')->get();
-//       $users=User::with('is_Doctor')->get();
-        $specilaty=speciality::get();
-//
-//        echo "<pre>";
-
-//        print_r(Auth::user()->mmedicalcenter->medicalcenter_id);
-//        die('helo');
-//       // $doctors=Userprofile::Where('user_id','=',Auth::user()->medicalcenterdoctor->doctor_id)->Where(Auth::user()->userProfile->user_id,'=',Auth::user()->medicalcenterdoctor->medicalcenter_id)->get();
-
+        $specilaty=speciality::where('user_id','=',Auth::user()->id)->get();
       $test= medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get();
 
       foreach ($test as $key=>$val){
@@ -48,20 +36,10 @@ class MedicalcenterServiceController extends Controller
 
         return view('medicalcenter.services.doctor',compact('doctors','users','specilaty'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
-//
 
     }
 
 
-    /**
-
-     * Show the form for creating a new resource.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function create()
 
@@ -79,34 +57,10 @@ class MedicalcenterServiceController extends Controller
     }
 
 
-    /**
-
-     * Store a newly created resource in storage.
-
-     *
-
-     * @param  \Illuminate\Http\Request  $request
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function store(Request $request)
 
     {
-//        echo "<pre>";
-//    print_r($request['role']);
-//        die('hello');
-////
-//        $this->validate($request, [
-//
-//            'role_id' => 'required',
-//            'first_name' => 'required',
-//            'email' => 'required',
-//            'password'=>'required|min:8',
-//        ]);
-//
-
         //generate a password for the new users
         $pw = User::generatePassword();
 
@@ -115,7 +69,6 @@ class MedicalcenterServiceController extends Controller
         $user->email=$request['email'];
         $user->status=1;
         $user->password=$pw;
-//        $user->password=bcrypt($request['password']);
         $user->save();
 
         $doctors = new Userprofile;
@@ -136,35 +89,27 @@ class MedicalcenterServiceController extends Controller
     }
 
 
-    /**
-
-     * Display the specified resource.
-
-     *
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
-
     public function show($id)
 
     {
 
         $item = Userprofile::find($id);
-//        echo "<pre>";
-//        print_r($item);
-//        die('hjdjdf');
+        $schedule= Schedule::where('user_id','=',$id)->get();
+        $test= Doctor_Speciality::where('user_id','=',$id)->get();
 
-        return view('medicalcenter.services.show-doctor',compact('item'));
+        foreach ($test as $key=>$val){
+
+            $test1= speciality::where('id','=',$val->speciality_id)->get();
+
+            $doctorsspeciality[]=$test1;
+        }
+        return view('medicalcenter.services.show-doctor',compact('item','doctorsspeciality','schedule'));
 
     }
 
 
     public function edit_specilaty_edit(Request $request,$id){
 
-//        speciality::find($id)->update($request->all());
         $medical_speciality=speciality::Where('id','=',$id)->first();
         $medical_speciality->name=$request['new_specility_name'];
         $medical_speciality->price=$request['new_specility_price'];
@@ -193,17 +138,6 @@ class MedicalcenterServiceController extends Controller
 
     }
 
-    /**
-
-     * Show the form for editing the specified resource.
-
-     *
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function edit($id)
 
@@ -214,20 +148,6 @@ class MedicalcenterServiceController extends Controller
         return view('ItemCRUD.edit',compact('item'));
 
     }
-
-    /**
-
-     * Update the specified resource in storage.
-
-     *
-
-     * @param  \Illuminate\Http\Request  $request
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function update(Request $request, $id)
 
@@ -251,24 +171,14 @@ class MedicalcenterServiceController extends Controller
     }
 
 
-    /**
-
-     * Remove the specified resource from storage.
-
-     *
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
-
     public function destroy($id)
 
     {
 
         User::where('id', $id)->delete();
-      Doctor::where('user_id', $id)->delete();
+        Userprofile::where('user_id', $id)->delete();
+        Doctor_Speciality::where('user_id', $id)->delete();
+        Schedule::where('user_id', $id)->delete();
         return redirect()->route('add-doctor.index')->with('success','Item updated successfully');
 
 
@@ -276,39 +186,25 @@ class MedicalcenterServiceController extends Controller
     }
     public function add_services(){
         $services=Service::get();
-        //print_r($services);
-        // dd($services);
         return view('medicalcenter.services.add-services',compact('services'));
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function assign_service(Request $request){
         $service_id=Auth::user()->is_MedicalCenter;
-       // echo $service_id;
-
-        //$name=$request['service'];
         foreach($request->service as $key)
         {
 
-          //  echo $key;
             $service = new Medicalcenter_service;
             $service->service_id=$key;
             $service->medicalcenter_id=$service_id->id;
             $service->save();
-
-//
         }
         $medicaldetail = Medicalcenter::find($service_id->id);
         return view('medicalcenter.services.show-services',compact('medicaldetail'));
 
     }
     public function add_specilaty(){
-        $specilaty=speciality::orderBy('id', 'desc')->get();
-        //print_r($services);
-        // dd($services);
+        $specilaty=speciality::orderBy('id', 'desc')->where('user_id','=',Auth::user()->id)->get();
         return view('medicalcenter.services.add-specilaty',compact('specilaty'));
     }
 public function insert_specilaty(Request $request){
@@ -334,22 +230,14 @@ public function insert_specilaty(Request $request){
 
         foreach ($request->specilaty as $key) {
             $doc_id = $request['doc_id'];
-            //  echo $key;
+
             $specilaty = new  Doctor_Speciality;
             $specilaty->speciality_id = $key;
             $specilaty->user_id = $doc_id;
 
             $specilaty->save();
-
-//            return redirect()->view('medicalcenter.services.add-doctor',compact('specilaty'));
-
-
-           return redirect()->route('add-doctor.index');
         }
-
-
-
-
+        return redirect()->route('add-doctor.index');
     }
 public function show_setting_page(){
         return view('medicalcenter.settings');

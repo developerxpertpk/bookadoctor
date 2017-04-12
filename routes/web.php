@@ -93,12 +93,30 @@ Route::post('/medical-center-change-password','MedicalcenterServiceController@pw
 Route::post('/doctor-working-hours-and-days','ScheduleController@doctor_schedule')->name('doctor.schedule.create');
 Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedule')->name('medical.schedule.create');
 //
+<<<<<<< HEAD
 // Route::get('/medical-center-add-specilaty','MedicalcenterServiceController@add_specilaty')->name('speciality.show.form');
 Route::post('/medical-center-add-specilaty','MedicalcenterServiceController@assign_specilaty')->name('specilaty.form.submit');
 //                    Route::get('/add-doctor', 'MedicalcenterServiceController@index')->name('add.doctor.form');
 Route::resource('/add-doctor','MedicalcenterServiceController');
 Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
 //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');
+=======
+
+                    Route::get('/medical-center-add-specilaty','MedicalcenterServiceController@add_specilaty')->name('specility.show.form');
+                    Route::post('/medical-center-add-specilaty','MedicalcenterServiceController@insert_specilaty')->name('specilaty.form.submit');
+                    Route::post('/medical-center-assign-specilaty','MedicalcenterServiceController@assign_specilaty')->name('assign.specilaty.form.submit');
+                    Route::get('/specility/{id}/edit','MedicalcenterServiceController@edit_specilaty_show')->name('specilaty.show.edit.form');
+                    Route::post('/specility/{id}/edit','MedicalcenterServiceController@edit_specilaty_edit')->name('specilaty.edit.form.submit');
+                    Route::delete('/specility/{id}','MedicalcenterServiceController@delete_specilaty')->name('specilaty.delete');
+//
+
+                  //  Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
+                    Route::resource('/add-doctor','MedicalcenterServiceController');
+
+                    Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
+            //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');
+
+>>>>>>> c18beab308cf5edf9ec571934e3c22de370da88f
 });
             //patients Routes
 

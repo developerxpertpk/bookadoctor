@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Userprofile;
 use Illuminate\Http\Request;
-//use App\User;
-use App\Medicalcenter;
-use App\Subscription;
 Use App\Plan;
 use Auth;
 
@@ -37,7 +35,7 @@ class MedicalCenterController extends Controller
 
 
 
-                 $medical_info=Medicalcenter::Where('user_id','=',Auth::user()->id)->first();
+                 $medical_info=Userprofile::Where('user_id','=',Auth::user()->id)->first();
 
                  if($file = $request->hasFile('profilepic')) {
                      $file = $request->file('profilepic') ;
@@ -53,16 +51,11 @@ class MedicalCenterController extends Controller
                  $medical_info->medical_center_info=$request['medical_center_info'];
                  $medical_info->title=$request['title'];
                  $medical_info->description=$request['description'];
-                 $medical_info->
-                 //  $profile->Auth::User();
+                 $medical_info->images=$fileName;
                  $medical_info->save();
-                 $profile =new Profile;
-                 $profile->profilepic=$fileName;
-                 $profile->save();
+
                  return redirect()->route('medical.center.image.gallery')
                      ->with('success', 'New Admin Regester successfully');
-
-                 //return $profile->profilepic;
 
              }
              public function contact_insert(Request $request){
@@ -75,20 +68,18 @@ class MedicalCenterController extends Controller
                      'state' => 'required',
                      'city' => 'required',
                      'pincode' => 'required',
-                     'working_hours' => 'required',
 
                  ]);
-                 $medical_contact=Medicalcenter::Where('user_id','=',Auth::user()->id)->first();
+                 $medical_contact=Userprofile::Where('user_id','=',Auth::user()->id)->first();
 
                  $medical_contact->medical_center_email=$request['medical_center_email'];
                  $medical_contact->web_url=$request['web_url'];
                  $medical_contact->contact_no=$request['contact_no'];
+                 $medical_contact->pincode=$request['pincode'];
                  $medical_contact->address=$request['address'];
                  $medical_contact->country=$request['country'];
                  $medical_contact->state=$request['state'];
                  $medical_contact->city=$request['city'];
-                 $medical_contact->pincode=$request['pincode'];
-                 $medical_contact->working_hours=$request['working_hours'];
 
                  $medical_contact->save();
                  return redirect()->route('medical.center.image.gallery')
@@ -100,14 +91,13 @@ class MedicalCenterController extends Controller
                 return view('medicalcenter.show_contact_form');
             }
             public  function payment_success(Request $request){
-                echo "<pre>";
 
 
 
-                $medical_subscription=Subscription::Where('user_id','=',Auth::user()->id)->first();
-                $medical_subscription->plan_type = $request['plan_type'];
-                $medical_subscription->plan_amount = $request['plan_amount'];
-                $medical_subscription->status = $request['plan_status'];
+
+                $medical_subscription=Userprofile::Where('user_id','=',Auth::user()->id)->first();
+                $medical_subscription->plan_id = $request['new_plan_id'];
+                $medical_subscription->plan_payment_status = $request['plan_status'];
                 $medical_subscription->save();
 
                 return redirect()->route('medical.center.dashboard');

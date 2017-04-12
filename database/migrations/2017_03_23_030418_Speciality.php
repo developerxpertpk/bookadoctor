@@ -11,12 +11,11 @@ class Speciality extends Migration
 */
 public function up()
 {
-Schema::create('speciality',function(Blueprint $table){
+Schema::create('specialities',function(Blueprint $table){
 $table->increments('id');
 $table->integer('user_id')->comment('medical center id');
 $table->string('name');
 $table->string('price');
-$table->rememberToken();
 $table->timestamps();
 
 $table->foreign('user_id')->references('id')->on('users');
@@ -32,6 +31,6 @@ $table->foreign('user_id')->references('id')->on('users');
 */
 public function down()
 {
-Schema::dropIfExists('speciality');
+Schema::dropIfExists('specialities');
 }
 }

@@ -31,23 +31,17 @@ class MedicalcenterimageController extends Controller
                 $uploadcount ++;
                 }
                     $gallery = new Medicalcenterimage;
-                    $gallery->medical_center_id=Auth::user()->is_MedicalCenter->id;
+                    $gallery->user_id=Auth::user()->id;
                     $gallery->images=$fileName;
                     $gallery->save();
-                    return redirect()->route('medical.center.image.gallery')->with('success','Image Uploaded successfully');
+
                 }
-//                if($uploadcount == $file_count){
-//                    Session::flash('success', 'Upload successfully');
-//                    return redirect()->route('medical.center.image.gallery');
-//
-//                }
-//                else {
-//                    return Redirect::to('medical-center-image-upload')->withInput()->withErrors($validator);
-//                }
+        return redirect()->route('medical.center.image.gallery')->with('success','Image Uploaded successfully');
+
 }
 
         public function gallery_images(){
-            $images_gallery = Medicalcenterimage::where('medical_center_id', '=', Auth::user()->is_MedicalCenter->id)->get();
+            $images_gallery = Medicalcenterimage::where('user_id', '=', Auth::user()->id)->get();
 
 //            echo "<pre>";
 //            print_r($images_gallery);

@@ -48,11 +48,8 @@ class CreateProfileTable extends Migration
             $table->integer('plan_id')->nullable();
             $table->integer('plan_payment_status')->default(0)->comment("0=pending","1=complete");
             $table->timestamps();
-
-            
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('plan_id')->references('id')->on('plans');
-//          
+            $table->foreign('plan_id')->references('id')->on('plans');         
         });
     }
 

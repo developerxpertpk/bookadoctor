@@ -25,12 +25,16 @@
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-    {{--<script src="{{ asset('js/location.js') }}" type="text/javascript"></script>--}}
+    <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
+            type="text/javascript"></script>
+
+    {{--&callback=initMap--}}
 
     {{-- flot js include for admin dashboard --}}
 
@@ -89,12 +93,18 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                             <li>
                                 <a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>
                             </li>
+                            <li>
+                                <a href="{{route('specility.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Speciality</a>
+                            </li>
 
 
                         </ul>
                     </li>
+                    {{--<li>--}}
+                        {{--<a href="{{route('doctor.add.doctor')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>--}}
+                    {{--</li>--}}
                     <li>
-                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>
+                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor/Show Doctors</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
@@ -151,9 +161,9 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         {{--Dr. Booking --}}
                         {{--</h1>--}}
                         <section class="page-header">
-                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->profile->profilepic}}"></div>
+                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_Profile->images}}"></div>
                             <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
-                            <h1>{{Auth::user()->is_MedicalCenter->title}}</h1>
+                            <h1>{{Auth::user()->is_Profile->title}}</h1>
                         </span></div>
                         </section>
                     </div>

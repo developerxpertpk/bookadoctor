@@ -24,5 +24,6 @@ public function getUser(){
 public function user(){
 	return $this->hasOne('App\User','user_id');
 }
+
 }
 

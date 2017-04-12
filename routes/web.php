@@ -127,11 +127,15 @@ Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('
                     Route::get('/dr_login','DoctorController@Showlogin');
 
                     Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                    Route::get('/change_password','DoctorController@password')->name('password.reset');
+                    Route::post('/changepassword','DoctorController@resetpassword')->name('change.password');
                     Route::get('/profile','DoctorController@profile');
                     // /Route::post('/profile','DoctorController@profile')->name('Doctor.show.profile');
                     Route::post('/profile','DoctorController@update_profile')->name('Doctor.image');
                     //Route::post('/profile/s','ScheduleController@insert')->name('Doctor.schedule.create');
                     Route::get('/bookings','DoctorController@viewBookings')->name('Doctor.booking');
+                    Route::get('/userprofile{id}','DoctorController@bookingsProfile')->name('user.profile');
+
                     //Route:get('/showInfo','DoctorController@ShowEdit');
                    // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
                     //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');

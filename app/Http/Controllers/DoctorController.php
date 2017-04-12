@@ -147,11 +147,47 @@ return view('doctor.dr_login');
    //$user = Auth::user()->bookings;
 
    $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
-   echo "<pre>";
-   print_r($booking);
-   die('jkjk');
-      return view('doctor.booking');
+ 
+      return view('doctor.booking', compact('booking'));
    }
 
+   public function bookingsProfile($id){
+   $booking = Booking::find($id);
+      //print_r($booking->is_users->is_Profile->last_name);
+      return view('doctor.userprofile' , compact('booking'));
+}
+ 
+ public function password(){
+
+  return view('doctor.changepassword');
+
+ }
+
+
+public function resetpassword(Request $request){
+
+     $oldpsw = bcrypt($request['oldpassword']);
+     $newpsw = bcrypt($request['newpassword']);
+     $conpsw = bcrypt($request['conformpassword']);
+
+      $psw = Auth::attempt(['password'=> $oldpsw]);
+      // echo Auth::User()->password;
+      //   echo $oldpsw;
+      //   die('Ice Cream');
+
+
+
+    if (Hash::check($old_pwd, $current_password))
+      // if(Auth::User()->password == $oldpsw)
+      // {
+      //   echo "<pre>";
+      //   echo Auth::User()->password;
+      //   echo $oldpsw;
+      //   die('Ice Cream'); 
+      // }
+        
+        die('hjhjhjhj');
+   
+}
 
 }

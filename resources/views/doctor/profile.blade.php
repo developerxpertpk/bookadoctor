@@ -22,7 +22,7 @@
 							{!! Form::open(['route' => 'Doctor.image','class' => 'form','files' => true])!!}
 							
 							<h3>WELCOME  {{$userr->first_name}} {{$userr->last_name}}  </h3>
-							<p><b>Your Profile</b></p>
+							<p><b>Your Profile</b></p>    <a href="{{ route('password.reset') }}">  Change Password</a>
 							<div class="form-group">
 								{!! Form::label('Number') !!}
 								{{$userr->contact_no}}
@@ -66,6 +66,7 @@
 									<img src="{{asset('images/profile_pic/'.$userr->images)}}" >
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>

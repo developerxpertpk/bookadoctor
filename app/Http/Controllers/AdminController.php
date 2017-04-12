@@ -43,7 +43,7 @@ class AdminController extends Controller
             ->where('users.role_id','=','2')
             ->get();
          
-            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'/status" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Status</a><a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
+            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'/status" class="btn btn-xs btn-primary"><i class="fa fa-television"></i>Status</a><a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
         }
 
         public function medicalshow($id)

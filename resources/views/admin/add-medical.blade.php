@@ -34,9 +34,6 @@ $(function() {
         ajax: { url:'{!! route('admin.datatable.list') !!}',
                 method: 'GET',
                 cache: false,
-                data: function(data) {
-                data.token = '{{ csrf_token() }}';
-                 },
 
             },
         columns: [

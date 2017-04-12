@@ -82,7 +82,22 @@
     padding: 8px;
     width: 100%;
 }
-
+#doctor_previewimg {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-bottom: 1px solid #e4d3c3;
+    border-image: none;
+    border-left: 1px solid #e4d3c3;
+    border-radius: 100%;
+    border-top: 1px solid #e4d3c3;
+    float: left;
+    height: 250px;
+    margin-bottom: 5px;
+    padding: 8px;
+    width: 100%;
+}
 #file {
     opacity: 0;
     width: 115px;

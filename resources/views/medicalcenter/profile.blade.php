@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <?php
-            $medical_center=Auth::user()->is_MedicalCenter;
+            $medical_center=Auth::user()->is_Profile;
                 ?>
             <div class="medical-center-profile-view">
                 <div class="panel panel-default">
@@ -19,7 +19,7 @@
                         <div class="profile-body">
 
                             <div class="col-md-12 profile-basic-info">
-                                <div class="col-md-2 image"><img src="{{asset('/images/profile_pic/'.$medical_center->profilepic)}}" alt="Profile Pic"/></div>
+                                <div class="col-md-2 image"><img src="{{asset('/images/profile_pic/'.$medical_center->images)}}" alt="Profile Pic"/></div>
                                 <div class="col-md-2">
                                     <Strong>Title: </Strong><br/>
                                     <Strong>Center Information:</Strong><br/>
@@ -48,8 +48,6 @@
                                     <Strong>State:</Strong><br/>
                                     <Strong>City:</Strong><br/>
                                     <Strong>Pincode:</Strong><br/>
-                                    <Strong>Working Hours:</Strong><br/>
-
 
                                 </div>
                                 <div class="col-md-8">
@@ -61,7 +59,6 @@
                                     {{ $medical_center->state }}<br/>
                                     {{ $medical_center->city }}<br/>
                                     {{ $medical_center->pincode }}<br/>
-                                    {{ $medical_center->working_hours }} * 7<br/>
 
                                 </div>
 

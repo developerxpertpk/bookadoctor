@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Doctor_Speciality;
 use App\speciality;
+use App\Userprofile;
+use App\medicalcenter_doctor;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
-use App\Doctor;
 use App\User;
 use App\Service;
 use App\Medicalcenter_service;
-Use App\Medicalcenter;
 use Validator;
 use Redirect;
 use Auth;
@@ -26,13 +26,25 @@ class MedicalcenterServiceController extends Controller
 
     {
 
-        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->get();
-//        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->with('User')->get();
-       $users=User::with('is_Doctor')->get();
+//        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->get();
+////        $doctors=Doctor::Where('medic_id','=',Auth::user()->is_MedicalCenter->id)->with('User')->get();
+//       $users=User::with('is_Doctor')->get();
         $specilaty=speciality::get();
 //
 //        echo "<pre>";
-//
+
+//        print_r(Auth::user()->mmedicalcenter->medicalcenter_id);
+//        die('helo');
+//       // $doctors=Userprofile::Where('user_id','=',Auth::user()->medicalcenterdoctor->doctor_id)->Where(Auth::user()->userProfile->user_id,'=',Auth::user()->medicalcenterdoctor->medicalcenter_id)->get();
+
+      $test= medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get();
+
+      foreach ($test as $key=>$val){
+
+          $test1= Userprofile::where('user_id','=',$val->doctor_id)->get();
+
+          $doctors[]=$test1;
+      }
 
         return view('medicalcenter.services.doctor',compact('doctors','users','specilaty'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -56,6 +68,13 @@ class MedicalcenterServiceController extends Controller
     {
 
         return view('ItemCRUD.create');
+
+    }
+    public function add_doctor()
+
+    {
+
+        return view('medicalcenter.services.add-doctor');
 
     }
 
@@ -94,17 +113,23 @@ class MedicalcenterServiceController extends Controller
         $user = new User;
         $user->role_id=$request['role'];
         $user->email=$request['email'];
+        $user->status=1;
         $user->password=$pw;
 //        $user->password=bcrypt($request['password']);
         $user->save();
 
-        $doctors = new Doctor;
+        $doctors = new Userprofile;
         $doctors->user_id=$user->id;
-        $doctors->medic_id= Auth::user()->is_MedicalCenter->id;
         $doctors->first_name=$request['first_name'];
         $doctors->last_name=$request['last_name'];
-        $doctors->status=1;
+
             $doctors->save();
+        $doctorsmedical = new medicalcenter_doctor;
+        $doctorsmedical->doctor_id=$user->id;
+        $doctorsmedical->medicalcenter_id=Auth::user()->id;
+        $doctorsmedical->save();
+
+
         User::sendWelcomeEmail($user);
     return redirect()->route('add-doctor.index')->with('success','Item updated successfully');
 
@@ -127,12 +152,46 @@ class MedicalcenterServiceController extends Controller
 
     {
 
-        $item = Item::find($id);
+        $item = Userprofile::find($id);
+//        echo "<pre>";
+//        print_r($item);
+//        die('hjdjdf');
 
-        return view('ItemCRUD.show',compact('item'));
+        return view('medicalcenter.services.show-doctor',compact('item'));
 
     }
 
+
+    public function edit_specilaty_edit(Request $request,$id){
+
+//        speciality::find($id)->update($request->all());
+        $medical_speciality=speciality::Where('id','=',$id)->first();
+        $medical_speciality->name=$request['new_specility_name'];
+        $medical_speciality->price=$request['new_specility_price'];
+        $medical_speciality->save();
+
+        return redirect()->route('specility.show.form');
+
+
+
+    }
+    public function edit_specilaty_show($id){
+
+        $specilaty=speciality::find($id)->first();
+
+        return view('medicalcenter.services.edit-specilaty',compact('specilaty','id'));
+
+
+    }
+    public function delete_specilaty($id){
+
+
+    speciality::where('id', $id)->delete();
+        return redirect()->route('specility.show.form');
+
+
+
+    }
 
     /**
 
@@ -150,12 +209,11 @@ class MedicalcenterServiceController extends Controller
 
     {
 
-        $item = Item::find($id);
+        $item = Userprofile::find($id);
 
         return view('ItemCRUD.edit',compact('item'));
 
     }
-
 
     /**
 
@@ -184,9 +242,9 @@ class MedicalcenterServiceController extends Controller
         ]);
 
 
-        Item::find($id)->update($request->all());
+        Userprofile::find($id)->update($request->all());
 
-        return redirect()->route('itemCRUD.index')
+        return redirect()->route('add-doctor.index')
 
             ->with('success','Item updated successfully');
 
@@ -248,12 +306,29 @@ class MedicalcenterServiceController extends Controller
 
     }
     public function add_specilaty(){
-        $specilaty=speciality::get();
+        $specilaty=speciality::orderBy('id', 'desc')->get();
         //print_r($services);
         // dd($services);
-        return view('medicalcenter.services.doctor',compact('specilaty'));
+        return view('medicalcenter.services.add-specilaty',compact('specilaty'));
     }
+public function insert_specilaty(Request $request){
 
+
+
+    $this->validate($request, [
+        'specility_name' => 'required',
+        'specility_price' => 'required',
+    ]);
+    $specilaty1 = new speciality;
+    $specilaty1->user_id=Auth::user()->id;
+    $specilaty1->name=$request['specility_name'];
+    $specilaty1->price=$request['specility_price'];
+    $specilaty1->save();
+
+    return redirect()->route('specility.show.form');
+
+
+}
     public function assign_specilaty(Request $request)
     {
 
@@ -262,7 +337,7 @@ class MedicalcenterServiceController extends Controller
             //  echo $key;
             $specilaty = new  Doctor_Speciality;
             $specilaty->speciality_id = $key;
-            $specilaty->doctors_id = $doc_id;
+            $specilaty->user_id = $doc_id;
 
             $specilaty->save();
 

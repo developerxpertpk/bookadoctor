@@ -17,6 +17,8 @@ class CreatePlansTable extends Migration
            $table->increments('id');
             $table->string('name');
             $table->string('ammount');
+            $table->string('status')->comment('Active = Activated plans, Deactive =Deactivated plans')->default('Active');
+
             $table->text('description');
             $table->timestamps();
         });

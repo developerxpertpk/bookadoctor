@@ -34,7 +34,7 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">$ {{ App\plan::where('id','=',Auth::user()->is_Profile->plan_id)->first()->ammount}}</div>
+                        <div class="huge">$ {{ App\plan::where('id','=',Auth::user()->is_Profile->plan_id)->first()->amount}}</div>
                         <div>Subscription Type {{ App\plan::where('id','=',Auth::user()->is_Profile->plan_id)->first()->name}}</div>
                     </div>
                 </div>

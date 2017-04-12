@@ -37,6 +37,13 @@
                             <label for="username" class="col-md-4 control-label">Specialization</label>
                             <div class="col-md-6">
                           <div class="dropdown">
+
+                          <input type="checkbox" name="speciality" value="gynecologist"> Gynecologist
+                          <input type="checkbox" name="speciality" value="dermtologist" > Dermatologist
+                          <input type="checkbox" name="speciality" value="sexologist">  Sexologist 
+                          <input type="checkbox" name="speciality" value="cardiologist" > Cardiologist
+                          <input type="checkbox" name="speciality" value="ayurveda"> Ayurveda
+                          <input type="checkbox" name="speciality" value="homeopathy" > Homeopathy
                          
                          <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown button -->

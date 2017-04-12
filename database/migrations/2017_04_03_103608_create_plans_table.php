@@ -16,9 +16,13 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
            $table->increments('id');
             $table->string('name');
+<<<<<<< HEAD
             $table->string('ammount');
             $table->string('status')->comment('Active = Activated plans, Deactive =Deactivated plans')->default('Active');
 
+=======
+            $table->string('amount');
+>>>>>>> 3463c348bd43d998881ba69743ada06524770be9
             $table->text('description');
             $table->timestamps();
         });

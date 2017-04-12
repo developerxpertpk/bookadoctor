@@ -58,11 +58,7 @@
                             <ul class="nav navbar-nav side-nav">
                                 <li class="active">
                                     <a href="{{ route('home1.home1') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                                </li>
-                                {{-- <li>
-                                    <a href="{{ route('admin.add') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Admin</a>
-                                </li> --}}
-                                <li>
+                               
                                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                                     <ul id="demo" class="collapse">
                                         <li>
@@ -106,6 +102,7 @@
                                     <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                                 </li>-->
                             </ul>
+                        </div>
                         </div>
                         <!-- /.navbar-collapse -->
                     {{-- </nav> --}}

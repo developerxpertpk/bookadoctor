@@ -26,4 +26,29 @@ class DoctorBookingController extends Controller
     	//$booking_a = Booking::where(','','id')->name->get();
     	
     	}
+
+
+        public function completebooking($id,Request $request){
+
+          $booking = Booking::find($id)->first();
+
+          $k = $request['complete'];
+          // print_r($k);
+          // die('fgfgf');
+         
+            $currentId = $booking->status;
+            // print_r($currentId);
+            // die
+            if($currentId == $k){
+                echo "yes";
+
+            }
+            else{
+                $booking->status = 1;
+                $booking->save();
+            }
+           return redirect()->route('Doctor.booking');
+            
+            
     }
+}

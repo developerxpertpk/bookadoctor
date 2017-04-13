@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
         <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
+        <link rel="stylesheet" href="{{asset('css/lightbox.css')}}">
         <script src="https://unpkg.com/vue-select@latest"></script>
-        
         <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/jquery-ui.js') }}"></script>
         <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
@@ -30,6 +30,9 @@
         <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
+        <script src="{{asset('js/lightbox.js') }}"></script>
+        <script src ="{{asset('js/lightbox-plus-jquery.js') }}"></script>
+
         <!-- <script src="{{ asset('js/dropdown.js') }}" type="text/javascript"></script> -->
         <!--   flot js include for admin dashboard
         <script src="{{ asset('js/plugins/flot/excanvas.min.js') }}" type="text/javascript"></script>
@@ -63,7 +66,7 @@
                                     <a href="{{ route('Doctor.image') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                                 </li>
                                      <li>
-                                        <a href="{{ route('Doctor.booking') }}"><i class="fa fa-bars"></i> View Bookings</a>
+                                        <a href="{{ route('Doctor.booking') }}"><i class="fa fa-bars"></i>  Bookings</a>
                                     </li>
                                 </ul>
 

@@ -19,13 +19,12 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id');
             $table->integer('medic_id');
             $table->integer('speciality_id');
-            $table->text('cancel reason');
-            $table->text('reschedule reason');
+            $table->text('cancel_reason');
+            $table->text('reschedule_reason');
             $table->datetime('Appoitment_timings')->nullable();
             $table->text('reason');
-            $table->string('documents');
-            $table->boolean('payment_status')->comment("0=pending","1=complete");
-            $table->string('status')->comment('0=pending',"1=complete","2=cancel","3=reshedule");
+            $table->boolean('payment_status')->comment('0=pending','1=complete');
+            $table->string('status')->comment('0=pending','1=complete','2=cancel','3=reshedule');
             $table->timestamps();
             
             

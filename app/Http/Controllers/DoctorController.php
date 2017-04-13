@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
+use App\Http\Validators\HashValidator;
+use Validator;
+use Hash;
 use Illuminate\Http\Request;
 use file;
 use Auth;
@@ -11,6 +14,7 @@ use Image;
 use App\Doctor_Speciality;
 use App\Booking;
 use App\Userprofile;
+use App\BookingDocuments;
 
 
 class DoctorController extends Controller
@@ -152,32 +156,84 @@ return view('doctor.dr_login');
    }
 
    public function bookingsProfile($id){
+
+
+   
    $booking = Booking::find($id);
+   
+
+    $k = $booking->documents;
+     
+     // foreach($k as $key){
+     //  print_r($key->documents);
+     // }
+   
       //print_r($booking->is_users->is_Profile->last_name);
-      return view('doctor.userprofile' , compact('booking'));
+      return view('doctor.userprofile' , compact('booking','k'));
 }
+
+public function cancelbooking($id,Request $request){
+     
+  if(isset($request['reason'])){
+   $reason = $request['reason'];
+   $book = Booking::find($id);
+    $book->cancel_reason=$reason;
+    $book->save();
+  }
+  else{
+    $reason = $request['reschedule'];
+    $book = Booking::find($id);
+    $book->reschedule_reason=$reason;
+    $book->save();
+  }
  
+ 
+  return $this->bookingsProfile($id);
+
+}
+
  public function password(){
 
   return view('doctor.changepassword');
-
  }
 
 
 public function resetpassword(Request $request){
 
-     $oldpsw = bcrypt($request['oldpassword']);
+     $oldpsw = $request['oldpassword'];
      $newpsw = bcrypt($request['newpassword']);
      $conpsw = bcrypt($request['conformpassword']);
 
-      $psw = Auth::attempt(['password'=> $oldpsw]);
+      //$psw = Auth::attempt(['password'=> $oldpsw]);
       // echo Auth::User()->password;
       //   echo $oldpsw;
       //   die('Ice Cream');
 
+$validation = Validator::make(Auth::User()->all(), [
+
+    // Here's how our new validation rule is used.
+    'password' => 'hash:' . Auth::User()->password,
+    'newpassword' => 'required|different:password|confirmed'
+  ]);
+
+if ($validation->fails()) {
+    return redirect()->back()->withErrors($validation->errors());
+  }
+
+  $newpsw->password = Hash::make(Request::input('newpassword'));
+  $newpsw->save();
+
+  return redirect()->back()
+    ->with('success-message', 'Your new password is now set!');
+  }
 
 
-    if (Hash::check($old_pwd, $current_password))
+    // if (Hash::check($oldpsw, Auth::User()->password)){
+    //      echo "yes";
+    // }
+    // else{
+    //   echo "no";
+    // }
       // if(Auth::User()->password == $oldpsw)
       // {
       //   echo "<pre>";
@@ -185,9 +241,4 @@ public function resetpassword(Request $request){
       //   echo $oldpsw;
       //   die('Ice Cream'); 
       // }
-        
-        die('hjhjhjhj');
-   
-}
-
 }

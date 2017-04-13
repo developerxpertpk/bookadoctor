@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class speciality extends Model
 {
-  //  protected $table = 'speciality';
+  protected $table = 'speciality';
 
      public function doctor_speciality()
     {
@@ -15,6 +15,6 @@ class speciality extends Model
 
     public function speciality_user()
     {
-    	return $this->hasMany('App\User','user_id');
+    	return $this->hasMany('App\Userprofile','user_id');
     }
 }

@@ -37,8 +37,7 @@
          <a class="btn btn-info" href="{{ route('cms.status',$item->id) }}">Deactivate</a>
          @endif
           <a class="btn btn-primary" href="{{ route('cms.edit',$item->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['cms.destroy', $item->id],'style'=>'display:inline']) !!}
-        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+          <a class="btn btn-danger" href="{{ route('cms.destroy',$item->id) }}">Delete</a>
         </td>
 
         

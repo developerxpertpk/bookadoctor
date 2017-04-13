@@ -89,7 +89,7 @@ class User extends Authenticatable
 //    Releation with medical center and doctor
     public function mmedicalcenter(){
         return $this->belongsToMany('App\medicalcenter_doctor','medicalcenter_id');
-    }
+    }  
 //    public function medicalcenterdoctor(){
 //        return $this->belongsTo('App\medicalcenter_doctor','doctor_id');
 //    }

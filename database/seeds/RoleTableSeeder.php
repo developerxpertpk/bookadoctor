@@ -28,7 +28,6 @@ class RoleTableSeeder extends Seeder
         $role3->role="doctor";
         $role3->save();
 
-
         $role4= new App\Role;
         $role4->role="medicalcenter";
         $role4->save();

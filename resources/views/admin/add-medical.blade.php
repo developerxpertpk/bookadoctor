@@ -8,40 +8,46 @@
         </div>
     @endif
     </div>
-<div class="show-admin">
-  <table class="table table-bordered">
-      <tr class="tr-head">
-          <th>No</th>
-          <th>Medical Center Name</th>
-          <th>Medical Center Email</th>
-          <th>Medical Center Username</th>
-          <th>Working Hours</th>
-          <th width="206px">Action</th>
-      </tr>
-    <?php $i=0;?>
-    @foreach ($medicallist as $key => $item)
-    <tr>
-      <td>{{ ++$i }}</td>
-      <td>{{ $item->title }}</td>
-      <td>{{ $item->medical_center_email }}</td>
-      <td>{{ $item->medical_center_info }}</td>
-      <td>{{ $item->working_hours }}</td>
-       <td>
-          <a class="btn btn-info" href="{{ route('medical.show',$item->id) }}">Show</a>
-          <a class="btn btn-primary" href="{{ route('medical.edit',$item->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['medical.destroy', $item->id],'style'=>'display:inline']) !!}
-        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        </td>
+@section('content')
+    <table class="table table-bordered" id="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Contact Number</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+@stop
 
-        
-        {!! Form::close() !!}
-       @endforeach
-        
-  </tr>
-  </table>
-</div>
-</div>       
+@push('scripts')
+<script>
+$(function() {
+    $('#table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: { url:'{!! route('admin.datatable.list') !!}',
+                method: 'GET',
+                cache: false,
 
-</div>
+            },
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'user_id', name: 'user_id' },
+            { data: 'title', name: 'title' },
+            { data: 'description', name: 'description' },
+            { data: 'contact_no', name: 'contact_no' },
+            { data: 'address', name: 'address' },
+            { data: 'status', name: 'status' },
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
 
-@endsection
+    });
+});
+</script>
+@endpush

@@ -30,7 +30,8 @@ class CreateBookingsTable extends Migration
             
             
             $table->foreign('user_id')->references('id')->on('users');
-            
+             $table->foreign('speciality_id')->references('id')->on('speciality');
+
         });
     }
 

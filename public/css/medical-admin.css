@@ -276,3 +276,61 @@ div#img {
     width: 100%;
     margin: 0 0 16px;
 }
+.booking-details p{
+    float: left;
+    width: 100%;
+}
+.booking-details p img#logo-img{
+    float: left;
+    width: 100%;
+    border-radius: 4px;
+    padding: 7px;
+    border: 1px solid #000;
+}
+
+.primary{
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.success{
+    color: #fff;
+    background-color: #449d44;
+    border-color: #419641;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.warning{
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #eb9316;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.danger{
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #c12e2a;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+@media (min-width: 992px){
+    .modal-lg {
+        width: 80% !important;
+    }
+}

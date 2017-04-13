@@ -127,7 +127,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-handshake-o" aria-hidden="true"></i> Manage Bookings<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li>
-                                <a href="#">List Of Booking</a>
+                                <a href="{{route('medical.center.booking.show')}}">List Of Booking</a>
                             </li>
                             <li>
                                 <a href="#">FAQ</a>

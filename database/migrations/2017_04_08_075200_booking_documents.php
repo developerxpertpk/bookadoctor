@@ -18,7 +18,7 @@ class BookingDocuments extends Migration
 
             $table->increments('id');
             $table->integer('booking_id');
-            $table->integer('document_id');
+            $table->integer('documents');
             $table->timestamps();
 
             $table->foreign('booking_id')->references('id')->on('booking');

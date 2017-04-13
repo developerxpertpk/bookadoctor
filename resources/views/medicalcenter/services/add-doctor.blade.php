@@ -9,7 +9,7 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('add-doctor.store') }}">
                             {{ csrf_field() }}
-                            <input id="role" type="hidden" class="form-control" name="role" value="2" required autofocus>
+                            <input id="role" type="hidden" class="form-control" name="role" value="3" required autofocus>
                             <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">First Name</label>
                                 <div class="col-md-6">

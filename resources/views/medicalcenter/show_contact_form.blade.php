@@ -52,6 +52,17 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="form-group{{ $errors->has('pincode') ? ' has-error' : '' }}">
+
+
+                                {{Form::text('pincode', null, ['class' => 'form-control','id'=>'medical_center_pincode','placeholder'=>'Medical Center Pincode','onblur'=>'getLocation()'])}}
+                                @if ($errors->has('pincode'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('pincode') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
 
                             <div class="form-group col-md-4{{ $errors->has('country') ? ' has-error' : '' }}">
 
@@ -88,29 +99,9 @@
                     </div>
 
 
-                            <div class="form-group{{ $errors->has('pincode') ? ' has-error' : '' }}">
 
 
-                                {{Form::text('pincode', null, ['class' => 'form-control','id'=>'medical_center_pincode','placeholder'=>'Medical Center Pincode'])}}
-                                @if ($errors->has('pincode'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('pincode') }}</strong>
-                                    </span>
-                                @endif
 
-                            </div>
-
-                            <div class="form-group{{ $errors->has('working_hours') ? ' has-error' : '' }}">
-
-
-                                {{Form::text('working_hours', null, ['class' => 'form-control','id'=>'medical_center_pincode','placeholder'=>'Medical Center Working Hours'])}}
-                                @if ($errors->has('working_hours'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('working_hours') }}</strong>
-                                    </span>
-                                @endif
-
-                            </div>
 
                             <div class="form-group">
                                 <div class="">

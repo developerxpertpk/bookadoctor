@@ -19,7 +19,6 @@
           <th>Plan Title</th>
           <th>Plan Cost</th>
           <th>Plan Body</th>
-          <th>Plan Status</th>
           <th width="206px">Action</th>
       </tr>
     <?php $i=0;?>
@@ -27,25 +26,13 @@
     <tr>
       <td>{{$key->id}}</td>
       <td>{{$key->name}}</td>
-      <td>{{$key->cost}}</td>
-      <td>{{$key->details}}</td>
-      <td>{{$key->status}}</td>
-      <td> @if($key->status=="Inactive")
-          <a class="btn btn-info" href="{{ route('cms.status',$key->id) }}">Activate</a>
-        @else
-         <a class="btn btn-info" href="{{ route('cms.status',$key->id) }}">Deactivate</a>
-         @endif
-          <a class="btn btn-primary" href="{{ route('plan.edit',$key->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['plan.destroy', $key->id],'style'=>'display:inline']) !!}
-        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+      <td>{{$key->amount}}</td>
+      <td>{{$key->description}}</td>
+         <td>
+          <a class="btn btn-primary" href="{{ route('plan.edit.show',$key->id) }}">Edit</a>
+          <a class="btn btn-danger" href="{{ route('plan.destroy',$key->id) }}">Delete</a>
         </td>
-        {!! Form::close() !!}
-    @endforeach
-     
-         
-        
-        {!! Form::close() !!}
-        
+    @endforeach        
   </tr>
   </table>
 </div>

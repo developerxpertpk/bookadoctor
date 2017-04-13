@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Userprofile;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Input;                                          //All below this was copy n paste
 use App\Http\Requests;
 use App\User;
 use App\UserRegisters;
-use App\UserProfiles;
-use App\Subscription;
 use Validator;
 use View;
 use Auth;
@@ -56,22 +55,23 @@ class LoginController extends Controller
         $password=$_POST['password'];
         if (Auth::attempt(array('email' => $email, 'password' => $password)))
             {
-                if(Auth::user()->role_id == 1)
+                if(Auth::user()->role_id == 2)
                 {
                     return redirect(route('patient.dashboard'));
                 }
-                if(Auth::user()->role_id == 2)
+                if(Auth::user()->role_id == 3)
                 {
                     return redirect(route('doctor.dashboard'));
                 }
-                if(Auth::user()->role_id == 3)
+                if(Auth::user()->role_id == 4)
                 {
-                    $status2=Subscription::where('user_id','=',Auth::user()->id)->first();
-                    if( $status2->status == 0){
+                    $status2=Userprofile::where('user_id','=',Auth::user()->id)->first();
+
+                    if( $status2->plan_payment_status == 0){
                         return redirect()->route('medical.center.subscription.form')
                             ->with('success', 'New Admin Regester successfully');
                     }
-                    if( $status2->status == 1){
+                    if( $status2->plan_payment_status == 1){
                         return redirect(route('medical.center.dashboard'));
                     }
                 }

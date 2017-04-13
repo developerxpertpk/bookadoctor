@@ -186,6 +186,9 @@ return [
         //C-K Editor
         Unisharp\Ckeditor\ServiceProvider::class,
 
+        //Datatables
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
 
     ],
 
@@ -240,6 +243,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'auth.password.tokens' => Illuminate\Auth\Passwords\TokenRepositoryInterface::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 

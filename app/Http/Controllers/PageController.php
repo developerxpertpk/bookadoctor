@@ -8,10 +8,6 @@ use App\Page;
 
 class PageController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
 
     public function create(Request $request)
     {
@@ -21,7 +17,6 @@ class PageController extends Controller
           'body' => 'required',
 
       ]);
-
     	$page = new Page;
     	$page->title=$request['title'];
     	$page->author_id=1;

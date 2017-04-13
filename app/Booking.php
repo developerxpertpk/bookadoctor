@@ -19,6 +19,13 @@ class Booking extends Model
    public function documents(){
    	    return $this->hasMany('App\BookingDocuments', 'booking_id');
    }
+
+   public function is_doctors(){
+   	 return $this->belongsTo('App\User','doctor_id');
+   }
+
+   
+
    
 }
  

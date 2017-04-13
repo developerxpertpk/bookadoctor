@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 
-        $admin= new App\Admin;
-        $admin->name="admin";
+        $admin= new App\User;
         $admin->email="admin@admin.com";
-        $admin->username="admin12";
+        $admin->status="1";
         $admin->password=bcrypt('admin12#');
+        $admin->role_id="1";
         $admin->save();
 
        

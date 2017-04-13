@@ -11,6 +11,11 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
+        $role= new App\Role;
+        $role->role="admin";
+        $role->save();
+
+
         $role1= new App\Role;
         $role1->role="admin";
         $role1->save();
@@ -22,7 +27,6 @@ class RoleTableSeeder extends Seeder
         $role3= new App\Role;
         $role3->role="doctor";
         $role3->save();
-
 
         $role4= new App\Role;
         $role4->role="medicalcenter";

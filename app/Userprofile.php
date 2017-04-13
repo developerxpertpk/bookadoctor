@@ -18,11 +18,18 @@ class Userprofile extends Model
 //    }
 
 public function getUser(){
-    return $this->belongsTo('App\User','id');
+    return $this->belongsTo('App\User','user_id');
 }
 
 public function user(){
-	return $this->belongsTo('App\User','user_id');
+	return $this->hasOne('App\User','user_id');
+}
+public function doc(){
+	return $this->hasOne('App\medicalcenter_doctor','doctor_id');
+}
+public function Servicepiv(){
+	return $this->hasMany('App\speciality','user_id');
+	//return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
 }
 
 }

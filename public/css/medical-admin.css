@@ -216,27 +216,27 @@ div#img {
 }
 
 
-/*Schedule days css*/
-.weekDays-selector input {
-    display: none!important;
-}
+/*!*Schedule days css*!*/
+/*.weekDays-selector input {*/
+    /*display: none!important;*/
+/*}*/
 
-.weekDays-selector input[type=checkbox] + label {
-    display: inline-block;
-    border-radius: 6px;
-    background: #dddddd;
-    height: 40px;
-    width: 100px;
-    margin-right: 3px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-}
+/*.weekDays-selector input[type=checkbox] + label {*/
+    /*display: inline-block;*/
+    /*border-radius: 6px;*/
+    /*background: #dddddd;*/
+    /*height: 40px;*/
+    /*width: 100px;*/
+    /*margin-right: 3px;*/
+    /*line-height: 40px;*/
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+/*}*/
 
-.weekDays-selector input[type=checkbox]:checked + label {
-    background: #2AD705;
-    color: #ffffff;
-}
+/*.weekDays-selector input[type=checkbox]:checked + label {*/
+    /*background: #2AD705;*/
+    /*color: #ffffff;*/
+/*}*/
 .medical-center-subscription #admin-wrapper #admin-sidebar .side-nav{
     display: none;
 }
@@ -268,4 +268,11 @@ div#img {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
     -webkit-animation-duration: 1.7s;
+}
+
+
+.panel-default > .custom-panel-heading {
+    float: left;
+    width: 100%;
+    margin: 0 0 16px;
 }

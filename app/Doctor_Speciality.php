@@ -14,5 +14,6 @@ class Doctor_Speciality extends Model
     {
         return $this->belongsToMany('App\speciality', 'speciality_id');
     }
+
 }
 

@@ -125,7 +125,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="myModelkkklpp{{$item->id }}" class="modal fade" role="dialog">
+                                            <div id="myModelkkklpp{{$item->id }}" data-easein="tada" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
@@ -137,7 +137,7 @@
                                                         <input type="hidden" name="user_id" value="{{$item->id }}">
                                                         <div class="modal-body">
                                                             <p>Select Working Days </p>
-                                                            <div class="weekDays-selector">
+                                                            <div class="">
                                                                 <input type="checkbox" id="weekday-mon" class="weekday" name="weekdays[]" value="mon"/>
                                                                 <label for="weekday-mon">Monday</label>
                                                                 <input type="checkbox" id="weekday-tue" class="weekday" name="weekdays[]" value="tue"/>

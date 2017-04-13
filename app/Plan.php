@@ -9,7 +9,6 @@ class Plan extends Model
     protected $fillable = [
         'name', 'amount','description',
     ];
-    protected $hidden = [
-        'token', 
-    ];
 }
+
+

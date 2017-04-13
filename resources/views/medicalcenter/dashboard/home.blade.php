@@ -11,7 +11,7 @@
                         <i class="fa fa-user-md fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"></div> {{-- App\Userprofile::where('user_id','=',Auth::user()->id)->where(Auth::user()->role_id,'=',3)->get()->count() --}}
+                        <div class="huge"></div> {{App\medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get()->count()}}
 
                         <div>Total No Of Doctors</div>
                     </div>

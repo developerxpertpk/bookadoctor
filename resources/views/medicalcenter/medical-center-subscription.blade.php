@@ -17,7 +17,7 @@
                             <div class="col-md-4">
                             <div class="plan">
                                 <h3 class="plan-title">{{$plan_key->name}}</h3>
-                                <p class="plan-price">$ {{$plan_key->ammount}} <span class="plan-unit">per {{$plan_key->name}}</span></p>
+                                <p class="plan-price">$ {{$plan_key->amount}} <span class="plan-unit">per {{$plan_key->name}}</span></p>
                                 <ul class="plan-features">
                                     <li class="plan-feature">2 <span class="plan-feature-name">Lore ipsum</span></li>
                                     <li class="plan-feature">5<span class="plan-feature-unit">Ipsum</span> <span class="plan-feature-name">Lore ipsum</span></li>
@@ -31,7 +31,7 @@
                                     <script
                                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                             data-key="pk_test_flOGeTYD3hDVIRwgbXXqwBNo"
-                                            data-amount="{{$plan_key->ammount}}00"
+                                            data-amount="{{$plan_key->amount}}00"
                                             data-name="{{Auth::user()->is_Profile->first_name}} {{Auth::user()->is_Profile->last_name}}"
                                             data-description="Widget"
                                             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

@@ -25,7 +25,7 @@ class MedicalcenterServiceController extends Controller
 
     {
         $specilaty=speciality::where('user_id','=',Auth::user()->id)->get();
-      $test= medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get();
+        $test= medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get();
 
       foreach ($test as $key=>$val){
 
@@ -179,7 +179,16 @@ class MedicalcenterServiceController extends Controller
         Userprofile::where('user_id', $id)->delete();
         Doctor_Speciality::where('user_id', $id)->delete();
         Schedule::where('user_id', $id)->delete();
-        return redirect()->route('add-doctor.index')->with('success','Item updated successfully');
+        medicalcenter_doctor::where('doctor_id', $id)->delete();
+        if(medicalcenter_doctor::where('doctor_id', $id)->get()->count()==0){
+
+            return redirect()->route('doctor.add.doctor')->with('success','Item updated successfully');
+        }
+        else{
+            return redirect()->route('add-doctor.index')->with('success','Item updated successfully');
+        }
+
+
 
 
 

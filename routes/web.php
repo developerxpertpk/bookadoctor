@@ -109,7 +109,7 @@ Route::prefix('medical')->group(function(){
                     Route::delete('/specility/{id}','MedicalcenterServiceController@delete_specilaty')->name('specilaty.delete');
 //
 
-                  //  Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
+                  Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
                     Route::resource('/add-doctor','MedicalcenterServiceController');
 
                     Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');

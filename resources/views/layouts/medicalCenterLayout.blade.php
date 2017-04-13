@@ -100,12 +100,15 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
 
                         </ul>
                     </li>
-                    {{--<li>--}}
-                        {{--<a href="{{route('doctor.add.doctor')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>--}}
-                    {{--</li>--}}
                     <li>
-                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor/Show Doctors</a>
+                        <a href="{{route('doctor.add.doctor')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>
+
                     </li>
+                    @if(App\medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get()->count()>=1)
+                    <li>
+                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Show Doctor/Show Doctors</a>
+                    </li>
+@endif
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="profile-medical-center" class="collapse">

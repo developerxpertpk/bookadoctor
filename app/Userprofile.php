@@ -24,6 +24,13 @@ public function getUser(){
 public function user(){
 	return $this->hasOne('App\User','user_id');
 }
+public function doc(){
+	return $this->hasOne('App\medicalcenter_doctor','doctor_id');
+}
+public function Servicepiv(){
+	return $this->hasMany('App\speciality','user_id');
+	//return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
+}
 
 }
 

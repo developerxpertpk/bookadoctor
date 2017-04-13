@@ -9,7 +9,7 @@ use App\User;
 use Datatables;
 use App\Userprofile;
 use App\Booking;
-
+use App\medicalcenter_doctor;
 class AdminController extends Controller
 {
     /**
@@ -49,13 +49,21 @@ class AdminController extends Controller
 
         public function medicalshow($id)
         {
-            $medicaldetail = Userprofile::all()->where('user_id','=',$id);
+            $medicaldetail = Userprofile::where('user_id','=',$id)->first();
             $booking=Booking::where('medic_id','=',$id)->get();
+            $doctors=medicalcenter_doctor::where('medicalcenter_id','=',$id)->paginate(5);
+            // foreach ($doctors as $key) 
+            // {
+            // $user=User::find($id);
+            // print_r($medicaldetail->Servicepiv);
+            // }
+            
+            // die();
             // foreach ($booking as $key =>$value) {
             //     echo($value->is_doctors->is_profile);
             // }
             // die();
-            return view('admin.detail-medical', compact('medicaldetail','booking'));
+            return view('admin.detail-medical', compact('medicaldetail','booking','doctors'));
         }
 
         public function medicaledit($id)
@@ -130,9 +138,14 @@ class AdminController extends Controller
             return redirect()->route('add.faq.show')
                             ->with('success','Page Deleted');
         }
-        function createnewpage()
+        public function createnewpage()
         {
             return view('admin.faq-editor');
+        }
+        public function showdoctor($id)
+        {
+            $user=User::find($id);
+            return view('admin.doctorprofile',compact('user'));
         }
 }
    

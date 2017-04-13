@@ -22,27 +22,22 @@
       <Strong>web:</Strong>
       </div>
       <div class="col-md-5 mediccontent">
-      @foreach($medicaldetail as $key)
-      {{ $key->title }} <br/>
-      {{ $key->medical_center_info }}<br/>
-      {{ $key->description }}<br/>
-      {{ $key->medical_center_email }}<br/>
-      +91-{{ $key->contact_no }}<br/>
-      {{ $key->address }},{{$key->city}},{{$key->state}},{{$key->country}},<br/>pincode:{{$key->pincode}}<br/><br/>
-      {{-- {{ $key->working_hours }}<br/> --}}
-     {{ $key->web_url }}<br/>
-      {{-- {{ $key->created_at->totimestring() }} --}}
-      @endforeach
+      {{ $medicaldetail->title }} <br/>
+      {{ $medicaldetail->medical_center_info }}<br/>
+      {{ $medicaldetail->description }}<br/>
+      {{ $medicaldetail->medical_center_email }}<br/>
+      +91-{{ $medicaldetail->contact_no }}<br/>
+      {{ $medicaldetail->address }},{{$medicaldetail->city}},{{$medicaldetail->state}},{{$medicaldetail->country}},<br/>pincode:{{$medicaldetail->pincode}}<br/><br/>
+     {{ $medicaldetail->working_hours }}<br/> 
+     {{ $medicaldetail->web_url }}<br/>
   </div>
   <div class="col-md-3 mediccontent">
   <div class="aligndoc">
-  {{-- @foreach($medicaldetail->doctors as $doctor)
-
-  {{$doctor->first_name}} {{$doctor->last_name}}<br/>
-
+  @foreach($doctors as $doctor)
+  <a href="{{ route('Doctor.profile',$doctor->doctor_id) }}"><i class="fa fa-user-md"></i>{{$doctor->is_doctors->is_profile['first_name']}} {{$doctor->is_doctors->is_profile['last_name']}}</a><br/>
   @endforeach
-  {!! $medicaldetail->doctors->render() !!} --}}
   </div>
+  {{$doctors->render()}}
   </div> 
 </div>
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bookings">Open Modal</button> 

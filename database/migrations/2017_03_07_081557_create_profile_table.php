@@ -6,14 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProfileTable extends Migration
 {
-             
-
-//            contact info of medical center
-            
-           
     /**
-    ye kya hai??? ye pankaj sir ne pehle se create kiya hua tha comment kr k dekho to ess ko
-
      * Run the migrations.
      *
      * @return void
@@ -39,9 +32,6 @@ class CreateProfileTable extends Migration
             $table->string('web_url')->nullable();
             $table->bigInteger('pincode')->nullable();
             $table->string('images')->default('Anony.png');
-
-            
-            
              //medical center column
            
             $table->text('sub_domain')->nullable();

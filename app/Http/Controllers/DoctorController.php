@@ -157,10 +157,12 @@ public function loginnew(){
    // die('sss');
 
    $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
+
    // echo "<pre>";
    // print_r($booking);
-   // die('zxvbnm12345678');
-    
+   // die();
+ 
+
       return view('doctor.booking', compact('booking'));
    }
 

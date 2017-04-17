@@ -10,6 +10,9 @@ use Datatables;
 use App\Userprofile;
 use App\Booking;
 use App\medicalcenter_doctor;
+use Auth;
+use Validator;
+use Hash;
 class AdminController extends Controller
 {
     /**
@@ -31,6 +34,10 @@ class AdminController extends Controller
     {
         return view('admin.admin');
     }
+    public function showPasswordForm()
+      {
+        return view('admin.reset');
+      }
         public function medicalindex()
         {
             return view('admin.add-medical');
@@ -44,7 +51,7 @@ class AdminController extends Controller
             ->where('users.role_id','=','4')
             ->get();
          
-            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'/status" class="btn btn-xs btn-primary"><i class="fa fa-television"></i>Status</a><a href="/admin/medical/'.$user->id.'" class="btn btn-xs btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-xs btn-info"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
+            return Datatables::of($users)->addColumn('action', function($user){return '<a href="/admin/medical/'.$user->id.'/status" class="btn btn-s btn-info"><i class="fa fa-television"></i>Status</a><a href="/admin/medical/'.$user->id.'" class="btn btn-s btn-primary"><i class="fa fa-television"></i> Show</a><a href="/admin/medical/'.$user->id.'/edit" class="btn btn-s btn-warning"><i class="fa fa-edit"></i> Edit</a><a href="#show-'.$user->id.'" class="btn btn-s btn-danger"><i class="fa fa-trash"></i> Delete</a>';})->make(true);
         }
 
         public function medicalshow($id)
@@ -71,18 +78,36 @@ class AdminController extends Controller
             $medicaldetail = Userprofile::where('id', '=', $id)->first();
             return view('admin.edit-medical',compact('medicaldetail'));
         }
-        public function medicalStore(Request $request)
+        public function medicalStore(Request $request,$id)
         {
-            Userprofile::find($request->id)->update($request->all());
+            Userprofile::find($id)->update($request->all());
             return redirect()->route('medical.list')
                             ->with('success','Page record updated');
         }
 
         public function medicaldestroy($id)
         {
-             Medicalcenter::find($id)->delete();
-            return redirect()->route('admin.detail-medical')
+             Userprofile::find($id)->delete();
+            return redirect()->route('medical.list')
                             ->with('success','Medical Center Deleted');
+        }
+        public function medicalstatus($id)
+        {
+          $user=User::find($id);
+          if($user->status==1)
+          {
+            $user->status=0;
+            $user->save();
+           return redirect()->route('medical.list')
+                            ->with('success','Medical Center Status Changed');
+          } 
+          elseif($user->status==0)
+          {
+            $user->status=1;
+            $user->save();
+           return redirect()->route('medical.list')
+                            ->with('success','Medical Center Status Changed');
+          } 
         }
 
         public function showcmsfaq()
@@ -147,5 +172,56 @@ class AdminController extends Controller
             $user=User::find($id);
             return view('admin.doctorprofile',compact('user'));
         }
+        public function reset2(Request $request)
+    {
+        if(Auth::Check())
+  {
+    $request_data = $request->All();
+    $validator = $this->admin_credential_rules($request_data);
+    if($validator->fails())
+    {
+        return redirect()->route('reset.password')->with('Warning','Password Does not match');
+    }
+    else
+    {  
+      $current_password = Auth::User()->password;           
+      if(Hash::check($request_data['current-password'], $current_password))
+      {           
+        $user_id = Auth::User()->id;                       
+        $obj_user = User::find($user_id);
+        $obj_user->password = Hash::make($request_data['password']);;
+        $obj_user->save(); 
+        return redirect()->route('admin.dashboard')->with('success','Password Changed');
+      }
+      else
+      {           
+        $error = array('current-password' => 'Please enter correct current password');
+        return redirect()->route('reset.password')->with('Warning','error');
+      }
+    }        
+  }
+  else
+  {
+    return redirect()->to('/');
+  }    
+       
+    }
+
+    public function admin_credential_rules(array $data)
+{
+  $messages = [
+    'current-password.required' => 'Please enter current password',
+    'password.required' => 'Please enter password',
+  ];
+
+  $validator = Validator::make($data, [
+    'current-password' => 'required',
+    'password' => 'required|same:password',
+    'password_confirmation' => 'required|same:password',     
+  ], $messages);
+
+  return $validator;
+}
+
 }
    

@@ -5,7 +5,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-heading"> Doctor Profile
-				<a href="{{route('medical.show',$user->is_profile->doc->medicalcenter_id)}}" class="pull-right btn btn-sm btn-info"><i class="fa fa-long-arrow-left"></i> Schedule
+				<a href="{{route('medical.show',$user->is_profile->doc->medicalcenter_id)}}" class="pull-right btn btn-sm btn-info"><i class="fa fa-long-arrow-left"></i> Medical Detail
 					</a>
 					<!-- Modalend-->
 					<div class="panel-body">

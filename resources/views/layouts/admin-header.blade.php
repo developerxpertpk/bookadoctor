@@ -52,6 +52,9 @@
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
+                        <li>
+                            <a href="{{ route('reset.password') }}">Reset Password</a>
+                        </li>
                         <li class="divider"></li>
                         <li>
 
@@ -71,13 +74,6 @@
                     </ul>
                 </li>
             @endif
-
-
-
-
-            {{-- <li><a href="{{URL::to('/signin')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login </a></li>
-            <li><a href="{{URL::to('/regester')}}"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li> --}}
-          </ul>
       </nav>
     </div>
   </div>

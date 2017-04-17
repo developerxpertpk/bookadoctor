@@ -9,7 +9,7 @@ class Userprofile extends Model
 {
 
   //  protected $table='profile';
-    protected $fillable=array('user_id','issue');
+    protected $fillable=array('user_id','issue','contact_no','address','country','pincode','medical_center_info','title');
     protected $primaryKey='user_id';
 //    public function users()
 //    {

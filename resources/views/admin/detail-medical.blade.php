@@ -40,7 +40,7 @@
   {{$doctors->render()}}
   </div> 
 </div>
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bookings">Open Modal</button> 
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bookings">View Bookings</button> 
 </div>       
 
 </div>

@@ -63,52 +63,53 @@
                                 </div>
 
                             </div>
-                            <div class="profile-headding"><span>Center Gallary</span> <a class="edit_pro_btn pull-right" href="{{route('medical.center.image.upload.form')}}"><i class="fa fa-picture-o"></i>Upload Images</a></div>
-                            <div class="profile-body">
 
-                                        @foreach ($images_gallery as $key => $gallery_img)
+                        </div>
+                    <div class="profile-headding"><span>Center Gallary</span> <a class="edit_pro_btn pull-right" href="{{route('medical.center.image.upload.form')}}"><i class="fa fa-picture-o"></i>Upload Images</a></div>
+                    <div class="profile-body last-element">
 
-
-                                         <div class="col-md-3">
-
+                        @foreach ($images_gallery as $key => $gallery_img)
 
 
+                            <div class="col-md-3">
 
 
 
-                                            <a data-toggle="lightbox" href="#gal_{{$gallery_img->medical_center_id}}_{{$gallery_img->id}}">
 
-                                                <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}" class="small-img">
 
-                                            </a>
 
-                                            <div id="gal_{{$gallery_img->medical_center_id}}_{{$gallery_img->id}}" class="lightbox fade"  tabindex="-1" role="dialog" aria-hidden="true">
+                                <a data-toggle="lightbox" href="#gal_{{$gallery_img->medical_center_id}}_{{$gallery_img->id}}">
 
-                                                <div class='lightbox-dialog'>
+                                    <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}" class="small-img">
 
-                                                    <div class='lightbox-content'>
-                                                        {!! Form::open(['method' => 'DELETE','route' => ['image.destroy', $gallery_img->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                                        {!! Form::close() !!}
-                                                        <button type="button" class="close" data-dismiss="lightbox" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}">
+                                </a>
 
-                                                        <div class='lightbox-caption'>
+                                <div id="gal_{{$gallery_img->medical_center_id}}_{{$gallery_img->id}}" class="lightbox fade"  tabindex="-1" role="dialog" aria-hidden="true">
 
-                                                            Write here your caption heress
+                                    <div class='lightbox-dialog'>
 
-                                                        </div>
+                                        <div class='lightbox-content'>
+                                            {!! Form::open(['method' => 'DELETE','route' => ['image.destroy', $gallery_img->id],'style'=>'display:inline']) !!}
+                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                            {!! Form::close() !!}
+                                            <button type="button" class="close" data-dismiss="lightbox" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <img src="http://www.drbooking.com/images/gallery_pic/{{$gallery_img->images}}">
 
-                                                    </div>
+                                            <div class='lightbox-caption'>
 
-                                                </div>
+                                                Write here your caption heress
 
                                             </div>
-                                        </div>
-                                        @endforeach
 
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+
+                    </div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
-<header id="header">
-    <div class="container">
+<header id="header" class="medic-headder">
+    <div class="container-fluid">
         <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
             <div class="logo">
                 {{-- {{ route('products.index') }} --}}

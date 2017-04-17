@@ -111,6 +111,14 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::post('medical-center-doctor-booking-cancel/{id}','MedicalcenterBookingController@cancel_booking')->name('medical.cancel.booking');
                     Route::post('medical-center-doctor-booking-reschedule/{id}','MedicalcenterBookingController@reschedule_booking')->name('medical.reschedule.booking');
                     Route::get('medical-center-doctor-booking-complete/{id}','MedicalcenterBookingController@complete_booking')->name('complete.booking.detail');
+                    Route::get('medical-center-doctor-booking-history','MedicalcenterBookingController@show_booking_history')->name('medical.center.patient.booking.history');
+                    Route::post('/patient-booking-history','MedicalcenterBookingController@show_booking_history_show');
+                    Route::get('patient-booking-documents/{id}','MedicalcenterBookingController@documents_upload_form')->name('patient.document.upload.form');
+                    Route::post('patient-booking-documents','MedicalcenterBookingController@documents_upload_submit')->name('patient.document.upload.submit');
+
+
+                    Route::delete('booking-documents-delete/{id}-{del}','MedicalcenterBookingController@destroy1doc')->name('document.destroy');
+
 });
             //patients Routes
 

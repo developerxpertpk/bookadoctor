@@ -4,7 +4,7 @@
         <div class="row">
             <div class="booking-details">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Booking Details</div>
+                    <div class="panel-heading custom-panel-heading"> <span><b>{{$paitent_detail->first_name}} {{$paitent_detail->last_name}} </b></span> Booking Details <a href="{{route('medical.center.booking.show')}}" class="edit_pro_btn pull-right"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Back</a></div>
 
                     <div class="panel-body">
                         <div class="col-md-3">
@@ -65,6 +65,45 @@
                         </div>
                         <div class="col-md-3">
                             <h3>Documents Details</h3>
+                            <a href="{{route('patient.document.upload.form',$booking_detail->id)}}" class="edit_pro_btn" id="yourBtn">Click To Add Document</a>
+@foreach($booling_docs as $booling_doc)
+    <div class="col-md-6">
+
+    {{--<img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" alt="{{$booling_doc->documents}}">--}}
+
+
+        <a data-toggle="lightbox" href="#bookingdocs_{{$booling_doc->id}}">
+
+            <img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" class="new-small-img">
+
+        </a>
+
+        <div id="bookingdocs_{{$booling_doc->id}}" class="lightbox fade"  tabindex="-1" role="dialog" aria-hidden="true">
+
+            <div class='lightbox-dialog'>
+
+                <div class='lightbox-content'>
+                    {!! Form::open(['method' => 'DELETE','route' => ['document.destroy', $booling_doc->id,$booling_doc->booking_id],'style'=>'display:inline']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::close() !!}
+                    <button type="button" class="close" data-dismiss="lightbox" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}">
+
+                    <div class='lightbox-caption'>
+
+                        Write here your caption heress
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    @endforeach
+
                         </div>
 
                     </div>

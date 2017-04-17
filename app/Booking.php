@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use App\Doctor;
-use App\Medicalcenters;
+use App\User;
+use App\Userprofile;
 use App\Schedule;
 
 class Booking extends Model
@@ -20,7 +20,16 @@ class Booking extends Model
    	 return $this->belongsTo('App\User','doctor_id');
    }
 
-   
+   public function doctor(){
+       return $this->hasOne('App\User', 'doctor_id','id');
+   }
+    public function is_medical(){
+        return $this->belongsTo('App\User','medic_id');
+    }
+    public function transaction()
+    {
+        return $this->hasOne('App\BookingTransaction','booking_id');
+    }
    
 }
  

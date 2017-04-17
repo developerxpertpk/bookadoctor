@@ -14,9 +14,18 @@ jQuery(document).ready(function ($) {
                 $Class: $JssorBulletNavigator$
               }
             };
-
-
-
+ // //    //if (response.status == 0) {
+ //      $("span.status_append0").append("<label class='primary'>Booking Pending</label>");
+ // //  //  }
+ // //   // if (response.status == 1) {
+ //       $("span.status_append1").append("<label class='success'> Booking Complete </label>");
+ // //   // }
+ // // //   if (response.status == 2) {
+ //      $("span.status_append2").append("<label class='warning'> Booking Canceled </label>");
+ // //   // }
+ // //   // if (response.status == 3) {
+ //        $(".status_append3").append("<label class='danger'> Booking Rescheduled </label>");
+ // //   // }
 
             /*responsive code end*/
     $(".spelization").select2({

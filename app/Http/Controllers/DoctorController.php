@@ -170,8 +170,6 @@ public function loginnew(){
    
 
     $k = $booking->documents;
-
-    
      
      // foreach($k as $key){
      //  print_r($key->documents);

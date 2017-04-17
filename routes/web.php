@@ -68,6 +68,8 @@ Route::post('/plan/create','SubscriptionController@store')->name('plan.create.su
 Route::post('/plan/{id}/edit','SubscriptionController@update1')->name('plan.edit.submit');
 Route::get('/plan/{id}/delete','SubscriptionController@delete')->name('plan.destroy');
 Route::get('/doctor/{id}','AdminController@showdoctor')->name('Doctor.profile');
+Route::get('/payments','DoctorBookingController@viewpage')->name('payments.list');
+Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.data');
 // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
 // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
 });

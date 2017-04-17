@@ -151,6 +151,9 @@ return view('doctor.dr_login');
    //$user = Auth::user()->bookings;
 
    $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
+   echo "<pre>";
+   print_r($booking);
+   die();
  
       return view('doctor.booking', compact('booking'));
    }

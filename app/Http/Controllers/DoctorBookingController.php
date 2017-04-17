@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Booking;
 use App\Doctor;
 use App\Schedule;
+use App\BookingTransaction;
 
 class DoctorBookingController extends Controller
 {
@@ -47,8 +49,24 @@ class DoctorBookingController extends Controller
                 $booking->status = 1;
                 $booking->save();
             }
-           return redirect()->route('Doctor.booking');
-            
-            
+           return redirect()->route('Doctor.booking');     
+    }
+    public function viewpage()
+    {   
+          
+        return view('admin.payment');
+
+    }
+    public function viewlist()
+    {
+        $transaction=BookingTransaction::all();
+        foreach($transaction as $key)
+        {
+            $key['doctor_name']=$key->booking->is_doctors->is_profile->first_name." ".$key->booking->is_doctors->is_profile->last_name;
+           $key['patient_name']=$key->booking->is_users->is_profile->first_name." ".$key->booking->is_users->is_profile->last_name;
+           $key['medicalcenter_name']=$key->booking->is_medical->is_profile->title;
+        }  
+
+        return response()->json($transaction);
     }
 }

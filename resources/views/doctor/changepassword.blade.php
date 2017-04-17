@@ -14,7 +14,7 @@
                             <label for="password" class="col-md-4 control-label"> Old Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="oldpassword" required>
+                                <input id="password" type="password" class="form-control" name="old_password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -28,7 +28,7 @@
                             <label for="password" class="col-md-4 control-label"> New Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="newpassword" required>
+                                <input id="password" type="password" class="form-control" name="new_password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -42,7 +42,7 @@
                             <label for="password" class="col-md-4 control-label">Conform Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="conformpassword" required>
+                                <input id="password" type="password" class="form-control" name="confirm_password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

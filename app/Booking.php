@@ -24,7 +24,9 @@ class Booking extends Model
    	 return $this->belongsTo('App\User','doctor_id');
    }
 
-   
+   public function Booking_status(){
+   	$user->notify(new Cancel($token));
+   }
 
    
 }

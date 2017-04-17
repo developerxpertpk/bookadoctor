@@ -132,9 +132,11 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::get('/drregistration','DoctorController@index');
                     Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
                     //Route::get('/drregistration','DoctorController@speciality');
-                    Route::get('/dr_login','DoctorController@Showlogin');
+                   Route::get('/dr_login','DoctorController@Showlogin');
 
-                    Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                   Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                    Route::get('/dr-login','DoctorController@loginnew')->name('doctor.profile');
+
                     Route::get('/change_password','DoctorController@password')->name('password.reset');
                     Route::post('/changepassword','DoctorController@resetpassword')->name('change.password');
                     Route::get('/profile','DoctorController@profile');
@@ -144,7 +146,8 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::get('/bookings','DoctorController@viewBookings')->name('Doctor.booking');
                     Route::get('/bookings/{id}','DoctorController@bookingsProfile')->name('user.profile');
                     Route::post('/bookings/{id}','DoctorController@cancelbooking')->name('cancel.booking');
-                    Route::post('/bookings/{id}/ss','DoctorBookingController@completebooking')->name('booking.complete');
+                    Route::post('/bookings/{id}/reschedule','DoctorBookingController@reschedulebooking')->name('booking.reschedule');
+                    Route::post('/bookings/{id}/complete','DoctorBookingController@completebooking')->name('booking.complete');
 
                     //Route:get('/showInfo','DoctorController@ShowEdit');
                    // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');

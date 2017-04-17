@@ -61,7 +61,9 @@ class LoginController extends Controller
                 }
                 if(Auth::user()->role_id == 3)
                 {
-                    return redirect(route('doctor.dashboard'));
+
+                   
+                    return redirect(route('doctor.profile'));
                 }
                 if(Auth::user()->role_id == 4)
                 {

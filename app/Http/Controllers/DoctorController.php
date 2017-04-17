@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use App\Http\Validators\HashValidator;
+use Illuminate\Notifications\Notifiable;
 use Validator;
 use Hash;
 use Illuminate\Http\Request;
@@ -80,27 +81,31 @@ return view('doctor.dr_login');
   }
 
  public function login(Request $request){
- 
- 	 $email = $request['email'];
- 	 $password = $request ['password'];
-	 Auth::attempt(['email'=> $request['email'],'password'=> $request ['password']]);
 
-
- 	 // if(Auth::check()){
+ 	 if(Auth::check()){
  	 	
- 	 // 	//die('hhhhh');
- 	 // 	$details = speciality::all()->where('user_id','=',Auth::User()->id )->first();
- 	 	 //print_r('user_id');
+ 	 	//die('hhhhh');
+ 	 	$details = speciality::all()->where('user_id','=',Auth::User()->id )->first();
+ 	 	 print_r('user_id');
  	 	 
- 		 //print_r(Auth::User()->id);	
- 		 // print_r($details);
- 		 //die('kkkkk');
+ 		 print_r(Auth::User()->id);	
+ 		 print_r($details);
+ 		 die('kkkkk');
  	 	
- 	 	 //return view('doctor.showInfo');  //,compact('details')
+ 	 	 return view('doctor.showInfo');  //,compact('details')
  
  	 	return redirect('/profile');
  	 }
+  }
 
+public function loginnew(){
+  $user = Auth::User();
+  $userr = $user->is_Profile;
+
+ 
+ return view('doctor.profile', compact('userr'));
+
+}
 
 	
  public function profile(){
@@ -141,28 +146,32 @@ return view('doctor.dr_login');
  	$user->save();
  	return $this->profile();
  
-
- 	 
-
  }
 
    public function viewBookings(){
 
-   //$user = Auth::user()->bookings;
+   // $user = Auth::user()->is_Profile;
+   // //$a = Booking::all()->is_users;
+   // echo "<pre>";
+   // print_r($user);
+   // die('sss');
 
    $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
- 
+   // echo "<pre>";
+   // print_r($booking);
+   // die('zxvbnm12345678');
+    
       return view('doctor.booking', compact('booking'));
    }
 
    public function bookingsProfile($id){
 
-
-   
    $booking = Booking::find($id);
    
 
     $k = $booking->documents;
+
+    
      
      // foreach($k as $key){
      //  print_r($key->documents);
@@ -172,23 +181,25 @@ return view('doctor.dr_login');
       return view('doctor.userprofile' , compact('booking','k'));
 }
 
-public function cancelbooking($id,Request $request){
-     
-  if(isset($request['reason'])){
-   $reason = $request['reason'];
-   $book = Booking::find($id);
-    $book->cancel_reason=$reason;
-    $book->save();
-  }
-  else{
-    $reason = $request['reschedule'];
+public function cancelbooking(Request $request,$id){
+
+     $c = $request['cancels'];
+    $reason = $request['reasoncancel'];
     $book = Booking::find($id);
-    $book->reschedule_reason=$reason;
+    // echo "<pre>";
+    // print_r($book);
+    // die('jhjhjh');
+    $book->cancel_reason=$reason;
+    $book->status = $c;
+
+    $cancel = ['key' => 'Your Booking Has been canceled, Please Reschedule it.'];
+    $variable = $book->medic_id;
+    $var = $book->user_id;
+
+ 
     $book->save();
-  }
  
- 
-  return $this->bookingsProfile($id);
+ return redirect()->route('Doctor.booking');
 
 }
 
@@ -198,34 +209,121 @@ public function cancelbooking($id,Request $request){
  }
 
 
-public function resetpassword(Request $request){
+// public function resetpassword(Request $request){
 
-     $oldpsw = $request['oldpassword'];
-     $newpsw = bcrypt($request['newpassword']);
-     $conpsw = bcrypt($request['conformpassword']);
+//      $oldpsw = $request['oldpassword'];
+//      // echo "<pre>";
+//      // print_r($oldpsw);
+//      // die('klklk');
+//      $newpsw = bcrypt($request['newpassword']);
+//      $conpsw = bcrypt($request['conformpassword']);
 
-      //$psw = Auth::attempt(['password'=> $oldpsw]);
-      // echo Auth::User()->password;
-      //   echo $oldpsw;
-      //   die('Ice Cream');
+//       //$psw = Auth::attempt(['password'=> $oldpsw]);
+//       // echo Auth::User()->password;
+//       //   echo $oldpsw;
+//       //   die('Ice Cream');
 
-$validation = Validator::make(Auth::User()->all(), [
+// $validation = Validator::make(Auth::User()->all(), [
 
-    // Here's how our new validation rule is used.
-    'password' => 'hash:' . Auth::User()->password,
-    'newpassword' => 'required|different:password|confirmed'
-  ]);
+//     // Here's how our new validation rule is used.
+//     'password' => 'hash:' . Auth::User()->password,
+//     'newpassword' => 'required|different:password|confirmed'
+//   ]);
 
-if ($validation->fails()) {
-    return redirect()->back()->withErrors($validation->errors());
+
+//change password
+    /*To Change Password of the current logged in  user*/
+    public function resetpassword(Request $request){
+ 
+        if(Auth::Check())
+  {
+    $request_data = $request->All();
+    $validator = $this->admin_credential_rules($request_data);
+    if($validator->fails())
+    {
+        return redirect()->route('password.reset')->with('success','Password Does not match');
+    }
+    else
+    {  
+      $current_password = Auth::User()->password;           
+      if(Hash::check($request_data['old_password'], $current_password))
+      {           
+        $user_id = Auth::User()->id;
+        // echo"<pre>";
+        // print_r($user_id);
+        // die('hjhjh');                    
+        $obj_user = User::find($user_id);
+        $obj_user->password = Hash::make($request_data['new_password']);;
+        $obj_user->save(); 
+        return redirect()->route('doctor.profile')->with('success','Password Changed');
+      }
+      else
+      {           
+        $error = array('old_password' => 'Please enter correct current password');
+        return redirect()->route('password.reset')->with('success','error');
+      }
+    }        
   }
+  else
+  {
+    return redirect()->to('/');
+  }    
+       
+    }
 
-  $newpsw->password = Hash::make(Request::input('newpassword'));
-  $newpsw->save();
 
-  return redirect()->back()
-    ->with('success-message', 'Your new password is now set!');
-  }
+    public function admin_credential_rules(array $data)
+{
+  $messages = [
+    'old_password.required' => 'Please enter current password',
+    'new_password.required' => 'Please enter password',
+  ];
+
+  $validator = Validator::make($data, [
+    'old_password' => 'required',
+    'new_password' => 'required|same:password',
+    'confirm_password' => 'required|same:password',     
+  ], $messages);
+
+  return $validator;
+}
+
+
+    
+
+//change password end
+
+//Notification of booking cancel
+
+
+
+// public function toMail($cancel){
+//    $url = url('/invoice/'.$this->cancel->id);
+
+//     return (new MailMessage)
+//                 ->greeting('Hello!')
+//                 ->line('Your Booking has been Canceled!')
+//                 ->action('View Reason', $url)
+//                 ->line('Thank you for using our application!');
+
+// }
+
+//End of Notification of booking cancel
+
+
+
+
+
+// if ($validation->fails()) {
+//     return redirect()->back()->withErrors($validation->errors());
+//   }
+
+//   $newpsw->password = Hash::make(Request::input('newpassword'));
+//   $newpsw->save();
+
+//   return redirect()->back()
+//     ->with('success-message', 'Your new password is now set!');
+//   }
 
 
     // if (Hash::check($oldpsw, Auth::User()->password)){

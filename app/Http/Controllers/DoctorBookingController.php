@@ -30,25 +30,49 @@ class DoctorBookingController extends Controller
 
         public function completebooking($id,Request $request){
 
-          $booking = Booking::find($id)->first();
+           $com =  $request['completes'];
 
-          $k = $request['complete'];
-          // print_r($k);
-          // die('fgfgf');
-         
-            $currentId = $booking->status;
-            // print_r($currentId);
-            // die
-            if($currentId == $k){
-                echo "yes";
+           // echo"<pre>";
+           // print_r($com);
+           // die('ghgh');
 
-            }
-            else{
-                $booking->status = 1;
-                $booking->save();
-            }
+           $book = Booking::find($id);
+           $book->status = $com;
+           $book->save();
+        
            return redirect()->route('Doctor.booking');
-            
-            
+         
     }
+
+public function reschedulebooking(Request $request,$id){
+
+   // $booking = Booking::find($id)->first();
+
+    // echo "<pre>";
+    $r = $request['reschedules'];
+   
+
+    $reason = $request['reschedule'];
+    $book = Booking::find($id);
+    $book->reschedule_reason=$reason;
+    $book->status = $r;
+    $book->save();
+ return redirect()->route('Doctor.booking');
+   // $booking->save();
+
+    
+}
+
+// public  function cancelbooking(Request $request)
+//     {
+//         if($request['cancels']){
+//              $cancel[] = ['key' => 'Your Booking Has been canceled, Please Reschedule it.'];
+//         }
+//         else ($request['reschedules']){
+//             $reschedule[] = ['key' => 'Your Booking Has been rescheduled, Thank You.'];
+//         }
+
+        
+
+//     }
 }

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_token" content="{{ csrf_token() }}">
 
     <title>Dr. Booking</title>
     <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
@@ -21,6 +22,11 @@
     <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
     {{--<link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
@@ -31,6 +37,8 @@
 
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/ajax-function.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.form.min.js') }}" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
             type="text/javascript"></script>
 
@@ -127,17 +135,17 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-handshake-o" aria-hidden="true"></i> Manage Bookings<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li>
-                                <a href="#">List Of Booking</a>
+                                <a href="{{route('medical.center.booking.show')}}">List Of Booking</a>
                             </li>
                             <li>
-                                <a href="#">FAQ</a>
+                                <a href="{{route('medical.center.patient.booking.history')}}">Patients Booking History</a>
                             </li>
-                            <li>
-                                <a href="#">Privacy Policy</a>
-                            </li>
-                            <li>
-                                <a href="#">Social Network Links</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="#">Privacy Policy</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="#">Social Network Links</a>--}}
+                            {{--</li>--}}
                         </ul>
                     </li>
 

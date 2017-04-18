@@ -101,13 +101,25 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::get('/specility/{id}/edit','MedicalcenterServiceController@edit_specilaty_show')->name('specilaty.show.edit.form');
                     Route::post('/specility/{id}/edit','MedicalcenterServiceController@edit_specilaty_edit')->name('specilaty.edit.form.submit');
                     Route::delete('/specility/{id}','MedicalcenterServiceController@delete_specilaty')->name('specilaty.delete');
-//
-
-                  Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
+                    Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
                     Route::resource('/add-doctor','MedicalcenterServiceController');
-
                     Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
             //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');
+
+//    routes for booking under medical center
+                    Route::get('medical-center-doctor-booking','MedicalcenterBookingController@index')->name('medical.center.booking.show');
+                    Route::get('medical-center-doctor-booking-show/{id}','MedicalcenterBookingController@show_detail')->name('show.booking.detail');
+                    Route::post('medical-center-doctor-booking-cancel/{id}','MedicalcenterBookingController@cancel_booking')->name('medical.cancel.booking');
+                    Route::post('medical-center-doctor-booking-reschedule/{id}','MedicalcenterBookingController@reschedule_booking')->name('medical.reschedule.booking');
+                    Route::get('medical-center-doctor-booking-complete/{id}','MedicalcenterBookingController@complete_booking')->name('complete.booking.detail');
+                    Route::get('medical-center-doctor-booking-history','MedicalcenterBookingController@show_booking_history')->name('medical.center.patient.booking.history');
+                    Route::post('/patient-booking-history','MedicalcenterBookingController@show_booking_history_show');
+                    Route::get('patient-booking-documents/{id}','MedicalcenterBookingController@documents_upload_form')->name('patient.document.upload.form');
+                    Route::post('patient-booking-documents','MedicalcenterBookingController@documents_upload_submit')->name('patient.document.upload.submit');
+
+
+                    Route::delete('booking-documents-delete/{id}-{del}','MedicalcenterBookingController@destroy1doc')->name('document.destroy');
+
 });
             //patients Routes
 

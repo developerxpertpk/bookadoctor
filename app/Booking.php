@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use App\Doctor;
-use App\Medicalcenters;
+use App\User;
+use App\Userprofile;
 use App\Schedule;
 
 class Booking extends Model
@@ -31,10 +31,6 @@ class Booking extends Model
    		return $this->hasOne('App\BookingTransaction','booking_id');
    }
 
-   public function Booking_status(){
-   	$user->notify(new Cancel($token));
-   }
 
-   
 }
  

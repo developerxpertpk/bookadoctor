@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Userprofile;
 use App\role;
+use App\Booking;
 use Mail;
 
 
@@ -52,6 +53,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Doctors', 'user_id');
     }
 
+    public function doctor(){
+        return $this->hasMany('App\Booking', 'doctor_id','id');
+    }
+
       public static function generatePassword()
     {
         // Generate random string and encrypt it.
@@ -90,12 +95,66 @@ class User extends Authenticatable
     public function mmedicalcenter(){
         return $this->belongsToMany('App\medicalcenter_doctor','medicalcenter_id');
     }  
-  public function medicalcenterdoctor(){
-       return $this->hasOne('App\medicalcenter_doctor','doctor_id');
-   }
+
+
+    public static function booking_complete_email_msg_to_patient($patient_email)
+    {
+
+
+
+        // Send email
+        Mail::send('emails.completebooking', ['user' => $patient_email], function ($m) use ($patient_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $m->to($patient_email,'')->subject('Welcome to APP');
+        });
+
+
+    }
+    public static function booking_complete_email_msg_to_doctor($doctor_email)
+    {
+
+
+
+         // Send email
+        Mail::send('emails.completebooking', ['user' => $doctor_email], function ($mm) use ($doctor_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $mm->to($doctor_email,'')->subject('Welcome to APP');
+
+});
+
+    }
+
+    public static function booking_reschedule_email_msg_to_patient($patient_email)
+    {
+
+
+
+         // Send email
+        Mail::send('emails.reschedulebooking', ['user' => $patient_email], function ($mm) use ($patient_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $mm->to($patient_email,'')->subject('Welcome to APP');
+
+});
+
+    }
+    public static function booking_reschedule_email_msg_to_doctor($doctor_email)
+    {
+
+
+
+         // Send email
+        Mail::send('emails.reschedulebooking', ['user' => $doctor_email], function ($mm) use ($doctor_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $mm->to($doctor_email,'')->subject('Welcome to APP');
+
+});
+
+    }
 
     public static function booking_cancel_email_msg_to_patient($patient_email)
     {
+
+
 
          // Send email
         Mail::send('emails.cancelBooking', ['user' => $patient_email], function ($mm) use ($patient_email) {
@@ -104,7 +163,26 @@ class User extends Authenticatable
 
 });
 
-}
+    }
+    public static function booking_cancel_email_msg_to_doctor($doctor_email)
+    {
+
+
+
+         // Send email
+        Mail::send('emails.cancelBooking', ['user' => $doctor_email], function ($mm) use ($doctor_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $mm->to($doctor_email,'')->subject('Welcome to APP');
+
+});
+
+    }
+
+  public function medicalcenterdoctor(){
+       return $this->hasOne('App\medicalcenter_doctor','doctor_id');
+   }
+
+
 }
 
 

@@ -26,24 +26,36 @@
 }
 
 .side-nav {
-    background-color: #fff;
+    background: #aaa none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
+    height: 644px;
     left: 225px;
     margin-left: -225px !important;
     overflow-x: hidden;
     overflow-y: auto;
-    padding-bottom: 260px!important;
     position: fixed;
-    top: 51px;
+    top: 52px;
     width: 260px;
 }
 
 
 #wrapper {
+    float: left;
+    height: 650px;
+    max-height: 100%;
     padding-left: 260px;
+    width: 100%;
 }
+.medic-headder .logo img {
+    float: left;
+    height: 44px !important;
+    width: 60% !important;
 
+}
+.profile-body.last-element{
+    margin-bottom: 100px !important;
+}
 .side-nav li ul li:hover a:hover,
 .side-nav li ul li:hover a:focus,
 .side-nav li ul li:hover a:active {
@@ -275,4 +287,74 @@ div#img {
     float: left;
     width: 100%;
     margin: 0 0 16px;
+}
+.booking-details p{
+    float: left;
+    width: 100%;
+}
+.booking-details p img#logo-img{
+    float: left;
+    width: 100%;
+    border-radius: 4px;
+    padding: 7px;
+    border: 1px solid #000;
+}
+
+.primary{
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.success{
+    color: #fff;
+    background-color: #449d44;
+    border-color: #419641;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.warning{
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #eb9316;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.danger{
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #c12e2a;
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+#yourBtn {
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+.new-small-img {
+    height: 100px;
+    width: 100px;
+}
+.lightbox-dialog{
+    max-height: 100%;
+}
+@media (min-width: 992px){
+    .modal-lg {
+        width: 80% !important;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BookingTransaction;
 use Illuminate\Http\Request;
 use App\Booking;
 use App\User;
@@ -12,17 +13,50 @@ use Validator;
 use Redirect;
 use File;
 use Session;
+use Illuminate\Support\Facades\Input;
 
 class MedicalcenterBookingController extends Controller
 {
     public function index(){
-        $bookings=Booking::where('medic_id','=',Auth::user()->id)->get();
+
+//        if ($request==true&&$request==false){
+//            $bookings = Booking::whereBetween('reservation_from', [$from, $to])->get();
+//            //$bookings=Booking::where('medic_id','=',Auth::user()->id)->where('Appointment_timings', '>=', $now=2017-04-13 )->where('Appointment_timings', '<=', $to=2017-04-14)->get();
+//
+//        }else{
+            $bookings=Booking::where('medic_id','=',Auth::user()->id)->get();
+       // }
 //        echo "<pre>";
 //        print_r($bookings);
 //        die('hsdd');
 
+//        where('reservation_from', '>=', $now)
+//            ->where('reservation_from', '<=', $to)
+
             return view('medicalcenter.bookings.show-bookings',compact('bookings'));
     }
+
+    public function filter_booking(Request $request)
+
+    {
+//          print_r($request['from_date']);
+//          print_r($request['to_date']);
+//          die('xas');
+
+                if ($request['from_date'] <> '' && $request['to_date'] <> '') {
+//                    $start = date("yy-mm-dd", strtotime($request['from_date']));
+//                    $end = date("yy-mm-dd", strtotime($request['to_date'] . "+1 day"));
+//                    print_r($start);
+//                    print_r( $end);
+//                    die('xas');
+                    $bookings=Booking::whereBetween('Appointment_timings', [$request['from_date'], $request['to_date']]);
+                    echo "<pre>";
+                    print_r( $bookings);
+                  die('xas');
+                }
+        return view('medicalcenter.bookings.show-bookings',compact('bookings'));
+    }
+
     public function show_detail($id){
         $booking_detail=Booking::where('id','=',$id)->first();
         $booling_docs=BookingDocuments::where('booking_id','=',$id)->get();
@@ -40,6 +74,18 @@ class MedicalcenterBookingController extends Controller
             return view('medicalcenter.bookings.show-booking-detail',compact('booking_detail','doctor_detail','paitent_detail','booling_docs'));
     }
     public function cancel_booking(Request $request,$id){
+
+
+       if($request['refund_amount']==1){
+           $book1 = BookingTransaction::find($id);
+           $book1->amount=0;
+           $book1->save();
+           $book2 = Booking::find($id);
+           $refund_email=User::where('id','=',$book2->user_id)->first()->email;
+           User::booking_amount_refund_email_msg_to_patient($refund_email);
+       }
+
+
 
         $book = Booking::find($id);
         $book->status=$request['cancel_status'];

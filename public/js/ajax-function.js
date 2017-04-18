@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 
                     // <td>"+ val.doctor_name +"</td>
-                    html = html + "<tr><td>" + i + "</td><td>" + val.id + "</td><td>"+ val.patient_name +"</td><td>" + val.reason + "</td><td>" + val.cancel_reason + "</td><td>" + val.reschedule_reason + "</td><td>" + val.Appointment_timings + "<td><span class='status_append"+val.status+"'>"+status+"</span></td></tr>";
+                    html = html + "<tr><td>" + i + "</td><td>" + val.id + "</td><td>"+ val.patient_name +"</td><td>"+ val.doctor_name +"</td><td>" + val.reason + "</td><td>" + val.cancel_reason + "</td><td>" + val.reschedule_reason + "</td><td>" + val.Appointment_timings + "<td><span class='status_append"+val.status+"'>"+status+"</span></td></tr>";
 
 
                 });

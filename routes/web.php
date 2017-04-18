@@ -108,6 +108,7 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
 
 //    routes for booking under medical center
                     Route::get('medical-center-doctor-booking','MedicalcenterBookingController@index')->name('medical.center.booking.show');
+                    Route::post('medical-center-doctor-booking-filter','MedicalcenterBookingController@filter_booking')->name('medical.center.booking.filter');
                     Route::get('medical-center-doctor-booking-show/{id}','MedicalcenterBookingController@show_detail')->name('show.booking.detail');
                     Route::post('medical-center-doctor-booking-cancel/{id}','MedicalcenterBookingController@cancel_booking')->name('medical.cancel.booking');
                     Route::post('medical-center-doctor-booking-reschedule/{id}','MedicalcenterBookingController@reschedule_booking')->name('medical.reschedule.booking');
@@ -123,7 +124,7 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
 });
             //patients Routes
 
-                    Route::get('/patient', 'Auth\MedicalController@showPatientRegistrationForm')->name('patient.regester');
+//                    Route::get('/patient', 'Auth\MedicalController@showPatientRegistrationForm')->name('patient.regester');
                     Route::post('/patient', 'Auth\MedicalCenterRegisterController@register')->name('patient.regester.submit');
                     Route::get('/patient-dashboard', 'LoginController@showPatientDashboard')->name('patient.dashboard')->middleware('auth');
                     Route::get('/doctor-dashboard', 'LoginController@showDoctorDashboard')->name('doctor.dashboard')->middleware('auth');

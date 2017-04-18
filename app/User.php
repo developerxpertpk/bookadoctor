@@ -177,6 +177,14 @@ class User extends Authenticatable
 });
 
     }
+public static function booking_amount_refund_email_msg_to_patient($refund_email){
+    // Send email
+    Mail::send('emails.refundAmount', ['user' => $refund_email], function ($mm) use ($refund_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+        $mm->to($refund_email,'')->subject('Welcome to APP');
+
+    });
+}
 
   public function medicalcenterdoctor(){
        return $this->hasOne('App\medicalcenter_doctor','doctor_id');

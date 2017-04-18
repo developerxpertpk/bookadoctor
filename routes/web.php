@@ -44,15 +44,14 @@ Route::prefix('admin')->group(function(){
 Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
 Route::get('/','AdminController@index')->name('admin.dashboard');
-// Route::post('/', 'AdminController@index')->name('home1.home1');
-Route::get('/add-admin', 'AdminController@add')->name('admin.add');
-Route::delete('/add-admin/{id}', 'AdminController@destroy')->name('admin.destroy');
-Route::get('/add-admin/{id}', 'AdminController@show')->name('admin.show');
-Route::get('/add-admin/{id}/edit', 'AdminController@edit')->name('admin.edit');
+Route::get('password/reset','AdminController@showPasswordForm')->name('reset.password');
+Route::post('password/reset','AdminController@reset2')->name('admin.reset');
 Route::get('/medical','AdminController@medicalindex')->name('medical.list');
 Route::get('/medical/list','AdminController@medicallist')->name('admin.datatable.list');
 Route::get('/medical/{id}','AdminController@medicalshow')->name('medical.show');
 Route::get('/medical/{id}/edit','AdminController@medicaledit')->name('medical.edit');
+Route::get('/medical/{id}/status','AdminController@medicalstatus')->name('medical.status');
+Route::post('/medical/{id}/edit','AdminController@medicalStore')->name('update.medical.submit');
 Route::post('/medical', 'AdminController@medicalStore')->name('admin.add.submit');
 Route::delete('/medical/{id}', 'AdminController@medicaldestroy')->name('medical.destroy');
 Route::get('/add-faq', 'AdminController@showcmsfaq')->name('add.faq.show');
@@ -69,6 +68,8 @@ Route::post('/plan/create','SubscriptionController@store')->name('plan.create.su
 Route::post('/plan/{id}/edit','SubscriptionController@update1')->name('plan.edit.submit');
 Route::get('/plan/{id}/delete','SubscriptionController@delete')->name('plan.destroy');
 Route::get('/doctor/{id}','AdminController@showdoctor')->name('Doctor.profile');
+Route::get('/payments','DoctorBookingController@viewpage')->name('payments.list');
+Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.data');
 // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
 // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
 });
@@ -154,7 +155,9 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::post('/profile','DoctorController@update_profile')->name('Doctor.image');
                     //Route::post('/profile/s','ScheduleController@insert')->name('Doctor.schedule.create');
                     Route::get('/bookings','DoctorController@viewBookings')->name('Doctor.booking');
-                    Route::get('/userprofile{id}','DoctorController@bookingsProfile')->name('user.profile');
+                    Route::get('/bookings/{id}','DoctorController@bookingsProfile')->name('user.profile');
+                    Route::post('/bookings/{id}','DoctorController@cancelbooking')->name('cancel.booking');
+                    Route::post('/bookings/{id}/ss','DoctorBookingController@completebooking')->name('booking.complete');
 
                     //Route:get('/showInfo','DoctorController@ShowEdit');
                    // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');

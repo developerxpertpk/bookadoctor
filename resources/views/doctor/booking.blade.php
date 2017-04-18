@@ -5,9 +5,10 @@
   <thead>
       <tr>
           <th>Bookings Id</th>
-          <th>Status</th>
+            <th>Status</th>
           <th>Problem</th>
-          
+           <th>Action</th>
+        
      </tr>
   </thead>
   @foreach($booking as $key)
@@ -15,8 +16,9 @@
 
  	<tr>
  		<td>
-	 		<a href="{{ route('user.profile', $key->id) }}">{!! $key->id !!}
+	 		{!! $key->id !!}
 
+	 	
 	 	</td>
 
 	 	<td>
@@ -44,6 +46,10 @@
 	 	<td>
 	 		{{$key->reason}}
 	 	</td>
+	 	<td>
+			<a href="{{ route('user.profile', $key->id) }}" class="edit_pro_btn">Show Details</a>
+	 	</td>
+
 	 	 </tr>
 	 	  @endif
  	 @endforeach

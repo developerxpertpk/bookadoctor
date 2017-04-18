@@ -95,11 +95,6 @@ class User extends Authenticatable
     public function mmedicalcenter(){
         return $this->belongsToMany('App\medicalcenter_doctor','medicalcenter_id');
     }  
-//    public function medicalcenterdoctor(){
-//        return $this->belongsTo('App\medicalcenter_doctor','doctor_id');
-//    }
-
-
 
 
     public static function booking_complete_email_msg_to_patient($patient_email)
@@ -182,6 +177,11 @@ class User extends Authenticatable
 });
 
     }
+
+  public function medicalcenterdoctor(){
+       return $this->hasOne('App\medicalcenter_doctor','doctor_id');
+   }
+
 }
 
 

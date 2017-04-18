@@ -87,7 +87,7 @@
                                     <a href="{{ route('subscription.list') }}"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
                                 </li>
                                 <li>
-                                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
+                                    <a href="{{route('payments.list')}}"><i class="fa fa-fw fa-desktop"></i> Payments</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('add.faq.show') }}" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-wrench"></i> Manage Content</a>

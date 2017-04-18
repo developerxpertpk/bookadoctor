@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BookingDocuments extends Migration
+class CreateBookingTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class BookingDocuments extends Migration
      */
     public function up()
     {
-        Schema::create('bookingdocuments', function (Blueprint $table){
-
-
+        Schema::create('booking_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('booking_id');
-            $table->string('documents');
+            $table->integer('amount');
+            $table->string('transaction_id');
+            $table->string('transaction_mode');
+            $table->integer('status');
             $table->timestamps();
-
             $table->foreign('booking_id')->references('id')->on('bookings');
-           
         });
     }
 
@@ -33,6 +32,6 @@ class BookingDocuments extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('bookingdocuments');
+        Schema::dropIfExists('booking_transactions');
     }
 }

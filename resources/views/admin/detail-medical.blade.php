@@ -10,7 +10,7 @@
         </a></div>
   </div>
   <div class="row">
-   {{--  <div class="col-md-2 medic "><img src="{{asset('/images/profile_pic/'.$medicaldetail->images)}}" alt="Profile Pic"/></div> --}}
+    <div class="col-md-2 medic "><img src="{{asset('/images/profile_pic/'.$medicaldetail->images)}}" alt="Profile Pic"/></div>
     <div class="col-md-1 mediccontent">
       <Strong>Name: </Strong><br/>
       <Strong>UserName:</Strong><br/>
@@ -40,7 +40,7 @@
   {{$doctors->render()}}
   </div> 
 </div>
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bookings">Open Modal</button> 
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bookings">View Bookings</button> 
 </div>       
 
 </div>

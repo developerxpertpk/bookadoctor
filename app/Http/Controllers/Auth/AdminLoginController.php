@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
 use App\Admin;
 
 class AdminLoginController extends Controller
@@ -13,7 +15,7 @@ class AdminLoginController extends Controller
     $this->middleware('guest:admin');
   }
   public function showLoginForm(){
-    return View('admin.admin-login');
+    return view('admin.admin-login');
   }
   public function login(Request $request){
     //return true;
@@ -33,4 +35,13 @@ return redirect()->intended(route('admin.dashboard'));
    return redirect()->back()->withInput($request->only('email','remember'));
 
   }
+  public function showPasswordForm()
+      {
+        return view('admin.Auth.reset');
+      }
+  public function reset2()
+    {
+       dd($_POST);
+       die();
+    }
 }

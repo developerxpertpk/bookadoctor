@@ -48,6 +48,7 @@
 	 	</td>
 	 	<td>
 			<a href="{{ route('user.profile', $key->id) }}" class="edit_pro_btn">Show Details</a>
+			<a href="{{ route('previous.history', $key->id) }}" class="edit_pro_btn">Previous History</a>
 	 	</td>
 
 	 	 </tr>

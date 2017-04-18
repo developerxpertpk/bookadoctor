@@ -149,6 +149,7 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::post('/bookings/{id}','DoctorController@cancelbooking')->name('cancel.booking');
                     Route::post('/bookings/{id}/reschedule','DoctorBookingController@reschedulebooking')->name('booking.reschedule');
                     Route::post('/bookings/{id}/complete','DoctorBookingController@completebooking')->name('booking.complete');
+                    Route::get('/bookings/{id}/history','DoctorBookingController@patientHistory')->name('previous.history');
 
                     //Route:get('/showInfo','DoctorController@ShowEdit');
                    // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');

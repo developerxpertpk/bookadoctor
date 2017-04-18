@@ -16,6 +16,7 @@ use App\Doctor_Speciality;
 use App\Booking;
 use App\Userprofile;
 use App\BookingDocuments;
+use Illuminate\Support\Facades\Mail;
 
 
 class DoctorController extends Controller
@@ -191,13 +192,38 @@ public function cancelbooking(Request $request,$id){
     // die('jhjhjh');
     $book->cancel_reason=$reason;
     $book->status = $c;
+    $name = $book->is_users->is_Profile->first_name;
+    $email = $book->is_users->email;
+    // echo "<pre>";
+    // print_r($email);
+    // die('klklkkl');
 
-    $cancel = ['key' => 'Your Booking Has been canceled, Please Reschedule it.'];
+   // $cancel = ['key' => 'Your Booking Has been canceled, Please Reschedule it.'];
     $variable = $book->medic_id;
     $var = $book->user_id;
+    // echo "<pre>";
+    // print_r($var);
+    // die('kjkjkjkj');
 
  
+    
     $book->save();
+   // $booking->
+
+$userData = array();
+
+        $userData['name'] = $name;
+        $userData['email'] = $email;
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+
+        Mail::send('emails.DoctorCancelbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Cancel');
+        });
+
+
  
  return redirect()->route('Doctor.booking');
 

@@ -188,6 +188,11 @@
 										{{Form::close()}}
 
 										<!-- End Reschedule Modal -->
+										<!-- Previous History -->
+										
+										<!-- End Previous History -->
+
+										<!-- Complete Booking -->
 										<div class="complete">
 										{!! Form::open(['route' => ['booking.complete', $booking->id]] ) !!}
 										{!! csrf_field() !!}
@@ -197,8 +202,8 @@
 										
 										</div>
 										{!! Form::close() !!}
-
 									</div>
+									<!-- End Complete Booking -->
 									
 								</div>
 								</form>

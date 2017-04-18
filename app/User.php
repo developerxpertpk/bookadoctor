@@ -93,6 +93,18 @@ class User extends Authenticatable
   public function medicalcenterdoctor(){
        return $this->hasOne('App\medicalcenter_doctor','doctor_id');
    }
+
+    public static function booking_cancel_email_msg_to_patient($patient_email)
+    {
+
+         // Send email
+        Mail::send('emails.cancelBooking', ['user' => $patient_email], function ($mm) use ($patient_email) {
+//            $m->from('hello@appsite.com', 'Your App Name');
+            $mm->to($patient_email,'')->subject('Welcome to APP');
+
+});
+
+}
 }
 
 

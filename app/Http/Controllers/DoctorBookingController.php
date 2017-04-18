@@ -9,6 +9,7 @@ use App\Booking;
 use App\Doctor;
 use App\Schedule;
 use App\BookingTransaction;
+use Illuminate\Support\Facades\Mail;
 
 class DoctorBookingController extends Controller
 {
@@ -80,7 +81,7 @@ class DoctorBookingController extends Controller
         }  
 
         return response()->json($transaction);
->>>>>>> 3ca27f0d1f6ed84bb7d9eeab4da1f4565443baa8
+
     }
 
 public function reschedulebooking(Request $request,$id){
@@ -95,23 +96,47 @@ public function reschedulebooking(Request $request,$id){
     $book = Booking::find($id);
     $book->reschedule_reason=$reason;
     $book->status = $r;
+    $name = $book->is_users->is_Profile->first_name;
+    $email = $book->is_users->email;
+
+$userData = array();
+
+        $userData['name'] = $name;
+        $userData['email'] = $email;
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+
+        Mail::send('emails.DoctorReschedulebooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Reschedule');
+        });
+
+
+
+
     $book->save();
  return redirect()->route('Doctor.booking');
-   // $booking->save();
+   
 
     
 }
+public function patientHistory($id){
 
-// public  function cancelbooking(Request $request)
-//     {
-//         if($request['cancels']){
-//              $cancel[] = ['key' => 'Your Booking Has been canceled, Please Reschedule it.'];
-//         }
-//         else ($request['reschedules']){
-//             $reschedule[] = ['key' => 'Your Booking Has been rescheduled, Thank You.'];
-//         }
+  $booking = Booking::find($id);
 
-        
+  $k = $booking->documents;
+     
+     // foreach($k as $key){
+     //  print_r($key->documents);
+     //   die('kkkk');
+     // }
+     // die('ghghgh');
 
-//     }
+  
+  return view('doctor.patient-previous-history',compact('booking' , 'k'));
+}
+
+
+
 }

@@ -24,7 +24,7 @@
                                     <th>Sr.No</th>
                                     <th>Booking No</th>
                                     <th>Patient Name</th>
-                                    {{--<th>Doctor Name</th>--}}
+                                    <th>Doctor Name</th>
                                     <th>Disease Name</th>
                                     <th>Cancel Reason</th>
                                     <th>Reschedule Reason</th>

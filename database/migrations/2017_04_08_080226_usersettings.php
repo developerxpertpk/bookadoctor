@@ -13,13 +13,14 @@ class usersettings extends Migration
      */
     public function up()
     {
-        Schema::create('user_setting', function (Blueprint $table){
+        Schema::create('usersettings', function (Blueprint $table){
            $table->increments('id');
             $table->integer('user_id');
             $table->string('day')->nullable();
-            $table->datetime('time_in')->nullable();
-            $table->datetime('time_out')->nullable();
+            $table->time('time_in')->nullable();
+            $table->time('time_out')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
         $table->foreign('user_id')->references('id')->on('users');
     }
@@ -31,6 +32,6 @@ class usersettings extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_setting');
+        Schema::dropIfExists('usersettings');
     }
 }

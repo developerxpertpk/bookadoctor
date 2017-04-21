@@ -54,8 +54,7 @@ class MedicalCenterController extends Controller
                  $medical_info->images=$fileName;
                  $medical_info->save();
 
-                 return redirect()->route('medical.center.image.gallery')
-                     ->with('success', 'New Admin Regester successfully');
+                 return redirect()->route('medical.center.image.gallery');
 
              }
              public function contact_insert(Request $request){
@@ -82,8 +81,7 @@ class MedicalCenterController extends Controller
                  $medical_contact->city=$request['city'];
 
                  $medical_contact->save();
-                 return redirect()->route('medical.center.image.gallery')
-                     ->with('success', 'New Admin Regester successfully');
+                 return redirect()->route('medical.center.image.gallery');
 
              }
 
@@ -110,9 +108,16 @@ class MedicalCenterController extends Controller
             public function imageUpload(){
                 return view('medicalcenter.image-upload');
             }
+            public function show_medical_subscription_detail()
+            {
+                $plan_dta= Userprofile::where('user_id','=',Auth::user()->id)->first()->plan_id;
+               $plan_detail=Plan::where('id','=',$plan_dta)->first();
+               return view('medicalcenter.plan-subscription-detail',compact('plan_detail'));
+
+            }
 
 
- }
+}
 
 
 

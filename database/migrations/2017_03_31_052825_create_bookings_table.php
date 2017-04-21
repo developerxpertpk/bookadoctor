@@ -24,8 +24,8 @@ class CreateBookingsTable extends Migration
             $table->datetime('Appointment_timings')->nullable();
             $table->text('reason');
 
-            $table->boolean('payment_status')->comment('0=pending','1=complete');
-            $table->string('status')->comment('0=pending','1=complete','2=cancel','3=reshedule');
+            $table->boolean('payment_status')->comment('0=pending, 1=complete');
+            $table->string('status')->comment('0=pending, 1=complete, 2=cancel, 3=reshedule');
             $table->timestamps();
             
             

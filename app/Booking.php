@@ -28,9 +28,8 @@ class Booking extends Model
    }
    public function transaction()
    {
-   		return $this->hasOne('App\BookingTransaction','booking_id');
+   		return $this->hasMany('App\BookingTransaction','booking_id');
    }
-
 
 }
  

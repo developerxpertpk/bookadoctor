@@ -95,8 +95,8 @@
                                                       <label>
                                                         <b>Login As :</b></br>
                                                         <input checked="checked" name="role" type="radio" value="1"> Patient</br>
-                                                        <input  name="role" type="radio" value="2"> Doctor</br>
-                                                        <input  name="role" type="radio" value="3"> Medical Center</br>
+                                                        <input  name="role" type="radio" value="3"> Doctor</br>
+                                                        <input  name="role" type="radio" value="4"> Medical Center</br>
                                                       </label>
                                                   </div>
                                               </div>

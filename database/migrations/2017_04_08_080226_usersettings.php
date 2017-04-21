@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserSetting extends Migration
+class usersettings extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,7 @@ class UserSetting extends Migration
             $table->datetime('time_out')->nullable();
             $table->timestamps();
         });
+        $table->foreign('user_id')->references('id')->on('users');
     }
 
     /**

@@ -81,6 +81,9 @@ class User extends Authenticatable
     public function bookings(){
         return $this->hasMany('App\Booking', 'user_id');
     }
+    public function drbookings(){
+        return $this->hasMany('App\Booking', 'doctor_id');
+    }
 
 
     public function schedule()
@@ -182,6 +185,9 @@ class User extends Authenticatable
        return $this->hasOne('App\medicalcenter_doctor','doctor_id');
    }
 
+public function usersetting(){
+    return $this->hasMany('App\Usersetting','user_id');
+}
 
 }
 

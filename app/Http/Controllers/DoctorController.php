@@ -17,6 +17,8 @@ use App\Booking;
 use App\Userprofile;
 use App\BookingDocuments;
 use Illuminate\Support\Facades\Mail;
+use App\Usersetting;
+use Carbon\Carbon;
 
 
 class DoctorController extends Controller
@@ -27,59 +29,18 @@ public function index(){
 }
 
 public function insert(Request $request ){
-	
 
-    // echo ($request['first_name']);
-$user = new User;
-	$user->email=$request['email'];
-	$user->password=bcrypt($request['password']);
-	$user->role_id=3;
-	$user->status=1;
-	$user->save();
 $doctor = new Userprofile;
-	$doctor->first_name=$request['first_name'];
-	$doctor->last_name=$request['last_name'];
-	$doctor->user_id=$user->id;
-	$doctor->save();
-		
-	//$doctor->profile_pic=$fileName;
-    // return view('doctor.show_profile');
-	//Pivot table
-	// foreach($request->speciality as $key)
-	// {
-	// $speciality = new  Doctor_Speciality;
-	// 	$speciality->speciality_id=$key;
-	// 	$speciality->doctors_id=$doctor->id;
-	// 	$speciality->save();
-	// }
-
-
-return view('doctor.dr_login');
+$doc = Userprofile::where('user_id','=',Auth::User()->id )->first();
+$doc['contact_no']=$request['contactno'];
+$doc['address']=$request['address'];
+$doc['state']=$request['state'];
+$doc['city']=$request['city'];
+$doc['country']=$request['country'];
+$doc['pincode']=$request['pincode'];
+$doc->save();
+return $this->profile();
 }
-
-
-//  public function update(Request $request){
-
-//  		$user  = new User;
-//  		$doctor = new Doctor;
-// 		$doctor->user_id=$user->id;
-// 	    //print_r($doctor);
-// 		//die('aaaaa');
-// 		 return redirect ('doctor.show_profile');
-// 	}
-
-//  	// if($file = $request->hasFile('profile_pic1')) {
-//   //        $file = $request->file('profile_pic1') ;
-//   //        $fileName = $file->getClientOriginalName() ;
-//   //        $extention = $file->getClientOriginalExtension();
-//   //        $destinationPath = public_path().'/images/profile_pic/' ;
-//   //        $file->move($destinationPath,$fileName);
- public function Showlogin()
- {
-  
-  	return  view('doctor.dr_login');
-
-  }
 
  public function login(Request $request){
 
@@ -87,11 +48,11 @@ return view('doctor.dr_login');
  	 	
  	 	//die('hhhhh');
  	 	$details = speciality::all()->where('user_id','=',Auth::User()->id )->first();
- 	 	 print_r('user_id');
+ 	 	 //print_r('user_id');
  	 	 
- 		 print_r(Auth::User()->id);	
- 		 print_r($details);
- 		 die('kkkkk');
+ 		 // print_r(Auth::User()->id);	
+ 		 // print_r($details);
+ 		 // die('kkkkk');
  	 	
  	 	 return view('doctor.showInfo');  //,compact('details')
  
@@ -104,7 +65,7 @@ public function loginnew(){
   $userr = $user->is_Profile;
 
  
- return view('doctor.profile', compact('userr'));
+ return view('doctor.profile', compact('user','userr'));
 
 }
 
@@ -112,6 +73,7 @@ public function loginnew(){
  public function profile(){
  
   $user = Auth::User();
+  // echo"<pre>";
   // print_r(Auth::User());
   // die();
 
@@ -128,24 +90,28 @@ public function loginnew(){
 
  public function update_profile(Request $request){
 
- $user=Userprofile::Where('user_id','=',Auth::user()->id)->first();
- 	
- 	 if($file = $request->hasFile('image')) {
+if($request->file('image')) {
                      $file = $request->file('image') ;
-                     $fileName = $file->getClientOriginalName() ;
+                     $fileName = $file->getClientOriginalName();
                      // echo "<pre>";
                      // print_r($fileName);
                      // die('sbsbsb');
                      $extention = $file->getClientOriginalExtension();
                      $destinationPath = public_path().'/images/profile_pic/' ;
                      $file->move($destinationPath,$fileName);
-
+                    
                  }
 
+ $user=Userprofile::Where('user_id','=',Auth::user()->id)->first();
+ //$file = $request->hasFile('image');
+ 	 
 
- 	$user->images=$fileName;
- 	$user->save();
- 	return $this->profile();
+ $user->images=$fileName;
+ $user->save();
+ // echo "<pre>";
+ //                     print_r($fileName);
+ //                     die('sbsbsb');
+ return $this->profile();
  
  }
 
@@ -162,6 +128,12 @@ public function loginnew(){
    // echo "<pre>";
    // print_r($booking);
    // die();
+    //$a = Booking::count()->where('doctor_id', '=' , Auth::User()->id);
+
+    $count = Booking::where('doctor_id', '=' , Auth::User()->id)->count();
+     // echo"<pre>";
+     // print_r($count);
+     // die('klklklklkl');
  
 
       return view('doctor.booking', compact('booking'));
@@ -170,17 +142,30 @@ public function loginnew(){
    public function bookingsProfile($id){
 
    $booking = Booking::find($id);
+
+   // echo"<pre>";
+   // print_r($booking);
+   // die('hbhbfhbhheb');
    
 
     $k = $booking->documents;
-     
-     // foreach($k as $key){
-     //  print_r($key->documents);
-     // }
-   
-      //print_r($booking->is_users->is_Profile->last_name);
-      return view('doctor.userprofile' , compact('booking','k'));
+     // echo"<pre>";
+     // print_r($k);
+     // die('klklk');
+
+    $s = $booking->Appointment_timings;
+     // echo"<pre>";
+     // print_r($s);
+     // die('klklk');
+
+    $name = $booking->is_users->is_Profile->first_name;
+    // print_r($name);
+    // die('jkjkjkjkkj');
+    return view('doctor.userprofile' , compact('booking','k'));
+
+      
 }
+
 
 public function cancelbooking(Request $request,$id){
 
@@ -204,7 +189,10 @@ public function cancelbooking(Request $request,$id){
     // echo "<pre>";
     // print_r($var);
     // die('kjkjkjkj');
-
+    $a= $book->transaction;
+     echo "<pre>";
+    print_r($a);
+    die('kjkjkjkj');
  
     
     $book->save();
@@ -224,6 +212,14 @@ $userData = array();
         });
 
 
+
+
+        Mail::send('emails.DoctorRefundbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Refund');
+        });
+
+
  
  return redirect()->route('Doctor.booking');
 
@@ -234,135 +230,110 @@ $userData = array();
   return view('doctor.changepassword');
  }
 
-
-// public function resetpassword(Request $request){
-
-//      $oldpsw = $request['oldpassword'];
-//      // echo "<pre>";
-//      // print_r($oldpsw);
-//      // die('klklk');
-//      $newpsw = bcrypt($request['newpassword']);
-//      $conpsw = bcrypt($request['conformpassword']);
-
-//       //$psw = Auth::attempt(['password'=> $oldpsw]);
-//       // echo Auth::User()->password;
-//       //   echo $oldpsw;
-//       //   die('Ice Cream');
-
-// $validation = Validator::make(Auth::User()->all(), [
-
-//     // Here's how our new validation rule is used.
-//     'password' => 'hash:' . Auth::User()->password,
-//     'newpassword' => 'required|different:password|confirmed'
-//   ]);
-
-
 //change password
     /*To Change Password of the current logged in  user*/
     public function resetpassword(Request $request){
- 
-        if(Auth::Check())
-  {
-    $request_data = $request->All();
-    $validator = $this->admin_credential_rules($request_data);
-    if($validator->fails())
-    {
-        return redirect()->route('password.reset')->with('success','Password Does not match');
+
+if (Auth::check()) {
+                $request_data = $request->All();
+                $old_pwd = $request_data['old_password'];
+                $new_pwd = $request_data['new_password'];
+                $confirm_pwd = $request_data['password_confirmation'];
+                $current_password = Auth::User()->password;
+
+                if (Hash::check($old_pwd, $current_password)) {
+
+                    $user_id = Auth::User()->id;
+                    $obj_user = User::find($user_id);
+
+                    if ($new_pwd == $confirm_pwd) {
+
+                        $new_pwd = Hash::make($request_data['new_password']);
+                        $obj_user->password = $new_pwd;
+                        $obj_user->save();
+
+                     return redirect()->route('doctor.profile')->with('success','Password Changed');
+
+                    } else {
+
+                       return redirect()->route('password.reset')->with('success','Password Does not match');
+                    }
+
+                } else {
+                  return redirect()->route('password.reset')->with('success','Password Does not match');
+                }
+            }
+
+
+
+            
     }
-    else
-    {  
-      $current_password = Auth::User()->password;           
-      if(Hash::check($request_data['old_password'], $current_password))
-      {           
-        $user_id = Auth::User()->id;
-        // echo"<pre>";
-        // print_r($user_id);
-        // die('hjhjh');                    
-        $obj_user = User::find($user_id);
-        $obj_user->password = Hash::make($request_data['new_password']);;
-        $obj_user->save(); 
-        return redirect()->route('doctor.profile')->with('success','Password Changed');
-      }
-      else
-      {           
-        $error = array('old_password' => 'Please enter correct current password');
-        return redirect()->route('password.reset')->with('success','error');
-      }
-    }        
+ public function dashboard(){
+
+  $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
+
+  $count = Booking::where('doctor_id', '=' , Auth::User()->id)->count();
+
+  return view('doctor.dashboard.home' ,compact('count'));
+ }
+
+  public function manageschedule(){
+
+    $user = Auth::User();
+   
+    $userr = $user->is_Profile;
+
+    $u = $user->usersetting;
+     $a = $user->id;
+
+
+
+    // foreach($u as $key){
+    //   $a = $key->day;
+    //    echo"<pre>";
+    // print_r($a);
+    // die('mnmnmnmnmn');
+    // }
+   // die('jhhjh');
+
+
+       return view('doctor.doctor-manage-schedule' , compact('userr','a','u'));
   }
-  else
-  {
-    return redirect()->to('/');
-  }    
-       
-    }
+
+  public function editschedule(Request $request){
+     $user = Auth::User();
+
+     $a = $user->id;
+     // echo"<pre>";
+     // print_r($a);
+     // die('qwertyu');
+   
+
+     if($request['weekdays']!=NULL)
+        {
+            if(Usersetting::where('user_id' , '=',$request['user_id'] )->count()==0){
+                $schedule = new Usersetting;
+                $schedule->user_id=$request['user_id'];
+                $schedule->day=implode(",", $request['weekdays']);
+                $schedule->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
+                $schedule->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
+                $schedule->save();
+                return  redirect(route('manage.scedule' ,compact('user','a')));
+            }
+            else {
+
+                $val=Usersetting::where('user_id' , '=',$request['user_id'])->pluck('id');
+                $sch=Usersetting::find($val);
+                $sch->day=implode(",", $request['weekdays']);
+                $sch->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
+                $sch->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
+                $sch->save();
+                return  redirect(route('manage.scedule',compact('user','a')));
 
 
-    public function admin_credential_rules(array $data)
-{
-  $messages = [
-    'old_password.required' => 'Please enter current password',
-    'new_password.required' => 'Please enter password',
-  ];
+            }
+     }
 
-  $validator = Validator::make($data, [
-    'old_password' => 'required',
-    'new_password' => 'required|same:password',
-    'confirm_password' => 'required|same:password',     
-  ], $messages);
 
-  return $validator;
 }
-
-
-    
-
-//change password end
-
-//Notification of booking cancel
-
-
-
-// public function toMail($cancel){
-//    $url = url('/invoice/'.$this->cancel->id);
-
-//     return (new MailMessage)
-//                 ->greeting('Hello!')
-//                 ->line('Your Booking has been Canceled!')
-//                 ->action('View Reason', $url)
-//                 ->line('Thank you for using our application!');
-
-// }
-
-//End of Notification of booking cancel
-
-
-
-
-
-// if ($validation->fails()) {
-//     return redirect()->back()->withErrors($validation->errors());
-//   }
-
-//   $newpsw->password = Hash::make(Request::input('newpassword'));
-//   $newpsw->save();
-
-//   return redirect()->back()
-//     ->with('success-message', 'Your new password is now set!');
-//   }
-
-
-    // if (Hash::check($oldpsw, Auth::User()->password)){
-    //      echo "yes";
-    // }
-    // else{
-    //   echo "no";
-    // }
-      // if(Auth::User()->password == $oldpsw)
-      // {
-      //   echo "<pre>";
-      //   echo Auth::User()->password;
-      //   echo $oldpsw;
-      //   die('Ice Cream'); 
-      // }
 }

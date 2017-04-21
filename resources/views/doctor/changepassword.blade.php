@@ -1,7 +1,7 @@
 {{-- @extends('layouts.app') --}}
 @extends('layouts.doctorLayout')
 @section('content')
-<div class="container">
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -42,7 +42,7 @@
                             <label for="password" class="col-md-4 control-label">Conform Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="confirm_password" required>
+                                <input id="password" type="password" class="form-control" name="password_confirmation" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -71,5 +71,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

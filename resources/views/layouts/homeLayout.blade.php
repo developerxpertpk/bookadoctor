@@ -24,15 +24,15 @@
 </head>
 <body>
 
-@if(Auth::user()->role_id=1)
+@if(Auth::user()->role_id=2)
  @include('layouts.header')
  @endif
 
-@if(Auth::user()->role_id=2)
-    @include('layouts.header')
+@if(Auth::user()->role_id=3)
+    @include('layouts.doctor-header')
     @endif
 
-@if(Auth::user()->role_id=3)
+@if(Auth::user()->role_id=4)
     @include('layouts.medical-header')
     @endif
 

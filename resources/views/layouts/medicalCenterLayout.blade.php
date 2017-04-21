@@ -116,7 +116,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                     <li>
                         <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Show Doctor/Show Doctors</a>
                     </li>
-@endif
+                    @endif
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="profile-medical-center" class="collapse">

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Booking;
 use App\Doctor;
+use App\User;
 use App\Schedule;
 use App\BookingTransaction;
 use Illuminate\Support\Facades\Mail;
@@ -113,17 +114,16 @@ $userData = array();
         });
 
 
-
-
     $book->save();
  return redirect()->route('Doctor.booking');
-   
-
-    
+ 
 }
 public function patientHistory($id){
 
   $booking = Booking::find($id);
+  // echo"<pre>";
+  // print_r($booking);
+  // die('rtyui');
 
   $k = $booking->documents;
      
@@ -138,5 +138,49 @@ public function patientHistory($id){
 }
 
 
+public function history($id){
+
+  
+   $booking = Booking::find($id);
+
+ return view('doctor.patient-previous-history' , compact('booking'));
+  
 
 }
+
+public function bookinghistory(Request $request){
+        // $term = Input::get('term');
+        // print_r($term);
+        // DIE('A'); 
+  $a= Auth::User()->id;
+ 
+        $b = User::find($a);
+        $c=  $b->drbookings;
+  //                          echo"<pre>";
+  // print_r($c);
+  //       DIE('A');
+        foreach ($c as $key) {
+           // echo"<pre>";
+           $z = $key->is_users->is_profile->first_name;
+        
+         }
+        $term = $request['term'];
+        $data = DB::table('userprofiles')->where('first_name', 'LIKE', '%' . $term . '%')->select('first_name')->distinct()->get();
+
+                $return_array = [];
+                foreach ($data as $name_data){
+                    // $return_array['id'] = $name_data->first_name;
+                    // $return_array['label'] = $name_data->first_name;
+                    $return_array['value'] = $name_data->first_name;
+
+                }
+                //dd($name_data);
+                return response()->json($return_array);
+
+    }
+ 
+    // public function logout(){
+    //    return redirect('/');
+
+    // }
+  }

@@ -116,6 +116,7 @@
                                     <td style="width: 350px">
 
                                             <a class="btn btn-info" href="{{route('show.booking.detail',$booking->id)}}">Show Booking</a>
+                                        <a class="btn btn-info" href="{{route('show.booking.payment',$booking->id)}}">Show Payment</a>
                                         @if($booking->status != 2)
                                         <a class="btn btn-danger" href="" data-toggle="modal" data-target="#cancel_booking{{$booking->id}}">Cancel Booking</a>
                                            @endif
@@ -163,10 +164,6 @@
                                     </div>
 
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
     {{--cancel booking model end--}}
    {{--reschedule booking model start--}}
                                 <div id="reschedule_booking{{$booking->id}}" data-easein="whirlIn" class="modal fade" role="dialog">
@@ -201,9 +198,7 @@
 
 
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+
   {{--reschedule booking model end--}}
   {{--complete booking model start--}}
 
@@ -212,9 +207,10 @@
 
                         @endforeach
                       </table>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
 @endsection

@@ -189,6 +189,9 @@ public static function booking_amount_refund_email_msg_to_patient($refund_email)
   public function medicalcenterdoctor(){
        return $this->hasOne('App\medicalcenter_doctor','doctor_id');
    }
+    public function usersetting(){
+        return $this->hasMany('App\Usersetting','user_id');
+    }
 
 }
 

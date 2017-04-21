@@ -353,6 +353,11 @@ div#img {
 .lightbox-dialog{
     max-height: 100%;
 }
+
+.panel {
+    margin-bottom: 101px!important;
+
+}
 @media (min-width: 992px){
     .modal-lg {
         width: 80% !important;

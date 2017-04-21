@@ -39,8 +39,11 @@
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/ajax-function.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery.form.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.table2excel.js') }}" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
             type="text/javascript"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
 
     {{--&callback=initMap--}}
 
@@ -98,9 +101,9 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#services-speciality"><i class="fa fa-sliders" aria-hidden="true"></i> Manage Service/Speciality <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="services-speciality" class="collapse">
-                            <li>
-                                <a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="{{route('specility.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Speciality</a>
                             </li>
@@ -109,12 +112,14 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('doctor.add.doctor')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>
+                        <a href="{{route('doctor.add.doctor')}}"><i class="fa fa-user-md" aria-hidden="true"></i>
+                             Add Doctor</a>
 
                     </li>
                     @if(App\medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get()->count()>=1)
                     <li>
-                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Show Doctor/Show Doctors</a>
+                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                             Show Doctor/Show Doctors</a>
                     </li>
 @endif
                     <li>
@@ -149,11 +154,13 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         </ul>
                     </li>
 
+
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
+                        <a href="{{route('patient.booking.payment.history')}}"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                             Manage Booking Payments</a>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
+                        <a href="{{route('subscription.plans.details')}}"><i class="fa fa-fw fa-edit"></i> Subscription Plans Details</a>
                     </li>
 
 
@@ -190,5 +197,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
 </div>
 
 @include('layouts.footer')
+
+
 </body>
 </html>

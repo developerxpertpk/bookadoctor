@@ -16,12 +16,16 @@
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Contact Number</th>
+                                    <th>Weekly Schedule</th>
+                                    <th>Daily Time In</th>
+                                    <th>Daily Time Out</th>
+
                                     <th width="206px">Action</th>
                                 </tr>
                                 <?php $i=0;?>
                                 @foreach ($doctors as $key => $items)
                                     @foreach ($items as $key => $item)
-
+                                        <?php $days = App\Usersetting::where('user_id','=',$item->user_id)->get()?>
 
 
                                     <tr>
@@ -29,12 +33,34 @@
                                         <td>{{ $item->first_name }}</td>
                                         <td>{{ $item->last_name }}</td>
                                         <td>{{ $item->contact_no }}</td>
+                                        <td>@foreach($days as $day)
+                                                {{$day->day}}
+                                            @endforeach
+                                            </td>
+                                        <td>@foreach($days as $day)
+                                                {{$day->time_in}}
+                                            @endforeach
+                                        </td>
+                                        <td>@foreach($days as $day)
+                                                {{$day->time_out}}
+                                            @endforeach
+                                        </td>
+
                                         <td>
                                             @if(App\Doctor_Speciality::where('user_id','=',Auth::user()->id)->get()->count()>=1)
                                             <a class="btn btn-info" href="{{ route('add-doctor.show',$item->id) }}">Show</a>
                                             @endif
+                                                @if(App\Speciality::where('user_id','=',Auth::user()->id)->get()->count()>=1)
                                             <a class="btn btn-primary" href="" data-toggle="modal" data-target=".bs-assign-speciality{{$item->id }}">Assign speciality</a>
-                                            <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp{{$item->id }}">Add Doctor Schedule</a>
+                                              @endif
+
+                                                @if(App\Usersetting::where('user_id','=',$item->user_id)->get()->count()==0)
+                                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp{{$item->id }}">Add Doctor Schedule</a>
+                                                @endif
+                                                @if(App\Usersetting::where('user_id','=',$item->user_id)->get()->count()==1)
+                                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp{{$item->id }}">Update Doctor Schedule</a>
+                                                @endif
+
 
 
 
@@ -48,7 +74,7 @@
                                                         <div class="modal-body">
                                                             <form action="{{route('assign.specilaty.form.submit')}}" method="post">
                                                                 {{ csrf_field() }}
-                                                                <input type="hidden" value="{{$item->id}}" name="doc_id">
+                                                                <input type="hidden" value="{{$item->user_id}}" name="doc_id">
                                                                 <table>
                                                                     <tr><th>Specilaty</th></tr>
                                                                     @foreach($specilaty as $key => $doc_specilaty)
@@ -73,23 +99,23 @@
                                                             <h4 class="modal-title">Modal Header</h4>
                                                         </div>
                                                         {!! Form::open(['route' => 'doctor.schedule.create','method'=>'POST','files'=> true]) !!}
-                                                        <input type="hidden" name="user_id" value="{{$item->id }}">
+                                                        <input type="hidden" name="user_id" value="{{$item->user_id }}">
                                                         <div class="modal-body">
                                                             <p>Select Working Days </p>
                                                             <div class="">
-                                                                <input type="checkbox" id="weekday-mon" class="weekday" name="weekdays[]" value="mon"/>
+                                                                <input type="checkbox" id="weekday-mon" class="weekday" name="weekdays[]" value="Monday"/>
                                                                 <label for="weekday-mon">Monday</label>
-                                                                <input type="checkbox" id="weekday-tue" class="weekday" name="weekdays[]" value="tue"/>
+                                                                <input type="checkbox" id="weekday-tue" class="weekday" name="weekdays[]" value="Tuesday"/>
                                                                 <label for="weekday-tue">Tuesday</label>
-                                                                <input type="checkbox" id="weekday-wed" class="weekday" name="weekdays[]" value="wed"/>
+                                                                <input type="checkbox" id="weekday-wed" class="weekday" name="weekdays[]" value="Wednesday"/>
                                                                 <label for="weekday-wed">Wednesday</label>
-                                                                <input type="checkbox" id="weekday-thu" class="weekday" name="weekdays[]" value="thu"/>
+                                                                <input type="checkbox" id="weekday-thu" class="weekday" name="weekdays[]" value="Thursday"/>
                                                                 <label for="weekday-thu">Thursday</label>
-                                                                <input type="checkbox" id="weekday-fri" class="weekday" name="weekdays[]" value="fri"/>
+                                                                <input type="checkbox" id="weekday-fri" class="weekday" name="weekdays[]" value="Friday"/>
                                                                 <label for="weekday-fri">Friday</label>
-                                                                <input type="checkbox" id="weekday-sat" class="weekday" name="weekdays[]" value="sat"/>
+                                                                <input type="checkbox" id="weekday-sat" class="weekday" name="weekdays[]" value="Saturday"/>
                                                                 <label for="weekday-sat">Saturday</label>
-                                                                <input type="checkbox" id="weekday-sun" class="weekday" name="weekdays[]" value="sun"/>
+                                                                <input type="checkbox" id="weekday-sun" class="weekday" name="weekdays[]" value="Sunday"/>
                                                                 <label for="weekday-sun">Sunday</label>
                                                             </div>
 

@@ -36,26 +36,7 @@ class MedicalcenterBookingController extends Controller
             return view('medicalcenter.bookings.show-bookings',compact('bookings'));
     }
 
-    public function filter_booking(Request $request)
 
-    {
-//          print_r($request['from_date']);
-//          print_r($request['to_date']);
-//          die('xas');
-
-                if ($request['from_date'] <> '' && $request['to_date'] <> '') {
-//                    $start = date("yy-mm-dd", strtotime($request['from_date']));
-//                    $end = date("yy-mm-dd", strtotime($request['to_date'] . "+1 day"));
-//                    print_r($start);
-//                    print_r( $end);
-//                    die('xas');
-                    $bookings=Booking::whereBetween('Appointment_timings', [$request['from_date'], $request['to_date']]);
-                    echo "<pre>";
-                    print_r( $bookings);
-                  die('xas');
-                }
-        return view('medicalcenter.bookings.show-bookings',compact('bookings'));
-    }
 
     public function show_detail($id){
         $booking_detail=Booking::where('id','=',$id)->first();
@@ -77,9 +58,15 @@ class MedicalcenterBookingController extends Controller
 
 
        if($request['refund_amount']==1){
-           $book1 = BookingTransaction::find($id);
-           $book1->amount=0;
-           $book1->save();
+           $old_transaction = BookingTransaction::where('booking_id','=',$id)->first();
+           $new_refund_transaction= new BookingTransaction;
+
+           $new_refund_transaction->booking_id=$old_transaction->booking_id;
+           $new_refund_transaction->amount=$old_transaction->amount;
+           $new_refund_transaction->transaction_id=$myStr = str_random(16);
+           $new_refund_transaction->transaction_mode='VISA';
+           $new_refund_transaction->status=0;
+           $new_refund_transaction->save();
            $book2 = Booking::find($id);
            $refund_email=User::where('id','=',$book2->user_id)->first()->email;
            User::booking_amount_refund_email_msg_to_patient($refund_email);
@@ -95,6 +82,14 @@ class MedicalcenterBookingController extends Controller
         $book->save();
         User::booking_cancel_email_msg_to_patient($patient_email);
         User::booking_cancel_email_msg_to_doctor($doctor_email);
+
+
+            $notification = array(
+                'message' => 'Booking Cancel And Payment Refunded Successfulyss',
+                'alert-type' => 'success'
+            );
+        \Session::flash('notification',$notification);
+
         return $this->show_detail($id);
     }
     public function reschedule_booking(Request $request,$id){
@@ -107,6 +102,13 @@ class MedicalcenterBookingController extends Controller
         $book->save();
         User::booking_reschedule_email_msg_to_patient($patient_email);
         User::booking_reschedule_email_msg_to_doctor($doctor_email);
+        $notification = array(
+            'message' => 'Booking Rescheduled Successfuly.',
+            'alert-type' => 'success'
+        );
+        \Session::flash('notification',$notification);
+
+
         return $this->show_detail($id);
     }
     public function complete_booking($id){
@@ -121,6 +123,13 @@ class MedicalcenterBookingController extends Controller
       $book->save();
         User::booking_complete_email_msg_to_patient($patient_email);
         User::booking_complete_email_msg_to_doctor($doctor_email);
+
+        $notification = array(
+            'message' => 'Booking Complete Successfuly.',
+            'alert-type' => 'success'
+        );
+        \Session::flash('notification',$notification);
+
      return $this->show_detail($id);
     }
  public function show_booking_history(){
@@ -199,7 +208,63 @@ public function documents_upload_submit(Request $request)
         return $this->show_detail($del);
 
     }
+    public function show_payment_detail($id){
+        $booking_detail=Booking::where('id','=',$id)->first();
+        $paitent_detail= Userprofile::where('user_id','=',$booking_detail->user_id)->first();
 
+     $payment_deatils=BookingTransaction::where('booking_id','=',$id)->get();
+
+        foreach($payment_deatils as $key)
+        {
+
+            $key['doctor_name']=$key->booking->is_doctors->is_profile->first_name." ".$key->booking->is_doctors->is_profile->last_name;
+            $key['patient_name']=$key->booking->is_users->is_profile->first_name." ".$key->booking->is_users->is_profile->last_name;
+
+        }
+
+     return view('medicalcenter.bookings.show-booking-payment',compact('payment_deatils','paitent_detail'));
+    }
+
+    public function paitent_payment_update($id){
+        $payment_deatils_update =BookingTransaction::find($id);
+
+    }
+    public function show_payment_history(){
+        $bookings=Booking::where('medic_id','=',Auth::user()->id)->get();
+        foreach($bookings as $bookings_payment){
+
+
+            $a[]=$bookings_payment->id;
+
+        }
+        //print_r($a);
+        foreach ($a as $key=>$val){
+            $bookings_payments[]=  BookingTransaction::where('booking_id','=',$val)->get();
+
+        }
+//
+//echo "<pre>";
+//        print_r($bookings_payments);
+//        die('ddf');
+//        $bookings_payments=  BookingTransaction::with(['booking' => function ($query) {
+//            $query->where('medic_id', '=', Auth::user()->id);
+//        }])->get();
+    //echo "<pre>";
+            //print_r($bookings_payments);
+
+//    foreach($bookings_payments as $key)
+//    {
+//        $key['doctor_name']=$key->booking->is_doctors->is_profile->first_name." ".$key->booking->is_doctors->is_profile->last_name;
+//        $key['patient_name']=$key->booking->is_users->is_profile->first_name." ".$key->booking->is_users->is_profile->last_name;
+//    }
+
+
+
+
+
+       return view('medicalcenter.bookings.booking-payment-report',compact('bookings_payments'));
+
+    }
 
 }
 

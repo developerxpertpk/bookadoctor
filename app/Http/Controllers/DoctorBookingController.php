@@ -53,7 +53,7 @@ class DoctorBookingController extends Controller
     }
     public function viewpage()
     {   
-          
+         
         return view('admin.payment');
 
     }
@@ -65,6 +65,7 @@ class DoctorBookingController extends Controller
             $key['doctor_name']=$key->booking->is_doctors->is_profile->first_name." ".$key->booking->is_doctors->is_profile->last_name;
            $key['patient_name']=$key->booking->is_users->is_profile->first_name." ".$key->booking->is_users->is_profile->last_name;
            $key['medicalcenter_name']=$key->booking->is_medical->is_profile->title;
+           $key->created_at=$key->created_at->format('Y-m-d');
         }  
 
         return response()->json($transaction);

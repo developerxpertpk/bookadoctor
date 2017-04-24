@@ -30,8 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\Medicalcenter::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => 'User',
         'secret' => env('STRIPE_SECRET'),
     ],
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class speciality extends Model
 {
-  protected $table = 'speciality';
+  //protected $table = 'specialities';
 
      public function doctor_speciality()
     {

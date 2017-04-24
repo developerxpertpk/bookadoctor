@@ -73,27 +73,27 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
 // Route::get('/medical','AdminController@medicaledit')->name('medical.edit');
 // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
 });
-//medical center routes
-Route::prefix('medical')->group(function(){
-Route::get('/medical-center', 'Auth\MedicalCenterRegisterController@showMedicalRegistrationForm')->name('medical.center.regester');
-Route::post('/medical-center', 'Auth\MedicalCenterRegisterController@register')->name('medical.center.regester.submit');
-Route::get('/medical-center-subscription', 'MedicalCenterController@index')->name('medical.center.subscription.form');
-Route::post('/payment-sussess', 'MedicalCenterController@payment_success')->name('medical.center.payment');
-Route::get('/medical-center-info', 'MedicalCenterController@show_info_form')->name('medical.center.info.form');
-Route::post('/medical-center-info', 'MedicalCenterController@insert')->name('medical.center.info.submit');
-Route::get('/medical-center-contact-info', 'MedicalCenterController@show_contact_form')->name('medical.center.contact.info.form');
-Route::post('/medical-center-contact-info', 'MedicalCenterController@contact_insert')->name('medical.center.contact.info.submit');
-Route::get('/medical-center-profile','MedicalCenterController@getProfile')->name('medical.center.profile');
-Route::get('/medical-center-image-upload','MedicalCenterController@imageUpload')->name('medical.center.image.upload.form');
-Route::post('/medical-center-image-upload','MedicalcenterimageController@multiple_upload')->name('medical.center.image.upload.submit');
-Route::get('/medical-center-image-gallery','MedicalcenterimageController@gallery_images')->name('medical.center.image.gallery');
-Route::delete('/medical-center-image-delete/{id}','MedicalcenterimageController@destroy1')->name('image.destroy');
-Route::get('/medical-center-add-service','MedicalcenterServiceController@add_services')->name('service.show.form');
-Route::post('/medical-center-add-service','MedicalcenterServiceController@assign_service')->name('service.form.submit');
-Route::get('/medical-center-setting','MedicalcenterServiceController@show_setting_page')->name('medical.center.settings');
-Route::post('/medical-center-change-password','MedicalcenterServiceController@pwdchange')->name('medical.center.postpwd');
-Route::post('/doctor-working-hours-and-days','ScheduleController@doctor_schedule')->name('doctor.schedule.create');
-Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedule')->name('medical.schedule.create');
+            //medical center routes
+            Route::prefix('medical')->group(function(){
+                    Route::get('/medical-center', 'Auth\MedicalCenterRegisterController@showMedicalRegistrationForm')->name('medical.center.regester');
+                    Route::post('/medical-center', 'Auth\MedicalCenterRegisterController@register')->name('medical.center.regester.submit');
+                    Route::get('/medical-center-subscription', 'MedicalCenterController@index')->name('medical.center.subscription.form');
+                    Route::post('/payment-sussess', 'MedicalCenterController@payment_success')->name('medical.center.payment');
+                    Route::get('/medical-center-info', 'MedicalCenterController@show_info_form')->name('medical.center.info.form');
+                    Route::post('/medical-center-info', 'MedicalCenterController@insert')->name('medical.center.info.submit');
+                    Route::get('/medical-center-contact-info', 'MedicalCenterController@show_contact_form')->name('medical.center.contact.info.form');
+                    Route::post('/medical-center-contact-info', 'MedicalCenterController@contact_insert')->name('medical.center.contact.info.submit');
+                    Route::get('/medical-center-profile','MedicalCenterController@getProfile')->name('medical.center.profile');
+                    Route::get('/medical-center-image-upload','MedicalCenterController@imageUpload')->name('medical.center.image.upload.form');
+                    Route::post('/medical-center-image-upload','MedicalcenterimageController@multiple_upload')->name('medical.center.image.upload.submit');
+                    Route::get('/medical-center-image-gallery','MedicalcenterimageController@gallery_images')->name('medical.center.image.gallery');
+                    Route::delete('/medical-center-image-delete/{id}','MedicalcenterimageController@destroy1')->name('image.destroy');
+                    Route::get('/medical-center-add-service','MedicalcenterServiceController@add_services')->name('service.show.form');
+                    Route::post('/medical-center-add-service','MedicalcenterServiceController@assign_service')->name('service.form.submit');
+                    Route::get('/medical-center-setting','MedicalcenterServiceController@show_setting_page')->name('medical.center.settings');
+                    Route::post('/medical-center-change-password','MedicalcenterServiceController@pwdchange')->name('medical.center.postpwd');
+                    Route::post('/doctor-working-hours-and-days','ScheduleController@doctor_schedule')->name('doctor.schedule.create');
+                    Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedule')->name('medical.schedule.create');
 //
                     Route::get('/medical-center-add-specilaty','MedicalcenterServiceController@add_specilaty')->name('specility.show.form');
                     Route::post('/medical-center-add-specilaty','MedicalcenterServiceController@insert_specilaty')->name('specilaty.form.submit');
@@ -101,14 +101,31 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::get('/specility/{id}/edit','MedicalcenterServiceController@edit_specilaty_show')->name('specilaty.show.edit.form');
                     Route::post('/specility/{id}/edit','MedicalcenterServiceController@edit_specilaty_edit')->name('specilaty.edit.form.submit');
                     Route::delete('/specility/{id}','MedicalcenterServiceController@delete_specilaty')->name('specilaty.delete');
-//
-
-                  Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
+                    Route::get('/add-new-doctor', 'MedicalcenterServiceController@add_doctor')->name('doctor.add.doctor');
                     Route::resource('/add-doctor','MedicalcenterServiceController');
-
                     Route::get('/medical-dashboard', 'LoginController@showMedicalDashboard')->name('medical.center.dashboard')->middleware('auth');
+                    Route::get('/medicalcenter-plan-subscription-detail', 'MedicalCenterController@show_medical_subscription_detail')->name('subscription.plans.details');
             //Route::get('/add-doctor', 'AddController@add')->name('doctor.add');
-});
+
+            //    routes for booking under medical center
+                    Route::get('medical-center-doctor-booking','MedicalcenterBookingController@index')->name('medical.center.booking.show');
+                    Route::post('medical-center-doctor-booking-filter','MedicalcenterBookingController@filter_booking')->name('medical.center.booking.filter');
+                    Route::get('medical-center-doctor-booking-show/{id}','MedicalcenterBookingController@show_detail')->name('show.booking.detail');
+                    Route::post('medical-center-doctor-booking-cancel/{id}','MedicalcenterBookingController@cancel_booking')->name('medical.cancel.booking');
+                    Route::post('medical-center-doctor-booking-reschedule/{id}','MedicalcenterBookingController@reschedule_booking')->name('medical.reschedule.booking');
+                    Route::get('medical-center-doctor-booking-complete/{id}','MedicalcenterBookingController@complete_booking')->name('complete.booking.detail');
+                    Route::get('medical-center-doctor-booking-history','MedicalcenterBookingController@show_booking_history')->name('medical.center.patient.booking.history');
+                    Route::post('/patient-booking-history','MedicalcenterBookingController@show_booking_history_show');
+                    Route::get('patient-booking-documents/{id}','MedicalcenterBookingController@documents_upload_form')->name('patient.document.upload.form');
+                    Route::post('patient-booking-documents','MedicalcenterBookingController@documents_upload_submit')->name('patient.document.upload.submit');
+
+                    Route::get('medical-center-doctor-booking-payment-detail/{id}','MedicalcenterBookingController@show_payment_detail')->name('show.booking.payment');
+                    Route::get('medical-center-doctor-booking-payment-history','MedicalcenterBookingController@show_payment_history')->name('patient.booking.payment.history');
+
+                    Route::delete('booking-documents-delete/{id}-{del}','MedicalcenterBookingController@destroy1doc')->name('document.destroy');
+
+                    Route::post('patient-booking-payment-update/{id}/edit','MedicalcenterBookingController@paitent_payment_update')->name('patient.booking.payment.update');
+            });
             //patients Routes
 
                     Route::get('/patient', 'Auth\MedicalController@showPatientRegistrationForm')->name('patient.regester');
@@ -130,12 +147,14 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
             //        return view ( 'homenew' )->withMessage ( 'No Details found. Try to search again !' );
             //} );
                         //Doctors Module
-                    Route::get('/drregistration','DoctorController@index');
+                    Route::get('/drregistration','DoctorController@index')->name('doctor.register');
                     Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
                     //Route::get('/drregistration','DoctorController@speciality');
-                    Route::get('/dr_login','DoctorController@Showlogin');
+                   Route::get('/dr_login','DoctorController@Showlogin');
 
-                    Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                   Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                    Route::get('/dr-login','DoctorController@loginnew')->name('doctor.profile');
+
                     Route::get('/change_password','DoctorController@password')->name('password.reset');
                     Route::post('/changepassword','DoctorController@resetpassword')->name('change.password');
                     Route::get('/profile','DoctorController@profile');
@@ -145,25 +164,14 @@ Route::post('/medical-working-hours-and-days','ScheduleController@medical_schedu
                     Route::get('/bookings','DoctorController@viewBookings')->name('Doctor.booking');
                     Route::get('/bookings/{id}','DoctorController@bookingsProfile')->name('user.profile');
                     Route::post('/bookings/{id}','DoctorController@cancelbooking')->name('cancel.booking');
-                    Route::post('/bookings/{id}/ss','DoctorBookingController@completebooking')->name('booking.complete');
-
-                    //Route:get('/showInfo','DoctorController@ShowEdit');
-                   // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
-                    //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');
-                    //Route::get('/doctor.show-profile','DoctorController@update');
-                    //Doctors Module
-
-
-                    //Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
-                   //Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
-
-
-
-                     Route::get('/{page}','HomenewController@show')->name('dynamic');
-
-
-                    //Route::get('/dr_login','DoctorController@showInfo');
-                    //Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
-
-                    //booking
-                    //Route::get('/booking','BookingController@')
+                    Route::post('/bookings/{id}/reschedule','DoctorBookingController@reschedulebooking')->name('booking.reschedule');
+                    Route::post('/bookings/{id}/complete','DoctorBookingController@completebooking')->name('booking.complete');
+                 Route::get('/bookings/{id}/history','DoctorBookingController@history')->name('previous.history');
+                 Route::get('/bookings_H','DoctorBookingController@bookinghistory')->name('booking.history');
+                 Route::get('/dashboard','DoctorController@dashboard')->name('doctor.dashboard');
+             Route::get('/manageschedule','DoctorController@manageschedule')->name('manage.scedule');
+             Route::post('/manageschedule/edit','DoctorController@editschedule')->name('edit.schedule');
+                 
+                   // Route::get('/{page}','HomenewController@show')->name('dynamic');
+                //booking
+                    

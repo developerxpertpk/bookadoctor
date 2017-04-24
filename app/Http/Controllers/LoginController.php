@@ -21,6 +21,7 @@ class LoginController extends Controller
 
     //Attempt to log the user in
     if(Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password], $request->remember,'role_id','=','1')){
+        
 //If successfull, then redirect to there intended locale_get_display_region
 return redirect()->intended(route('admin.dashboard'));
     }

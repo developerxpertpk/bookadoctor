@@ -75,6 +75,9 @@ class MedicalCenterRegisterController extends Controller
                           ->with('success', 'New Admin Regester successfully');
 //                  }
               }
+          if($request['role']==2) {
+
+          }
 
 
           }

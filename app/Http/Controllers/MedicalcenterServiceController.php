@@ -286,19 +286,29 @@ public function show_setting_page(){
                         $new_pwd = Hash::make($request_data['password']);
                         $obj_user->password = $new_pwd;
                         $obj_user->save();
-
-                        return redirect()->route('medical.center.settings')
-                            ->with('success', 'Password changed successfully');
+                        $notification = array(
+                            'message' => 'Password changed successfully',
+                            'alert-type' => 'success'
+                        );
+                        \Session::flash('notification',$notification);
+                        return redirect()->route('medical.center.settings');
 
                     } else {
-
-                        return redirect()->route('medical.center.settings')
-                            ->withErrors('Your New Password and confirm password are not match');
+                        $notification = array(
+                            'message' => 'Your New Password and confirm password are not match',
+                            'alert-type' => 'warning'
+                        );
+                        \Session::flash('notification',$notification);
+                        return redirect()->route('medical.center.settings');
                     }
 
                 } else {
-                    return redirect()->route('medical.center.settings')
-                        ->withErrors('Your old password does not match');
+                    $notification = array(
+                        'message' => 'Your old password does not match.',
+                        'alert-type' => 'error'
+                    );
+                    \Session::flash('notification',$notification);
+                    return redirect()->route('medical.center.settings');
                 }
             }
         }

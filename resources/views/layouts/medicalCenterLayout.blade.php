@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_token" content="{{ csrf_token() }}">
 
     <title>Dr. Booking</title>
     <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
@@ -21,6 +22,11 @@
     <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
     {{--<link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
@@ -31,8 +37,13 @@
 
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/ajax-function.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.form.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.table2excel.js') }}" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
             type="text/javascript"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
 
     {{--&callback=initMap--}}
 
@@ -90,9 +101,9 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#services-speciality"><i class="fa fa-sliders" aria-hidden="true"></i> Manage Service/Speciality <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="services-speciality" class="collapse">
-                            <li>
-                                <a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{{route('service.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Service</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="{{route('specility.show.form')}}"><i class="fa fa-fw fa-edit"></i> Add Speciality</a>
                             </li>
@@ -101,14 +112,16 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('doctor.add.doctor')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Add Doctor</a>
+                        <a href="{{route('doctor.add.doctor')}}"><i class="fa fa-user-md" aria-hidden="true"></i>
+                             Add Doctor</a>
 
                     </li>
                     @if(App\medicalcenter_doctor::where('medicalcenter_id','=',Auth::user()->id)->get()->count()>=1)
                     <li>
-                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Show Doctor/Show Doctors</a>
+                        <a href="{{route('add-doctor.index')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                             Show Doctor/Show Doctors</a>
                     </li>
-@endif
+                    @endif
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="profile-medical-center" class="collapse">
@@ -127,25 +140,27 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-handshake-o" aria-hidden="true"></i> Manage Bookings<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li>
-                                <a href="#">List Of Booking</a>
+                                <a href="{{route('medical.center.booking.show')}}">List Of Booking</a>
                             </li>
                             <li>
-                                <a href="#">FAQ</a>
+                                <a href="{{route('medical.center.patient.booking.history')}}">Patients Booking History</a>
                             </li>
-                            <li>
-                                <a href="#">Privacy Policy</a>
-                            </li>
-                            <li>
-                                <a href="#">Social Network Links</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="#">Privacy Policy</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="#">Social Network Links</a>--}}
+                            {{--</li>--}}
                         </ul>
                     </li>
 
+
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Subscription Plans</a>
+                        <a href="{{route('patient.booking.payment.history')}}"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                             Manage Booking Payments</a>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Payments</a>
+                        <a href="{{route('subscription.plans.details')}}"><i class="fa fa-fw fa-edit"></i> Subscription Plans Details</a>
                     </li>
 
 
@@ -182,5 +197,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
 </div>
 
 @include('layouts.footer')
+
+
 </body>
 </html>

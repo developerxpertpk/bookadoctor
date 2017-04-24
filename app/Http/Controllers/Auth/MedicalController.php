@@ -19,5 +19,5 @@ use DB;                                            //Till here
 
 class MedicalController extends Controller
 {
-    
+
 }

@@ -142,19 +142,19 @@
                 <div class="modal-body">
                     <p>Select Working Days </p>
                     <div class="weekDays-selector">
-                        <input type="checkbox" id="weekday-mon" class="weekday" name="weekdays[]" value="mon"/>
+                        <input type="checkbox" id="weekday-mon" class="weekday" name="weekdays[]" value="Monday"/>
                         <label for="weekday-mon">Monday</label>
-                        <input type="checkbox" id="weekday-tue" class="weekday" name="weekdays[]" value="tue"/>
+                        <input type="checkbox" id="weekday-tue" class="weekday" name="weekdays[]" value="Tuesday"/>
                         <label for="weekday-tue">Tuesday</label>
-                        <input type="checkbox" id="weekday-wed" class="weekday" name="weekdays[]" value="wed"/>
+                        <input type="checkbox" id="weekday-wed" class="weekday" name="weekdays[]" value="Wednesday"/>
                         <label for="weekday-wed">Wednesday</label>
-                        <input type="checkbox" id="weekday-thu" class="weekday" name="weekdays[]" value="thu"/>
+                        <input type="checkbox" id="weekday-thu" class="weekday" name="weekdays[]" value="Thursday"/>
                         <label for="weekday-thu">Thursday</label>
-                        <input type="checkbox" id="weekday-fri" class="weekday" name="weekdays[]" value="fri"/>
+                        <input type="checkbox" id="weekday-fri" class="weekday" name="weekdays[]" value="Friday"/>
                         <label for="weekday-fri">Friday</label>
-                        <input type="checkbox" id="weekday-sat" class="weekday" name="weekdays[]" value="sat"/>
+                        <input type="checkbox" id="weekday-sat" class="weekday" name="weekdays[]" value="Saturday"/>
                         <label for="weekday-sat">Saturday</label>
-                        <input type="checkbox" id="weekday-sun" class="weekday" name="weekdays[]" value="sun"/>
+                        <input type="checkbox" id="weekday-sun" class="weekday" name="weekdays[]" value="Sunday"/>
                         <label for="weekday-sun">Sunday</label>
                     </div>
 
@@ -204,5 +204,24 @@
     </div>
 
     <!-- MODAL -->
+    <script>
+                @if(Session::has('notification'))
+        var type = "{{ Session::get('notification.alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('notification.message') }}");
+                break;
 
+            case 'warning':
+                toastr.warning("{{ Session::get('notification.message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('notification.message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('notification.message') }}");
+                break;
+        }
+        @endif
+    </script>
 @endsection

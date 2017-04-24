@@ -19,33 +19,18 @@
         <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
         <link rel="stylesheet" href="{{asset('css/lightbox.css')}}">
-        <script src="https://unpkg.com/vue-select@latest"></script>
+      <!--   <link rel="stylesheet" href="{{asset('css/jQuery UI - v1.12.1.css')}}">` -->
+        
+       <!--  <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
+       
+        <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
         <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/jquery-ui.js') }}"></script>
-        <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
-        <!-- <script src="{{ asset('js/location.js') }}" type="text/javascript"></script> -->
-        <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
-        <script src="{{asset('js/lightbox.js') }}"></script>
-        <script src ="{{asset('js/lightbox-plus-jquery.js') }}"></script>
+       <!--  
+       -->  <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
 
-        <!-- <script src="{{ asset('js/dropdown.js') }}" type="text/javascript"></script> -->
-        <!--   flot js include for admin dashboard
-        <script src="{{ asset('js/plugins/flot/excanvas.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/plugins/flot/flot-data.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/plugins/flot/jquery.flot.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/plugins/flot/jquery.flot.pie.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/flot/jquery.flot.resize.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/flot/jquery.flot.tooltip.min.js') }}" type="text/javascript"></script>
-        flot js include for admin dashboard  -->
-        <!-- <script src="{{ asset('js/plugins/morris/morris-data.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/morris/raphael.min.js') }}" type="text/javascript"></script> -->
-    </head>
+
+     </head>
     <body>
         @include('layouts.doctor-header')
         <div id="admin-wrapper">
@@ -59,48 +44,58 @@
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </span>
                         </button>
-                       
+                        
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="nav navbar-nav side-nav">
-                                <li class="active">
-                                    <a href="{{ route('Doctor.image') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                                </li>
-                                     <li>
-                                        <a href="{{ route('Doctor.booking') }}"><i class="fa fa-bars"></i>  Bookings</a>
-                                    </li>
-                                </ul>
 
-                            </div>
+                             <li>
+                                    <a href="{{ route('doctor.dashboard') }}"><i class="ffa fa-fw fa-dashboard"></i>  Dashboard</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="{{ route('Doctor.booking') }}"><i class="fa fa-sticky-note"></i>  Bookings</a>
+                                </li>
+                                <li>
+
+                                <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-gear"></i> Settings <i class="fa fa-fw fa-caret-down"></i></a>
+                             <ul id="profile-medical-center" class="collapse">
+
+                              <li>
+                                <a href="{{route('password.reset')}}"><i class="fa fa-fw fa-edit"></i> Change password</a>
+                            </li>
+                             <li>
+                                <a href="{{route('Doctor.image')}}"><i class="fa fa-fw fa-user"></i>Upload Profile Picture</a>
+                            </li>
+                             <li>
+                                <a href="{{route('manage.scedule')}}"><i class="fa fa-fw fa-user"></i>Manage Schedule</a>
+                            </li>
+                            </ul>
+
+                                <!--  <a href=""><i class="fa fa-fw fa-gear"></i> Settings </a> -->
+                                    
+                                 
+                                </li>
+                                
+                                <li>
+                                  <a href="{{ route('previous.history', Auth::User()->id) }}"><i class="fa fa-bars"></i> History of Patient's</a>
+                                </li>
+                               
+                            </ul>
                         </div>
                     </div>
-                    <div id="wrapper">
-                        <div id="bodder">
-                           
-                            @section('Annoy')
-                            <section class="container-fluid">
-                                <!-- Page Heading -->
-                                <section class="row">
-                                    <div class="medical-dashboard-header">
-                                        {{--<h1 class="page-header">--}}
-                                        {{--Dr. Booking --}}
-                                        {{--</h1>--}}
-                                        <section class="page-header">
-                                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="{{asset('images/profile_pic/Anony.png')}}"></div>
-                                            <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
-                                                
-                                            </span></div>
-                                        </section>
-                                    </div>
-                                </section>
-                            </section>
-                            @endsection
-                            @yield('content')
-                        </div>
-                    </div>
-                    <!-- /#page-wrapper -->
                 </div>
-                <!-- /#wrapper -->
+                <div id="wrapper">
+                    <div id="bodder">
+                        
+                       <div class="container-fluid">
+                        @yield('content')
+                        </div>
+                    </div>
+                </div>
+                <!-- /#page-wrapper -->
             </div>
-            @include('layouts.footer')
-        </body>
-    </html>
+            <!-- /#wrapper -->
+        </div>
+        @include('layouts.footer')
+    </body>
+</html>

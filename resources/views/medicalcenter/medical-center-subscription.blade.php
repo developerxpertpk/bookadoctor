@@ -30,12 +30,13 @@
                                     <input type="hidden" name="plan_status" value="1">
                                     <script
                                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                            data-key="pk_test_flOGeTYD3hDVIRwgbXXqwBNo"
+                                            data-key="<?php echo env('STRIPE_PUBLISHABLE_SECRET') ?>"
                                             data-amount="{{$plan_key->amount}}00"
                                             data-name="{{Auth::user()->is_Profile->first_name}} {{Auth::user()->is_Profile->last_name}}"
                                             data-description="Widget"
                                             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                             data-locale="auto">
+                                        Stripe.card.createToken($form, stripeResponseHandler);
                                     </script>
                                 </form>
 

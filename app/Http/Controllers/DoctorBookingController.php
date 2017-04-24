@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Booking;
 use App\Doctor;
+use App\User;
 use App\Schedule;
 use App\BookingTransaction;
+use Illuminate\Support\Facades\Mail;
 
 class DoctorBookingController extends Controller
 {
@@ -32,7 +34,19 @@ class DoctorBookingController extends Controller
 
         public function completebooking($id,Request $request){
 
-          $booking = Booking::find($id)->first();
+           $com =  $request['completes'];
+
+
+           // echo"<pre>";
+           // print_r($com);
+           // die('ghgh');
+
+           $book = Booking::find($id);
+           $book->status = $com;
+           $book->save();
+        
+           return redirect()->route('Doctor.booking');
+         
 
           $k = $request['complete'];
           // print_r($k);
@@ -69,5 +83,105 @@ class DoctorBookingController extends Controller
         }  
 
         return response()->json($transaction);
+
     }
+
+public function reschedulebooking(Request $request,$id){
+
+   // $booking = Booking::find($id)->first();
+
+    // echo "<pre>";
+    $r = $request['reschedules'];
+   
+
+    $reason = $request['reschedule'];
+    $book = Booking::find($id);
+    $book->reschedule_reason=$reason;
+    $book->status = $r;
+    $name = $book->is_users->is_Profile->first_name;
+    $email = $book->is_users->email;
+
+$userData = array();
+
+        $userData['name'] = $name;
+        $userData['email'] = $email;
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+
+        Mail::send('emails.DoctorReschedulebooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Reschedule');
+        });
+
+
+    $book->save();
+ return redirect()->route('Doctor.booking');
+ 
 }
+public function patientHistory($id){
+
+  $booking = Booking::find($id);
+  // echo"<pre>";
+  // print_r($booking);
+  // die('rtyui');
+
+  $k = $booking->documents;
+     
+     // foreach($k as $key){
+     //  print_r($key->documents);
+     //   die('kkkk');
+     // }
+     // die('ghghgh');
+
+  
+  return view('doctor.patient-previous-history',compact('booking' , 'k'));
+}
+
+
+public function history($id){
+
+  
+   $booking = Booking::find($id);
+
+ return view('doctor.patient-previous-history' , compact('booking'));
+  
+
+}
+
+public function bookinghistory(Request $request){
+        // $term = Input::get('term');
+        // print_r($term);
+        // DIE('A'); 
+  $a= Auth::User()->id;
+ 
+        $b = User::find($a);
+        $c=  $b->drbookings;
+  //                          echo"<pre>";
+  // print_r($c);
+  //       DIE('A');
+        foreach ($c as $key) {
+           // echo"<pre>";
+           $z = $key->is_users->is_profile->first_name;
+        
+         }
+        $term = $request['term'];
+        $data = DB::table('userprofiles')->where('first_name', 'LIKE', '%' . $term . '%')->select('first_name')->distinct()->get();
+
+                $return_array = [];
+                foreach ($data as $name_data){
+                    // $return_array['id'] = $name_data->first_name;
+                    // $return_array['label'] = $name_data->first_name;
+                    $return_array['value'] = $name_data->first_name;
+
+                }
+                //dd($name_data);
+                return response()->json($return_array);
+
+    }
+ 
+    // public function logout(){
+    //    return redirect('/');
+
+    // }
+  }

@@ -8,7 +8,6 @@
         </div>
     @endif
     </div>
-@section('content')
     <table class="table table-bordered" id="table">
         <thead>
             <tr>

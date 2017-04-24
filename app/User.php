@@ -195,11 +195,6 @@ public static function booking_amount_refund_email_msg_to_patient($refund_email)
     public function usersetting(){
         return $this->hasMany('App\Usersetting','user_id');
     }
-
-public function usersetting(){
-    return $this->hasMany('App\Usersetting','user_id');
-}
-
 }
 
 

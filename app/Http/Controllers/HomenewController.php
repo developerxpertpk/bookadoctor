@@ -11,7 +11,7 @@ class HomenewController extends Controller
   {
 
   	// $page = Page::where('status','Active')->get();
-      return view('homenew');   
+      return view('index');   
 
       // , compact('page')
   }

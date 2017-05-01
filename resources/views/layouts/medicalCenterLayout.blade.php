@@ -179,7 +179,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         {{--Dr. Booking --}}
                         {{--</h1>--}}
                         <section class="page-header">
-                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_Profile->images}}"></div>
+                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></div>
                             <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
                             <h1>{{Auth::user()->is_Profile->title}}</h1>
                         </span></div>

@@ -53,6 +53,7 @@ class LoginController extends Controller
         //print_r($_POST);
         $email=$_POST['email'];
         $password=$_POST['password'];
+        //dd($_POST);
         if (Auth::attempt(array('email' => $email, 'password' => $password)))
             {
                 if(Auth::user()->role_id == 2)

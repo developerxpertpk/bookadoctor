@@ -63,7 +63,6 @@ return $this->profile();
 public function loginnew(){
   $user = Auth::User();
   $userr = $user->is_Profile;
-
  
  return view('doctor.profile', compact('user','userr'));
 

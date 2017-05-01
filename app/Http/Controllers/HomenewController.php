@@ -10,7 +10,7 @@ class HomenewController extends Controller
   public function index()
   {
 
-  	// $page = Page::where('status','Active')->get();
+  	$page = Page::where('status','Active')->get();
       return view('index');   
 
       // , compact('page')

@@ -24,7 +24,7 @@ class CreateProfileTable extends Migration
             $table->string('address')->nullable();
             $table->string('country')->nullable();
             $table->string('state')->nullable();
-            $table->string('state')->nullable();
+            $table->string('gender')->nullable();
             $table->date('dob')->nullable();
             $table->string('city')->nullable();
             $table->string('medical_center_info')->nullable();

@@ -7,11 +7,15 @@ use App\Page;
 
 class HomenewController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('guest');
+    }
   public function index()
   {
 
   	$page = Page::where('status','Active')->get();
-      return view('index');   
+    return view('index');   
 
       // , compact('page')
   }

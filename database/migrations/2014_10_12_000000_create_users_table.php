@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('status')->comment("0=Not Active" , "1=Active");
+            $table->integer('status')->comment("0=Not Active , 1=Active");
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('role_id')->references('id')->on('roles');

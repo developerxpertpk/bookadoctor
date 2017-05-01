@@ -14,12 +14,7 @@ class RoleTableSeeder extends Seeder
         $role= new App\Role;
         $role->role="admin";
         $role->save();
-
-
-        $role1= new App\Role;
-        $role1->role="admin";
-        $role1->save();
-
+        
         $role2= new App\Role;
         $role2->role="user";
         $role2->save();

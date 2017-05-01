@@ -21,8 +21,7 @@ class usersettings extends Migration
             $table->time('time_out')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-        });
-        $table->foreign('user_id')->references('id')->on('users');
+            });
     }
 
     /**

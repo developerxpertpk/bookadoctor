@@ -35,11 +35,11 @@
                     </div>
                     <div class="col-xs-9 text-right">
                        <div class="huge">$ {{ App\plan::where('id','=',Auth::user()->is_Profile->plan_id)->first()->amount}}</div>
-                        <div>Subscription Type {{ App\plan::where('id','=',Auth::user()->is_Profile->plan_id)->first()->name}}</div>
+                        <div>Subscription {{ App\plan::where('id','=',Auth::user()->is_Profile->plan_id)->first()->name}}</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('subscription.plans.details')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -61,9 +61,11 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('medical.center.rescheduled.booking.show')}}">
                 <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
+                    <span class="pull-left">View Details
+                    
+                    </span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <div class="clearfix"></div>
                 </div>
@@ -83,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('medical.center.pending.booking.show')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -109,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('medical.center.canceled.booking.show')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -131,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('medical.center.completed.booking.show')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -153,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="{{route('medical.center.booking.show')}}">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -125,6 +125,12 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                     Route::delete('booking-documents-delete/{id}-{del}','MedicalcenterBookingController@destroy1doc')->name('document.destroy');
 
                     Route::post('patient-booking-payment-update/{id}/edit','MedicalcenterBookingController@paitent_payment_update')->name('patient.booking.payment.update');
+                    
+                    Route::get('medical-center-show-rescheduled-booking','MedicalcenterBookingController@show_rescheduled_booking')->name('medical.center.rescheduled.booking.show');
+                    Route::get('medical-center-show-pending-booking','MedicalcenterBookingController@show_pending_booking')->name('medical.center.pending.booking.show');
+                    Route::get('medical-center-show-canceled-booking','MedicalcenterBookingController@show_canceled_booking')->name('medical.center.canceled.booking.show');  
+                    Route::get('medical-center-show-completed-booking','MedicalcenterBookingController@show_completed_booking')->name('medical.center.completed.booking.show');
+                
             });
             //patients Routes
 

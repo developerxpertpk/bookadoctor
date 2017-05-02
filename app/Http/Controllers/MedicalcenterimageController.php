@@ -22,7 +22,8 @@ class MedicalcenterimageController extends Controller
                     // start count how many uploaded
                 $uploadcount = 0;
                 foreach($files as $file) {
-                $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+                $rules = array('file' => 'required',
+                               'required|mimes:png,jpeg'); 
                 $validator = Validator::make(array('file'=> $file), $rules);
                 if($validator->passes()){
                     $destinationPath = public_path().'/images/gallery_pic/' ;

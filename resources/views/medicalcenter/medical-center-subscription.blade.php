@@ -28,6 +28,7 @@
 
                                     <input type="hidden" name="new_plan_id" value="{{$plan_key->id}}">
                                     <input type="hidden" name="plan_status" value="1">
+                                    <input type="hidden" name="plan_amount" value="{{$plan_key->amount}}00">
                                     <script
                                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                             data-key="<?php echo env('STRIPE_PUBLISHABLE_SECRET') ?>"
@@ -36,8 +37,9 @@
                                             data-description="Widget"
                                             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                             data-locale="auto">
-                                        Stripe.card.createToken($form, stripeResponseHandler);
+//                                        Stripe.card.createToken($form, stripeResponseHandler);
                                     </script>
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </form>
 
                             </div>

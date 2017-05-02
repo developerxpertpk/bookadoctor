@@ -50,6 +50,12 @@ class MedicalcenterBookingController extends Controller
 //        echo "<pre>";
 //        print_r($paitent_detail);
 //
+
+
+
+
+
+        
 //        die('hsdd');
 
             return view('medicalcenter.bookings.show-booking-detail',compact('booking_detail','doctor_detail','paitent_detail','booling_docs'));

@@ -19,27 +19,7 @@
                 <li><a href="{{ route('register') }}"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
                 <li><a href=""><i class="fa fa-user-md" aria-hidden="true"></i> For Doctors</a></li>
                 <li><a href=""><i class="fa fa-medkit" aria-hidden="true"></i>Health Feed</a></li>
-            @else
-                {{-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </li> --}}
-
+            @elseif(Auth::User())
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->name }}  <b class="caret"></b></a>
                     <ul class="dropdown-menu custom-dropdown">
@@ -80,6 +60,3 @@
 
 </div>
 </header>
-<div class="mar-t-55">
-
-</div>

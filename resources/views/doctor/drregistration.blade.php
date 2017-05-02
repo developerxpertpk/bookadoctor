@@ -1,4 +1,3 @@
-
 @extends('layouts.doctorLayout')
 @section('content')
 <div class="container">
@@ -10,99 +9,52 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('Doctor.register.submit') }}">
                         {{ csrf_field() }}
                         <input id="role" type="hidden" class="form-control" name="role" value="2" required autofocus>
-                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">First Name</label>
-                            <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control" name="first_name" value="{{ old('first_name') }}" required autofocus>
-                                @if ($errors->has('first_name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('first_name') }}</strong>
-                                </span>
-                                @endif
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">Contact No. </label>
+                            <div class="col-10">
+                        <input class="form-control" type="text"  name="contactno" value="" id="example-text-input">
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Last Name</label>
-                            <div class="col-md-6">
-                                <input id="lastname" type="text" class="form-control" name="last_name" value="{{ old('username') }}" required autofocus>
-                                @if ($errors->has('last_name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
-                                </span>
-                                @endif
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">Address</label>
+                            <div class="col-10">
+                               <textarea class="form-control"  name="address" rows="5" id="comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">City</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text"  name="city" value="" id="example-text-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">State</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" name="state" value="" id="example-text-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">Pincode</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" name="pincode"  value="" id="example-text-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="example-text-input" class="col-2 col-form-label">Country</label>
+                             </div>
+                            <div class="col-8">
+                                <input class="form-control" type="text" name="country" value="" id="example-text-input">
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('speciality') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Specialization</label>
-                            <div class="col-md-6">
-                          <div class="dropdown">
-
-                          <input type="checkbox" name="speciality" value="gynecologist"> Gynecologist
-                          <input type="checkbox" name="speciality" value="dermtologist" > Dermatologist
-                          <input type="checkbox" name="speciality" value="sexologist">  Sexologist 
-                          <input type="checkbox" name="speciality" value="cardiologist" > Cardiologist
-                          <input type="checkbox" name="speciality" value="ayurveda"> Ayurveda
-                          <input type="checkbox" name="speciality" value="homeopathy" > Homeopathy
-                         
-                         <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button -->
-                          </button>
-                               
-                               
-                            </div>
-                        </div>
-                        </div>
                         
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                                @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-                                @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
-                            
-                            <div class="col-md-6">
-                                <input  type="hidden" class="form-control" name="role" value="2" required>
-                                @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                       
-                    <input id="role" type="hidden" class="form-control" name="role" value="2" required autofocus>
-                    <input id="medic" type="hidden" class="form-control" name="medic" value="1" required autofocus>
-
+                        <input id="role" type="hidden" class="form-control" name="role" value="3" required autofocus>
+                        <input id="medic" type="hidden" class="form-control" name="medic" value="4" required autofocus>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="edit_pro_btn">
-                                Register
+                               Done
                                 </button>
                             </div>
                         </div>

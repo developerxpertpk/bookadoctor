@@ -70,7 +70,7 @@
                                         </li>
                                     </ul>
                                 </li> --}}
-                                <li> <img id="profile_avatar" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_Profile->images}}"></li>
+                                <li> <img id="profile_avatar" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_Profile->first_name }}&nbsp;{{ Auth::user()->is_Profile->last_name }}  <b class="caret"></b></a>
                                     <ul class="dropdown-menu">

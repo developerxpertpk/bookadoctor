@@ -31,6 +31,7 @@
         <!-- App scripts -->
         <script src="{{ asset('js/tag-it.js') }}"></script>
         <script src="{{ asset('js/bootstrap-tagsinput.js') }}"></script>
+         <script src="{{ asset('js/jquery.table2excel.js') }}"></script>
         <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
         {{-- <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script> --}}
@@ -75,12 +76,6 @@
                                         <li>
                                             <a href="#">Schedule</a>
                                         </li>
-                                        <!--<li>
-                                            <a href="#">View</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">view</a>
-                                        </li>-->
                                     </ul>
                                 </li>
                                 <li>
@@ -92,31 +87,15 @@
                                 <li>
                                     <a href="{{ route('add.faq.show') }}" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-wrench"></i> Manage Content</a>
                                 </li>
-                                <!--<li>
-                                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                                    <ul id="demo" class="collapse">
-                                        <li>
-                                            <a href="#">Dropdown Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dropdown Item</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                                </li>-->
                             </ul>
                         </div>
-                        </div>
+                    </div>
                         <!-- /.navbar-collapse -->
                     {{-- </nav> --}}
                 </div>
             </div>
             <div id="wrapper">
+            <div id="page-wrapper">
                 <div id="bodder">
                     @yield('content')
                 </div>

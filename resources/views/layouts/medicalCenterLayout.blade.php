@@ -121,7 +121,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         <a href="{{route('add-doctor.index')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>
                              Show Doctor/Show Doctors</a>
                     </li>
-@endif
+                    @endif
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#profile-medical-center"><i class="fa fa-fw fa-medkit"></i> Medical Centers <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="profile-medical-center" class="collapse">
@@ -179,7 +179,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         {{--Dr. Booking --}}
                         {{--</h1>--}}
                         <section class="page-header">
-                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="http://www.drbooking.com/images/profile_pic/{{Auth::user()->is_Profile->images}}"></div>
+                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></div>
                             <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
                             <h1>{{Auth::user()->is_Profile->title}}</h1>
                         </span></div>

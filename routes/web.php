@@ -147,12 +147,14 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
             //        return view ( 'homenew' )->withMessage ( 'No Details found. Try to search again !' );
             //} );
                         //Doctors Module
-                    Route::get('/drregistration','DoctorController@index');
+                    Route::get('/drregistration','DoctorController@index')->name('doctor.register');
                     Route::post('/drregistration','DoctorController@insert')->name('Doctor.register.submit');
                     //Route::get('/drregistration','DoctorController@speciality');
-                    Route::get('/dr_login','DoctorController@Showlogin');
+                   Route::get('/dr_login','DoctorController@Showlogin');
 
-                    Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                   Route::post('/dr_login','DoctorController@login')->name('Doctor.login.submit');
+                    Route::get('/dr-login','DoctorController@loginnew')->name('doctor.profile');
+
                     Route::get('/change_password','DoctorController@password')->name('password.reset');
                     Route::post('/changepassword','DoctorController@resetpassword')->name('change.password');
                     Route::get('/profile','DoctorController@profile');
@@ -162,25 +164,14 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                     Route::get('/bookings','DoctorController@viewBookings')->name('Doctor.booking');
                     Route::get('/bookings/{id}','DoctorController@bookingsProfile')->name('user.profile');
                     Route::post('/bookings/{id}','DoctorController@cancelbooking')->name('cancel.booking');
-                    Route::post('/bookings/{id}/ss','DoctorBookingController@completebooking')->name('booking.complete');
-
-                    //Route:get('/showInfo','DoctorController@ShowEdit');
-                   // Route::post('/show-edit-info','DoctorController@edit')->name('Doctor.show.edit');
-                    //Route::get('/show-profile','DoctorController@update')->name('Doctor.show.list');
-                    //Route::get('/doctor.show-profile','DoctorController@update');
-                    //Doctors Module
-
-
-                    //Route::post('/dr_login','LoginController@login')->name('Doctor.login.submit');
-                   //Route::get('/dr_login','DoctorController@show_doctor_dashboard')->name('doctor.dashboard');
-
-
-
-                     Route::get('/{page}','HomenewController@show')->name('dynamic');
-
-
-                    //Route::get('/dr_login','DoctorController@showInfo');
-                    //Route::post('/dr_login','DoctorController@showInfo')->name('doctor.register.submit');
-
-                    //booking
-                    //Route::get('/booking','BookingController@')
+                    Route::post('/bookings/{id}/reschedule','DoctorBookingController@reschedulebooking')->name('booking.reschedule');
+                    Route::post('/bookings/{id}/complete','DoctorBookingController@completebooking')->name('booking.complete');
+                 Route::get('/bookings/{id}/history','DoctorBookingController@history')->name('previous.history');
+                 Route::get('/bookings_H','DoctorBookingController@bookinghistory')->name('booking.history');
+                 Route::get('/dashboard','DoctorController@dashboard')->name('doctor.dashboard');
+             Route::get('/manageschedule','DoctorController@manageschedule')->name('manage.scedule');
+             Route::post('/manageschedule/edit','DoctorController@editschedule')->name('edit.schedule');
+                 
+                   // Route::get('/{page}','HomenewController@show')->name('dynamic');
+                //booking
+                    

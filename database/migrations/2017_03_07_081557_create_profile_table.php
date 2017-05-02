@@ -16,7 +16,7 @@ class CreateProfileTable extends Migration
         Schema::create('userprofiles', function (Blueprint $table) {
 
 
-    $table->increments('id');
+            $table->increments('id');
             $table->integer('user_id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
@@ -24,6 +24,8 @@ class CreateProfileTable extends Migration
             $table->string('address')->nullable();
             $table->string('country')->nullable();
             $table->string('state')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('dob')->nullable();
             $table->string('city')->nullable();
             $table->string('medical_center_info')->nullable();
             $table->string('title')->nullable();
@@ -36,7 +38,7 @@ class CreateProfileTable extends Migration
            
             $table->text('sub_domain')->nullable();
             $table->integer('plan_id')->nullable();
-            $table->integer('plan_payment_status')->default(0)->comment("0=pending","1=complete");
+            $table->integer('plan_payment_status')->default(0)->comment("0=pending , 1=complete");
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('plan_id')->references('id')->on('plans');         

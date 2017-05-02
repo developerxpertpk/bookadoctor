@@ -53,6 +53,7 @@ class LoginController extends Controller
         //print_r($_POST);
         $email=$_POST['email'];
         $password=$_POST['password'];
+        //dd($_POST);
         if (Auth::attempt(array('email' => $email, 'password' => $password)))
             {
                 if(Auth::user()->role_id == 2)
@@ -61,7 +62,9 @@ class LoginController extends Controller
                 }
                 if(Auth::user()->role_id == 3)
                 {
-                    return redirect(route('doctor.dashboard'));
+
+                   
+                    return redirect(route('doctor.profile'));
                 }
                 if(Auth::user()->role_id == 4)
                 {
@@ -77,4 +80,5 @@ class LoginController extends Controller
                 }
             }
     }
+
 }

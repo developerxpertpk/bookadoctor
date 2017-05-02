@@ -1,29 +1,34 @@
 @extends('layouts.doctorLayout')
 @section('content')
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading"> User's Profile
-					{!! csrf_field() !!}
-					<div class="panel-body">
-						<div class="col-md-8">
-							{!! Form::open()!!}
-							
-							<p><b>User's Profile</b></p>
-							<div class="form-group">
+<div class="row">
+	<div class="user-profile">
+		<div class="panel panel-default">
+			<div class="panel-heading"> User's Profile
+				{!! csrf_field() !!}
+				<div class="panel-body">
+					<div class="profile-section">
+						@if($booking->payment_status == 1)
+						<div class="col-md-4">
+							<div class="profile-col-1">
+								<img class="profilepic" src="/images/profile_pic/{{ $booking->is_users->is_Profile->images}}">
+								<p>Booking Id : {{$booking->id}} </p>
+								<p>Appointment Date : {{date('F d, Y', strtotime($booking->Appointment_timings)) }}</p>
+								<p>Appointment Time : {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $booking->Appointment_timings)->format('H:i:s')}}</p>
+								<p>Name : {{$booking->is_users->is_Profile->first_name}}  {{$booking->is_users-> is_Profile->last_name}} </p>
+								<p>Diseases : {{$booking->reason}}</p>
+								<p>Contact No. : {{$booking->is_users->is_Profile->contact_no}}</p>
+								<p>Address : {{$booking->is_users->is_Profile->address}}</p>
+								<p>City : {{$booking->is_users->is_Profile->city}}</p>
+								<p>State : {{$booking->is_users->is_Profile->state}}</p>
+								<p>Zip Code : {{$booking->is_users->is_Profile->pincode}}</p>
 								
-								@if($booking->payment_status == 1)
-								<p>{!! Form::label('Booking Id') !!}
-									{{$booking->id}}
-								</p>
-								<p>{!! Form::label('Appointment Date & Time') !!}
-									{{$booking->Appoitment_timings}}
-								</p>
-								<p>{!! Form::label('Issue') !!}
-									{{$booking->reason}}
-								</p>
-								<p>{!! Form::label('Status') !!}
+							</div>
+
+							<br />
+						</div>
+						<div class="col-md-4">
+							<div class="profile-col-2">
+								<p>Status :
 									@if($booking->status == 0)
 									{{ 'Pending '}}
 									@endif
@@ -39,137 +44,157 @@
 									@endif
 								</p>
 								
-								<p>{!! Form::label('Name') !!}
-									{{$booking->is_users->is_Profile->first_name}}  {{$booking->is_users->is_Profile->last_name}}
-								</p>
-								<p>{!! Form::label('Contact Number') !!}
-									{{$booking->is_users->is_Profile->contact_no}}
-								</p>
-								<p>{!! Form::label('Address') !!}
-									{{$booking->is_users->is_Profile->address}}
-								</p>
-								<p>{!! Form::label('State') !!}
-									{{$booking->is_users->is_Profile->state}}
-								</p>
-								<p>{!! Form::label('City') !!}
-									{{$booking->is_users->is_Profile->city}}
-								</p>
-								<p>{!! Form::label('Country') !!}
-									{{$booking->is_users->is_Profile->country}}
-								</p>
-								<p>{!! Form::label('Zip Code') !!}
-									{{$booking->is_users->is_Profile->pincode}}
-								</p>
 								@endif
-								<p class="documents">{!! Form::label('Documents') !!}
-
-											@foreach($k as $key)									
-
-									<a href="{{asset('/images/documents/'.$key->documents)}}" data-lightbox="{{asset('/images/documents/'.$key->documents)}}">
-									<embed src="{{asset('/images/documents/'.$key->documents)}}" width="30" height="30"  ></embed></a>
+								<p class="documents">Documents :
+									@foreach($k as $key)
+									<div class="col-md-6">
+										<a href="{{asset('/images/documents/'.$key->documents) }}" data-lightbox=" {{asset('/images/documents/'.$key->documents) }}" >
+											<img src="{{asset('/images/documents/'.$key->documents) }}" class="embed">
+										</a>
+									</div>
 									@endforeach
 								</p>
 								
 							</div>
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#myModal">
-									Cancel
-									</button>
-									<!-- Cancel Modal -->
-
-									
+						</div>
+						<div class="col-md-4">
+							<div class="profile-col-3">
+								<!-- Complete Booking -->
+								<div class="complete">
+									<div col-md-12>
+										{!! Form::open(['route' => ['booking.complete', $booking->id]] ) !!}
+										{!! csrf_field() !!}
+										<input type="hidden" value="1" name="completes">
+										<input type="submit" class="edit_pro_btn"  name="complete" value="Complete">
+									</div>
+								</div>
+								
+								
+								<div col-md-12>
+									<div class="reschedule">
+										<button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#reschedule">
+										Reschedule
+										</button>
+										<!-- Reschedule Modal -->
+										<div class="modal fade" id="reschedule" role="dialog">
+											<div class="modal-dialog">
+												
+												<!-- Modal content-->
+												<div class="modal-content">
+													{!! Form::open(['route' => ['booking.reschedule', $booking->id]] ) !!}
+													<div class="modal-header">
+														
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">Reschedule Booking</h4>
+													</div>
+													<div class="modal-body">
+														<h4> Reason </h4>
+														<input type="hidden" value="3" name="reschedules">
+														<textarea class="form-control" placeholder="Message" name="reschedule">
+														</textarea>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+													<button type="submit" class="btn btn-default" id="sub">Submit</button>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+								{{Form::close()}}
+								
+								<!-- End Reschedule Modal -->
+								<div col-md-12>
+									<div class="cancel">
+										<button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#myModal">
+										Cancel
+										</button>
+										<!-- Cancel Modal -->
+										
 										<div class="modal fade" id="myModal" role="dialog">
 											<div class="modal-dialog">
 												
 												<!-- Modal content-->
-
 												<div class="modal-content">
-												{!! Form::open(['route' => ['cancel.booking', $booking->id]]) !!}
+													{!! Form::open(['route' => ['cancel.booking', $booking->id]]) !!}
+													{!! csrf_field() !!}
+													
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h4 class="modal-title">Cancel Booking</h4>
 													</div>
 													<div class="modal-body">
 														<h4> Reason </h4>
-														<textarea class="form-control" placeholder="Message" name="reason">
-                                      					</textarea>
-
+														<input type="hidden" value="2" name="cancels">
+														<textarea class="form-control" placeholder="Message" name="reasoncancel">
+														</textarea>
 													</div>
-
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
 														<button type="submit" class="btn btn-default" id="sub">Submit</button>
 													</div>
-
-													</div>
-												
-											</div>
-										</div>
-										{{Form::close()}}
-										<!--  End Cancel Modal -->
-										<button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#reschedule">
-										Reschedule
-										</button>
-										<!-- Reschedule Modal -->
-											<div class="modal fade" id="reschedule" role="dialog">
-											<div class="modal-dialog">
-												
-												<!-- Modal content-->
-
-												<div class="modal-content">
-												{!! Form::open(['route' => ['cancel.booking', $booking->id]] ) !!}
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title">Reschedule Booking</h4>
-													</div>
-													<div class="modal-body">
-														<h4> Reason </h4>
-														<textarea class="form-control" placeholder="Message" name="reschedule">
-                                      					</textarea>
-
-													</div>
-													</div>
-
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-														<button type="submit" class="btn btn-default" id="sub">Submit</button>
-													</div>
-
 												</div>
-												
 											</div>
 										</div>
-										{{Form::close()}}
-
-										<!-- End Reschedule Modal -->
-										<div class="complete">
-										{!! Form::open(['route' => ['booking.complete', $booking->id]] ) !!}
-										<input type="submit" class="edit_pro_btn"  name="complete" value="Complete">
-										
-										
-										</div>
-										{!! Form::close() !!}
-
 									</div>
-									
-									
+									{{Form::close()}}
 								</div>
-								
-								
-								<!-- Style -->
-								<style>
-								.documents img{
-									width:30px;
-									height:30px;
-								}
-								</style>
-								<!-- EndStyle -->
 							</div>
+							<!-- Style -->
+							<style>
+							.profile-col-3{
+								margin-top:20px;
+							}
+							.reschedule{
+								padding-top:10px;
+							}
+							.cancel{
+								padding-top:10px;
+							}
+							.embed{
+								float: left;
+								width: 125px;
+								height: 125px;
+								border: 1px solid #ff0000;
+								padding: 4px;
+								border-radius: 2px;
+							}
+							.embed:hover{
+								border: 1px solid GREEN;
+							}
+							
+							.profile-col-1{
+								float:left;
+								width:100%;
+							}
+							.profile-col-1 img{
+								width:200px;
+								height:200px;
+								float:left;
+							}
+							.profile-col-1 p{
+								float: left;
+								width: 100%;
+							}
+							</style>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- Script -->
+			<script>
+			$(document).ready(function(){
+			$('a.embed').gdocsViewer();
+			});
+			</script>
+			<script src="{{ asset('js/lightbox-plus-jquery.js') }}"></script>
+			<!-- End Script -->
 		</div>
 	</div>
-	@endsection
+</div>
+</div>
+</div>
+</div>
+@endsection

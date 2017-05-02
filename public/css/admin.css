@@ -7,7 +7,7 @@
 
 body {
     margin-top: 100px;
-    background-color: #222;
+    background-color: #ffffff!important;;
 }
 
 @media(max-width:768px) {
@@ -265,6 +265,7 @@ ul.alert-dropdown {
     float: left;
     padding: 0 10px 147px;
     width: 100%;
+    height:700px;
 }
 #wrapper > #bodder {
     background: #fff none repeat scroll 0 0;
@@ -299,4 +300,16 @@ ul.alert-dropdown {
 }
 .mediccontent strong{
     padding-right: 20px;
+}
+.row{
+    margin: 0px;
+    padding: 0px;
+    width:100%;
+}
+#header{
+    margin:0px;
+    padding:0px;
+}
+#admin-content{
+    background-color: #ffffff;
 }

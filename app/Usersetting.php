@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usersetting extends Model
 {
-public function userrs(){
-    return $this->belongsTo('App/User','user_id');
-}
+
+ 	 protected $table = 'usersettings';
+
+
+    public function userrs(){
+    	return $this->belongsTo('App/User','user_id');
+    }
+
 }

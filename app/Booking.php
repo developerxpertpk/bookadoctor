@@ -31,7 +31,5 @@ class Booking extends Model
    		return $this->hasMany('App\BookingTransaction','booking_id');
    }
 
-
-
 }
  

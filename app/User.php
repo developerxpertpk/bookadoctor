@@ -81,6 +81,9 @@ class User extends Authenticatable
     public function bookings(){
         return $this->hasMany('App\Booking', 'user_id');
     }
+    public function drbookings(){
+        return $this->hasMany('App\Booking', 'doctor_id');
+    }
 
 
     public function schedule()
@@ -192,7 +195,6 @@ public static function booking_amount_refund_email_msg_to_patient($refund_email)
     public function usersetting(){
         return $this->hasMany('App\Usersetting','user_id');
     }
-
 }
 
 

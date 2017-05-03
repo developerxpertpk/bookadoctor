@@ -7,7 +7,139 @@
 <link href="{{asset('css/app.css')}}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
 <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="{{asset('js/app.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://maps.google.com/maps/api/js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<style type="text/css" media="screen">
+        ul.ui-autocomplete {
+    z-index: 1100;
+}
+        #instructions{
+          display:none;
+        }
+                #mymap {
+            border:2px solid black;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }	
+</style>
+
+<script>
+	
+	$( function() { 
+    $( "#city" ).autocomplete({
+      source: "{{URL::route('city')}}",
+      minLength: 1,
+      select: function( event, ui ) {
+        $("#city").val(ui.item.value);
+      }
+    });
+    $( "#state" ).autocomplete({
+     source: "{{URL::route('state')}}",
+     minLength: 1,
+     select: function( event, ui ) {
+        $("#state").val(ui.item.value);
+     }
+    });
+
+    $( "#country" ).autocomplete({
+     source: "{{URL::route('country')}}",
+     minLength: 1,
+     select: function( event, ui ) {
+        $("#country").val(ui.item.value);
+      }
+    });
+
+    var locations = <?php print_r(json_encode($locations)) ?>;
+    var geocoder =new google.maps.Geocoder();
+    var mymap = new GMaps({
+      el: '#mymap',
+      lat: 21.170240,
+      lng: 72.831061,
+      zoom:4,
+    });// Gmaps end
+    console.log(locations);
+     $.each( locations, function( index, value ){
+        var geocoder = new google.maps.Geocoder();
+        var address = value.address+','+value.city+','+value.state+','+value.country;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            var longitude = results[0].geometry.location.lng();
+        mymap.addMarker({
+          lat: latitude,
+          lng: longitude,
+          title: value.city,
+          infoWindow: {
+                content: '<p><b><img src="{{asset('images/medic.png' )}}">'+value.title+'</b><br>'+value.address+'</p><p>'+value.city+','+value.state+','+value.country+'</p>'
+                        },
+          mouseover: function(e){
+                this.infoWindow.open(this.map, this);
+            },
+         /* mouseout: function(e){
+                this.infoWindow.close(this.map, this);
+            },*/
+             mouseout: function(e){
+                 this.infoWindow.close(this.map, this);
+             }
+        });//add marker ends ends
+    }});
+      });
+    $( "#citybar" ).autocomplete({
+         source: "{{URL::route('city')}}",
+         minLength: 1,
+         select: function( event, ui ) {
+             document.getElementById("services").value ="";
+             var geocoder = new google.maps.Geocoder();
+             var address = ui.item.value;//value=City Name
+             geocoder.geocode({ 'address': address }, function (results, status) {
+         if (status == google.maps.GeocoderStatus.OK) {
+             var latitude = results[0].geometry.location.lat();
+             var longitude = results[0].geometry.location.lng();
+             //alert(latitude);
+             var mymap = new GMaps({
+             el: '#mymap',
+             lat: latitude,
+            lng: longitude,
+             zoom:13,
+     });
+             $.each( locations, function( index, value ){
+         var geocoder = new google.maps.Geocoder();
+         var address = value.address+','+value.city+','+value.state+','+value.country;
+         geocoder.geocode({ 'address': address }, function (results, status) {
+         if (status == google.maps.GeocoderStatus.OK) {
+             var latitude = results[0].geometry.location.lat();
+             var longitude = results[0].geometry.location.lng();
+         mymap.addMarker({
+           lat: latitude,
+           lng: longitude,
+           title: value.city,
+           click: function(e) {
+             alert('This is '+value.address+','+value.city+','+value.state+' from India.');
+           },
+           infoWindow: {
+                 content: '<p><b><img src="{{asset('images/medic.png' )}}">'+value.address+'</b></p><p>'+value.city+','+value.state+','+value.country+'</p>'
+                         },
+          mouseover: function(e){
+                 this.infoWindow.open(this.map, this);
+             },
+             mouseout: function(e){
+                 this.infoWindow.close(this.map, this);
+             }
+         });
+     }});
+        });
+        }});
+            //console.log(ui.item.value);
+         //$('#birds').val(ui.item.value);
+       }
+  });//city ends
+  });
+</script>
 </head>
 <body>
 
@@ -114,11 +246,11 @@
 <section class="search text-center">         
 <div class="container">
  <div class="col-xs-12 col-sm-5">
-    <input type="text" class="form-control input-lg" placeholder="Enter City">
+    <input type="text" class="form-control input-lg" placeholder="Enter City" id="citybar">
   </div>
   
   <div class="col-xs-12 col-sm-5 spl">
-    <input type="text" class="form-control input-lg" placeholder="Specialists Doctors,Clinics">
+    <input type="text" class="form-control input-lg" placeholder="Specialists Doctors,Clinics" id="services">
   </div>
 
 	
@@ -131,7 +263,8 @@
 		 
 		 <!--Map-->
 		 <section> <div class="container control_map">
-		 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3431.3224802446844!2d76.72586331460944!3d30.6812015951665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390f92d9039a87ad%3A0x725444a58a7f1c82!2sTalentelgia+Technologies+PVT+LTD!5e0!3m2!1sen!2sin!4v1493199520534" width="100%" height="450px" frameborder="0" style="border:0" allowfullscreen></iframe>
+		 <div id="mymap"></div>
+  			<ul id="instructions2"></ul>
 		 </div></section>
 		 
 		<!--healthcare portion-->
@@ -212,7 +345,7 @@ Dentist</a></li>
     <li>siddha</li>
                                                
                                                                                                                            
-     <li>Yoga$Naturopatny</li>
+     <li>Yoga&Naturopatny</li>
                                                 
                                                                                                                            
      <li>Homeopath</li>
@@ -467,39 +600,17 @@ Twitter</a></i></li>
           <div class="col-sm-3"> 
           <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
           <div class="dropdown1">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Country
-          <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">India</a></li>
-          <li><a href="#">Canada</a></li>
-            </ul>
+			Country:<input id="country" class="form-control">
           </div>
             </div>
           <div class="col-sm-3"> 
           <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
         <div class="dropdown1">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          State
-          <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Punjab</a></li>
-          <li><a href="#">Haryana</a></li>
-          <li><a href="#"></a></li>
-          </ul>
+          State:<input id="state" class="form-control">
           </div></div>  
-          <div class="col-sm-4"> 
+          <div class="col-sm-3"> 
           <div class="dropdown1">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            City
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Mohali</a></li>
-            <li><a href="#">Chandigarh</a></li>    
-            </ul>
+           City:<input id="city" class="form-control">
           </div>
           </div>
           </div>

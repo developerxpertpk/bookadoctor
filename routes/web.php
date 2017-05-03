@@ -174,4 +174,7 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                  
                    // Route::get('/{page}','HomenewController@show')->name('dynamic');
                 //booking
+             Route::get('/city','HomenewController@city')->name('city');
+             Route::get('/state','HomenewController@state')->name('state');
+             Route::get('/country','HomenewController@country')->name('country');
                     

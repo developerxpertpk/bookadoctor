@@ -358,6 +358,10 @@ div#img {
     margin-bottom: 101px!important;
 
 }
+
+.plan-subscription-detail .plan-features {
+    width: auto;
+}
 @media (min-width: 992px){
     .modal-lg {
         width: 80% !important;

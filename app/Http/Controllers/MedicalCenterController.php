@@ -90,6 +90,25 @@ class MedicalCenterController extends Controller
             }
             public  function payment_success(Request $request){
 
+// Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+\Stripe\Stripe::setApiKey("sk_test_LtT2bKstSjmAaPEF8Nupd7s");
+
+// Token is created using Stripe.js or Checkout!
+// Get the payment token submitted by the form:
+$token = $_POST['stripeToken'];
+
+// Charge the user's card:
+//print_r($request['plan_amount']);
+//die();
+$charge = \Stripe\Charge::create(array(
+  "amount" => $request['plan_amount'],
+  "currency" => "usd",
+  "description" => "Example charge",
+  "source" => $token,
+));
+
+
 
 
 
@@ -110,9 +129,10 @@ class MedicalCenterController extends Controller
             }
             public function show_medical_subscription_detail()
             {
-                $plan_dta= Userprofile::where('user_id','=',Auth::user()->id)->first()->plan_id;
-               $plan_detail=Plan::where('id','=',$plan_dta)->first();
-               return view('medicalcenter.plan-subscription-detail',compact('plan_detail'));
+                $plan_dta= Userprofile::where('user_id','=',Auth::user()->id)->first();
+                $plan_id=$plan_dta->plan_id;
+               $plan_detail=Plan::where('id','=',$plan_id)->first();
+               return view('medicalcenter.plan-subscription-detail',compact('plan_detail','plan_dta'));
 
             }
 

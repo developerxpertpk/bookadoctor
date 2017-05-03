@@ -15,11 +15,12 @@ class CreateSubscriptionTable extends Migration
     {
 
         Schema::create('subscriptions', function ( Blueprint $table){
-           $table->increments('id');
+            $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->string('name');
             $table->string('plan')->nullable();
             $table->string('description')->nullable();
-             $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -14,13 +14,13 @@ class Schedule extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
-            
-            $table->increments('id');
-            $table->integer('user_id')->unique();
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
             $table->time('to');
             $table->time('from');
             $table->string('days');
-            $table->foreign('user_id')->references('id')->on('user');
+          //  $table->foreign('user_id')->references('id')->on('user');
 
         });
     }

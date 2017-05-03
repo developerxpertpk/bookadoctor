@@ -8,6 +8,38 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
 <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
 <script src="{{asset('js/app.js')}}"></script>
+<!-- <script src="{{asset('js/jquery-1.12.4.js')}}"></script> -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="{{asset('js/jquery-ui.js')}}"></script>
+
+<script>
+$( function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'yy-mm-dd'
+    });
+  } );
+// $( function() {
+//     $( "#datepicker" ).datepicker({
+//       showOn: "button",
+//       buttonImage: "/img/calendar.gif",
+//       buttonImageOnly: true,
+//       buttonText: "Select date"
+//     });
+//   } );
+</script>
+<style>
+#datepicker{
+	float:left;
+
+}
+#datepicker img{
+	width:40px;
+
+}
+
+</style>
 </head>
 <body>
 
@@ -53,7 +85,7 @@
 					<div class="modal-body">
 					<form class="form-horizontal" action="{{action('Auth\LoginController@login')}}" method="POST"> 
 					<div class="form-group">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+        		    <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label> 
 					<div class="col-sm-10"><input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
 					</div> </div> <div class="form-group"> 
@@ -422,14 +454,17 @@ Twitter</a></i></li>
 					<h4 class="modal-title" id="myModalLabel1">Registration</h4>  
           </div>
           <div class="modal-body">
+          <form class="form-horizontal" method="POST" action="{{route('patient.insert')}}">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="role" value="2"> 
           <form class="form-horizontal"> 
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">First Name</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name"> 
+          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name" > 
           </div> </div> 
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Last Name" type="text" name="last_name"> 
+          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Last Name" type="text" name="last_name" > 
           </div> </div> 
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label> 
@@ -441,25 +476,25 @@ Twitter</a></i></li>
           <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> 
           </div> </div> 
           <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Age</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Age" type="email" name="dob"> <!-- To be replaced by Jquery Datepicker -->
+          <label for="inputEmail3" class="col-sm-2 control-label">DOB</label> 
+          <div class="col-sm-10"><input type="text" id="datepicker" name="dob" > <!-- <input class="form-control" id="inputEmail3" placeholder="Age" type="text" name="dob"> --> <!-- To be replaced by Jquery Datepicker -->
           </div> </div>
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">Gender</label> 
           <div class="col-sm-10"> 
             <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" checked>
+            <input type="radio" name="gender" id="optionsRadios1" value="Male" checked>
             Male
             </label>
             <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="Female" checked>
+            <input type="radio" name="gender" id="optionsRadios1" value="Female" checked>
             Female
             </label>    
           </div> </div> 
           
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">Address</label> 
-          <div class="col-sm-10"> <textarea class="form-control" rows="3" placeholder="Address"></textarea>
+          <div class="col-sm-10"> <textarea class="form-control" rows="3" placeholder="Address" name="address"></textarea>
           
           </div> </div>
           <div class="form-group"> 
@@ -505,13 +540,15 @@ Twitter</a></i></li>
           </div>
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">Pin Code</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text"> 
+          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text" name="pincode"> 
           </div> </div>
           
           <div class="form-group"> 
           <label for="inputEmail3" class="col-sm-2 control-label">Contact Number</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text"> 
-          </div> </div>
+          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text" name="contactno"> 
+          </div> 
+          </div>
+          
           </div>
           <div class="modal-footer">
           <button type="Submit" class="btn btn-primary">Submit</button>          

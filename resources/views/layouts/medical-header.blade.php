@@ -7,11 +7,11 @@
                         <a class="navbar-brand" href="#">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                         </a>
-                        <a class="navbar-brand" href="#"><img src="{{ asset('img\logo.png') }}"></a>
+                        <a class="navbar-brand" href="{{ route('home1.home1') }}"><img src="{{ asset('img\logo.png') }}"></a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Dr.Booking</a></li>
+                            <li class="active"><a href="{{ route('home1.home1') }}">Dr.Booking</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right"> @if(isset($page)) @foreach($page as $key)
                             <li class="dropdown"> <a href="{{$key->slug}}">{{$key->title}}</a></li> @endforeach @endif

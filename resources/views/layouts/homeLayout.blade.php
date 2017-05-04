@@ -20,6 +20,8 @@
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
+     <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script>
 
 </head>
 <body>

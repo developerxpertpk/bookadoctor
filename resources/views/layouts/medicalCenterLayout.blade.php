@@ -41,6 +41,8 @@
     <script src="{{ asset('js/ajax-function.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery.form.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery.table2excel.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
             type="text/javascript"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
@@ -198,7 +200,48 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
 </div>
 
 @include('layouts.footer')
-
+<div align = "right" id="topscroll">
+<a href="javascript:;" id="scrollToTop">&#x25B2;</a>
+</div>
+<script type = "text/javascript">
+        $(function () {
+           
+            $('#scrollToTop').bind("click", function () {
+                $('html, body').animate({ scrollTop: 0 }, 1200);
+                return false;
+            });
+        });
+    </script>
+     <style type="text/css">
+        .display_none{
+            display: none;
+        }
+        #scrollToTop
+        {
+             cursor:pointer;
+             background-color:#0090CB;
+             display:inline-block;
+             height:40px;
+             width:40px;
+             color:#ff0000;
+             font-size:16pt;
+             text-align:center;
+             text-decoration:none;
+             line-height:40px;
+               -webkit-transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+   transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+   border-radius: 4px;
+        }
+        #scrollToTop:hover{
+            background-color:#ff0000;
+            color:#0090CB;
+        }
+        #topscroll {
+            bottom: 64px;
+            position: fixed;
+            right: 6px;
+}
+    </style>
 
 </body>
 </html>

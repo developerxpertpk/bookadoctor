@@ -29,7 +29,7 @@ class MedicalCenterController extends Controller
                      'medical_center_info' => 'required',
                      'title' => 'required',
                      'description' => 'required',
-                     'profilepic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    // 'profilepic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
                  ]);
 
@@ -43,7 +43,7 @@ class MedicalCenterController extends Controller
                      $extention = $file->getClientOriginalExtension();
                      $destinationPath = public_path().'/images/profile_pic/' ;
                      $file->move($destinationPath,$fileName);
-
+                    $medical_info->images=$fileName;
                  }
 
 
@@ -51,7 +51,7 @@ class MedicalCenterController extends Controller
                  $medical_info->medical_center_info=$request['medical_center_info'];
                  $medical_info->title=$request['title'];
                  $medical_info->description=$request['description'];
-                 $medical_info->images=$fileName;
+                
                  $medical_info->save();
 
                  return redirect()->route('medical.center.image.gallery');
@@ -86,13 +86,17 @@ class MedicalCenterController extends Controller
              }
 
             public  function show_contact_form(){
-                return view('medicalcenter.show_contact_form');
+                $contact_info=Userprofile::Where('user_id','=',Auth::user()->id)->first();
+               // echo "<pre>";
+               //  print_r($contact_info);
+               //  die('info');
+                return view('medicalcenter.show_contact_form',compact('contact_info'));
             }
             public  function payment_success(Request $request){
 
 // Set your secret key: remember to change this to your live secret key in production
 // See your keys here: https://dashboard.stripe.com/account/apikeys
-\Stripe\Stripe::setApiKey("sk_test_LtT2bKstSjmAaPEF8Nupd7s");
+\Stripe\Stripe::setApiKey("sk_test_xJ0emzIKBRpb5CiOFSNcEaSq");
 
 // Token is created using Stripe.js or Checkout!
 // Get the payment token submitted by the form:

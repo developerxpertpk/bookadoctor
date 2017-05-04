@@ -24,7 +24,7 @@ header .navbar {
    .navbar-default .navbar-nav > .active > a:focus, 
    .navbar-default .navbar-nav > .active > a:hover {
     color: #5C5C5C;
-    background: #ffff;
+    background: #fff;
 }
 
 .navbar-brand {
@@ -232,12 +232,14 @@ margin-top: 40px;
 }
 
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-	color: #555;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,.nav-tabs > li > a:hover {
+	color: #555!important;
 	cursor: default;
-	background-color: #f1ebeb;
-	border: 1px solid #ddd;
+	background-color: #f1ebeb!important;
+	border: 1px solid #ddd!important;
 	border-bottom-color: transparent;
+   -webkit-transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+   transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
 
 }
 

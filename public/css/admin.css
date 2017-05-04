@@ -242,7 +242,7 @@ ul.alert-dropdown {
     color: #000;
 }
  .side-nav li:hover a, .admin-nav .side-nav li.active a, .admin-nav .side-nav li:focus a{
-  background: #c82506!important;
+  background: #31708f!important;
   color: #fff!important;
 }
  .side-nav li:first-child a{

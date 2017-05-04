@@ -14,13 +14,14 @@ class usersettings extends Migration
     public function up()
     {
         Schema::create('usersettings', function (Blueprint $table){
-           $table->increments('id');
-            $table->integer('user_id');
+            $table->engine = 'InnoDB';
+           $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
             $table->string('day')->nullable();
             $table->time('time_in')->nullable();
             $table->time('time_out')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+          //  $table->foreign('user_id')->references('id')->on('users');
             });
     }
 

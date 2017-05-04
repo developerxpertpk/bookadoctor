@@ -14,11 +14,12 @@ class MedicalCenterDoctor extends Migration
     public function up()
     {
         Schema::create('medicalcenter_doctor', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('doctor_id');
-            $table->integer('medicalcenter_id');
-            $table->foreign('doctor_id')->references('id')->on('users');
-            $table->foreign('medicalcenter_id')->references('id')->on('users');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->integer('doctor_id')->unsigned()->index();
+            $table->integer('medicalcenter_id')->unsigned()->index();
+         // $table->foreign('doctor_id')->references('id')->on('users');
+           //$table->foreign('medicalcenter_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Cms extends Migration
+class SpecialityTableForeignkey extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class Cms extends Migration
      */
     public function up()
     {
-        Schema::create('cms', function (Blueprint $table){
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->string('title');
-            $table->string('slug');
-            $table->string('context');
-            $table->timestamps();
+        Schema::table('doctor_speciality',function(Blueprint $table){
+
+          $table->foreign('speciality_id')->references('id')->on('speciality');
+            $table->foreign('user_id')->references('id')->on('users');  
+
         });
     }
 
@@ -30,6 +28,6 @@ class Cms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cms');
+        //
     }
 }

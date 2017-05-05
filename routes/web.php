@@ -141,14 +141,20 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                     Route::get('/profile',array('as'=>'profile','before'=>'auth','uses'=>'ProfileController@getProfile'));
                     Route::get('/editProfile',array('as'=>'editProfile','before'=>'auth','uses'=>'ProfileController@editProfile'));
                     Route::post('/updateProfile',array('as'=>'updateProfile','before'=>'auth','uses'=>'ProfileController@updateProfile'));
-
+                    //komal
                 Route::post('/userProfile','PatientController@insert')->name('patient.insert');
                 Route::get('/userprofile','PatientController@user_login')->name('patient.profile.login');
                 Route::get('/edit','PatientController@edit')->name('patient.edit');
                 Route::post('/imageupload','PatientController@update_profile')->name('patient.update');
                 Route::get('/changepassword','PatientController@change_password')->name('patient.password');
                 Route::post('/password','PatientController@password')->name('patient.password.change');
-                
+                Route::get('/appointment','PatientController@appointment')->name('patient.appointment');
+                Route::get('/city','PatientController@city')->name('city');
+                Route::get('/state','PatientController@state')->name('state');
+                Route::get('/country','PatientController@country')->name('country');
+                Route::get('/medicalcenter','PatientController@medicalcenter')->name('title');
+                Route::get('/disease','PatientController@disease')->name('disease');
+               
 
                // Rout::get('/getprofile','PatientController@profile')->name('patient.profile');
 

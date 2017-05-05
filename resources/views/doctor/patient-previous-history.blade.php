@@ -6,13 +6,14 @@
 				<div class="panel-heading">Previous History
 					
 					{!! csrf_field() !!}
+					<div class="panel-body">
 					<p> Hello </p>
 					<div class="ui-widget">
 						<label for="birds">Names </label>
 						<input id="birds">
 					</div>
 					
-					
+					</div>
 				</div>
 			</div>
 		</div>

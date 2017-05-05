@@ -20,6 +20,31 @@ $( function() {
       changeYear: true,
       dateFormat: 'yy-mm-dd'
     });
+
+ $( "#city" ).autocomplete({
+      source: "{{URL::route('city')}}",
+      minLength: 1,
+      select: function( event, ui ) {
+        $("#city").val(ui.item.value);
+      }
+    });
+    $( "#state" ).autocomplete({
+     source: "{{URL::route('state')}}",
+     minLength: 1,
+     select: function( event, ui ) {
+        $("#state").val(ui.item.value);
+     }
+    });
+
+    $( "#country" ).autocomplete({
+     source: "{{URL::route('country')}}",
+     minLength: 1,
+     select: function( event, ui ) {
+        $("#country").val(ui.item.value);
+      }
+    });
+
+
   } );
 // $( function() {
 //     $( "#datepicker" ).datepicker({
@@ -39,87 +64,12 @@ $( function() {
 	width:40px;
 
 }
+ ul.ui-autocomplete {
+    z-index: 1100;
+}
 
 </style>
 </head>
-<body>
-
-<header>
-<div class="container-fluid navigation">
-
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-		  <a class="navbar-brand" href="#">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="img\logo.png"></a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Dr.Booking</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            @if(isset($page))
-              @foreach($page as $key)
-               <li class="dropdown">
-              <a href="{{$key->slug}}">{{$key->title}}</a></li>
-              @endforeach
-            @endif
-			 <li class="dropdown">
-			  <a href="#" data-toggle="modal" data-target="#myModall">Login</a>
-					  <div class="modal fade" id="myModall" tabindex="-1" role="dialog" aria-labelledby="myModalLabell">
-					  <div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Login</h4>
-					<!--<i class="fa fa-address-book" aria-hidden="true"></i>-->
-  
-					</div>
-
-					<div class="modal-body">
-					<form class="form-horizontal" action="{{action('Auth\LoginController@login')}}" method="POST"> 
-					<div class="form-group">
-        		    <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-					<label for="inputEmail3" class="col-sm-2 control-label">Email</label> 
-					<div class="col-sm-10"><input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
-					</div> </div> <div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-					<div class="col-sm-10"> <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<div class="col-sm-offset-2 col-sm-10"> 
-					<div class="checkbox"> 
-					<label> <input type="checkbox"> Remember me </label> 
-					</div> </div> </div> <div class="form-group"> 
-					<div class="col-sm-offset-2 col-sm-10"> 
-					<button type="submit" class="btn btn-primary">Login</button>
-					</div> </div> 
-					</form>
-					</div>
-					<div class="modal-footer">
-					{{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
-					<a href="#">Forget Password</a>
-				</div>
-			</div>
-				</div></div>
-			</li>
-			
-              <li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></a>
-					  <ul class="dropdown-menu">
-						<li class="dropdown-submenu">
-                <a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal">Medical Center</a>
-			   
-						<li class="dropdown-submenu open">
-    <a tabindex="0"  href="#" data-toggle="modal" data-target="#myModal1">Patient</a>  </li>
-
 
 <body>
     <header>
@@ -290,7 +240,36 @@ Dentist</a></li>
     <section class="request">
         <div class="container">
             <div class="big_button">
+            @if(!Auth::User())
+               <button type="button" class="btn btn-success btn-lg"data-toggle="modal" data-target="#myModal">Request an appointment</button>
+                <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+        <div class="modal-body">
+          <h4>Please Login First.</h4>
+        </div>
+       </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+    		@elseif(Auth::User())
+    		
+              <form id="logout-form" action="{{ route('patient.appointment') }}" method="POST" ">
+           			 {{ csrf_field() }}
                 <button type="button" class="btn btn-success btn-lg">Request an appointment</button>
+
+               </form>
+@endif           
             </div>
         </div>
     </section>
@@ -360,170 +339,7 @@ Twitter</a>
         </div>
         <div class="rights text-center"> <span>© 2017 By <a href="http://www.wishtreetech.com" target="_blank" class="text-color">Talentelgia Technologies</a>
  All Rights Reserved </span></div>
-<<<<<<< HEAD
 
-</section>
-
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Medical Center</h4>  
-					</div>
-					<div class="modal-body"> 
-					<form class="form-horizontal" method="POST" action="{{route('medical.center.regester.submit')}}">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="role" value="4"> 
-					<div class="form-group"> 
-					<label for="inputEmail3" class="col-sm-4 control-label">First Name</label> 
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-4 control-label">Last Name</label>
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputPassword3" placeholder="Last Name" type="text" name="last_name"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputEmail3" class="col-sm-4 control-label">E-mail</label> 
-					<div class="col-sm-8"> <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-4 control-label">Confirm Password</label>
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputPassword3" placeholder="Confirm Password" type="password"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<div class="col-sm-offset-2 col-sm-10"> 
-					<div class="checkbox"> 
-					<label> <input type="checkbox"> Remember me </label> 
-					</div> </div> </div>
-					</div>
-					<div class="modal-footer">
-					<button type="submit" class="btn btn-success">Submit</button>
-				</div>
-        </form>
-			</div>
-				</div></div>
-				
-				
-				
-				
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel1">Registration</h4>  
-          </div>
-          <div class="modal-body">
-          <form class="form-horizontal" method="POST" action="{{route('patient.insert')}}">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="role" value="2"> 
-          <form class="form-horizontal"> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">First Name</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name" > 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Last Name" type="text" name="last_name" > 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10"> 
-          <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">DOB</label> 
-          <div class="col-sm-10"><input type="text" id="datepicker" name="dob" > <!-- <input class="form-control" id="inputEmail3" placeholder="Age" type="text" name="dob"> --> <!-- To be replaced by Jquery Datepicker -->
-          </div> </div>
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Gender</label> 
-          <div class="col-sm-10"> 
-            <label>
-            <input type="radio" name="gender" id="optionsRadios1" value="Male" checked>
-            Male
-            </label>
-            <label>
-            <input type="radio" name="gender" id="optionsRadios1" value="Female" checked>
-            Female
-            </label>    
-          </div> </div> 
-          
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Address</label> 
-          <div class="col-sm-10"> <textarea class="form-control" rows="3" placeholder="Address" name="address"></textarea>
-          
-          </div> </div>
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label"></label> 
-          <div class="col-sm-3"> 
-          <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
-          <div class="dropdown1">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Country
-          <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">India</a></li>
-          <li><a href="#">Canada</a></li>
-            </ul>
-          </div>
-            </div>
-          <div class="col-sm-3"> 
-          <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
-        <div class="dropdown1">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          State
-          <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Punjab</a></li>
-          <li><a href="#">Haryana</a></li>
-          <li><a href="#"></a></li>
-          </ul>
-          </div></div>  
-          <div class="col-sm-4"> 
-          <div class="dropdown1">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            City
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Mohali</a></li>
-            <li><a href="#">Chandigarh</a></li>    
-            </ul>
-          </div>
-          </div>
-          </div>
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Pin Code</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text" name="pincode"> 
-          </div> </div>
-          
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Contact Number</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text" name="contactno"> 
-          </div> 
-          </div>
-          
-          </div>
-          <div class="modal-footer">
-          <button type="Submit" class="btn btn-primary">Submit</button>          
-=======
     </section>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -575,17 +391,18 @@ Twitter</a>
                 </form>
                     </div>
             </div>
->>>>>>> 028390822a0e29d92ce27d6978d1f1db40b22796
-        </div>
+                    </div>
     </div>
-    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel1">Registration</h4> </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
+
+                <form class="form-horizontal"  action="{{route('patient.insert')}}" method="post" File="true">
+                {{csrf_field()}}
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
                             <div class="col-sm-10">
@@ -607,9 +424,9 @@ Twitter</a>
                                 <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Age</label>
+                            <label for="inputEmail3" class="col-sm-2 control-label">DOB</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="inputEmail3" placeholder="Age" type="email" name="dob">
+                                <input class="form-control" id="datepicker" placeholder="Age" type="text" name="dob">
                                 <!-- To be replaced by Jquery Datepicker -->
                             </div>
                         </div>
@@ -617,15 +434,15 @@ Twitter</a>
                             <label for="inputEmail3" class="col-sm-2 control-label">Gender</label>
                             <div class="col-sm-10">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" checked> Male </label>
+                                    <input type="radio" name="gender" id="optionsRadios1" value="Male" checked> Male </label>
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="Female" checked> Female </label>
+                                    <input type="radio" name="gender" id="optionsRadios1" value="Female" checked> Female </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="3" placeholder="Address"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Address" name="address"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -633,45 +450,29 @@ Twitter</a>
                             <div class="col-sm-3">
                                 <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
                                 <div class="dropdown1">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Country <span class="caret"></span> </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">India</a></li>
-                                        <li><a href="#">Canada</a></li>
-                                    </ul>
+                                    Country:<input type="text" id="country" class="form-control" name="country">
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
                                 <div class="dropdown1">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> State <span class="caret"></span> </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">Punjab</a></li>
-                                        <li><a href="#">Haryana</a></li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
-                                    </ul>
+                                    State:<input type="text" id="state" class="form-control" name="state">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="dropdown1">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> City <span class="caret"></span> </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">Mohali</a></li>
-                                        <li><a href="#">Chandigarh</a></li>
-                                    </ul>
+                                   City:<input type="text" id="city" class="form-control" name="city">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Pin Code</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text"> </div>
+                                <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text" name="pincode"> </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Contact Number</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text"> </div>
+                                <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text" name="contactno"> </div>
                         </div>
                 
                 <div class="modal-footer">

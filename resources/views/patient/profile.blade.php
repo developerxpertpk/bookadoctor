@@ -165,8 +165,8 @@
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 					<li><a href="{{route('patient.edit')}}">Edit</a></li>
-					<li><a href="#">Delete</a></li>
 					<li><a href="{{route('patient.password')}}">Change password</a></li>
+          <li><a href="{{route('patient.appointment')}}">Make Appointment</a></li>
 					
 				  </ul>
 				</div>     
@@ -199,7 +199,7 @@
                       </tr>
                         <tr>
                         <td> Address</td>
-                        <td>{{Auth::User()->is_Profile->address}}</td>
+                        <td>{{Auth::User()->is_Profile->address}}, {{Auth::User()->is_Profile->city}} ,{{Auth::User()->is_Profile->state}} ,{{Auth::User()->is_Profile->country}}<br/>Pincode {{Auth::User()->is_Profile->pincode}}</td>
                       </tr>
                       <tr>
                         <td>Email</td>

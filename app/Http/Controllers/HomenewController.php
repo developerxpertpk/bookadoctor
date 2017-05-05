@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Page;
+use App\Userprofile;
 
 class HomenewController extends Controller
 {
@@ -27,4 +28,5 @@ class HomenewController extends Controller
   	$page = Page::where('status','Active')->get();
   	return view('page',compact('pagedata','page'));
   }
+  
 }

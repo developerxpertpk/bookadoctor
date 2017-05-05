@@ -6,14 +6,21 @@
 <link href="{{asset('css/app.css')}}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
 <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
-<script src="{{asset('js/app.js')}}"></script>
-<!-- <script src="{{asset('js/jquery-1.12.4.js')}}"></script> -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/jquery-ui.js')}}"></script>
 
 <style>
 .dropdown-menu{
 	float:left;
+}
+.img-circle {
+    height: 200px;
+    border-radius: 50%;
+    width: 200px;
+}
+ ul.ui-autocomplete {
+    z-index: 1100;
 }
 /*.profile{
 	float:left;
@@ -23,13 +30,32 @@
 }*/
 </style>
 <script>
+
 $( function() {
-    $( "#datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      dateFormat: 'yy-mm-dd'
+
+	  $( "#cities" ).autocomplete({
+      source: '/city',
+      minLength: 1,
+      select: function( event, ui ) {
+        $("#cities").val(ui.item.value);
+      }
     });
-  } );
+
+	  $( "#medical" ).autocomplete({
+      source: '/medicalcenter',
+      minLength: 1,
+      select: function( event, ui ) {
+        $("#medical").val(ui.item.value);
+      }
+    });
+
+$(" #disease").autocomplete({                              
+	source:'/disease',   
+	minLength: 1,
+	});
+
+	});
+
 </script>
 </head>
 <body>
@@ -162,109 +188,68 @@ $( function() {
 <div class="container profile">
  <div class="col-xs-12 panel panel-info">
             <div class="panel-heading">
-					  <h3 class="panel-title">{{Auth::User()->is_Profile->first_name}} {{Auth::User()->is_Profile->last_name}}</h3>
-					  
-					  
+			<h3> Make Your Booking Here</h3>
 			
 			</div>
-            <div class="panel-body">
+			 <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/images/profile_pic/{{Auth::user()->is_Profile->images}}" class="img-circle img-responsive"> </div>
-                {{ Form::open(['method' => 'POST', 'route' => ['patient.update'],'files' => 'true']) }}
-				
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>First-Name</td>
-                        <td><input type="text" name="first_name" value="{{Auth::User()->is_Profile->first_name}}"></td>
-                       
-                      </tr>
-                      <tr>
-                        <td>Last-Name</td>
-                        <td><input type="text" name="last_name" value="{{Auth::User()->is_Profile->last_name}}"></td>
-                      </tr>
-                      <tr>
-                        <td>Date of Birth</td>
-                        <td><input type="text" id="datepicker" name="dob" value="{{Auth::User()->is_Profile->dob}}"></td>
-                      </tr>
-                   
-                         <tr>
-                             </tr><tr>
-                        <td>Gender</td>
-                        <td>
-                         @if( Auth::User()->is_Profile->gender == 'Male')
-                        <input type="radio" name="gender" id="optionsRadios1" value="Male" checked>Male
-                        <input type="radio" name="gender" id="optionsRadios1" value="Female" >Female
-                        
-                        @else
-                        <input type="radio" name="gender" id="optionsRadios1" value="Male">Male
-                        <input type="radio" name="gender" id="optionsRadios1" value="Female" checked>Female
-                         
-                          @endif
-                      </td>
-                      </tr>
-                        <tr>
-                        <td> Address</td>
-                        <td><input type="text" name="address" value="{{Auth::User()->is_Profile->address}}"></td>
-                      </tr>
-                      <tr>
-                        <td>City</td>
-                        <td><input type="text" name="city" value="{{Auth::User()->is_Profile->city}}"></td>
-                      </tr>
-                      <tr>
-                        <td>State</td>
-                        <td><input type="text" name="state" value="{{Auth::User()->is_Profile->state}}"></td>
-                      </tr>
-                      <tr>
-                        <td>Country</td>
-                        <td><input type="text" name="country" value="{{Auth::User()->is_Profile->country}}"></td>
-                      </tr>
-                      <tr>
-                        <td>Pincode</td>
-                        <td><input type="text" name="pincode" value="{{Auth::User()->is_Profile->pincode}}"></td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td><input type="text" name="email" value="{{Auth::User()->email}}"></td>
-                      </tr>
-                        <tr><td>Phone Number</td>
-                      <td><input type="text" name="contactno" value="{{Auth::User()->is_Profile->contact_no}}">
-                        </td>
-                           
-                      </tr>
-                      <tr>
-                      <td>Image Upload</td>
-                      <td>
-                      <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="pic" value="{{Auth::User()->is_Profile->images}}"/></td>
-                      <td>{{Auth::User()->is_Profile->images}}</td>
-                      </tr>
+              	 <form id="logout-form" action="{{ route('patient.appointment') }}" method="POST" ">
+           			 {{ csrf_field() }}
+           		<div class="panel-body">
+           		<div class=" form-group form-inline">
+           			<div class="ui-widget">
+						<label for="city" class="col-md-4  contro-label">  Select City </label> <!--  Cities -->   
+						<input id="cities" name="city" class="form-control col-md-6 ">
+					</div>
+					</div>
+					<div class=" form-group form-inline">
+					<div class="ui-widget">
+						<label for="medical " class="col-md-4 contro-label"> Medical Center Name </label> <!--  Medical Centers -->   
+						<input id="medical" name="medical" class="form-control col-md-6  ">
+					</div>
+					</div>
+					
+					<div> <!-- Reason -->
+					<div class=" form-group form-inline">
+					<div class="ui-widget">
+						<label for="disease" class=" col-md-4 contro-label"> Disease </label> 
+						<input  type ="text" id="disease" name="disease" class="form-control col-md-6 ">
+					</div>
+					</div>
+					</div>
+           			</form>
 
-                     
-                    </tbody>
-                     <div class="modal-footer">
-                     <input type="submit" name="submit" value="submit"/>
-				          <!-- <button type="Submit" class="btn btn-primary">Submit</button>           -->
-				        </div>
-                  </table>
-               {{Form::close()}}
-                   <!-- <div class="form-group"> 
-               }
-               }
-          <label for="inputEmail3" class="col-sm-2 control-label">Upload Image</label> 
-          <div class="col-sm-10">   <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-          </div> 
-          </div> -->
-                 
+              </div>
+              </div>
+			<div class-="viewdoctors">
+			<table class="table table-bordered">
+				<tr>
+					<th>Day</th>
+					<th>Time</th>
+					<th>Status</th>   <!-- Available or Not available -->
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+			</table>
+              </div>
+              </div>
+
+              </ul>
+              </ul>
+              </li>
+              </div>
+              </a>
+              </div>
+              </div>
+              </nav>
+              </div>
             
-          </div>
-		  
- </div> 
- </div>
-  </div>
-  
-    </div>
-<section class="footer">
+
+              <section class="footer">
 <div class="container">
 
 <div class="col-xs-12 col-sm-4 list1">
@@ -282,6 +267,7 @@ I am 40 yrs. Now I was loosing my hair on my temple area which I got back from p
 <li><a href="#">Doctor Register</a></li>
 <li><a href="#">Best Doctors</a></li>
 <li><a href="#">Request an Appointment</a></li>
+</ul>
 </div>
 
 <div class="col-xs-12 col-sm-3 list">
@@ -306,12 +292,12 @@ Twitter</a></i></li>
 </div>
 </div>
 
+
 <div class="rights text-center">
 <span>© 2017 By <a href="http://www.wishtreetech.com" target="_blank" class="text-color">Talentelgia Technologies</a>
  All Rights Reserved </span></div>
 
 </section>
-
-		
 </body>
 </html>
+

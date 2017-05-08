@@ -14,7 +14,7 @@ class Cms extends Migration
     public function up()
     {
         Schema::create('cms', function (Blueprint $table){
-
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title');
             $table->string('slug');

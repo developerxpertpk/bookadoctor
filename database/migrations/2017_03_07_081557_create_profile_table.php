@@ -15,9 +15,9 @@ class CreateProfileTable extends Migration
     {
         Schema::create('userprofiles', function (Blueprint $table) {
 
-
-            $table->increments('id');
-            $table->integer('user_id');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->bigInteger('contact_no')->nullable();
@@ -37,11 +37,11 @@ class CreateProfileTable extends Migration
              //medical center column
            
             $table->text('sub_domain')->nullable();
-            $table->integer('plan_id')->nullable();
+            $table->integer('plan_id')->nullable()->unsigned()->index();
             $table->integer('plan_payment_status')->default(0)->comment("0=pending , 1=complete");
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('plan_id')->references('id')->on('plans');         
+         // $table->foreign('user_id')->references('id')->on('users');
+          // $table->foreign('plan_id')->references('id')->on('plans');         
         });
     }
 

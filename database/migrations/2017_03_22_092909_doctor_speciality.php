@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +14,13 @@ class DoctorSpeciality extends Migration
     public function up()
     {
         Schema::create('doctor_speciality', function (Blueprint $table) {
-            
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('speciality_id');
             $table->timestamps();
-            $table->foreign('speciality_id')->references('id')->on('speciality');
-            $table->foreign('user_id')->references('id')->on('users');
+            //$table->foreign('speciality_id')->references('id')->on('speciality');
+            //$table->foreign('user_id')->references('id')->on('users');
           
     });
 

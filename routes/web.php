@@ -125,6 +125,12 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                     Route::delete('booking-documents-delete/{id}-{del}','MedicalcenterBookingController@destroy1doc')->name('document.destroy');
 
                     Route::post('patient-booking-payment-update/{id}/edit','MedicalcenterBookingController@paitent_payment_update')->name('patient.booking.payment.update');
+                    
+                    Route::get('medical-center-show-rescheduled-booking','MedicalcenterBookingController@show_rescheduled_booking')->name('medical.center.rescheduled.booking.show');
+                    Route::get('medical-center-show-pending-booking','MedicalcenterBookingController@show_pending_booking')->name('medical.center.pending.booking.show');
+                    Route::get('medical-center-show-canceled-booking','MedicalcenterBookingController@show_canceled_booking')->name('medical.center.canceled.booking.show');  
+                    Route::get('medical-center-show-completed-booking','MedicalcenterBookingController@show_completed_booking')->name('medical.center.completed.booking.show');
+                
             });
             //patients Routes
 
@@ -135,8 +141,16 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                     Route::get('/profile',array('as'=>'profile','before'=>'auth','uses'=>'ProfileController@getProfile'));
                     Route::get('/editProfile',array('as'=>'editProfile','before'=>'auth','uses'=>'ProfileController@editProfile'));
                     Route::post('/updateProfile',array('as'=>'updateProfile','before'=>'auth','uses'=>'ProfileController@updateProfile'));
+                        //komal
+            Route::post('/userProfile','PatientController@insert')->name('patient.insert');
+                Route::get('/userprofile','PatientController@user_login')->name('patient.profile.login');
+                Route::get('/edit','PatientController@edit')->name('patient.edit');
+                Route::post('/imageupload','PatientController@update_profile')->name('patient.update');
+                Route::get('/changepassword','PatientController@change_password')->name('patient.password');
+                Route::post('/password','PatientController@password')->name('patient.password.change');
+                
 
-
+               // Rout::get('/getprofile','PatientController@profile')->name('patient.profile');
 
             //    Route::any ( '/search', function () {
             //    $q = Input::get ( 'search' );

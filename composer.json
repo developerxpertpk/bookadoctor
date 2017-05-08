@@ -13,6 +13,7 @@
         "laravelcollective/html": "^5.4",
         "unisharp/laravel-ckeditor": "^4.6",
         "way/generators": "3.0.*",
+        "cartalyst/stripe-laravel": "2.0.*",
         "yajra/laravel-datatables-oracle": "^7.3"
     },
     "require-dev": {

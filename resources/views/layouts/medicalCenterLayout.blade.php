@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
     {{--<link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script>

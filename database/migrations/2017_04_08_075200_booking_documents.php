@@ -15,13 +15,13 @@ class BookingDocuments extends Migration
     {
         Schema::create('bookingdocuments', function (Blueprint $table){
 
-
-            $table->increments('id');
-            $table->integer('booking_id');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->integer('booking_id')->unsigned()->index();
             $table->string('documents');
             $table->timestamps();
 
-            $table->foreign('booking_id')->references('id')->on('bookings');
+          //  $table->foreign('booking_id')->references('id')->on('bookings');
            
         });
     }

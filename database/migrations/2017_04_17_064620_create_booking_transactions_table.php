@@ -14,14 +14,15 @@ class CreateBookingTransactionsTable extends Migration
     public function up()
     {
         Schema::create('booking_transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('booking_id');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->integer('booking_id')->unsigned()->index();
             $table->integer('amount');
             $table->string('transaction_id');
             $table->string('transaction_mode');
             $table->integer('status');
-            $table->timestamps();
-            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->timestamps(); 
+          // $table->foreign('booking_id')->references('id')->on('bookings');
         });
     }
 

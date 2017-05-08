@@ -14,11 +14,12 @@ class CreatePlansTable extends Migration
     public function up()
     {
         Schema::create('plans', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
            $table->increments('id');
             $table->string('name');
             $table->string('amount');
             $table->text('description');
-            $table->string('status')->comment('Active = Activated plans, Deactive =Deactivated plans')->default('Active');
+            $table->string('status')->comment('Active = Activated plans, Deactive = Deactivated plans')->default('Active');
             $table->timestamps();
         });
     }

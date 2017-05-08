@@ -14,11 +14,12 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('doctor_id');
-            $table->integer('user_id');
-            $table->integer('medic_id');
-            $table->integer('speciality_id');
+            $table->integer('doctor_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('medic_id')->unsigned()->index();
+            $table->integer('speciality_id')->unsigned()->index();
             $table->text('cancel_reason');
             $table->text('reschedule_reason');
             $table->datetime('Appointment_timings')->nullable();
@@ -29,8 +30,8 @@ class CreateBookingsTable extends Migration
             $table->timestamps();
             
             
-            $table->foreign('user_id')->references('id')->on('users');
-             $table->foreign('speciality_id')->references('id')->on('speciality');
+          //  $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('speciality_id')->references('id')->on('speciality');
 
         });
     }

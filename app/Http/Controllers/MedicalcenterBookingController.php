@@ -164,6 +164,42 @@ class MedicalcenterBookingController extends Controller
 
         return response($bookings);
     }
+    public function show_rescheduled_booking(){
+      $bookings= Booking::where('medic_id','=',Auth::user()->id)->where('status','=',3)->get();
+//        echo "<pre>";
+//        print_r($bookings);
+//      
+//        die('hello');
+//        die('hello');
+        return view('medicalcenter.bookings.show-rescheduled-bookings',compact('bookings'));
+    }
+    public function show_pending_booking(){
+      $bookings= Booking::where('medic_id','=',Auth::user()->id)->where('status','=',0)->get();
+//        echo "<pre>";
+//        print_r($bookings);
+//      
+//        die('hello');
+//        die('hello');
+        return view('medicalcenter.bookings.show-rescheduled-bookings',compact('bookings'));
+    }
+    public function show_canceled_booking(){
+      $bookings= Booking::where('medic_id','=',Auth::user()->id)->where('status','=',2)->get();
+//        echo "<pre>";
+//        print_r($bookings);
+//      
+//        die('hello');
+//        die('hello');
+        return view('medicalcenter.bookings.show-rescheduled-bookings',compact('bookings'));
+    } 
+    public function show_completed_booking(){
+      $bookings= Booking::where('medic_id','=',Auth::user()->id)->where('status','=',1)->get();
+//        echo "<pre>";
+//        print_r($bookings);
+//      
+//        die('hello');
+//        die('hello');
+        return view('medicalcenter.bookings.show-rescheduled-bookings',compact('bookings'));
+    }
 
     public function documents_upload_form($id)
     {

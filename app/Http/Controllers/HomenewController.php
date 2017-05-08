@@ -17,7 +17,7 @@ class HomenewController extends Controller
   {
 
   	$page = Page::where('status','Active')->get();
-    $locations=DB::table('userprofiles')->select(array('title','address', 'city', 'state','country'))->get();
+    $locations=DB::table('userprofiles')->join('users', 'users.id', '=', 'userprofiles.user_id')->where('users.role_id',4)->select(array('title','address', 'city', 'state','country'))->get();
     return view('index',compact('locations'));   
 
       // , compact('page')
@@ -33,13 +33,15 @@ class HomenewController extends Controller
   public function city(Request $request)
     {
       $term=$request->term;
-      $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
+      $data=Userprofile::where('city','LIKE','%'.$term.'%')->distinct()->get();
      // $data=loc::where('city','LIKE','%'.$term.'%')->get();
       //dd($data);
       $results=array();
       foreach ($data as $key => $v) {
-
+          if($v->getUser->role_id == 4)
+          {
           $results[]=['value'=>$v->city];
+          }
 
       }
 
@@ -49,14 +51,16 @@ class HomenewController extends Controller
     public function state(Request $request)
     {
       $term=$request->term;
-      $data=Userprofile::where('state','LIKE','%'.$term.'%')->select('state')->distinct()->get();
+      $data=Userprofile::where('state','LIKE','%'.$term.'%')->distinct()->get();
      // $data=loc::where('city','LIKE','%'.$term.'%')->get();
       //dd($data);
 
       $results=array();
       foreach ($data as $key => $v) {
-
+        if($v->getUser->role_id == 4)
+        {
           $results[]=['value'=>$v->state];
+        }
 
       }
 
@@ -66,14 +70,15 @@ class HomenewController extends Controller
     public function country(Request $request)
     {
       $term=$request->term;
-      $data=Userprofile::where('country','LIKE','%'.$term.'%')->select('country')->distinct()->get();
+      $data=Userprofile::where('country','LIKE','%'.$term.'%')->distinct()->get();
      // $data=loc::where('city','LIKE','%'.$term.'%')->get();
       //dd($data);
 
       $results=array();
       foreach ($data as $key => $v) {
-
+          if($v->getUser->role_id == 4){
           $results[]=['value'=>$v->country];
+        }
 
       }
 

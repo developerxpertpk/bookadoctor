@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
 
+<head>
     <!-- Bootstrap core CSS -->
+
 
 <link href="{{asset('css/app.css')}}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
 <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="{{asset('js/app.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -25,12 +27,26 @@
             width: 100%;
             height: 500px;
             overflow: hidden;
-        }	
+        }
+        #datepicker{
+	float:left;
+
+}
+#datepicker img{
+	width:40px;
+
+}
+	
 </style>
 
 <script>
 	
 	$( function() { 
+	$( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'yy-mm-dd'
+    });
     $( "#city" ).autocomplete({
       source: "{{URL::route('city')}}",
       minLength: 1,
@@ -185,7 +201,7 @@
 					<div class="modal-body">
 					<form class="form-horizontal" action="{{action('Auth\LoginController@login')}}" method="POST"> 
 					<div class="form-group">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+        		    <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 					<label for="inputEmail3" class="col-sm-2 control-label">Email</label> 
 					<div class="col-sm-10"><input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
 					</div> </div> <div class="form-group"> 
@@ -209,8 +225,7 @@
 			</div>
 				</div></div>
 			</li>
-			
-              <li class="dropdown">
+			<li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></a>
 					  <ul class="dropdown-menu">
 						<li class="dropdown-submenu">
@@ -219,23 +234,62 @@
 						<li class="dropdown-submenu open">
     <a tabindex="0"  href="#" data-toggle="modal" data-target="#myModal1">Patient</a>  </li>
 
-   <!-- <ul class="dropdown-menu">
+
+<body>
+    <header>
+        <div class="container-fluid navigation">
+                                <div class="modal fade" id="myModall" tabindex="-1" role="dialog" aria-labelledby="myModalLabell">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Login</h4>
+                                                <!--<i class="fa fa-address-book" aria-hidden="true"></i>--></div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" action="{{action('Auth\LoginController@login')}}" method="POST">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-2 col-sm-10">
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox"> Remember me </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-2 col-sm-10">
+                                                            <button type="submit" class="btn btn-primary">Login</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer"> {{--
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}} <a href="#">Forget Password</a> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                           
+                                        <!-- <ul class="dropdown-menu">
       <li class="dropdown-header">User Name</li>
       <li><a tabindex="0">Sub action</a></li>
       <li class="disabled"><a tabindex="0">Another sub action</a></li>
       <li><a tabindex="0">Something else here</a></li>
     </ul>-->
-</ul>
-						</li>
-					</ul> 
-			
-             </li>
-			 
-           <!--  <li> settings
-			  <a href="#" <i class="fa fa-cog" aria-hidden="true"></i></a>
-					  
-			</li>-->
-</div>
+                             
+                        </ul>
+                        </li>
+                        </div>
           </div>
 		  </div>
       </nav>
@@ -277,8 +331,9 @@
   <ul class="nav nav-tabs" role="tablist">
 <li role="presentation" class="active"><a href="#doctors" aria-controls="doctor" role="tab" data-toggle="tab"><i class="fa fa-briefcase"></i>
 Doctors</a></li>
-    <li role="presentation"><a href="#dentist" aria-controls="dentist" role="tab" data-toggle="tab"><i class="fa fa-stethoscope"></i>
+                    <li role="presentation"><a href="#dentist" aria-controls="dentist" role="tab" data-toggle="tab"><i class="fa fa-stethoscope"></i>
 Dentist</a></li>
+
     <li role="presentation"><a href="#alternative_medicine_doctor" aria-controls="alternative_medicine_doctor" role="tab" data-toggle="tab"><i class="fa fa-plus-square"></i>Alternative Medicine doctor</a></li>
     <li role="presentation"><a href="#therapists_nutrinionist" aria-controls="therapists_nutrinionist" role="tab" data-toggle="tab"><i class="fa fa-heartbeat"></i>Therapists nutrinionist</a></li>
   </ul>
@@ -394,244 +449,214 @@ Dentist</a></li>
 </div>
 </div>
 </section>
-
 <!---Best Doctor Portion-->
-<section class="best-doctors">
-<div class="container">
-<h2>Best Doctors</h2>
-<div class="col-lg-3">
-          <img class="img-circle" src="img\dentist.png" alt="Generic placeholder image" height="170" width="170">
-          <h3>Dr. Rajesh</h3>
-		  <h4>Denatlist</h4>
+    <section class="best-doctors">
+        <div class="container">
+            <h2>Best Doctors</h2>
+            <div class="col-lg-3"> <img class="img-circle" src="img\dentist.png" alt="Generic placeholder image" height="170" width="170">
+                <h3>Dr. Rajesh</h3>
+                <h4>Denatlist</h4> </div>
+            <div class="col-lg-3"> <img class="img-circle" src="img\cardio.png" alt="Generic placeholder image" height="170" width="170">
+                <h3>Dr.Harish</h3>
+                <h4>Cardiolist</h4> </div>
+            <div class="col-lg-3"> <img class="img-circle" src="img\eye.png" alt="Generic placeholder image" height="170" width="170">
+                <h3>Dr.Saeed</h3>
+                <h4>Ophthalmologist</h4> </div>
+            <div class="col-lg-3"> <img class="img-circle" src="img\phy.png" alt="Generic placeholder image" height="170" width="170">
+                <h3>Dr.Shela</h3>
+                <h4>psychologist</h4> </div>
         </div>
-		
-<div class="col-lg-3">
-          <img class="img-circle" src="img\cardio.png" alt="Generic placeholder image" height="170" width="170">
-          <h3>Dr.Harish</h3>
-		   <h4>Cardiolist</h4>	  
-        </div>
-
-<div class="col-lg-3">
-          <img class="img-circle" src="img\eye.png" alt="Generic placeholder image" height="170" width="170">
-          <h3>Dr.Saeed</h3>
-		  <h4>Ophthalmologist</h4>
-        </div>		
-		
-<div class="col-lg-3">
-          <img class="img-circle" src="img\phy.png" alt="Generic placeholder image" height="170" width="170">
-          <h3>Dr.Shela</h3>
-		  <h4>psychologist</h4>
-        </div>		
-</div>
-</section>
-
-<!--Feedback portion-->
-<section class="feedback">
-<div class="container">
-<h3>Recent Feedback</h3>
- 
-<div class="col-xs-12 col-sm-2">
-<img src="img\doct.png">
-<h5>Dr. Deepak Sharma</h5>
-</div>	
-
-<div class="col-xs-12 col-sm-10">
-<p>I am 40 yrs. Now I was loosing my hair on my temple area which I got back from prp treatment by Dr. Deepak. 
-very satisfactory results of prp which I got at Dermasculpt clinic.Many thanks to team.- Bala
-<button type="button" class="btn btn-success btn-lg bb">View More</button></p>
-</div>  
-
-
-
-</div>
-</section>
-
-<section class="footer">
-<div class="container">
-
-<div class="col-xs-12 col-sm-4 list1">
-<h3>About Us</h3>
-<p>I am 40 yrs. Now I was loosing my hair on my temple area which I got back from prp treatment by Dr. Deepak. 
-very satisfactory results of prp which I got at Dermasculpt clinic.Many thanks to team  to team.
-I am 40 yrs. Now I was loosing my hair on my temple area which I got back from prp treatment by Dr. Deepak. 
-</p>
-</div>
-<div class="col-xs-12 col-sm-3 list">
-
-<ul class="listing">
-<li><a href="#">Register</a></li>
-<li><a href="#">Near HealthCare</a></li>
-<li><a href="#">Doctor Register</a></li>
-<li><a href="#">Best Doctors</a></li>
-<li><a href="#">Request an Appointment</a></li>
-</div>
-
-<div class="col-xs-12 col-sm-3 list">
-<ul class="listing">
-@if(isset($page))
-@foreach($page as $key)
-<li><a href="{{$key->slug}}">{{$key->title}}</a></li>
-@endforeach
-@endif
-</ul>
-</div>
-<div class="col-xs-12 col-sm-2 list">
-<ul class="listing">
-<li><a href="#"></i>Share on</a></li>
-<li class="share"><a href="#"><i class="fa fa-facebook-square"> </i>
-Facebook</a></li>
-<li><a href="#"><i class="fa fa-twitter-square"></i>
-Twitter</a></i></li>
-<li><a href="#"><i class="fa fa-youtube-square"></i>You Tube</a></li>
-
-</ul>
-</div>
-</div>
-
-<div class="rights text-center">
-<span>© 2017 By <a href="http://www.wishtreetech.com" target="_blank" class="text-color">Talentelgia Technologies</a>
- All Rights Reserved </span></div>
-
-</section>
-
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Medical Center</h4>  
-					</div>
-					<div class="modal-body"> 
-					<form class="form-horizontal" method="POST" action="{{route('medical.center.regester.submit')}}">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="role" value="4"> 
-					<div class="form-group"> 
-					<label for="inputEmail3" class="col-sm-4 control-label">First Name</label> 
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-4 control-label">Last Name</label>
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputPassword3" placeholder="Last Name" type="text" name="last_name"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputEmail3" class="col-sm-4 control-label">E-mail</label> 
-					<div class="col-sm-8"> <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<label for="inputPassword3" class="col-sm-4 control-label">Confirm Password</label>
-					<div class="col-sm-8"> 
-					<input class="form-control" id="inputPassword3" placeholder="Confirm Password" type="password"> 
-					</div> </div> 
-					<div class="form-group"> 
-					<div class="col-sm-offset-2 col-sm-10"> 
-					<div class="checkbox"> 
-					<label> <input type="checkbox"> Remember me </label> 
-					</div> </div> </div>
-					</div>
-					<div class="modal-footer">
-					<button type="submit" class="btn btn-success">Submit</button>
-				</div>
-        </form>
-			</div>
-				</div></div>
-				
-				
-				
-				
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel1">Registration</h4>  
-          </div>
-          <div class="modal-body">
-          <form class="form-horizontal"> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">First Name</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name"> 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Last Name" type="text" name="last_name"> 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10"> 
-          <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> 
-          </div> </div> 
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Age</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Age" type="email" name="dob"> <!-- To be replaced by Jquery Datepicker -->
-          </div> </div>
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Gender</label> 
-          <div class="col-sm-10"> 
-            <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" checked>
-            Male
-            </label>
-            <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="Female" checked>
-            Female
-            </label>    
-          </div> </div> 
-          
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Address</label> 
-          <div class="col-sm-10"> <textarea class="form-control" rows="3" placeholder="Address"></textarea>
-          
-          </div> </div>
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label"></label> 
-          <div class="col-sm-3"> 
-          <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
-          <div class="dropdown1">
-			Country:<input id="country" class="form-control">
-          </div>
+    </section>
+    <!--Feedback portion-->
+    <section class="feedback">
+        <div class="container">
+            <h3>Recent Feedback</h3>
+            <div class="col-xs-12 col-sm-2"> <img src="img\doct.png">
+                <h5>Dr. Deepak Sharma</h5> </div>
+            <div class="col-xs-12 col-sm-10">
+                <p>I am 40 yrs. Now I was loosing my hair on my temple area which I got back from prp treatment by Dr. Deepak. very satisfactory results of prp which I got at Dermasculpt clinic.Many thanks to team.- Bala
+                    <button type="button" class="btn btn-success btn-lg bb">View More</button>
+                </p>
             </div>
-          <div class="col-sm-3"> 
-          <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
-        <div class="dropdown1">
-          State:<input id="state" class="form-control">
-          </div></div>  
-          <div class="col-sm-3"> 
-          <div class="dropdown1">
-           City:<input id="city" class="form-control">
-          </div>
-          </div>
-          </div>
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Pin Code</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text"> 
-          </div> </div>
-          
-          <div class="form-group"> 
-          <label for="inputEmail3" class="col-sm-2 control-label">Contact Number</label> 
-          <div class="col-sm-10"> <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text"> 
-          </div> </div>
-          </div>
-          <div class="modal-footer">
-          <button type="Submit" class="btn btn-primary">Submit</button>          
         </div>
-        </form>
+    </section>
+    <section class="footer">
+        <div class="container">
+            <div class="col-xs-12 col-sm-4 list1">
+                <h3>About Us</h3>
+                <p>I am 40 yrs. Now I was loosing my hair on my temple area which I got back from prp treatment by Dr. Deepak. very satisfactory results of prp which I got at Dermasculpt clinic.Many thanks to team to team. I am 40 yrs. Now I was loosing my hair on my temple area which I got back from prp treatment by Dr. Deepak. </p>
+            </div>
+            <div class="col-xs-12 col-sm-3 list">
+                <ul class="listing">
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Near HealthCare</a></li>
+                    <li><a href="#">Doctor Register</a></li>
+                    <li><a href="#">Best Doctors</a></li>
+                    <li><a href="#">Request an Appointment</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-3 list">
+                <ul class="listing"> @if(isset($page)) @foreach($page as $key)
+                    <li><a href="{{$key->slug}}">{{$key->title}}</a></li> @endforeach @endif </ul>
+            </div>
+            <div class="col-xs-12 col-sm-2 list">
+                <ul class="listing">
+                    <li>
+                        <a href="#">Share on</a>
+                    </li>
+                    <li class="share"><a href="#"><i class="fa fa-facebook-square"> </i>
+Facebook</a></li>
+                    <li><a href="#"><i class="fa fa-twitter-square"></i>
+Twitter</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-youtube-square"></i>You Tube</a></li>
+                </ul>
+            </div>
         </div>
-        </div></div>
-        
-        
-        
+        <div class="rights text-center"> <span>© 2017 By <a href="http://www.wishtreetech.com" target="_blank" class="text-color">Talentelgia Technologies</a>
+ All Rights Reserved </span></div>
+    </section>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Medical Center</h4> </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="POST" action="{{route('medical.center.regester.submit')}}">
+                    {{ csrf_field() }}
+                        <input type="hidden" name="role" value="4">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-4 control-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="inputPassword3" placeholder="Last Name" type="text" name="last_name"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">E-mail</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-4 control-label">Confirm Password</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="inputPassword3" placeholder="Confirm Password" type="password"> </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Remember me </label>
+                                </div>
+                            </div>
+                        </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+                </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">Registration</h4> </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="{{route('patient.insert')}}" method="POST" file="TRUE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputEmail3" placeholder="First Name" type="text" name="first_name"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputEmail3" placeholder="Last Name" type="text" name="last_name"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputEmail3" placeholder="Email" type="email" name="email"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">DOB</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="datepicker" placeholder="Age" type="text" name="dob">
+                                <!-- To be replaced by Jquery Datepicker -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Gender</label>
+                            <div class="col-sm-10">
+                                <label>
+                                    <input type="radio" name="gender" id="optionsRadios1" value="Male" checked> Male </label>
+                                <label>
+                                    <input type="radio" name="gender" id="optionsRadios1" value="Female" checked> Female </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" placeholder="Address" name="address"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-3">
+                                <!--<input class="form-control" id="inputEmail3" placeholder="City" type="email">-->
+                                <div class="dropdown1">
+                                    Country:<input type="text" id="country" class="form-control" name="country">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="dropdown1">
+                                    State:<input type="text" id="state" class="form-control" name="state">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="dropdown1">
+                                   City:<input type="text" id="city" class="form-control" name="city">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Pin Code</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputEmail3" placeholder="Pin Code" type="text" name="pincode"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Contact Number</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="inputEmail3" placeholder="Contact Number" type="text" name="contactno"> </div>
+                        </div>
+                
+                <div class="modal-footer">
+                    <button type="Submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+                    </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

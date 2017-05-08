@@ -45,7 +45,7 @@ class MedicalcenterBookingController extends Controller
         $doctor_detail= Userprofile::where('user_id','=',$booking_detail->doctor_id)->first();
         $paitent_detail= Userprofile::where('user_id','=',$booking_detail->user_id)->first();
 
-
+$payment_transction_deatils=BookingTransaction::where('booking_id','=',$id)->get();
 
 //        echo "<pre>";
 //        print_r($paitent_detail);
@@ -58,18 +58,24 @@ class MedicalcenterBookingController extends Controller
         
 //        die('hsdd');
 
-            return view('medicalcenter.bookings.show-booking-detail',compact('booking_detail','doctor_detail','paitent_detail','booling_docs'));
+            return view('medicalcenter.bookings.show-booking-detail',compact('booking_detail','doctor_detail','paitent_detail','booling_docs','payment_transction_deatils'));
     }
     public function cancel_booking(Request $request,$id){
 
 
        if($request['refund_amount']==1){
            $old_transaction = BookingTransaction::where('booking_id','=',$id)->first();
+           \Stripe\Stripe::setApiKey("sk_test_xJ0emzIKBRpb5CiOFSNcEaSq");
+
+            $re = \Stripe\Refund::create(array(
+             "charge" => $old_transaction->transaction_id,
+                ));
            $new_refund_transaction= new BookingTransaction;
 
+           
            $new_refund_transaction->booking_id=$old_transaction->booking_id;
            $new_refund_transaction->amount=$old_transaction->amount;
-           $new_refund_transaction->transaction_id=$myStr = str_random(16);
+           //$new_refund_transaction->transaction_id=$old_transaction->transaction_id;
            $new_refund_transaction->transaction_mode='VISA';
            $new_refund_transaction->status=0;
            $new_refund_transaction->save();
@@ -216,19 +222,23 @@ public function documents_upload_submit(Request $request)
         // start count how many uploaded
         $uploadcount = 0;
         foreach($files as $file) {
-            $rules = array('file' => 'mimes:png,jpeg|required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+            $rules = array('file' => 'mimes:png,jpeg|required'); 
+            //'required|mimes:png,gif,jpeg,txt,pdf,doc'
             $validator = Validator::make(array('file'=> $file), $rules);
             if($validator->passes()){
                 $destinationPath = public_path().'/images/documents/' ;
                 $fileName = rand(5,8).$file->getClientOriginalName();
                 $upload_success = $file->move($destinationPath, $fileName);
                 $uploadcount ++;
+
             }
-           $dooking_id = $request['booking_id'];
-            $gallery = new BookingDocuments;
-            $gallery->booking_id=$dooking_id;
-            $gallery->documents=$fileName;
-            $gallery->save();
+            $dooking_id = $request['booking_id'];
+                $gallery = new BookingDocuments;
+                $gallery->booking_id=$dooking_id;
+                $gallery->documents=$fileName;
+                  $gallery->save();
+          
+          
 
         }
         return $this->show_detail($dooking_id);

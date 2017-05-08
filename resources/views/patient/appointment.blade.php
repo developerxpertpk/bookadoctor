@@ -148,10 +148,11 @@ $(" #disease").autocomplete({
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<a href="#">Forget Password</a>
-				</div>
-			</div>
-				</div></div>
-			</li>
+				  </div>
+			    </div>
+				  </div>
+          </div>
+			    </li>
 			
               <li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></a>

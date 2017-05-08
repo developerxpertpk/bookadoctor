@@ -236,20 +236,12 @@ if (Auth::check()) {
 
 
  }
+
   public function appointment(){
 
   
   return view('patient.appointment');
  }
-
-// public function profile(){
-
-// $user = Auth::User()->id;
-// print_r($user);
-// die('kkkk');
-
-// }
-
  public function city(Request $request)
     {
 
@@ -345,5 +337,15 @@ if (Auth::check()) {
       return response()->json($results);
 
     }
+
+
+// public function profile(){
+
+// $user = Auth::User()->id;
+// print_r($user);
+// die('kkkk');
+
+// }
+
 
 }

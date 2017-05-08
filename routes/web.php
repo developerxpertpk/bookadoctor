@@ -191,6 +191,13 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                  Route::get('/dashboard','DoctorController@dashboard')->name('doctor.dashboard');
              Route::get('/manageschedule','DoctorController@manageschedule')->name('manage.scedule');
              Route::post('/manageschedule/edit','DoctorController@editschedule')->name('edit.schedule');
+             Route::get('/patientprofile','DoctorController@historyProfile')->name('history.profile');
+            Route::get('/profilepatient','PatientController@index')->name('profile.patient');
+             Route::get('/city','PatientController@city')->name('city');
+                Route::get('/state','PatientController@state')->name('state');
+                Route::get('/country','PatientController@country')->name('country');
+                Route::get('/medicalcenter','PatientController@medicalcenter')->name('title');
+                Route::get('/disease','PatientController@disease')->name('disease');
                  
                    // Route::get('/{page}','HomenewController@show')->name('dynamic');
                 //booking

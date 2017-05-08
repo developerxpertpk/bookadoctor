@@ -15,7 +15,7 @@
                                 <?php
                                 $fileN=Auth::user()->is_Profile->images;
                                 ?>
-                                    <input type="file" name="profilepic" class="form-control" id="profilepic" value="{{$fileN}}">
+                                    <input type="file" name="profilepic" class="form-control" id="profilepic" value="Auth::user()->is_Profile->images">
                                 {{--{{Form::file('profilepic', ['class' => 'form-control','id'=>'profilepic',$value=$fileN])}}--}}
                                 @if ($errors->has('profilepic'))
                                     <span class="help-block">

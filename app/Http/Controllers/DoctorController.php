@@ -334,5 +334,99 @@ if (Auth::check()) {
      }
 
 
+
 }
+
+public function patientHistory($id){
+
+  $booking = Booking::find($id);
+  // echo"<pre>";
+  // print_r($booking);
+  // die('rtyui');
+
+  $k = $booking->documents;
+     
+     // foreach($k as $key){
+     //  print_r($key->documents);
+     //   die('kkkk');
+     // }
+     // die('ghghgh');
+
+  
+  return view('doctor.patient-previous-history',compact('booking' , 'k'));
+}
+
+
+public function history($id){
+
+  
+   $booking = Booking::all();
+   //  echo"<pre>";
+   // print_r($booking);
+   // die('hbhbfhbhheb');
+   
+   
+
+ return view('doctor.patient-previous-history' , compact('booking'));
+  
+
+}
+
+public function bookinghistory(Request $request){
+        // $term = Input::get('term');
+        // print_r($term);
+        // DIE('A'); 
+  $a= Auth::User()->id;
+ 
+        $b = User::find($a);
+        $c=  $b->drbookings;
+  //                          echo"<pre>";
+  // print_r($c);
+  //       DIE('A');
+        foreach ($c as $key) {
+           // echo"<pre>";
+           $z = $key->is_users->is_profile->first_name;
+        
+         }
+        $term = $request['term'];
+        $data = DB::table('userprofiles')->where('first_name', 'LIKE', '%' . $term . '%')->select('first_name','user_id')->distinct()->get();
+
+                $return_array=[];
+                foreach ($data as $name_data){
+                    $return_array[]=array("id"=>$name_data->user_id,"label"=>"$name_data->first_name");
+                    //$return_array['user_id'] = $name_data->user_id;
+                    //$return_array['value'] = $name_data->user_id;
+                  };
+                  
+                //dd($return_array);
+                //dd($name_data);
+                return response()->json($return_array);
+
+    }
+    public function historyProfile(Request $request){
+      die('kjjkjkjkj');
+
+    $id=$request->data1;
+
+    $booking = Booking::where('user_id','=',$id)->get();
+
+    // echo "<pre>";
+    // print_r($booking);
+    // die('nnnnn');
+ 
+   foreach ($booking as $key) 
+   {
+     $key['name']=$key->is_users->is_profile->first_name." ".$key->is_users->is_profile->last_name;
+     print_r($key['name']);
+     die('jhjhjhhj');
+   
+    $key['documents']=$key->documents;
+
+    $key['booking']=Booking::where('user_id','=',$key->user_id)->where('doctor_id','=',Auth::User()->id)->get();
+  }
+   return response()->json($booking);
+    //return redirect()->route('user.profile',$id);
+}
+ 
+
 }

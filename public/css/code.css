@@ -275,6 +275,11 @@ margin-right:9px;
 	height: 290px;
 	
 }
+ul.dropdown-menu{
+  margin: 0px;
+  
+    padding-right: 30px;
+}
 
 
 

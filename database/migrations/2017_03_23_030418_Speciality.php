@@ -12,13 +12,14 @@ class Speciality extends Migration
 public function up()
 {
 Schema::create('specialities',function(Blueprint $table){
-$table->increments('id');
-$table->integer('user_id')->comment('medical center id');
-$table->string('name');
-$table->string('price');
-$table->timestamps();
+	$table->engine = 'InnoDB';
+	$table->increments('id')->unsigned();
+	$table->integer('user_id')->comment('medical center id')->unsigned()->index();
+	$table->string('name');
+	$table->string('price');
+	$table->timestamps();
 
-$table->foreign('user_id')->references('id')->on('users');
+	//$table->foreign('user_id')->references('id')->on('users');
 
 });
 

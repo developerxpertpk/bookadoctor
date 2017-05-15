@@ -10,6 +10,7 @@ use App\Doctor;
 use App\User;
 use App\Schedule;
 use App\BookingTransaction;
+use App\Userprofile;
 use Illuminate\Support\Facades\Mail;
 
 class DoctorBookingController extends Controller
@@ -152,29 +153,37 @@ public function history($id){
 public function bookinghistory(Request $request){
         // $term = Input::get('term');
         // print_r($term);
-        // DIE('A'); 
+     
   $a= Auth::User()->id;
- 
+
         $b = User::find($a);
-        $c=  $b->drbookings;
+       $c=  $b->Drbookings;
+       
+  
   //                          echo"<pre>";
   // print_r($c);
   //       DIE('A');
         foreach ($c as $key) {
            // echo"<pre>";
-           $z = $key->is_users->is_profile->first_name;
+        
+         
+           // $z = $key->is_users->is_profile->first_name;
+             
         
          }
+
         $term = $request['term'];
-        $data = DB::table('userprofiles')->where('first_name', 'LIKE', '%' . $term . '%')->select('first_name')->distinct()->get();
+        $data = Userprofile::where('first_name', 'LIKE', '%' . $term . '%')->distinct()->get();
 
-                $return_array = [];
+                      $return_array=[];
                 foreach ($data as $name_data){
-                    // $return_array['id'] = $name_data->first_name;
-                    // $return_array['label'] = $name_data->first_name;
-                    $return_array['value'] = $name_data->first_name;
+                    $return_array[]=array("id"=>$name_data->user_id,"label"=>"$name_data->first_name");
+                    //$return_array['user_id'] = $name_data->user_id;
+                    //$return_array['value'] = $name_data->user_id;
+                    // print_r($return_array);
+                    // die('ghghghhgh');
+                  };
 
-                }
                 //dd($name_data);
                 return response()->json($return_array);
 

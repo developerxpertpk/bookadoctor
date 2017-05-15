@@ -21,13 +21,14 @@
         <link rel="stylesheet" href="{{asset('css/lightbox.css')}}">
       <!--   <link rel="stylesheet" href="{{asset('css/jQuery UI - v1.12.1.css')}}">` -->
         
-       <!--  <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
-       
-        <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
         <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
-       <!--  
-       -->  <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
+           <script src="{{ asset('js/jquery-ui.js') }}"></script>
+         <script src="{{ asset('js/lightbox.js') }}"></script>
+        <!-- <script src="{{ asset('js/jquery-1.12.4.js') }}"></script> -->
+       <!--  <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> -->
+     
+     
+        <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
 
 
      </head>
@@ -69,6 +70,9 @@
                              <li>
                                 <a href="{{route('manage.scedule')}}"><i class="fa fa-fw fa-user"></i>Manage Schedule</a>
                             </li>
+                             
+                            
+                            
                             </ul>
 
                                 <!--  <a href=""><i class="fa fa-fw fa-gear"></i> Settings </a> -->

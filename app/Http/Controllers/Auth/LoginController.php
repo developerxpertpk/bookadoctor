@@ -68,7 +68,7 @@ class LoginController extends Controller
                 }
                 if(Auth::user()->role_id == 4)
                 {
-                    $status2=Userprofile::where('user_id','=',Auth::user()->id)->first();
+                    // $status2=Userprofile::where('user_id','=',Auth::user()->id)->first();
 
                     if( $status2->plan_payment_status == 0){
                         return redirect()->route('medical.center.subscription.form')

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use Hash;
-use file;
+use File;
 //use Auth;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -17,6 +17,8 @@ use App\BookingDocuments;
 use Illuminate\Support\Facades\Mail;
 use App\Usersetting;
 use Carbon\Carbon;
+use App\BookingTransaction;
+
 
 
 
@@ -433,6 +435,31 @@ if (Auth::check()) {
 
     }
 
+      public function userhistory(){
+
+       $a = Auth::User()->id;
+       // print_r($a);
+       // die('klklk');
+       $b = Booking::where('user_id' , '=', $a)->distinct()->get();
+       //$c = $b->doctor_id;
+       // print_r($b);
+       // die('klklk');
+
+       foreach($b as $key){
+
+       
+        //Patient
+        // $key['doctor_fname'] = $key->is_users->is_profile->first_name;
+        // $key['doctor_lname'] = $key->is_users->is_profile->last_name;
+        // print_r($c);
+        // die('die');
+       }
+
+          //die('again');
+         return view('patient.appointment-history',compact('b'));
+       }
+       
+
 
 // public function profile(){
 
@@ -441,6 +468,201 @@ if (Auth::check()) {
 // die('kkkk');
 
 // }
+public function cancelbooking(Request $request,$id){
 
+     $c = $request['cancels'];
+    $reason = $request['reasoncancel'];
+    $book = Booking::find($id);
+    // echo "<pre>";
+    // print_r($book);
+    // die('jhjhjh');
+    $book->cancel_reason=$reason;
+    $book->status = $c;
+    $name = $book->is_users->is_Profile->first_name;
+    $email = $book->is_users->email;
+    $doctor_id =$request['did'];
+    $did = User::where('id','=',$doctor_id)->first()->email;
+    // echo "<pre>";
+    // print_r($email);
+    // die('klklkkl');
+
+   // $cancel = ['key' => 'Your Booking Has been canceled, Please Reschedule it.'];
+    $variable = $book->medic_id;
+    $var = $book->user_id;
+    // echo "<pre>";
+    // print_r($var);
+    // die('kjkjkjkj');
+    $a= $book->transaction;
+     echo "<pre>";
+    // print_r($a);
+    // die('kjkjkjkj');
+ 
+    $book->save();
+   // $booking->
+
+$userData = array();
+
+        $userData['name'] = $name;
+        $userData['email'] = $email;
+        $userData['doc_email']=$did;
+       //  
+       
+      
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+ Mail::send('emails.PatientCancelbooking',  $userData, function ($message) use ( $userData) {
+            $message->to($userData['doc_email'])
+                    ->subject('Bookings Cancel');
+        });
+
+        Mail::send('emails.PatientCancelbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Cancel');
+        });
+
+
+
+
+        Mail::send('emails.DoctorRefundbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Refund');
+        });
+
+            return redirect()->route('user.appointment.history');
 
 }
+
+public function reschedulebooking(Request $request,$id){
+
+   // $booking = Booking::find($id)->first();
+
+    // echo "<pre>";
+    $r = $request['reschedules'];
+   
+
+    $reason = $request['reschedule'];
+    $book = Booking::find($id);
+    $book->reschedule_reason=$reason;
+    $book->status = $r;
+    $name = $book->is_users->is_Profile->first_name;
+    $email = $book->is_users->email;
+     $doctor_id =$request['did'];
+    $did = User::where('id','=',$doctor_id)->first()->email;
+
+$userData = array();
+
+        $userData['name'] = $name;
+        $userData['email'] = $email;
+          $userData['doc_email']=$did;
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+        Mail::send('emails.Patientreschedulebooking',  $userData, function ($message) use ( $userData) {
+            $message->to($userData['doc_email'])
+                    ->subject('Bookings Cancel');
+        });
+
+
+        Mail::send('emails.Patientreschedulesbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['email'])
+                    ->subject('Bookings Reschedule');
+        });
+
+
+    $book->save();
+ return redirect()->route('user.appointment.history');
+ 
+}
+public function showbooking($id){
+ //print_r($id);
+  // $a = Auth::User()->id;
+   $key = Booking::where('id' , '=', $id)->first();
+
+  //print_r($key);
+   
+   //die('kjkjkjk');
+ 
+   $booling_docs= BookingDocuments::where('booking_id','=',$key->id)->get();
+   $payment_transction_deatils=BookingTransaction::where('booking_id','=',$key->id)->get();
+
+  
+ //    foreach($key as $v){
+     
+ //    print_r($v->status);
+   
+ //   die('kjkjkjk');
+ // }
+
+
+ //   foreach($b as $key){
+
+ //    $Dr = Userprofile::where('user_id','=',$key->doctor_id)->first()->gender;
+    // print_r($key);
+    // die('hjhjhjh');
+ // }
+ // die('mmmmm');
+
+   return view('patient.showbookings',compact('key','booling_docs','payment_transction_deatils'));
+}
+public function add_patient_document($id){
+ 
+
+   $booking_id=$id;
+        $booking = Booking::find($booking_id);
+        // echo "<pre>";
+        // print_r($booking);
+        // die('lklklkllkk');
+
+   return view('patient.add-documents',compact('booking'));
+
+}
+public function add_patient_document_submit(Request $request)
+    {
+        $files = $request->file('docimages') ;
+        // Making counting of uploaded images
+        $file_count = count($files);
+        // start count how many uploaded
+        $uploadcount = 0;
+        foreach($files as $file) {
+            $rules = array('file' => 'mimes:png,jpeg|required'); 
+            //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+            $validator = Validator::make(array('file'=> $file), $rules);
+            if($validator->passes()){
+                $destinationPath = public_path().'/images/documents/' ;
+                $fileName = rand(5,8).$file->getClientOriginalName();
+                $upload_success = $file->move($destinationPath, $fileName);
+                $uploadcount ++;
+
+            }
+            $dooking_id = $request['booking_id'];
+                $gallery = new BookingDocuments;
+                $gallery->booking_id=$dooking_id;
+                $gallery->documents=$fileName;
+                $gallery->save();
+          
+          
+        }
+
+
+        return $this->showbooking($dooking_id);
+
+
+    }
+
+ public function destroyDoc($id,$del)
+    {
+
+        $news = BookingDocuments::findOrFail($id);
+        $image_path = app_path("images/documents/{$news->documents}");
+
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        $news->delete();
+
+        return $this->showbooking($del);
+
+    }
+}
+ 

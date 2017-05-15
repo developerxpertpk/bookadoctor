@@ -19,6 +19,8 @@ use App\BookingDocuments;
 use Illuminate\Support\Facades\Mail;
 use App\Usersetting;
 use Carbon\Carbon;
+use App\speciality;
+use App\Schedule;
 
 
 class DoctorController extends Controller
@@ -61,10 +63,35 @@ return $this->profile();
   }
 
 public function loginnew(){
-  $user = Auth::User();
-  $userr = $user->is_Profile;
+  
+$speciality = Doctor_Speciality::where('user_id' , '=' , Auth::User()->id
+  )->get();
+
+foreach($speciality as $key){
+  //$user_id = 
+  $op[]= $key -> speciality_id;
+}
+
+foreach($op as $sep_name){
+
+  $speciality_nme = Speciality::where('id' , '=' , $sep_name)->first()->name;
+
+$spe_name_arr[]=$speciality_nme;
+
+}
+
+
+ $booki = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
+
+  $counts = Booking::where('doctor_id', '=' , Auth::User()->id)->count();
+
+
+$user = Auth::User();
  
- return view('doctor.profile', compact('user','userr'));
+
+  $userr = $user->is_Profile;
+
+ return view('doctor.profile', compact('userr','speciality','spe_name_arr','count'));
 
 }
 
@@ -89,28 +116,50 @@ public function loginnew(){
 
  public function update_profile(Request $request){
 
-if($request->file('image')) {
-                     $file = $request->file('image') ;
-                     $fileName = $file->getClientOriginalName();
-                     // echo "<pre>";
-                     // print_r($fileName);
-                     // die('sbsbsb');
+  $a = Auth::User()->id;
+
+$user = User::find($a);
+ 
+
+$user->email=$request['email'];
+
+$user->save();
+
+// $doc = Userprofile::find($user->id);
+
+
+$doc = Userprofile::where('user_id','=',Auth::User()->id )->first();
+$doc->user_id=$user->id;
+
+$doc->first_name=$request['first_name'];
+$doc->last_name=$request['last_name'];
+$doc->dob=$request['dob'];
+ 
+$doc->gender=$request['gender'];
+
+$doc['contact_no']=$request['contactno'];
+$doc['address']=$request['address'];
+$doc['state']=$request['state'];
+$doc['city']=$request['city'];
+$doc['country']=$request['country'];
+$doc['pincode']=$request['pincode'];
+
+ if($file = $request->hasFile('pic')) {
+ 
+                     $file = $request->file('pic') ;
+                     $fileName = $file->getClientOriginalName() ;
                      $extention = $file->getClientOriginalExtension();
                      $destinationPath = public_path().'/images/profile_pic/' ;
                      $file->move($destinationPath,$fileName);
-                    
+                     $doc->images=$fileName;
                  }
+ $doc->save();
 
- $user=Userprofile::Where('user_id','=',Auth::user()->id)->first();
- //$file = $request->hasFile('image');
- 	 
 
- $user->images=$fileName;
- $user->save();
- // echo "<pre>";
- //                     print_r($fileName);
- //                     die('sbsbsb');
- return $this->profile();
+return redirect()->route('doctor.profile');
+
+
+ 
  
  }
 
@@ -122,14 +171,14 @@ if($request->file('image')) {
    // print_r($user);
    // die('sss');
 
-   $booking = Booking::all()->where('doctor_id', '=' , Auth::User()->id);
+   $booking = Booking::where('doctor_id', '=' , Auth::User()->id)->get();
 
    // echo "<pre>";
    // print_r($booking);
    // die();
     //$a = Booking::count()->where('doctor_id', '=' , Auth::User()->id);
 
-    $count = Booking::where('doctor_id', '=' , Auth::User()->id)->count();
+    //$count = Booking::where('doctor_id', '=' , Auth::User()->id)->count();
      // echo"<pre>";
      // print_r($count);
      // die('klklklklkl');
@@ -162,8 +211,8 @@ if($request->file('image')) {
     // die('jkjkjkjkkj');
     return view('doctor.userprofile' , compact('booking','k'));
 
-      
-}
+}      
+
 
 
 public function cancelbooking(Request $request,$id){
@@ -189,9 +238,9 @@ public function cancelbooking(Request $request,$id){
     // print_r($var);
     // die('kjkjkjkj');
     $a= $book->transaction;
-     echo "<pre>";
-    print_r($a);
-    die('kjkjkjkj');
+   
+    // print_r($a);
+    // die('kjkjkjkj');
  
     
     $book->save();
@@ -276,58 +325,64 @@ if (Auth::check()) {
   return view('doctor.dashboard.home' ,compact('count'));
  }
 
-  public function manageschedule(){
+  public function manageschedule(Request $request){
 
     $user = Auth::User();
    
     $userr = $user->is_Profile;
 
-    $u = $user->usersetting;
-     $a = $user->id;
+    $schedule = $user->usersetting;
+    $doctorId = $user->id;
 
 
+// $schedules = Usersetting::where('user_id' , '=',$doctorId );
+//                 $schedules = new Usersetting;
+//                 $schedules->user_id=Auth::User()->id;
+//                 $schedules->day=$request['days'];
+//                 $schedules->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
+//                 $schedules->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
+//                 $schedules->save();
+//                 return  redirect(route('manage.scedule',compact('user','doctorId','schedule','schedules')));
+            
 
-    // foreach($u as $key){
-    //   $a = $key->day;
-    //    echo"<pre>";
-    // print_r($a);
-    // die('mnmnmnmnmn');
-    // }
-   // die('jhhjh');
-
-
-       return view('doctor.doctor-manage-schedule' , compact('userr','a','u'));
+       return view('doctor.doctor-manage-schedule' , compact('userr','doctorId','schedule'));
   }
 
-  public function editschedule(Request $request){
+  public function insertschedule(Request $request){
+
+
      $user = Auth::User();
 
-     $a = $user->id;
+     $user_id = $user->id;
      // echo"<pre>";
      // print_r($a);
      // die('qwertyu');
-   
+  
+   // echo"<pre>";
+   // print_r($day);
+   // die('jkjkjkjkj');
 
-     if($request['weekdays']!=NULL)
+     if($request['days']!=NULL)
         {
-            if(Usersetting::where('user_id' , '=',$request['user_id'] )->count()==0){
+      // Usersetting::where('user_id' , '=',$request['user_id'] )->count()==0)
+            if(Usersetting::where('user_id' , '=',$request['user_id'] )){
                 $schedule = new Usersetting;
                 $schedule->user_id=$request['user_id'];
-                $schedule->day=implode(",", $request['weekdays']);
+                $schedule->day=$request['days'];
                 $schedule->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
                 $schedule->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
                 $schedule->save();
-                return  redirect(route('manage.scedule' ,compact('user','a')));
+                return  redirect(route('manage.scedule' ,compact('user','user_id')));
             }
             else {
 
                 $val=Usersetting::where('user_id' , '=',$request['user_id'])->pluck('id');
                 $sch=Usersetting::find($val);
-                $sch->day=implode(",", $request['weekdays']);
+                $sch->day= $request['days'];
                 $sch->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
                 $sch->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
                 $sch->save();
-                return  redirect(route('manage.scedule',compact('user','a')));
+                return  redirect(route('manage.scedule',compact('user','user_id','day')));
 
 
             }
@@ -335,6 +390,54 @@ if (Auth::check()) {
 
 
 
+}
+public function deleteschedule($id){
+ 
+  $delschedule = Usersetting::find($id)->delete();
+  
+     return redirect()->back();
+}
+
+public function editschedule(Request $request , $id){
+   $user = Auth::User();
+
+     $user_id = $user->id;
+     
+     $delschedule = Usersetting::find($id);
+     $day = $delschedule->day;
+     // echo"<pre>";
+     // print_r($day);
+     // die('mmmmm');
+     $delschedule->time_in=$request['from_time'];
+     $delschedule->time_out=$request['to_time'];
+      $delschedule->save();
+     return redirect()->back();
+
+//      if($request['days']!=NULL)
+//         {
+//       // Usersetting::where('user_id' , '=',$request['user_id'] )->count()==0)
+//             if(Usersetting::where('user_id' , '=',$request['user_id'] )){
+//                 $schedule = new Usersetting;
+//                 $schedule->user_id=$request['user_id'];
+//                 $schedule->day=$request['days'];
+//                 $schedule->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
+//                 $schedule->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
+//                 $schedule->save();
+//                 return  redirect(route('manage.scedule' ,compact('user','user_id')));
+//             }
+//             else {
+
+//                 $val=Usersetting::where('user_id' , '=',$request['user_id'])->pluck('id');
+//                 $sch=Usersetting::find($val);
+//                 $sch->day= $request['days'];
+//                 $sch->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
+//                 $sch->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
+//                 $sch->save();
+//                 return  redirect(route('manage.scedule',compact('user','user_id','day')));
+
+
+//             }
+// }
 }
 
 public function patientHistory($id){
@@ -380,7 +483,7 @@ public function bookinghistory(Request $request){
  
         $b = User::find($a);
         $c=  $b->drbookings;
-  //                          echo"<pre>";
+  //echo"<pre>";
   // print_r($c);
   //       DIE('A');
         foreach ($c as $key) {
@@ -396,6 +499,8 @@ public function bookinghistory(Request $request){
                     $return_array[]=array("id"=>$name_data->user_id,"label"=>"$name_data->first_name");
                     //$return_array['user_id'] = $name_data->user_id;
                     //$return_array['value'] = $name_data->user_id;
+                    // print_r($return_array);
+                    // die('ghghghhgh');
                   };
                   
                 //dd($return_array);
@@ -404,9 +509,14 @@ public function bookinghistory(Request $request){
 
     }
     public function historyProfile(Request $request){
-      die('kjjkjkjkj');
+
+//$patient_user_id = $_POST['id'];
+//print_r($patient_user_id);
+//die('komal');
 
     $id=$request->data1;
+    
+   
 
     $booking = Booking::where('user_id','=',$id)->get();
 
@@ -417,16 +527,58 @@ public function bookinghistory(Request $request){
    foreach ($booking as $key) 
    {
      $key['name']=$key->is_users->is_profile->first_name." ".$key->is_users->is_profile->last_name;
-     print_r($key['name']);
-     die('jhjhjhhj');
+    
    
     $key['documents']=$key->documents;
 
     $key['booking']=Booking::where('user_id','=',$key->user_id)->where('doctor_id','=',Auth::User()->id)->get();
   }
-   return response()->json($booking);
+  //return response($booking);
+return response()->json($booking);
     //return redirect()->route('user.profile',$id);
 }
+
+public function AddDocuments($id){
+
+ $booking_id=$id;
+        $booking = Booking::find($booking_id);
+
+  return view('doctor.add-documents',compact('booking'));
+}
+public function add_doctor_document_submit(Request $request)
+    {
+        $files = $request->file('docimages') ;
+        // Making counting of uploaded images
+        $file_count = count($files);
+        // start count how many uploaded
+        $uploadcount = 0;
+        foreach($files as $file) {
+            $rules = array('file' => 'mimes:png,jpeg|required'); 
+            //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+            $validator = Validator::make(array('file'=> $file), $rules);
+            if($validator->passes()){
+                $destinationPath = public_path().'/images/documents/' ;
+                $fileName = rand(5,8).$file->getClientOriginalName();
+                $upload_success = $file->move($destinationPath, $fileName);
+                $uploadcount ++;
+
+            }
+            $dooking_id = $request['booking_id'];
+                $gallery = new BookingDocuments;
+                $gallery->booking_id=$dooking_id;
+                $gallery->documents=$fileName;
+                $gallery->save();
+          
+          
+        }
+
+
+        return $this->bookingsProfile($dooking_id);
+
+
+    }
+
+
  
 
 }

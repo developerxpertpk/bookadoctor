@@ -192,6 +192,7 @@
 }
 
 
+
 /*radio button code start*/
 
 .add-services .radio-group input[type=radio] {
@@ -227,3 +228,18 @@
 }
 
 /* radio button code end*/
+
+.panel-heading {
+    margin-bottom:2%;
+    float: left;
+    width: 100%;
+}
+.btn-padding{
+        padding-left: 20px;
+    padding-right: 20px;
+}
+.doctor-profile .panel-body {
+    padding: 15px;
+    border-top: 1px solid #ccc;
+}
+

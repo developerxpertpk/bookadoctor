@@ -79,6 +79,7 @@ tr[i].style.display = "none";
 	</tr>
 	
 	@foreach($booking as $key)
+	
 	@if($key->payment_status == 1)
 	<tr>
 		<td>{{$key->id}}</td>
@@ -96,12 +97,12 @@ tr[i].style.display = "none";
 			@endif</td>
 			<td>{{$key->reason}}</td>
 			<td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $key->Appointment_timings)->format('Y-m-d') }}</td>
-			
-		
-		<td>
+			<td>
 			<a href="{{ route('user.profile', $key->id) }}" class="edit_pro_btn">Show Details</a>
 		</td>
 	</tr>
+	
+
 	@endif
 	@endforeach
 	

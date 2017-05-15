@@ -190,3 +190,16 @@
     background: #37bbe6;
     border-radius: 0 0 4px 4px;
 }
+.panel-heading {
+    margin-bottom:2%;
+    float: left;
+    width: 100%;
+}
+.btn-padding{
+        padding-left: 20px;
+    padding-right: 20px;
+}
+.doctor-profile .panel-body {
+    padding: 15px;
+    border-top: 1px solid #ccc;
+}

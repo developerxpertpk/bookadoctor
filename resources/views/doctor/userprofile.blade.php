@@ -17,9 +17,7 @@
 								<p>Name : {{$booking->is_users->is_Profile->first_name}}  {{$booking->is_users-> is_Profile->last_name}} </p>
 								<p>Diseases : {{$booking->reason}}</p>
 								<p>Contact No. : {{$booking->is_users->is_Profile->contact_no}}</p>
-								<p>Address : {{$booking->is_users->is_Profile->address}}</p>
-								<p>City : {{$booking->is_users->is_Profile->city}}</p>
-								<p>State : {{$booking->is_users->is_Profile->state}}</p>
+								<p>Address : {{$booking->is_users->is_Profile->address}} , {{$booking->is_users->is_Profile->city}},{{$booking->is_users->is_Profile->state}}</p>
 								<p>Zip Code : {{$booking->is_users->is_Profile->pincode}}</p>
 								
 							</div>
@@ -48,7 +46,7 @@
 								<p class="documents">Documents :
 									@foreach($k as $key)
 									<div class="col-md-6">
-										<a href="{{asset('/images/documents/'.$key->documents) }}" data-lightbox=" {{asset('/images/documents/'.$key->documents) }}" >
+										<a href="{{asset('/images/documents/'.$key->documents) }} "  data-lightbox="roadtrip" >
 											<img src="{{asset('/images/documents/'.$key->documents) }}" class="embed">
 										</a>
 									</div>
@@ -59,22 +57,34 @@
 						</div>
 						<div class="col-md-4">
 							<div class="profile-col-3">
+
+							<!-- Add Bookings -->
+								
+								<!-- 
+								{!! Form::open(array('route' => array('doctor.documents.add',$booking->id),'method'=>'POST')) !!}
+										{!! csrf_field() !!}
+								<button type ="submit" class="edit_pro_btn top"> Add Documents</button>
+								{{Form::close()}}
+								</div> -->
+								<a href="{{route('doctor.documents.add',$booking->id)}}" class="edit_pro_btn">Add Documents</a>
+								<!-- End add Bookings -->
 								<!-- Complete Booking -->
 								<div class="complete">
-									<div col-md-12>
+									
 										{!! Form::open(['route' => ['booking.complete', $booking->id]] ) !!}
 										{!! csrf_field() !!}
 										<input type="hidden" value="1" name="completes">
-										<input type="submit" class="edit_pro_btn"  name="complete" value="Complete">
-									</div>
+										<input type="submit" class="edit_pro_btn tops"  name="complete" value="Complete">
+										{{Form::close()}}
+									
 								</div>
-								
-								
+	
 								<div col-md-12>
 									<div class="reschedule">
-										<button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#reschedule">
+										<!-- <button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#reschedule">
 										Reschedule
-										</button>
+										</button> -->
+										<a class="edit_pro_btn" data-toggle="modal" data-target="#reschedule">Reschedule</a>
 										<!-- Reschedule Modal -->
 										<div class="modal fade" id="reschedule" role="dialog">
 											<div class="modal-dialog">
@@ -93,11 +103,12 @@
 														<textarea class="form-control" placeholder="Message" name="reschedule">
 														</textarea>
 													</div>
-												</div>
+												
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
 													<button type="submit" class="btn btn-default" id="sub">Submit</button>
 												</div>
+                                                    </div>
 											</div>
 										</div>
 										
@@ -108,9 +119,10 @@
 								<!-- End Reschedule Modal -->
 								<div col-md-12>
 									<div class="cancel">
-										<button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#myModal">
+										<!-- <button type="button" class="edit_pro_btn" data-toggle="modal" data-target="#myModal">
 										Cancel
-										</button>
+										</button> -->
+										<a class="edit_pro_btn" data-toggle="modal" data-target="#myModal">Cancel</a>
 										<!-- Cancel Modal -->
 										
 										<div class="modal fade" id="myModal" role="dialog">
@@ -141,8 +153,21 @@
 									</div>
 									{{Form::close()}}
 								</div>
-							</div>
-							<!-- Style -->
+								<!-- End cancel booking -->
+
+							
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+
+	<!-- Style -->
 							<style>
 							.profile-col-3{
 								margin-top:20px;
@@ -178,12 +203,14 @@
 								float: left;
 								width: 100%;
 							}
+							.top{
+								margin-bottom:10px;
+							}
+							.edit_pro_btn .tops{
+								margin-bottom:8px;
+							}
 							</style>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Script -->
+<!-- Script -->
 			<script>
 			$(document).ready(function(){
 			$('a.embed').gdocsViewer();
@@ -191,10 +218,4 @@
 			</script>
 			<script src="{{ asset('js/lightbox-plus-jquery.js') }}"></script>
 			<!-- End Script -->
-		</div>
-	</div>
-</div>
-</div>
-</div>
-</div>
 @endsection

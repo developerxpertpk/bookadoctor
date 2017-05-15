@@ -14,8 +14,8 @@
                             <p>Contact Number : +91-{{$paitent_detail->contact_no}}</p>
                             <p>Address : {{$paitent_detail->address}}</p>
                             <p>Country : {{$paitent_detail->country}}</p>
-                            <p>State : {{$paitent_detail->state}}</p>
-                            <p>City : {{$paitent_detail->city}}</p>
+                            <p>State :   {{$paitent_detail->state}}</p>
+                            <p>City :    {{$paitent_detail->city}}</p>
                             <p>Pincode : {{$paitent_detail->pincode}}</p>
                         </div>
                         <div class="col-md-2">
@@ -25,8 +25,8 @@
                             <p>Contact Number : +91-{{$doctor_detail->contact_no}}</p>
                             <p>Address : {{$doctor_detail->address}}</p>
                             <p>Country : {{$doctor_detail->country}}</p>
-                            <p>State : {{$doctor_detail->state}}</p>
-                            <p>City : {{$doctor_detail->city}}</p>
+                            <p>State :   {{$doctor_detail->state}}</p>
+                            <p>City :    {{$doctor_detail->city}}</p>
                             <p>Pincode : {{$doctor_detail->pincode}}</p>
                         </div>
                         <div class="col-md-4">
@@ -96,8 +96,8 @@
 @foreach($booling_docs as $booling_doc)
     <div class="col-md-6">
 
-    {{--<img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" alt="{{$booling_doc->documents}}">--}}
-{{-- <a href="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" target="_blank"><img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" class="new-small-img"></a> --}}
+   <!-- <img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" alt="{{$booling_doc->documents}}">
+<a href="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" target="_blank"><img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" class="new-small-img"></a>  -->
 
         <a data-toggle="lightbox" href="#bookingdocs_{{$booling_doc->id}}">
 

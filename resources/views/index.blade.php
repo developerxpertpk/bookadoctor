@@ -120,7 +120,7 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right"> @if(isset($page)) @foreach($page as $key)
                                 <li class="dropdown"> <a href="{{$key->slug}}">{{$key->title}}</a></li> @endforeach @endif
-                                @if (Auth::guest())
+                                {{-- @if (Auth::guest()) --}}
                                 <li class="dropdown"> <a href="#" data-toggle="modal" data-target="#myModall">Login</a>
                                 <div class="modal fade" id="myModall" tabindex="-1" role="dialog" aria-labelledby="myModalLabell">
                                     <div class="modal-dialog" role="document">
@@ -180,61 +180,7 @@
                                             
                                         </ul>
                                     </li>
-                                    @else
-                                    {{-- <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            {{ Auth::user()->name }} <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="{{ route('logout') }}"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                                    Logout
-                                                </a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    {{ csrf_field() }}
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </li> --}}
-                                    <li> <img id="profile_avatar" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_Profile->first_name }}&nbsp;{{ Auth::user()->is_Profile->last_name }}  <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            @if(Auth::user()->role_id==4)
-                                            <li><a href="{{ route('medical.center.dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
-                                            @endif
-                                            <li><a href="{{route('medical.center.image.gallery')}}"><i class="fa fa-fw fa-user"></i> Show Profile</a></li>
-                                            <li>
-                                                <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('medical.center.settings')}}"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            {{--<li>--}}
-                                                {{--{{ Auth::user()->email }}--}}
-                                            {{--</li>--}}
-                                            <li>
-                                                <li>
-                                                    <a href="{{ route('logout') }}"
-                                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i>
-                                                        Logout
-                                                    </a>
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        {{ csrf_field() }}
-                                                    </form>
-                                                    {{-- <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a> --}}
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        @endif
-                                        <!--  <li> settings
-                                            <a href="#" <i class="fa fa-cog" aria-hidden="true"></i></a>
-                                            
-                                        </li>-->
+                                   
                                     </div>
                                 </div>
                                 

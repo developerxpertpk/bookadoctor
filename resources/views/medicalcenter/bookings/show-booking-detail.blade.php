@@ -90,54 +90,39 @@
                              @endforeach
                           </table>
                         </div>
+
                         <div class="col-md-4">
                             <h3>Documents Details</h3>
                             <a href="{{route('patient.document.upload.form',$booking_detail->id)}}" class="edit_pro_btn" id="yourBtn">Click To Add Document</a>
 @foreach($booling_docs as $booling_doc)
-    <div class="col-md-6">
 
-    {{--<img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" alt="{{$booling_doc->documents}}">--}}
-{{-- <a href="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" target="_blank"><img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" class="new-small-img"></a> --}}
 
-        <a data-toggle="lightbox" href="#bookingdocs_{{$booling_doc->id}}">
+
+ <div class="col-md-6">
+
+    
+        <a href="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" data-toggle="lightbox" data-gallery="example-gallery">
 
             <img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}" class="new-small-img">
 
         </a>
-
-        <div id="bookingdocs_{{$booling_doc->id}}" class="lightbox fade"  tabindex="-1" role="dialog" aria-hidden="true">
-
-            <div class='lightbox-dialog'>
-
-                <div class='lightbox-content'>
-                    {!! Form::open(['method' => 'DELETE','route' => ['document.destroy', $booling_doc->id,$booling_doc->booking_id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+{!! Form::open(['method' => 'DELETE','route' => ['document.destroy', $booling_doc->id,$booling_doc->booking_id],'style'=>'display:inline']) !!}
+                    {!! Form::submit('Delete', ['class' => 'edit_pro_btn1']) !!}
                     {!! Form::close() !!}
-                    <button type="button" class="close" data-dismiss="lightbox" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <img src="http://www.drbooking.com/images/documents/{{$booling_doc->documents}}">
-
-                    <div class='lightbox-caption'>
-
-                        Write here your caption heress
-
-                    </div>
-
-                </div>
-
-            </div>
 
         </div>
 
-    </div>
     @endforeach
 
+ </div>
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    
+
     <script>
                 @if(Session::has('notification'))
         var type = "{{ Session::get('notification.alert-type', 'info') }}";

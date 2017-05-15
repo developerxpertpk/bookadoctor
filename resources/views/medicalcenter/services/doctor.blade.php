@@ -54,12 +54,9 @@
                                             <a class="btn btn-primary" href="" data-toggle="modal" data-target=".bs-assign-speciality{{$item->id }}">Assign speciality</a>
                                               @endif
 
-                                                @if(App\Usersetting::where('user_id','=',$item->user_id)->get()->count()==0)
-                                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp{{$item->id }}">Add Doctor Schedule</a>
-                                                @endif
-                                                @if(App\Usersetting::where('user_id','=',$item->user_id)->get()->count()==1)
-                                                    <a class="btn btn-primary" href="" data-toggle="modal" data-target="#myModelkkklpp{{$item->id }}">Update Doctor Schedule</a>
-                                                @endif
+                                              
+                <a class="btn btn-primary" href="{{route('assign.doctor.service',$item->id)}}">Add Doctor Schedule</a>
+                                                
 
 
 
@@ -77,10 +74,14 @@
                                                                 <input type="hidden" value="{{$item->user_id}}" name="doc_id">
                                                                 <table>
                                                                     <tr><th>Specilaty</th></tr>
+                                                                     @if(isset($specilaty))
                                                                     @foreach($specilaty as $key => $doc_specilaty)
+                                                                    @if($doc_specilaty->status=="speciality")
 
                                                                         <tr><td colspan="2"> <input type="checkbox" value="{{$doc_specilaty->id}}" name="specilaty[{{$doc_specilaty->name}}]">&nbsp;{{$doc_specilaty->name}}</td></tr>
+                                                                        @endif
                                                                     @endforeach
+                                                                    @endif
 
                                                                 </table>
                                                                 <input type="submit" value="Add Specilaty to {{ $item->first_name }}" class="edit_pro_btn">
@@ -120,7 +121,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <p> Select Your Working Hour's</p>
+                                                        <p> Select Your Working Hours</p>
                                                         <div class="col-md-2">
                                                             <p>From </p>
                                                         </div>

@@ -15,6 +15,7 @@ use File;
 use Session;
 use Illuminate\Support\Facades\Input;
 
+
 class MedicalcenterBookingController extends Controller
 {
     public function index(){
@@ -290,10 +291,12 @@ public function documents_upload_submit(Request $request)
 
         }
         //print_r($a);
+        if(isset($a)){
         foreach ($a as $key=>$val){
             $bookings_payments[]=  BookingTransaction::where('booking_id','=',$val)->get();
 
         }
+    }
 //
 //echo "<pre>";
 //        print_r($bookings_payments);

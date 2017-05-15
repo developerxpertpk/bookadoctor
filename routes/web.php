@@ -130,6 +130,8 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
                     Route::get('medical-center-show-pending-booking','MedicalcenterBookingController@show_pending_booking')->name('medical.center.pending.booking.show');
                     Route::get('medical-center-show-canceled-booking','MedicalcenterBookingController@show_canceled_booking')->name('medical.center.canceled.booking.show');  
                     Route::get('medical-center-show-completed-booking','MedicalcenterBookingController@show_completed_booking')->name('medical.center.completed.booking.show');
+                    Route::get('assign-service-to-doctor-{id}','MedicalcenterServiceController@assign_service_to_doctor')->name('assign.doctor.service');
+                   
                 
             });
             //patients Routes

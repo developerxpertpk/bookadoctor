@@ -199,5 +199,10 @@ Route::delete('booking-documents-delete/{id}-{del}','PatientController@destroyDo
 Route::get('/documents/{id}','DoctorController@AddDocuments')->name('doctor.documents.add');
 Route::post('/adddocumnents','DoctorController@add_doctor_document_submit')->name('doctor.document.submit');
 
+
 // Route::get('/{page}','HomenewController@show')->name('dynamic');
 //booking
+                    
+                 
+                
+                 

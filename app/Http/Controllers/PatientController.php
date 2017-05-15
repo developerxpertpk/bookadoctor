@@ -238,6 +238,101 @@ if (Auth::check()) {
 
 
  }
+ public function city(Request $request)
+    {
+
+      $term=$request->term;
+      $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
+     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+      //dd($data);
+      $results=array();
+      foreach ($data as $key => $v) {
+          //if($v->getUser->role_id == 4)
+          //{
+          $results[]=['value'=>$v->city];
+          //}
+
+      }
+
+
+      return response()->json($results);
+
+    }
+    public function medicalcenter(Request $request)
+    {
+      $term=$request->term;
+      $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
+     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+      //dd($data);
+
+      $results=array();
+      foreach ($data as $key => $v) {
+        //if($v->getUser->role_id == 4)
+        //{
+          $results[]=['value'=>$v->title];
+        //}
+
+      }
+
+      return response()->json($results);
+
+    }
+    public function disease(Request $request)
+    {
+      $term=$request->term;
+      $data=Booking::where('reason','LIKE','%'.$term.'%')->select('reason')->distinct()->get();
+     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+      //dd($data);
+
+      $results=array();
+      foreach ($data as $key => $v) {
+        //if($v->getUser->role_id == 4)
+        //{
+          $results[]=['value'=>$v->reason];
+        //}
+
+      }
+
+      return response()->json($results);
+
+    }
+    public function state(Request $request)
+    {
+      $term=$request->term;
+      $data=Userprofile::where('state','LIKE','%'.$term.'%')->select('state')->distinct()->get();
+     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+      //dd($data);
+
+      $results=array();
+      foreach ($data as $key => $v) {
+        //if($v->getUser->role_id == 4)
+        //{
+          $results[]=['value'=>$v->state];
+        //}
+
+      }
+
+      return response()->json($results);
+
+    }
+    public function country(Request $request)
+    {
+      $term=$request->term;
+      $data=Userprofile::where('country','LIKE','%'.$term.'%')->distinct()->get();
+     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+      //dd($data);
+
+      $results=array();
+      foreach ($data as $key => $v) {
+          if($v->getUser->role_id == 4){
+          $results[]=['value'=>$v->country];
+        }
+
+      }
+
+      return response()->json($results);
+
+    }
 
   public function appointment(){
 

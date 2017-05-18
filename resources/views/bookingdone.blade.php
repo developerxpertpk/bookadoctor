@@ -66,6 +66,9 @@
     width: 100px!important;
     margin-left: -20px;
 }
+.panel-heading h2{
+  text-align: center;
+}
 /*.profile{
 	float:left;
 	    width: 65px;
@@ -103,7 +106,7 @@
                     {{ Auth::user()->first_name }}&nbsp;{{ Auth::user()->last_name }}  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ route('patient.profile.login') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                                                    
                         <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
@@ -204,40 +207,40 @@
 <!--Profile portion-->
 <div class="container profile">
  <div class="col-xs-12 panel panel-info">
-            <div class="panel-heading">
-			<h3> Make Your Booking Here</h3>
-			
+      <div class="panel-heading">
+			<h2> Thank You For Booking</h2>
 			</div>
-			 <div class="panel-body">
+         <div class="panel-body">
               <div class="row">
-              	 <form id="logout-form" action="{{ route('patient.appointment') }}" method="POST" ">
-           			 {{ csrf_field() }}
-           		<div class="panel-body">
-           		<div class=" form-group form-inline">
-           			<div class="ui-widget">
-						<label for="city" class="col-md-4  contro-label">  Select City </label> <!--  Cities -->   
-						<input id="city" name="city" class="form-control col-md-6 ">
-					</div>
-					</div>
-					<div class=" form-group form-inline">
-					<div class="ui-widget">
-						<label for="medical " class="col-md-4 contro-label"> Medical Center Name </label> <!--  Medical Centers -->   
-						<input id="medicalcenter" name="medical" class="form-control col-md-6  ">
-					</div>
-					</div>
-					
-					<div> <!-- Reason -->
-					</div>
-           			</form>
+
+              <h3>Your Booking Details</h3>
+
+              <h4> Patient's Name:{{$booking->is_users->is_profile->first_name}} {{$booking->is_users->is_profile->last_name}}</h4>
+              <h4> Medical Center Name:{{$booking->is_medical->is_profile->title}}</h4>
+              <h4> Doctor Name:{{$booking->is_doctors->is_profile->first_name}} {{$booking->is_doctors->is_profile->last_name}}</h4>
+              <h4> Appointment Day:{{date('l',strtotime($booking->Appointment_timings))}}</h4>
+              <h4> Appointment Date:{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $booking->Appointment_timings)->format('Y-m-d')}}</h4>
+              <h4> Appointment Timings:{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $booking->Appointment_timings)->format('H:i')}}</h4>
+
+
+      </div>
 
               </div>
-              </div>
-			<div class-="viewdoctors">
-			 <div class="row" id="micro">
-        </div>
-              </div>
-              </div>
-
+<form action="/your-server-side-code" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_CMz1FV6eGAeTExI07kCyGADa"
+    data-amount="{{$pieces}}"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-zip-code="true">
+  </script>
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="cost" value="{{$pieces}}">
+  <input type="hidden" name="id" value="{{ $booking->id }}">
+</form>
               </ul>
               </ul>
               </li>

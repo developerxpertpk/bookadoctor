@@ -17,6 +17,29 @@
     border-radius: 50%;
     width: 200px;
 }
+.profile_li{
+   list-style: none;
+}
+.img-circle {
+    height: 200px;
+    border-radius: 50%;
+    width: 200px;
+}
+.dropdown{
+  float:right;
+  list-style: none;
+  /*width:70%;*/
+  margin:0px;
+}
+.dropdown ul li{
+ /* float:right;*/
+    list-style: none;
+    text-decoration: none;
+ 
+}
+.nav navbar-nav li{
+  list-style: none;
+}
 /*.profile{
 	float:left;
 	    width: 65px;
@@ -48,7 +71,7 @@
               <li class="active"><a href="#">Dr.Booking</a></li>
             </ul>
             @if(Auth::Check())
-            <li> <img id="profile_avatar" class="profile" src=""></li>
+            <li class="profile_li"> <img id="profile_avatar" class="profile" src=""></li>
              <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>   
                     {{ Auth::user()->first_name }}&nbsp;{{ Auth::user()->last_name }}  <b class="caret"></b></a>

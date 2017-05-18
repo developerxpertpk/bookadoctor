@@ -71,40 +71,59 @@ tr[i].style.display = "none";
 <table class="table table-bordered" id="doctor">
 	
 	<tr>
-		<th>Bookings Id</th>
+		<th>Sr/No.</th>
 		<th>Status</th>
 		<th>Problem</th>
 		<th>Date</th>
 		<th>Action</th>
 	</tr>
-	
-	@foreach($booking as $key)
-	
-	@if($key->payment_status == 1)
-	<tr>
-		<td>{{$key->id}}</td>
-		<td>@if($key->status == 0)
-			{{'Pending'}}
-			@endif
-			@if($key->status == 1)
-			{{'Complete'}}
-			@endif
-			@if($key->status == 2)
-			{{'Cancel'}}
-			@endif
-			@if($key->status == 3)
-			{{'Reschedule'}}
-			@endif</td>
-			<td>{{$key->reason}}</td>
-			<td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $key->Appointment_timings)->format('Y-m-d') }}</td>
-			<td>
-			<a href="{{ route('user.profile', $key->id) }}" class="edit_pro_btn">Show Details</a>
-		</td>
-	</tr>
-	
+	<?php 
 
-	@endif
+		foreach(explode('=',$_SERVER['REQUEST_URI']) as $test){
+			$count=$test;
+		}
+
+		if($count > 1){
+			$count--;
+			$diff=$count;
+			$diff--;
+			$srno=($paginate*$count)-$diff;	
+		}else{
+			$srno=1;
+		}
+		
+
+	?>
+
+	@foreach($booking as $key)
+		@if($key->payment_status == 1)
+		<tr>
+		
+			<td>{{$srno}}</td>
+			<td>@if($key->status == 0)
+				{{'Pending'}}
+				@endif
+				@if($key->status == 1)
+				{{'Complete'}}
+				@endif
+				@if($key->status == 2)
+				{{'Cancel'}}
+				@endif
+				@if($key->status == 3)
+				{{'Reschedule'}}
+				@endif</td>
+				<td>{{$key->reason}}</td>
+				<td>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $key->Appointment_timings)->format('Y-m-d') }}</td>
+				<td>
+				<a href="{{ route('user.profile', $key->id) }}" class="edit_pro_btn">Show Details</a>
+			</td>
+		</tr>
+		<?php
+			$srno++;
+		?>
+
+		@endif
 	@endforeach
-	
+	{{$booking->links()}}
 </table>
 @endsection

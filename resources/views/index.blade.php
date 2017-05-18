@@ -1,88 +1,179 @@
 <!DOCTYPE html>
 <html ng-app>
 
-<head>
-    {{-- Bootstrap core CSS
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
-    <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
-    <script src="{{asset('js/app.js')}}"></script>
-    <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/angular/angular-messages.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script> --}}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_token" content="{{ csrf_token() }}">
-    <title>Dr. Booking</title>
-    <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/morris.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/medical-admin.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}"> {{--
-    <link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
-    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-    <script>
-        window.Laravel = {!!json_encode([
-                'csrfToken' => csrf_token(),
-            ]) !!
-        };
-
-    </script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/ajax-function.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/jquery.form.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/jquery.table2excel.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc" type="text/javascript"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
-    <script>
-        $(function() {
-            $("#datepicker").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: 'yy-mm-dd'
-            });
-            $("#city").autocomplete({
-                source: "{{URL::route('city')}}",
-                minLength: 1,
-                select: function(event, ui) {
-                    $("#city").val(ui.item.value);
-                }
-            });
-            $("#state").autocomplete({
-                source: "{{URL::route('state')}}",
-                minLength: 1,
-                select: function(event, ui) {
-                    $("#state").val(ui.item.value);
-                }
-            });
-            $("#country").autocomplete({
-                source: "{{URL::route('country')}}",
-                minLength: 1,
-                select: function(event, ui) {
-                    $("#country").val(ui.item.value);
-                }
-            });
+    <head>
+        {{--  Bootstrap core CSS
+        <link href="{{asset('css/app.css')}}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
+        <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+        <script src="{{asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/angular/angular-messages.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script> --}}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_token" content="{{ csrf_token() }}">
+        <title>Dr. Booking</title>
+        <link rel="shortcut icon" href="{{{ asset('images/favicon.png') }}}">
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/morris.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/medical-admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
+        {{--<link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
+        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+        <script>
+        window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        ]) !!};
+        </script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/jssor.slider-22.2.0.mini.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/velocity.ui.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/ajax-function.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.form.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.table2excel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
+        type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+        <script src="{{ asset('js/toastr.min.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
+        <script>
+        $( function() {
+        $( "#datepicker" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'
         });
+        $( "#city" ).autocomplete({
+        source: "{{URL::route('city')}}",
+        minLength: 1,
+        select: function( event, ui ) {
+        $("#city").val(ui.item.value);
+        }
+        });
+        $( "#state" ).autocomplete({
+        source: "{{URL::route('state')}}",
+        minLength: 1,
+        select: function( event, ui ) {
+        $("#state").val(ui.item.value);
+        }
+        });
+        $( "#country" ).autocomplete({
+        source: "{{URL::route('country')}}",
+        minLength: 1,
+        select: function( event, ui ) {
+        $("#country").val(ui.item.value);
+        }
+        });
+         var locations = {!! json_encode($locations->toArray()) !!};
+         //console.log(locations);
+    var geocoder =new google.maps.Geocoder();
+    var mymap = new GMaps({
+      el: '#mymap',
+      lat: 21.170240,
+      lng: 72.831061,
+      zoom:4,
+    });// Gmaps end
+    //console.log(locations);
+     $.each( locations, function( index, value ){
+        var geocoder = new google.maps.Geocoder();
+        if(value.address !== null)
+        {
+          console.log(value.address);
+        var address = value.address+','+value.city+','+value.state+','+value.country;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            var longitude = results[0].geometry.location.lng();
+        mymap.addMarker({
+          lat: latitude,
+          lng: longitude,
+          title: value.city,
+          infoWindow: {
+                content: '<p><b><img src="{{asset('images/medic.png' )}}">'+value.title+'</b><br>'+value.address+'</p><p>'+value.city+','+value.state+','+value.country+'</p>'
+                        },
+          mouseover: function(e){
+                this.infoWindow.open(this.map, this);
+            },
+         /* mouseout: function(e){
+                this.infoWindow.close(this.map, this);
+            },*/
+             mouseout: function(e){
+                 this.infoWindow.close(this.map, this);
+             }
+           
+        });}//add marker ends ends
+    });
+      }});
+    $( "#citybar" ).autocomplete({
+         source: "{{URL::route('city2')}}",
+         minLength: 1,
+         select: function( event, ui ) {
+            // alert(ui.item.value);
+             document.getElementById("services").value ="";
+             var geocoder = new google.maps.Geocoder();
+             var address = ui.item.value;//value=City Name
+             geocoder.geocode({ 'address': address }, function (results, status) {
+         if (status == google.maps.GeocoderStatus.OK) {
+             var latitude = results[0].geometry.location.lat();
+             var longitude = results[0].geometry.location.lng();
+             //alert(latitude);
+             var mymap = new GMaps({
+             el: '#mymap',
+             lat: latitude,
+            lng: longitude,
+             zoom:13,
+     });
+             $.each( locations, function( index, value ){
+         var geocoder = new google.maps.Geocoder();
+         var address = value.address+','+value.city+','+value.state+','+value.country;
+         geocoder.geocode({ 'address': address }, function (results, status) {
+         if (status == google.maps.GeocoderStatus.OK) {
+             var latitude = results[0].geometry.location.lat();
+             var longitude = results[0].geometry.location.lng();
+         mymap.addMarker({
+           lat: latitude,
+           lng: longitude,
+           title: value.city,
+           click: function(e) {
+             // alert('This is '+value.address+','+value.city+','+value.state+' from India.');
+           },
+           infoWindow: {
+                 content: '<p><b><img src="{{asset('images/medic.png' )}}">'+value.address+'</b></p><p>'+value.city+','+value.state+','+value.country+'</p>'
+                         },
+          mouseover: function(e){
+                 this.infoWindow.open(this.map, this);
+             },
+             mouseout: function(e){
+                 this.infoWindow.close(this.map, this);
+             }
+         });
+     }});
+        });
+        }});
+            //console.log(ui.item.value);
+         //$('#birds').val(ui.item.value);
+       }
+  });//city ends
+        } );
+
         // $( function() {
         //     $( "#datepicker" ).datepicker({
         //       showOn: "button",
@@ -92,12 +183,21 @@
         //     });
         //   } );
 
-    </script>
-    <style>
-        #datepicker {
-            float: left;
+        </script>
+        <style>
+        #instructions{
+          display:none;
         }
-        
+                #mymap {
+            border:2px solid black;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        #datepicker{
+        float:left;
+    }
+      
         #datepicker img {
             width: 40px;
         }
@@ -106,28 +206,28 @@
             z-index: 1100;
         }
 
-    </style>
-</head>
-
-<body>
-    <header id="header" class="user-headder">
-        <div class="container-fluid navigation">
-            <!-- Static navbar -->
-            <nav class="navbar navbar-default">
-                <div class="user-navigation">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        </a>
-                        <a class="navbar-brand" href="{{ route('home1.home1') }}"><img src="{{ asset('img\logo.png') }}"></a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{ route('home1.home1') }}">Dr.Booking</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right"> @if(isset($page)) @foreach($page as $key)
-                            <li class="dropdown"> <a href="{{$key->slug}}">{{$key->title}}</a></li> @endforeach @endif {{-- @if (Auth::guest()) --}}
-                            <li class="dropdown"> <a href="#" data-toggle="modal" data-target="#myModall">Login</a>
+        </style>
+    </head>
+    <body>
+        <header id="header" class="user-headder">
+            <div class="container-fluid navigation">
+                <!-- Static navbar -->
+                <nav class="navbar navbar-default">
+                    <div class="user-navigation">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                            </a>
+                            <a class="navbar-brand" href="{{ route('home1.home1') }}"><img src="{{ asset('img\logo.png') }}"></a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="{{ route('home1.home1') }}">Dr.Booking</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right"> @if(isset($page)) @foreach($page as $key)
+                                <li class="dropdown"> <a href="{{$key->slug}}">{{$key->title}}</a></li> @endforeach @endif
+                                {{-- @if (Auth::guest()) --}}
+                                <li class="dropdown"> <a href="#" data-toggle="modal" data-target="#myModall">Login</a>
                                 <div class="modal fade" id="myModall" tabindex="-1" role="dialog" aria-labelledby="myModalLabell">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -175,12 +275,17 @@
                                                 <li><a tabindex="0">Sub action</a></li>
                                                 <li class="disabled"><a tabindex="0">Another sub action</a></li>
                                                 <li><a tabindex="0">Something else here</a></li>
-                                            </ul>-->
-
-                                </ul>
-                            </li>
-
+                                            </ul>-->                                            
+                                        </ul>
+                                    </li>
+                                   
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </nav>
                     </div>
+
                 </div>
 
         </div>
@@ -199,32 +304,33 @@
                         @endif
                         
     <!--Banner and search portion--><img class="imgs" src="img\doctorteam.png">
-    <section class="search text-center">
-        <div class="container">
-            <div class="col-xs-12 col-sm-5">
-                <input type="text" class="form-control input-lg" placeholder="Enter City"> </div>
-            <div class="col-xs-12 col-sm-5 spl">
-                <input type="text" class="form-control input-lg" placeholder="Specialists Doctors,Clinics"> </div>
-            <div class="col-xs-12 col-sm-2 spl">
-                <button type="button" class="btn btn-success btn-lg">Search</button>
-            </div>
-        </div>
-
-    </section>
-    <!--Map-->
-    <section>
-        <div class="container control_map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3431.3224802446844!2d76.72586331460944!3d30.6812015951665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390f92d9039a87ad%3A0x725444a58a7f1c82!2sTalentelgia+Technologies+PVT+LTD!5e0!3m2!1sen!2sin!4v1493199520534" width="100%" height="450px" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
-    </section>
-    <!--healthcare portion-->
-    <section class="tab-new">
-        <h2>Find the Nearest HealthCare</h2>
-        <div class="active container tab_control">
-            <div class="tab left-nav col-xs-12 col-sm-4 pull-left">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#doctors" aria-controls="doctor" role="tab" data-toggle="tab"><i class="fa fa-briefcase"></i>
+                <section class="search text-center">
+                    <div class="container">
+                        <div class="col-xs-12 col-sm-5">
+                            <input type="text" class="form-control input-lg" placeholder="Enter City" id="citybar"> </div>
+                            <div class="col-xs-12 col-sm-5 spl">
+                                <input type="text" class="form-control input-lg" placeholder="Specialists Doctors,Clinics" id="services"> </div>
+                                <div class="col-xs-12 col-sm-2 spl">
+                                    <button type="button" class="btn btn-success btn-lg">Search</button>
+                                </div>
+                            </div>
+                            
+                        </section>
+                        <!--Map-->
+                        <section>
+                            <div class="container control_map">
+                                <div id="mymap"></div>
+            <ul id="instructions2"></ul>
+                            </div>
+                        </section>
+                        <!--healthcare portion-->
+                        <section class="tab-new">
+                            <h2>Find the Nearest HealthCare</h2>
+                            <div class="active container tab_control">
+                                <div class="tab left-nav col-xs-12 col-sm-4 pull-left">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#doctors" aria-controls="doctor" role="tab" data-toggle="tab"><i class="fa fa-briefcase"></i>
                                         Doctors</a></li>
                     <li role="presentation"><a href="#dentist" aria-controls="dentist" role="tab" data-toggle="tab"><i class="fa fa-stethoscope"></i>
                                         Dentist</a></li>

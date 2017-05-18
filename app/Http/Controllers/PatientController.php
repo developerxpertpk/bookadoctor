@@ -12,13 +12,13 @@ use App\User;
 use Image;
 use App\Doctor_Speciality;
 use App\Booking;
+use App\BookingTransaction;
 use App\Userprofile;
 use App\BookingDocuments;
+use App\medicalcenter_doctor;
 use Illuminate\Support\Facades\Mail;
 use App\Usersetting;
 use Carbon\Carbon;
-use App\BookingTransaction;
-
 
 
 
@@ -238,6 +238,7 @@ if (Auth::check()) {
 
 
  }
+
  public function city(Request $request)
     {
 
@@ -258,25 +259,7 @@ if (Auth::check()) {
       return response()->json($results);
 
     }
-    public function medicalcenter(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->title];
-        //}
-
-      }
-
-      return response()->json($results);
-
-    }
     public function disease(Request $request)
     {
       $term=$request->term;
@@ -292,6 +275,7 @@ if (Auth::check()) {
         //}
 
       }
+
 
       return response()->json($results);
 
@@ -334,12 +318,230 @@ if (Auth::check()) {
 
     }
 
+
   public function appointment(){
 
   
   return view('patient.appointment');
  }
- 
+
+//Prakhar
+    public function citymedic(Request $request)
+    {
+      $city= $request['searchText'];
+      $medical=Userprofile::where('city','=',$city)->distinct()->get();
+      $results=array();
+      foreach ($medical as $key => $v) {
+          if($v->getUser->role_id == 4){
+          $results[]=['value'=>$v->title];
+        }
+
+      }
+
+
+      return response()->json($results);
+    }
+    public function citymedicprof(Request $request)
+    {
+      $city= $request['searchText'];
+      $medical=Userprofile::where('city','=',$city)->distinct()->get();
+      $results=array();
+      foreach ($medical as $key => $v) {
+          if($v->getUser->role_id == 4){
+            foreach ($v->Servicepiv as $key) {
+              $special[]=$key->name;
+            }
+          $results[]=['title'=>$v->title,'medic_info'=>$v->title,'address'=>$v->address,'city'=>$v->city,'state'=>$v->state,'country'=>$v->country,'speciality'=>$special,'pic'=>$v->images,'pincode'=>$v->pincode,'id'=>$v->user_id];
+          $special="";
+        }
+      }
+      return response()->json($results);
+    }
+    public function citymedicprofile($id)
+    {
+      $medicalprofile=Userprofile::find($id);
+      $doctors=medicalcenter_doctor::where('medicalcenter_id','=',$id)->paginate(5);
+      // echo "<pre>";
+      // foreach ($medicalprofile->Servicepiv as $key) 
+      // {
+      //   print_r($key->name);
+      //   echo "</br>";
+      // }
+
+      return view('MedicalCenter',compact('medicalprofile','doctors'));
+
+    }
+    public function namemedicfilter(Request $request)
+    {
+       $city= $request['searchcity'];
+       $medicname = $request['searchText'];
+      $medical=Userprofile::where('city','=',$city)->where('title','=',$medicname)->distinct()->get();
+      $results=array();
+      foreach ($medical as $key => $v) {
+          if($v->getUser->role_id == 4){
+            foreach ($v->Servicepiv as $key) {
+              $special[]=$key->name;
+            }
+          $results[]=['title'=>$v->title,'medic_info'=>$v->title,'address'=>$v->address,'city'=>$v->city,'state'=>$v->state,'country'=>$v->country,'speciality'=>$special,'pic'=>$v->images,'pincode'=>$v->pincode,'id'=>$v->user_id];
+          $special="";
+        }
+      }
+      return response()->json($results);
+    }
+    public function booking(Request $request)
+    {
+      dd($request->medical_id);
+      die($request);
+    }
+    public function time(Request $request)
+    {
+      $date= $request->searchText;
+      $date=date('l', strtotime( $date));
+      $medical=Usersetting::where('user_id','=',$request['docid'])->where('day','=',$date)->distinct()->get();
+      //dd($date);
+      $bookings=Booking::where('doctor_id','=',$request['docid'])->where('medic_id','=',$request['medicid'])->where('Appointment_timings','>',$request->searchText." "."09:00:00")->where('Appointment_timings','<',$request->searchText." "."20:00:00")->distinct()->get();
+      foreach ($bookings as $key => $value) {
+
+        $result2[$key] = $value->Appointment_timings;
+      }
+      foreach ($medical as $key) {
+      $start=strtotime($key->time_in);
+      $end=strtotime($key->time_out);
+      $i=0;
+      while($start<$end)
+      {
+        $result[$i]="$start";
+        $start=strtotime('+30 minutes', $start);
+          $i++;
+      }
+            // dd($result);
+            }
+      foreach ($result as $key => $value) {
+        $result[$key]= $request->searchText." ".date("H:i:s",$value);
+      }
+          //  dd($result);
+      if(!empty($result2) && isset($result))
+      {
+      $result = array_diff($result, $result2);
+      return response()->json($result);
+    }
+    elseif (empty($result2) && !isset($result)) {
+      return response()->json('hahahah');
+    }
+    else{
+      //$result = array_diff($result, $result2);
+      return response()->json($result);
+    }
+
+      //return response()->json($result);
+    }
+    public function creatbooking(Request $request, $id)
+    {
+      // print_r($id);
+      // print_r(Auth::user()->id);
+      // print_r($request['reason']);
+      // print_r($request['datepicker23']);
+      // print_r($request['time12']);
+      $pieces = explode("-", $request['reason']);
+      //dd($request);
+      $booking = new Booking;
+      $booking->doctor_id=$request['doc-id'];
+      $booking->user_id=Auth::user()->id;
+      $booking->medic_id=$id;
+      $booking->speciality_id='3';
+      $booking->reason=$pieces[0];
+      $booking->Appointment_timings=$request['time12'];
+      $booking->payment_status='0';
+      $booking->status='0';
+      $booking->save();
+      $pieces=$pieces[1];
+      // dd($request);
+      // die();
+      \Stripe\Stripe::setApiKey("sk_test_dimU5va1HHMCgvtrz76xiO4L");
+  $charges=\Stripe\Charge::all(array('limit' => 50));
+  $charge=$charges->data;
+
+ $userData = array();
+
+        // $userData['name'] = $name;
+        // $userData['email'] = $email;
+        $userData['doctor_name']=$booking->is_doctors->is_profile->first_name." ".$booking->is_doctors->is_profile->last_name;
+        $userData['medical_name']=$booking->is_medical->is_profile->title;
+        $userData['user_name']=$booking->is_users->is_profile->first_name." ".$booking->is_users->is_profile->last_name;
+        $userData['user_email']=$booking->is_users->email;
+        $userData['medical_email']=$booking->is_medical->email;
+        $userData['doctor_email']=$booking->is_doctors->email;
+        $userData['timings']=$booking->Appointment_timings;
+
+
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+
+        Mail::send('emails.DoctorNewBooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['doctor_email'])
+                    ->subject('New Booking Made');
+        });
+
+          Mail::send('emails.MedicalcenterNewBooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['medical_email'])
+                    ->subject('New Booking Made');
+        });
+
+        Mail::send('emails.PatientsNewbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['user_email'])
+                    ->subject('New Booking Made');
+        });
+
+
+
+      return view('bookingdone',compact('booking','pieces','charge'));
+    }
+    public function stripeinsert(Request $request)
+    {
+      // Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+\Stripe\Stripe::setApiKey("sk_test_dimU5va1HHMCgvtrz76xiO4L");
+// Token is created using Stripe.js or Checkout!
+// Get the payment token submitted by the form:
+$token = $_POST['stripeToken'];
+// Charge the user's card:
+$charge = \Stripe\Charge::create(array(
+"amount" => $request->cost.'00',
+"currency" => "inr",
+"description" => "Booking Charges",
+"source" => $token,
+));
+// echo "<pre>";
+// print_r($charge->source->object);
+// die();
+// dd($charge);
+$booking = Booking::find($request['id']);
+$booking->payment_status=1;
+$booking->save;
+$bookingtrans = new BookingTransaction;
+$bookingtrans->booking_id=$request['id'];
+$bookingtrans->amount=$charge->amount;
+$bookingtrans->transaction_id=$charge->id;
+$bookingtrans->transaction_mode=$charge->source->brand." ".$charge->source->object;
+$bookingtrans->status=1;
+$bookingtrans->save();
+//$details=\Stripe\Balance::retrieve();
+// foreach ($details as $key) {
+//  dd($key->amount);
+// }
+//dd($details);
+// foreach ($charges as $key) {
+// print_r($key);$charges=\Stripe\Charge::all(array('limit' => 50));
+// die();
+// }
+// echo "<pre>";
+    // print_r($charges->_values);
+    // die();
+    // dd($charges->_values);
+    return redirect()->route('patient.profile.login');
+    }
+
       public function userhistory(){
 
        $a = Auth::User()->id;
@@ -363,8 +565,6 @@ if (Auth::check()) {
           //die('again');
          return view('patient.appointment-history',compact('b'));
        }
-       
-
 
 // public function profile(){
 

@@ -17,6 +17,25 @@
     border-radius: 50%;
     width: 200px;
 }
+
+.profile_li{
+   list-style: none;
+}
+.dropdown ul li{
+ /* float:right;*/
+    list-style: none;
+    text-decoration: none;
+ 
+}
+.dropdown{
+  float:right;
+  list-style: none;
+  /*width:70%;*/
+  margin:0px;
+}
+.form{
+  padding-top: 40px;
+}
 /*.profile{
 	float:left;
 	    width: 65px;
@@ -48,7 +67,7 @@
               <li class="active"><a href="#">Dr.Booking</a></li>
             </ul>
             @if(Auth::Check())
-            <li> <img id="profile_avatar" class="profile" src=""></li>
+            <li class="profile_li"> <img id="profile_avatar" class="profile" src=""></li>
              <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>   
                     {{ Auth::user()->first_name }}&nbsp;{{ Auth::user()->last_name }}  <b class="caret"></b></a>
@@ -160,7 +179,7 @@
           
       </div>
       <!-- Change Password -->
-<div>
+<div class="form">
 <form class="form-horizontal" action="{{route('patient.password.change')}}" method="POST"> 
           <div class="form-group">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 

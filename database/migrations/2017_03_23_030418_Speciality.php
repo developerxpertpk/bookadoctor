@@ -17,6 +17,7 @@ Schema::create('specialities',function(Blueprint $table){
 	$table->integer('user_id')->comment('medical center id')->unsigned()->index();
 	$table->string('name');
 	$table->string('price');
+	$table->string('status');
 	$table->timestamps();
 
 	//$table->foreign('user_id')->references('id')->on('users');

@@ -113,3 +113,30 @@ jQuery(document).ready(function() {
         });
     });
 });
+
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox({
+        alwaysShowClose: true
+    });
+});
+
+
+                                    jQuery(document).ready(function(){
+                                        
+
+                                    $('.radio-group input:radio[name="selector"]').change(function(){
+
+                                    if($(this).val() == 'speciality'){
+                                    $('#medical_center_specility_price').attr('disabled', true).val(null);
+                                    $('#medical_center_specility_price').removeAttr('required');
+
+                                    }
+                                    if($(this).val() == 'service'){
+                                        
+                                    $('#medical_center_specility_price').attr('disabled', false).val();
+                                    $('#medical_center_specility_price').attr('required','required')
+                                    }
+                                    });
+                                    });
+                                    // ]]>

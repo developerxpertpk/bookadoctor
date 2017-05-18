@@ -20,7 +20,6 @@ use Hash;
 
 class MedicalcenterServiceController extends Controller
 {
-
     public function index(Request $request)
 
     {
@@ -222,12 +221,14 @@ public function insert_specilaty(Request $request){
 
     $this->validate($request, [
         'specility_name' => 'required',
-        'specility_price' => 'required',
+        // 'specility_price' => 'required',
+        'selector' =>'required',
     ]);
     $specilaty1 = new speciality;
     $specilaty1->user_id=Auth::user()->id;
     $specilaty1->name=$request['specility_name'];
     $specilaty1->price=$request['specility_price'];
+    $specilaty1->status=$request['selector'];
     $specilaty1->save();
 
     return redirect()->route('specility.show.form');
@@ -313,7 +314,9 @@ public function show_setting_page(){
             }
         }
     }
-
+public function assign_service_to_doctor($id){
+return view('medicalcenter.services.add-services',compact('id'));
+}
 
 
 }

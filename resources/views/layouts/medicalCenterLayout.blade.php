@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/medical-admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-lightbox.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/ekko-lightbox.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clockpicker.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/code.css')}}">
     {{--<link rel="stylesheet" href="{{ asset('css/standalone.css') }}">--}}
@@ -33,7 +34,8 @@
     <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/location.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('js/bootstrap-lightbox.min.js') }}" type="text/javascript"></script> --}}
+    <script src="{{ asset('js/ekko-lightbox.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/clockpicker.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('js/velocity.min.js') }}" type="text/javascript"></script>

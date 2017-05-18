@@ -9,11 +9,13 @@
                     <div class="panel-body">
                         <select class="form-control chosepatient" name="sem" id="patient">
                             <option value="" selected="selected" disabled>Select Patient</option>
+                            @if(isset($patient_history))
                     @foreach($patient_history as $patients)
                         @foreach($patients as $patient)
                            <option value="{{$patient->user_id}}"> {{$patient->first_name}} {{$patient->last_name}}</option>
                             @endforeach
                             @endforeach
+                            @endif
                         </select>
 
                         <div class="showdata">

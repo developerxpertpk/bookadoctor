@@ -1,10 +1,10 @@
 @extends('layouts.doctorLayout')
 @section('content')
-	<div class="row">
-		<div class="col-md-12 col-md-offset-2">
+	
+		
 			<div class="panel panel-default">
 				<div class="panel-heading">Previous History
-					<p> </p>
+					
 					{!! csrf_field() !!}
 					
 					<div class="ui-widget">
@@ -47,22 +47,20 @@
 					<div class="profile-col-3">
 					<table class="table table-striped" id="tab2">
 					<p><b>Documents</b></p>
-					<tr>
-						
-						
-							
-						
-					</tr>
+					<tr></tr>
 					</table>
 					</div>
 					</div>
+					</div>
+					</div>
+
 					
 					
 					
 				</div>
 			</div>
-		</div>
-	</div>
+		
+	
 	
 <!-- Styel -->
 <!-- <style>
@@ -72,6 +70,7 @@
 }
 </style> -->
 <!-- Script -->
+
 <script>
 
 $( function() {
@@ -79,11 +78,13 @@ $( function() {
 	$("#kl").css("display", "none");
 	$("#kz").css("display", "none");
 
-	$(" #birds").autocomplete({
+	$("#birds").autocomplete({
 	source:'/bookings_H',   
 	minLength: 1,
 	select: function(event,ui)
 	{
+		
+
 		  $.ajaxSetup({
           headers:
           {
@@ -91,8 +92,8 @@ $( function() {
           }
           });
             $.ajax({                    
-            url: "{{route('history.profile')}}",     
-            type: 'GET',
+            url: "/patientprofile",     
+            type: 'POST',
             datatype:'text', // performing a POST request
             data : {
             data1 : ui.item.id, // will be accessible in $_POST['data1']
@@ -101,7 +102,7 @@ $( function() {
 
             { 
 
-               alert('Success');
+               //alert('Success');
             	$("#kk").css("display", "block");
             	$("#kl").css("display", "block");
 				$("#kz").css("display", "block");
@@ -168,14 +169,14 @@ $( function() {
      
      	
 </script>
-<script>
+<!-- <script>
    lightbox.option({
       'resizeDuration': 500,
       'wrapAround': true,
       'disableScrolling': true,
       
   })
-      </script>
+      </script> -->
 <!--   End Script -->
 <!-- Style -->
 <style>
@@ -189,7 +190,19 @@ $( function() {
 	height:100px;
 	padding-right:10px;
 }
-
+/*.lb-outerContainer{
+	height: 307px !important;
+}*/
+.lightbox {
+    height: 100%;
+    overflow: hidden;
+}
+.lb-prev{
+	display: block !important;
+}
+.lb-next{
+	display: block !important;
+}
 </style>
 <!-- End Style -->
 

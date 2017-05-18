@@ -124,6 +124,7 @@ Route::get('medical-center-show-rescheduled-booking','MedicalcenterBookingContro
 Route::get('medical-center-show-pending-booking','MedicalcenterBookingController@show_pending_booking')->name('medical.center.pending.booking.show');
 Route::get('medical-center-show-canceled-booking','MedicalcenterBookingController@show_canceled_booking')->name('medical.center.canceled.booking.show');
 Route::get('medical-center-show-completed-booking','MedicalcenterBookingController@show_completed_booking')->name('medical.center.completed.booking.show');
+Route::get('assign-service-to-doctor-{id}','MedicalcenterServiceController@assign_service_to_doctor')->name('assign.doctor.service');
 
 });
 //patients Routes
@@ -147,8 +148,7 @@ Route::get('/state','PatientController@state')->name('state');
 Route::get('/country','PatientController@country')->name('country');
 Route::get('/medicalcenter','PatientController@medicalcenter')->name('title');
 Route::get('/disease','PatientController@disease')->name('disease');
-
-// Rout::get('/getprofile','PatientController@profile')->name('patient.profile');
+ Rout::get('/getprofile','PatientController@profile')->name('patient.profile');
 //    Route::any ( '/search', function () {
 //    $q = Input::get ( 'search' );
 //    $user = Admin::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->get ();
@@ -179,14 +179,26 @@ Route::get('/bookings/{id}/history','DoctorBookingController@history')->name('pr
 Route::get('/bookings_H','DoctorBookingController@bookinghistory')->name('booking.history');
 Route::get('/dashboard','DoctorController@dashboard')->name('doctor.dashboard');
 Route::get('/manageschedule','DoctorController@manageschedule')->name('manage.scedule');
-Route::post('/manageschedule/edit','DoctorController@editschedule')->name('edit.schedule');
-Route::get('/patientprofile','DoctorController@historyProfile')->name('history.profile');
+Route::post('/manageschedule','DoctorController@insertschedule')->name('insert.schedule');
+Route::post('/manageschedule/edit{id}','DoctorController@editschedule')->name('edit.schedule');
+Route::get('/manageschedule/delete{id}','DoctorController@deleteschedule')->name('delete.schedule');
+Route::post('/patientprofile','DoctorController@historyProfile')->name('history.profile');
 Route::get('/profilepatient','PatientController@index')->name('profile.patient');
 Route::get('/city','PatientController@city')->name('city');
 Route::get('/state','PatientController@state')->name('state');
 Route::get('/country','PatientController@country')->name('country');
 Route::get('/medicalcenter','PatientController@medicalcenter')->name('title');
 Route::get('/disease','PatientController@disease')->name('disease');
+Route::get('/user-history','PatientController@userhistory')->name('user.appointment.history');
+Route::post('/booking-cancel/{id}','PatientController@cancelbooking')->name('patient.cancel.booking');
+Route::post('/booking-reschedule/{id}','PatientController@reschedulebooking')->name('patient.reschedule.booking');
+Route::get('/showbooking{id}','PatientController@showbooking')->name('patient.show.booking');
+Route::get('/add-patient-document{id}','PatientController@add_patient_document')->name('add.booking.doc');
+Route::post('/add-patient-document','PatientController@add_patient_document_submit')->name('add.booking.doc.submit');
+Route::delete('booking-documents-delete/{id}-{del}','PatientController@destroyDoc')->name('patient.document.destroy');
+Route::get('/documents/{id}','DoctorController@AddDocuments')->name('doctor.documents.add');
+Route::post('/adddocumnents','DoctorController@add_doctor_document_submit')->name('doctor.document.submit');
+
 
 // Route::get('/{page}','HomenewController@show')->name('dynamic');
 //booking
@@ -202,3 +214,9 @@ Route::get('bookingmade/{bookingdetails}','PatientController@booking')->name('pa
 Route::post('bookingmake/{medic_id}','PatientController@creatbooking')->name('make.booking');
 Route::get('/time','PatientController@time');
 Route::post('/your-server-side-code','PatientController@stripeinsert');
+                    
+
+                                      
+
+                 
+

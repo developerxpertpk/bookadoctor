@@ -31,5 +31,11 @@ class Booking extends Model
    		return $this->hasMany('App\BookingTransaction','booking_id');
    }
 
+    // public function userprofile()
+    // {
+    //   return $this->hasMany('App\BookingTransaction','booking_id');
+    // }
+
+ // create relation between userprofile and booking
 }
  

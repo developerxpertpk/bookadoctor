@@ -54,7 +54,7 @@
                     {{ Auth::user()->first_name }}&nbsp;{{ Auth::user()->last_name }}  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="{{ route('patient.profile.login') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                                                    
                         <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>

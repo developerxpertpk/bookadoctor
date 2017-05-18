@@ -177,6 +177,7 @@ Route::post('/bookings/{id}/reschedule','DoctorBookingController@reschedulebooki
 Route::post('/bookings/{id}/complete','DoctorBookingController@completebooking')->name('booking.complete');
 Route::get('/bookings/{id}/history','DoctorBookingController@history')->name('previous.history');
 Route::get('/bookings_H','DoctorBookingController@bookinghistory')->name('booking.history');
+// Route::get('/bookings_H','DoctorBookingController@paging')->name('booking.history.paging');
 Route::get('/dashboard','DoctorController@dashboard')->name('doctor.dashboard');
 Route::get('/manageschedule','DoctorController@manageschedule')->name('manage.scedule');
 Route::post('/manageschedule','DoctorController@insertschedule')->name('insert.schedule');
@@ -202,7 +203,8 @@ Route::post('/adddocumnents','DoctorController@add_doctor_document_submit')->nam
 
 // Route::get('/{page}','HomenewController@show')->name('dynamic');
 //booking
-                    
+
+Route::post('test','DoctorController@historyProfile'); //test route for jquery pagination
                  
                 
                  

@@ -238,101 +238,100 @@ if (Auth::check()) {
 
 
  }
- public function city(Request $request)
-    {
+ // public function city(Request $request)    {
 
-      $term=$request->term;
-      $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
-      $results=array();
-      foreach ($data as $key => $v) {
-          //if($v->getUser->role_id == 4)
-          //{
-          $results[]=['value'=>$v->city];
-          //}
+ //      $term=$request->term;
+ //      $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
+ //     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+ //      //dd($data);
+ //      $results=array();
+ //      foreach ($data as $key => $v) {
+ //          //if($v->getUser->role_id == 4)
+ //          //{
+ //          $results[]=['value'=>$v->city];
+ //          //}
 
-      }
+ //      }
 
 
-      return response()->json($results);
+ //      return response()->json($results);
 
-    }
-    public function medicalcenter(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+ //    }
+    // public function medicalcenter(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->title];
-        //}
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //     //if($v->getUser->role_id == 4)
+    //     //{
+    //       $results[]=['value'=>$v->title];
+    //     //}
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
-    public function disease(Request $request)
-    {
-      $term=$request->term;
-      $data=Booking::where('reason','LIKE','%'.$term.'%')->select('reason')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // }
+    // public function disease(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Booking::where('reason','LIKE','%'.$term.'%')->select('reason')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->reason];
-        //}
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //     //if($v->getUser->role_id == 4)
+    //     //{
+    //       $results[]=['value'=>$v->reason];
+    //     //}
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
-    public function state(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('state','LIKE','%'.$term.'%')->select('state')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // }
+    // public function state(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Userprofile::where('state','LIKE','%'.$term.'%')->select('state')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->state];
-        //}
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //     //if($v->getUser->role_id == 4)
+    //     //{
+    //       $results[]=['value'=>$v->state];
+    //     //}
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
-    public function country(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('country','LIKE','%'.$term.'%')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // }
+    // public function country(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Userprofile::where('country','LIKE','%'.$term.'%')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-          if($v->getUser->role_id == 4){
-          $results[]=['value'=>$v->country];
-        }
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //       if($v->getUser->role_id == 4){
+    //       $results[]=['value'=>$v->country];
+    //     }
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
+    // }
 
   public function appointment(){
 
@@ -359,6 +358,18 @@ if (Auth::check()) {
       return response()->json($results);
 
     }
+
+    // $term=$request->term;
+     //  $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
+     // // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+     //  //dd($data);
+     //  $results=array();
+     //  foreach ($data as $key => $v) {
+     //      //if($v->getUser->role_id == 4)
+     //      //{
+     //      $results[]=['value'=>$v->city];
+     //      //}
+
     public function medicalcenter(Request $request)
     {
       $term=$request->term;

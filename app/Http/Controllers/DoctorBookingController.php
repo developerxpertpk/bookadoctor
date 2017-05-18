@@ -126,7 +126,7 @@ public function patientHistory($id){
   // echo"<pre>";
   // print_r($booking);
   // die('rtyui');
-
+$paginate=3;
   $k = $booking->documents;
      
      // foreach($k as $key){
@@ -136,7 +136,7 @@ public function patientHistory($id){
      // die('ghghgh');
 
   
-  return view('doctor.patient-previous-history',compact('booking' , 'k'));
+  return view('doctor.patient-previous-history',compact('booking' , 'k','paginate'));
 }
 
 
@@ -144,8 +144,15 @@ public function history($id){
 
   
    $booking = Booking::find($id);
+   $booking = Booking::where('doctor_id','=',$id)->paginate(2);
+   //    print_r($booking);
+   // die();
+ //  $bookingsPaginate = Booking::paginate(6);
+   $bookingsPaginate = DB::table('bookings');
 
- return view('doctor.patient-previous-history' , compact('booking'));
+
+  // $o = $booking->id; 
+    return view('doctor.patient-previous-history' , compact('booking','bookingsPaginate'));
   
 
 }
@@ -154,16 +161,16 @@ public function bookinghistory(Request $request){
         // $term = Input::get('term');
         // print_r($term);
      
-  $a= Auth::User()->id;
+        $userrId= Auth::User()->id;
 
-        $b = User::find($a);
-       $c=  $b->Drbookings;
+        $Userrid = User::find($userrId);
+       $drBooking=  $Userrid->Drbookings;
        
   
-  //                          echo"<pre>";
+  // echo"<pre>";
   // print_r($c);
   //       DIE('A');
-        foreach ($c as $key) {
+        foreach ($drBooking as $key) {
            // echo"<pre>";
         
          
@@ -174,7 +181,7 @@ public function bookinghistory(Request $request){
 
         $term = $request['term'];
         $data = Userprofile::where('first_name', 'LIKE', '%' . $term . '%')->distinct()->get();
-
+        
                       $return_array=[];
                 foreach ($data as $name_data){
                     $return_array[]=array("id"=>$name_data->user_id,"label"=>"$name_data->first_name");
@@ -188,6 +195,11 @@ public function bookinghistory(Request $request){
                 return response()->json($return_array);
 
     }
+
+  //   public function paging() {
+  //   $bookingsPaginate = Booking::paginate(2);
+  //   return redirect()->route('booking.history', compact('bookingsPaginate'));
+  // }
  
     // public function logout(){
     //    return redirect('/');

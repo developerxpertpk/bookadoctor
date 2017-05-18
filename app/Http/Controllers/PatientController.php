@@ -260,21 +260,22 @@ if (Auth::check()) {
 
     }
 
-    // public function medicalcenter(Request $request)
-    // {
-    //   $term=$request->term;
-    //   $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
-    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-    //   //dd($data);
+    public function disease(Request $request)
+    {
+      $term=$request->term;
+      $data=Booking::where('reason','LIKE','%'.$term.'%')->select('reason')->distinct()->get();
+     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+      //dd($data);
 
-    //   $results=array();
-    //   foreach ($data as $key => $v) {
-    //     //if($v->getUser->role_id == 4)
-    //     //{
-    //       $results[]=['value'=>$v->title];
-    //     //}
+      $results=array();
+      foreach ($data as $key => $v) {
+        //if($v->getUser->role_id == 4)
+        //{
+          $results[]=['value'=>$v->reason];
+        //}
 
-    //   }
+      }
+
 
     //   return response()->json($results);
 
@@ -340,9 +341,10 @@ if (Auth::check()) {
  //      }
 
 
+
  //      return response()->json($results);
 
-
+ //    }
 
     public function medicalcenter(Request $request)
     {
@@ -582,11 +584,11 @@ if (Auth::check()) {
                     ->subject('New Booking Made');
         });
 
-
         Mail::send('emails.PatientsNewbooking', $userData, function ($message) use ($userData) {
             $message->to($userData['user_email'])
                     ->subject('New Booking Made');
         });
+
 
 
       return view('bookingdone',compact('booking','pieces','charge'));

@@ -203,6 +203,7 @@ Route::post('/adddocumnents','DoctorController@add_doctor_document_submit')->nam
 
 // Route::get('/{page}','HomenewController@show')->name('dynamic');
 //booking
+
 Route::post('test','DoctorController@historyProfile'); //test route for jquery pagination
 
 // Route::get('/city','HomenewController@city')->name('city');

@@ -148,7 +148,7 @@ Route::get('/state','PatientController@state')->name('state');
 Route::get('/country','PatientController@country')->name('country');
 Route::get('/medicalcenter','PatientController@medicalcenter')->name('title');
 Route::get('/disease','PatientController@disease')->name('disease');
- Rout::get('/getprofile','PatientController@profile')->name('patient.profile');
+ Route::get('/getprofile','PatientController@profile')->name('patient.profile');
 //    Route::any ( '/search', function () {
 //    $q = Input::get ( 'search' );
 //    $user = Admin::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->get ();

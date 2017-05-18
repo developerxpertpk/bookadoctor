@@ -19,7 +19,6 @@ use App\medicalcenter_doctor;
 use Illuminate\Support\Facades\Mail;
 use App\Usersetting;
 use Carbon\Carbon;
-use App\BookingTransaction;
 
 
 
@@ -259,25 +258,25 @@ if (Auth::check()) {
       return response()->json($results);
 
     }
-    public function medicalcenter(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // public function medicalcenter(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Userprofile::where('title','LIKE','%'.$term.'%')->select('title')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->title];
-        //}
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //     //if($v->getUser->role_id == 4)
+    //     //{
+    //       $results[]=['value'=>$v->title];
+    //     //}
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
+    // }
     public function disease(Request $request)
     {
       $term=$request->term;
@@ -340,26 +339,26 @@ if (Auth::check()) {
   
   return view('patient.appointment');
  }
- public function city(Request $request)
-    {
+ // public function city(Request $request)
+ //    {
 
-      $term=$request->term;
-      $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
-      $results=array();
-      foreach ($data as $key => $v) {
-          //if($v->getUser->role_id == 4)
-          //{
-          $results[]=['value'=>$v->city];
-          //}
+ //      $term=$request->term;
+ //      $data=Userprofile::where('city','LIKE','%'.$term.'%')->select('city')->distinct()->get();
+ //     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+ //      //dd($data);
+ //      $results=array();
+ //      foreach ($data as $key => $v) {
+ //          //if($v->getUser->role_id == 4)
+ //          //{
+ //          $results[]=['value'=>$v->city];
+ //          //}
 
-      }
+ //      }
 
 
-      return response()->json($results);
+ //      return response()->json($results);
 
-    }
+ //    }
     public function medicalcenter(Request $request)
     {
       $term=$request->term;
@@ -379,62 +378,62 @@ if (Auth::check()) {
       return response()->json($results);
 
     }
-    public function disease(Request $request)
-    {
-      $term=$request->term;
-      $data=Booking::where('reason','LIKE','%'.$term.'%')->select('reason')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // public function disease(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Booking::where('reason','LIKE','%'.$term.'%')->select('reason')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->reason];
-        //}
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //     //if($v->getUser->role_id == 4)
+    //     //{
+    //       $results[]=['value'=>$v->reason];
+    //     //}
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
-    public function state(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('state','LIKE','%'.$term.'%')->select('state')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // }
+    // public function state(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Userprofile::where('state','LIKE','%'.$term.'%')->select('state')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-        //if($v->getUser->role_id == 4)
-        //{
-          $results[]=['value'=>$v->state];
-        //}
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //     //if($v->getUser->role_id == 4)
+    //     //{
+    //       $results[]=['value'=>$v->state];
+    //     //}
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
-    public function country(Request $request)
-    {
-      $term=$request->term;
-      $data=Userprofile::where('country','LIKE','%'.$term.'%')->distinct()->get();
-     // $data=loc::where('city','LIKE','%'.$term.'%')->get();
-      //dd($data);
+    // }
+    // public function country(Request $request)
+    // {
+    //   $term=$request->term;
+    //   $data=Userprofile::where('country','LIKE','%'.$term.'%')->distinct()->get();
+    //  // $data=loc::where('city','LIKE','%'.$term.'%')->get();
+    //   //dd($data);
 
-      $results=array();
-      foreach ($data as $key => $v) {
-          if($v->getUser->role_id == 4){
-          $results[]=['value'=>$v->country];
-        }
+    //   $results=array();
+    //   foreach ($data as $key => $v) {
+    //       if($v->getUser->role_id == 4){
+    //       $results[]=['value'=>$v->country];
+    //     }
 
-      }
+    //   }
 
-      return response()->json($results);
+    //   return response()->json($results);
 
-    }
+    // }
 //Prakhar
     public function citymedic(Request $request)
     {
@@ -570,6 +569,41 @@ if (Auth::check()) {
       \Stripe\Stripe::setApiKey("sk_test_dimU5va1HHMCgvtrz76xiO4L");
   $charges=\Stripe\Charge::all(array('limit' => 50));
   $charge=$charges->data;
+
+ $userData = array();
+
+        // $userData['name'] = $name;
+        // $userData['email'] = $email;
+        $userData['doctor_name']=$booking->is_doctors->is_profile->first_name." ".$booking->is_doctors->is_profile->last_name;
+        $userData['medical_name']=$booking->is_medical->is_profile->title;
+        $userData['user_name']=$booking->is_users->is_profile->first_name." ".$booking->is_users->is_profile->last_name;
+        $userData['user_email']=$booking->is_users->email;
+        $userData['medical_email']=$booking->is_medical->email;
+        $userData['doctor_email']=$booking->is_doctors->email;
+        $userData['timings']=$booking->Appointment_timings;
+
+
+        // $userData['password'] = $password;
+        // $userData['seme_url'] = $url;
+
+
+        Mail::send('emails.DoctorNewBooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['doctor_email'])
+                    ->subject('New Booking Made');
+        });
+
+          Mail::send('emails.MedicalcenterNewBooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['medical_email'])
+                    ->subject('New Booking Made');
+        });
+
+
+        Mail::send('emails.PatientsNewbooking', $userData, function ($message) use ($userData) {
+            $message->to($userData['user_email'])
+                    ->subject('New Booking Made');
+        });
+
+
       return view('bookingdone',compact('booking','pieces','charge'));
     }
     public function stripeinsert(Request $request)

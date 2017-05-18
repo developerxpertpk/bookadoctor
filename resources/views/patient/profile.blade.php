@@ -151,26 +151,28 @@
       </nav>
 </div>   
 </header>
+</ul>
+</ul></li></div></a></div></div></nav></div></header>
 <!--Profile portion-->
 <div class="container profile">
  <div class="col-xs-12 panel panel-info">
             <div class="panel-heading">
-					  <h3 class="panel-title">{{Auth::User()->is_Profile->first_name}} {{Auth::User()->is_Profile->last_name}}</h3>
+					  
 					  
 					  
 				<div class="dropdown1">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<button class="btn btn-default dropdown-toggle col-md-offset-10" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					Setting
 					<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu1">
 					<li><a href="{{route('patient.edit')}}">Edit</a></li>
-					<li><a href="#">Delete</a></li>
 					<li><a href="{{route('patient.password')}}">Change password</a></li>
+          <li><a href="{{route('patient.appointment')}}">Make Appointment</a></li>
 					
 				  </ul>
 				</div>     
-			</div>
+			</div></div></div></div></a>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/images/profile_pic/{{Auth::user()->is_Profile->images}}" class="img-circle img-responsive"> </div>
@@ -180,11 +182,11 @@
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>First-Name:</td>
+                        <td>First-Name</td>
                         <td>{{Auth::User()->is_Profile->first_name}}</td>
                       </tr>
                       <tr>
-                        <td>Last-Name:</td>
+                        <td>Last-Name</td>
                         <td>{{Auth::User()->is_Profile->last_name}}</td>
                       </tr>
                       <tr>
@@ -199,7 +201,7 @@
                       </tr>
                         <tr>
                         <td> Address</td>
-                        <td>{{Auth::User()->is_Profile->address}}</td>
+                        <td>{{Auth::User()->is_Profile->address}}, {{Auth::User()->is_Profile->city}} ,{{Auth::User()->is_Profile->state}} ,{{Auth::User()->is_Profile->country}}<br/>Pincode {{Auth::User()->is_Profile->pincode}}</td>
                       </tr>
                       <tr>
                         <td>Email</td>

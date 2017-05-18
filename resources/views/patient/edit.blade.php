@@ -165,18 +165,7 @@ $( function() {
 					  <h3 class="panel-title">{{Auth::User()->is_Profile->first_name}} {{Auth::User()->is_Profile->last_name}}</h3>
 					  
 					  
-				<div class="dropdown1">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					Setting
-					<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					<li><a href="#">Edit</a></li>
-					<li><a href="#">Delete</a></li>
-					<li><a href="#">Change password</a></li>
-					
-				  </ul>
-				</div>     
+			
 			</div>
             <div class="panel-body">
               <div class="row">
@@ -187,12 +176,12 @@ $( function() {
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>First-Name:</td>
+                        <td>First-Name</td>
                         <td><input type="text" name="first_name" value="{{Auth::User()->is_Profile->first_name}}"></td>
                        
                       </tr>
                       <tr>
-                        <td>Last-Name:</td>
+                        <td>Last-Name</td>
                         <td><input type="text" name="last_name" value="{{Auth::User()->is_Profile->last_name}}"></td>
                       </tr>
                       <tr>
@@ -220,11 +209,27 @@ $( function() {
                         <td><input type="text" name="address" value="{{Auth::User()->is_Profile->address}}"></td>
                       </tr>
                       <tr>
+                        <td>City</td>
+                        <td><input type="text" name="city" value="{{Auth::User()->is_Profile->city}}"></td>
+                      </tr>
+                      <tr>
+                        <td>State</td>
+                        <td><input type="text" name="state" value="{{Auth::User()->is_Profile->state}}"></td>
+                      </tr>
+                      <tr>
+                        <td>Country</td>
+                        <td><input type="text" name="country" value="{{Auth::User()->is_Profile->country}}"></td>
+                      </tr>
+                      <tr>
+                        <td>Pincode</td>
+                        <td><input type="text" name="pincode" value="{{Auth::User()->is_Profile->pincode}}"></td>
+                      </tr>
+                      <tr>
                         <td>Email</td>
-                        <td><input type="text" name="email" value="{{Auth::User()->email}}"></a></td>
+                        <td><input type="text" name="email" value="{{Auth::User()->email}}"></td>
                       </tr>
                         <tr><td>Phone Number</td>
-                        <td><input type="text" name="contactno" value="{{Auth::User()->is_Profile->contact_no}}">
+                      <td><input type="text" name="contactno" value="{{Auth::User()->is_Profile->contact_no}}">
                         </td>
                            
                       </tr>

@@ -106,6 +106,7 @@
 
                             </tr>
                             <?php $i=1; ?>
+                            @if(isset($bookings_payments))
                             @foreach($bookings_payments as $payment_deatil)
                                 @foreach($payment_deatil as $payment)
                                     {{--<pre>--}}
@@ -136,6 +137,7 @@
         </div>
         @endforeach
         @endforeach
+        @endif
     </div>
 
 @endsection

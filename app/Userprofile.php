@@ -31,6 +31,10 @@ public function Servicepiv(){
 	return $this->hasMany('App\speciality','user_id');
 	//return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
 }
+public function Servicedoc(){
+	return $this->hasMany('App\speciality','user_id');
+	//return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
+}
 
 }
 

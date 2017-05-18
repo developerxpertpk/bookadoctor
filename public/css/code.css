@@ -24,7 +24,7 @@ header .navbar {
    .navbar-default .navbar-nav > .active > a:focus, 
    .navbar-default .navbar-nav > .active > a:hover {
     color: #5C5C5C;
-    background: #fff;
+    background: #ffff;
 }
 
 .navbar-brand {
@@ -51,9 +51,21 @@ width:100%;
 margin-top: -56px;
    }
    
-   .col-xs-12.col-sm-5.spl {
-    margin-left: -11px;
+   
+   .col-sm-5 {
+    width: 41.66666667%;
+    padding-right: 24px;
+}
+.col-xs-12.col-sm-5.spl{
+position: relative;
+min-height: 1px;
+padding-right: 22px;
+margin-left: -8px;
     padding: 0;
+}
+
+.search button{
+width:100%;
 }
 
 /*Nearest Health Care*/
@@ -159,12 +171,13 @@ font-size: 14px;
 
 /*Footer*/
 
-.footer{
-float:left;
-width:100%;
-background:#53565a;
-margin: 2% 0;
-padding: 4% 0px;
+.footer {
+	float: left;
+	width: 100%;
+	background: #53565a;
+	margin: 2% 0;
+	padding: 4% 0px;
+	margin-bottom: 0 !important;
 }
 
 .footer p{
@@ -232,14 +245,12 @@ margin-top: 40px;
 }
 
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,.nav-tabs > li > a:hover {
-	color: #555!important;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+	color: #555;
 	cursor: default;
-	background-color: #f1ebeb!important;
-	border: 1px solid #ddd!important;
+	background-color: #f1ebeb;
+	border: 1px solid #ddd;
 	border-bottom-color: transparent;
-   -webkit-transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
-   transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
 
 }
 
@@ -261,7 +272,6 @@ margin-top: 40px;
 .nav-tabs > li > a {
 	margin-right: 2px;
 	line-height: 1.42857143;
-	
 	color: #5ab9f6;
 	font-size: 18px;
 }
@@ -275,14 +285,6 @@ margin-right:9px;
 	height: 290px;
 	
 }
-ul.dropdown-menu{
-  margin: 0px;
-  
-    padding-right: 30px;
-}
-
-
-
 
 .dropdown-submenu {
     position: relative;
@@ -342,11 +344,11 @@ font-size:16px;
 	
 }
 .form-horizontal .form-group {
-    margin-right: -15px;
-    margin-left: -15px;
-    font-size: 20px;
-	
+    font-size: 15px;
+    margin-left: -5px;
+    margin-right: 0;
 }
+
 .checkbox label, 
 .radio label {
     cursor: pointer;
@@ -372,9 +374,264 @@ width:100%;
     padding-top: 7px;
     margin-bottom: 0;
     text-align: right;
-    font-size: 18px;
+    font-size: 15px;
 }
 .modal-header h4{
 text-align:center;
 font-weight:600;
+}
+
+.modal label {
+    font-size: 15px;
+    font-weight: normal;
+    padding-right: 0;
+}
+
+.form-group a{
+    padding-left: 255px;
+    font-size: 15px;
+}
+.checkbox1{
+padding-left:95px;
+}
+
+
+/*User profile*/
+.profile .btn-info {
+ color: #fff;
+ background-color: #5bc0de;
+ border-color: #46b8da;
+ float: right;
+ margin-top:2px;
+}
+.profile .panel-info > .panel-heading {
+ color: #31708f;
+ background-color: #d9edf7;
+ border-color: #bce8f1;
+}
+.profile .btn-info:hover {
+ color: #fff;
+ background-color: #31b0d5;
+ border-color: #269abc;
+ margin-top: -46px;
+}
+.profile .dropdown1, 
+.profile .dropup {
+ position: relative;
+ float: right;
+ margin-top: -23px;
+ margin-right:6px;
+ 
+}
+
+.profile .img-responsive,
+ .profile .thumbnail a > img,
+ .profile .thumbnail > img {
+    display: block;
+    max-width: 62%;
+    height: auto;
+}
+
+.profile .col-xs-12.panel.panel-info {
+    margin-top: 50px;
+}
+
+/*Aspire Fertility Center Portion*/
+.center{
+width:100%;
+    margin-top: 60px;
+}
+.left img {
+   
+ margin-top: 19px;
+ margin-left: 0px;
+}
+ h4 {
+    font-size: 13px;
+}
+
+.right button {
+    float: right;
+    background: #ffff;
+    color: #afb42b;
+    border: 1px solid #afb42b;
+    font-size: 20px;
+    margin-top: -43px;
+    width: 30%;
+    margin-right: -55px;
+}
+.right span i{
+color:#afb42b;
+}
+
+
+
+/*Nav-tabs*/
+.e-nav-tab.selected, .e-nav-tab.selected:hover, .e-nav-tab.selected:focus {    
+color: #14bef0;  
+background: #ffff;   
+ border-top: 5px solid #D0D0DF;
+ width:500%;
+ }
+ 
+.link {
+ border-bottom: 0px solid #ddd;
+margin-top: 10px;
+}
+
+.link  > li {
+    background: #f1ebeb;
+    color: #555;
+    cursor: default;
+    border: 0px solid #ddd;
+    border-bottom-color: transparent;
+	    		
+}
+.tt > .active {
+	display: block;
+background:none;
+}
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: blue;
+    cursor: default;
+    background-color: #ffff;
+    border-top: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+
+.link > li > a {
+    
+    line-height: 1.42857143;
+    color: #555;
+    font-size: 18px;
+	padding: 13px 60px;
+	
+}
+.text-center{
+margin-right:-18px;
+}
+
+.text-center li {
+    margin-top: -21px;
+    margin-bottom: 30px;
+    background: #f1ebeb none repeat scroll 0 0;
+    margin-right: 1px;
+    margin-left: -11px;
+}
+
+.about{
+padding:2% 2%;
+}
+
+.about h1{
+ font-size: 20px;
+ padding:5px;
+ font-weight: 500;
+margin-bottom: 10px;
+text-align: left;
+
+}
+.about p{
+font-size:15px;
+float:left;
+padding:5px;
+margin-bottom: 15px;
+font-weight: 200;
+text-align:justify;
+width:100%;
+}
+.about span {
+color:skyblue;
+}
+
+.control_margin {
+    float: none;
+    margin: 0 auto;
+    max-width: 1100px;
+    width: 100%;
+}
+.box {
+    float: left;
+    width:25%;	
+}
+
+.box3{
+margin-top: 39px;
+padding: 0px;
+}
+
+.three-boxes h5{
+margin-bottom: 16px;
+}
+
+.tab_Doctors{
+ border: 5px solid #ddd;
+     margin: 40px 0;
+    padding: 1% 1%;
+}
+
+
+
+/*Book appointment */
+.appointment{
+margin-top:-70px;
+}
+.appointment h4{
+font-weight:600;
+}
+
+.center h5{
+padding-bottom: 2%;
+}
+.info h3{
+color:#01579b;
+margin: 0;
+}
+
+.icons h5{
+font-size:18px;
+}
+
+.icons span{
+margin-left: 19px;
+}
+.icons{
+margin: 0;
+}
+
+.table{
+border:1px solid #cccc;
+text-align:center;
+font-size:17px;
+}
+
+.table span{
+background:#cccc;
+}
+.table thead{
+text-align:center;
+}
+.cc {
+color:green;
+}
+.cons th{
+margin-left: 19px;
+}
+
+.appointment .tb{
+float:left;
+background:#fff;
+font-size:20px;
+color:#afb42b;
+border:1px solid #afb42b;
+width:50%;
+}
+
+
+.bb{
+margin-bottom: 21px;
+width:180px;
+font-size:17px;
 }

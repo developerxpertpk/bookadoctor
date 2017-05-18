@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/jquery-ui.js')}}"></script>
+<script src="{{asset('js/medicalfilter.js')}}"></script>
 
 <style>
 .dropdown-menu{
@@ -22,6 +23,49 @@
  ul.ui-autocomplete {
     z-index: 1100;
 }
+        ul.ui-autocomplete {
+    z-index: 1100;
+}
+        #instructions{
+          display:none;
+        }
+                #mymap {
+            border:2px solid black;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        #datepicker{
+  float:left;
+
+}
+#datepicker img{
+  width:40px;
+
+}
+.body-pannel{
+    border: .1px solid grey;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+.img{
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+}
+#butt
+{
+    margin-top: 69px;
+    margin-left: -30px;
+
+}
+.btn{
+    border-radius: 20px!important;
+    -webkit-border-radius: 20px!important;
+    -moz-border-radius: 20px!important;
+    width: 100px!important;
+    margin-left: -20px;
+}
 /*.profile{
 	float:left;
 	    width: 65px;
@@ -29,34 +73,6 @@
     border-radius: 69px;
 }*/
 </style>
-<script>
-
-$( function() {
-
-	  $( "#cities" ).autocomplete({
-      source: '/city',
-      minLength: 1,
-      select: function( event, ui ) {
-        $("#cities").val(ui.item.value);
-      }
-    });
-
-	  $( "#medical" ).autocomplete({
-      source: '/medicalcenter',
-      minLength: 1,
-      select: function( event, ui ) {
-        $("#medical").val(ui.item.value);
-      }
-    });
-
-$(" #disease").autocomplete({                              
-	source:'/disease',   
-	minLength: 1,
-	});
-
-	});
-
-</script>
 </head>
 <body>
 
@@ -200,42 +216,25 @@ $(" #disease").autocomplete({
            		<div class=" form-group form-inline">
            			<div class="ui-widget">
 						<label for="city" class="col-md-4  contro-label">  Select City </label> <!--  Cities -->   
-						<input id="cities" name="city" class="form-control col-md-6 ">
+						<input id="city" name="city" class="form-control col-md-6 ">
 					</div>
 					</div>
 					<div class=" form-group form-inline">
 					<div class="ui-widget">
 						<label for="medical " class="col-md-4 contro-label"> Medical Center Name </label> <!--  Medical Centers -->   
-						<input id="medical" name="medical" class="form-control col-md-6  ">
+						<input id="medicalcenter" name="medical" class="form-control col-md-6  ">
 					</div>
 					</div>
 					
 					<div> <!-- Reason -->
-					<div class=" form-group form-inline">
-					<div class="ui-widget">
-						<label for="disease" class=" col-md-4 contro-label"> Disease </label> 
-						<input  type ="text" id="disease" name="disease" class="form-control col-md-6 ">
-					</div>
-					</div>
 					</div>
            			</form>
 
               </div>
               </div>
 			<div class-="viewdoctors">
-			<table class="table table-bordered">
-				<tr>
-					<th>Day</th>
-					<th>Time</th>
-					<th>Status</th>   <!-- Available or Not available -->
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-
-			</table>
+			 <div class="row" id="micro">
+        </div>
               </div>
               </div>
 

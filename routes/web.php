@@ -37,7 +37,7 @@ Auth::routes();
 //   });
 Route::get('/', 'HomenewController@index')->name('home1.home1');
 // Route::get('/','AdminController@index')->name('admin.dashboard');
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 Route::prefix('admin')->group(function(){
 Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -124,6 +124,7 @@ Route::get('medical-center-show-rescheduled-booking','MedicalcenterBookingContro
 Route::get('medical-center-show-pending-booking','MedicalcenterBookingController@show_pending_booking')->name('medical.center.pending.booking.show');
 Route::get('medical-center-show-canceled-booking','MedicalcenterBookingController@show_canceled_booking')->name('medical.center.canceled.booking.show');
 Route::get('medical-center-show-completed-booking','MedicalcenterBookingController@show_completed_booking')->name('medical.center.completed.booking.show');
+Route::get('assign-service-to-doctor-{id}','MedicalcenterServiceController@assign_service_to_doctor')->name('assign.doctor.service');
 
 });
 //patients Routes
@@ -147,8 +148,7 @@ Route::get('/state','PatientController@state')->name('state');
 Route::get('/country','PatientController@country')->name('country');
 Route::get('/medicalcenter','PatientController@medicalcenter')->name('title');
 Route::get('/disease','PatientController@disease')->name('disease');
-
-// Rout::get('/getprofile','PatientController@profile')->name('patient.profile');
+ Route::get('/getprofile','PatientController@profile')->name('patient.profile');
 //    Route::any ( '/search', function () {
 //    $q = Input::get ( 'search' );
 //    $user = Admin::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->get ();
@@ -203,8 +203,20 @@ Route::post('/adddocumnents','DoctorController@add_doctor_document_submit')->nam
 
 // Route::get('/{page}','HomenewController@show')->name('dynamic');
 //booking
-
 Route::post('test','DoctorController@historyProfile'); //test route for jquery pagination
+
+// Route::get('/city','HomenewController@city')->name('city');
+// Route::get('/state','HomenewController@state')->name('state');
+// Route::get('/country','HomenewController@country')->name('country');
+// Route::get('/getbooking','HomenewController@bookingdone')->name('bookingdoes');
+Route::get('/citymedicfilter2','PatientController@citymedicprof')->name('citymedicprof');
+Route::get('/citymedicfilter','PatientController@citymedic')->name('medicalcity');
+Route::get('/medicalprofiledisplay/{id}','PatientController@citymedicprofile');
+Route::get('/namemedicfilter','PatientController@namemedicfilter');
+Route::get('bookingmade/{bookingdetails}','PatientController@booking')->name('patbook');
+Route::post('bookingmake/{medic_id}','PatientController@creatbooking')->name('make.booking');
+Route::get('/time','PatientController@time');
+Route::post('/your-server-side-code','PatientController@stripeinsert');
+
                  
-                
-                 
+

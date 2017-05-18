@@ -190,6 +190,45 @@
     background: #37bbe6;
     border-radius: 0 0 4px 4px;
 }
+
+
+
+/*radio button code start*/
+
+.add-services .radio-group input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+.add-services .radio-group label {
+  color: #9a929e;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+  margin-bottom: 0!important;
+}
+
+.add-services .radio-group input[type=radio]:checked + label {
+  color: #ccc8ce;
+  background: #675f6b;
+}
+
+.add-services .radio-group label + .add-services .radio-group input[type=radio] + label {
+  border-left: solid 3px #675f6b;
+}
+
+.add-services .radio-group {
+  border: solid 3px #675f6b;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* radio button code end*/
+
 .panel-heading {
     margin-bottom:2%;
     float: left;
@@ -203,3 +242,4 @@
     padding: 15px;
     border-top: 1px solid #ccc;
 }
+

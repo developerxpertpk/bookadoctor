@@ -372,6 +372,20 @@ border: 1px solid #ff0000;
 .plan-subscription-detail .plan-features {
     width: auto;
 }
+.add-services .panel-heading span.dr-comlete-name{
+        padding: 6px;
+    background: #ddd;
+    border-radius: 2px;
+}
+.add-services .panel-heading span.dr-name, .add-services .panel-heading span.dr-name-spx{
+        text-transform: capitalize;
+    font-weight: 700;
+    font-size: 20px;
+}
+.add-services .panel-heading span.dr-name-spx{
+    color: #ff0000;
+}
+
 @media (min-width: 992px){
     .modal-lg {
         width: 80% !important;

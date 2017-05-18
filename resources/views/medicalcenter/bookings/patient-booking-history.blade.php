@@ -1,6 +1,7 @@
 @extends('layouts.medicalCenterLayout')
 @section('content')
     <div class="container">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.3.1/jquery.twbsPagination.min.js"></script>
         <div class="row">
             <div class="paitent-booking-history">
                 <div class="panel panel-default">

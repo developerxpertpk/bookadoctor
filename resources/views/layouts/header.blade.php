@@ -27,8 +27,8 @@
                     <div class="modal-body">
                       <form class="form-horizontal" action="{{action('Auth\LoginController@login')}}" method="POST" name="loginForm" novalidate
                         ng-app="LoginApp" ng-controller="LoginController" rc-submit="login()">
-                        <div class="form-group" ng-class="{'has-error': loginForm.email.$invalid && 
-         (loginForm.email.$dirty || rc.loginForm.attempted)}">
+                        <div class="form-group" ng-class="{'has-error': loginForm.email.$invalid &&
+                          (loginForm.email.$dirty || rc.loginForm.attempted)}">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                           <div class="col-sm-10">
@@ -37,92 +37,85 @@
                             ng-show="loginForm.email.$error.required">Required</span> </div>
                           </div>
                           <div class="form-group"  ng-class="{'has-error': loginForm.password.$invalid &&
-         (loginForm.password.$dirty || rc.loginForm.attempted)}">
+                            (loginForm.password.$dirty || rc.loginForm.attempted)}">
                             <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
                               <input class="form-control" id="inputPassword3" placeholder="Password" type="password" name="password" required ng-model="session.password"><span class="help-block"
                             ng-show="loginForm.password.$error.required">Required</span>
                           </div> </div>
                         </div>
+                        
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                              <label>
-                                <input type="checkbox"> Remember me </label>
-                              </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary"
+                            value="Login" title="Login">
+                            <span>Login</span>
+                            </button>
+                            {{-- <button type="submit" class="btn btn-primary">Login</button> --}}
                           </div>
-                          <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" 
-           value="Login" title="Login">
-           <span>Login</span>
-         </button>
-                              {{-- <button type="submit" class="btn btn-primary">Login</button> --}}
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer"> {{--
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}} <a href="#">Forget Password</a> </div>
-                      </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer"> {{--
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}} <a href="#">Forget Password</a> </div>
                     </div>
                   </div>
+                </div>
+              </li>
+              <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-submenu"> <a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal">Medical Center</a></li>
+                <li class="dropdown-submenu open"> <a tabindex="0" href="#" data-toggle="modal" data-target="#myModal1">Patient</a> </li>
+                <!-- <ul class="dropdown-menu">
+                  <li class="dropdown-header">User Name</li>
+                  <li><a tabindex="0">Sub action</a></li>
+                  <li class="disabled"><a tabindex="0">Another sub action</a></li>
+                  <li><a tabindex="0">Something else here</a></li>
+                </ul>-->
+                
+              </ul>
+            </li>
+            @else
+            
+            <li> <img id="profile_avatar" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_Profile->first_name }}&nbsp;{{ Auth::user()->is_Profile->last_name }}  <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{route('medical.center.image.gallery')}}"><i class="fa fa-fw fa-user"></i>Show Profile</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                 </li>
-                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-submenu"> <a tabindex="-1" href="#" data-toggle="modal" data-target="#myModal">Medical Center</a></li>
-                  <li class="dropdown-submenu open"> <a tabindex="0" href="#" data-toggle="modal" data-target="#myModal1">Patient</a> </li>
-                  <!-- <ul class="dropdown-menu">
-                    <li class="dropdown-header">User Name</li>
-                    <li><a tabindex="0">Sub action</a></li>
-                    <li class="disabled"><a tabindex="0">Another sub action</a></li>
-                    <li><a tabindex="0">Something else here</a></li>
-                  </ul>-->
-                  
+                <li>
+                  <a href="{{route('medical.center.settings')}}"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                {{--<li>--}}
+                  {{--{{ Auth::user()->email }}--}}
+                {{--</li>--}}
+                <li>
+                  <li>
+                    <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i>
+                      Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                    </form>
+                    {{-- <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a> --}}
+                  </li>
                 </ul>
               </li>
-              @else
-              
-              <li> <img id="profile_avatar" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->is_Profile->first_name }}&nbsp;{{ Auth::user()->is_Profile->last_name }}  <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{route('medical.center.image.gallery')}}"><i class="fa fa-fw fa-user"></i>Show Profile</a></li>
-                  <li>
-                    <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                  </li>
-                  <li>
-                    <a href="{{route('medical.center.settings')}}"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                  </li>
-                  <li class="divider"></li>
-                  {{--<li>--}}
-                    {{--{{ Auth::user()->email }}--}}
-                  {{--</li>--}}
-                  <li>
-                    <li>
-                      <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i>
-                        Logout
-                      </a>
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                      </form>
-                      {{-- <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a> --}}
-                    </li>
-                  </ul>
-                </li>
-                @endif
-                <!--  <li> settings
-                  <a href="#" <i class="fa fa-cog" aria-hidden="true"></i></a>
-                  
-                </li>-->
-              </div>
+              @endif
+              <!--  <li> settings
+                <a href="#" <i class="fa fa-cog" aria-hidden="true"></i></a>
+                
+              </li>-->
             </div>
-            
           </div>
-        </nav>
-      </div>
-    </header>
-  {{--</div>--}}
+          
+        </div>
+      </nav>
+    </div>
+  </header>
+{{--</div>--}}

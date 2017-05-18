@@ -35,6 +35,7 @@ Auth::routes();
 // Route::get('/', function () {
 //     return view('welcome');
 //   });
+Route::get('/404','HomeController@show_404');
 Route::get('/', 'HomenewController@index')->name('home1.home1');
 // Route::get('/','AdminController@index')->name('admin.dashboard');
 Route::get('/home', 'HomeController@index');
@@ -72,7 +73,7 @@ Route::get('/payments/data','DoctorBookingController@viewlist')->name('payment.d
 // Route::get('/medical','AdminController@medicaldestroy')->name('medical.destroy');
 });
 //medical center routes
-Route::prefix('medical')->group(function(){
+Route::group(['prefix' => 'medical',  'middleware' => 'is-medicalcenter'],function(){
 Route::get('/medical-center', 'Auth\MedicalCenterRegisterController@showMedicalRegistrationForm')->name('medical.center.regester');
 Route::post('/medical-center', 'Auth\MedicalCenterRegisterController@register')->name('medical.center.regester.submit');
 Route::get('/medical-center-subscription', 'MedicalCenterController@index')->name('medical.center.subscription.form');
@@ -125,6 +126,11 @@ Route::get('medical-center-show-pending-booking','MedicalcenterBookingController
 Route::get('medical-center-show-canceled-booking','MedicalcenterBookingController@show_canceled_booking')->name('medical.center.canceled.booking.show');
 Route::get('medical-center-show-completed-booking','MedicalcenterBookingController@show_completed_booking')->name('medical.center.completed.booking.show');
 Route::get('assign-service-to-doctor-{id}','MedicalcenterServiceController@assign_service_to_doctor')->name('assign.doctor.service');
+Route::post('insert-doctor-schedule','MedicalcenterServiceController@insertschedule')->name('insert.doctor.schedule');
+Route::get('delete-doctor-schedule-{id}','MedicalcenterServiceController@deleteschedule')->name('delete.doctor.schedule');
+Route::post('doctor-schedule-{id}/edit','MedicalcenterServiceController@editschedule')->name('edit.doctor.schedule');
+Route::get('delete-mecical-center-schedule-{id}','ScheduleController@deleteschedule')->name('delete.medicalcenter.schedule');
+Route::post('medical-center-schedule-{id}/edit','ScheduleController@editschedule')->name('edit.medicalcenter.schedule');
 
 });
 //patients Routes

@@ -225,11 +225,7 @@ margin-top: 40px;
 	width: 112%;
 }
 
-.pull-right {
-	float: right !important;
-	margin-top: 40px;
-	
-}
+
 
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover,.nav-tabs > li > a:hover {
@@ -377,4 +373,12 @@ width:100%;
 .modal-header h4{
 text-align:center;
 font-weight:600;
+}
+
+.medical-center-profile-view .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: none;
+    margin-top: 43px;
+    border-top: 1px solid #ddd;
 }

@@ -55,7 +55,7 @@
                                               @endif
 
                                               
-                <a class="btn btn-primary" href="{{route('assign.doctor.service',$item->id)}}">Add Doctor Schedule</a>
+                <a class="btn btn-primary" href="{{route('assign.doctor.service',$item->user_id)}}">Add Doctor Schedule</a>
                                                 
 
 
@@ -180,11 +180,8 @@
 
                                 @endforeach
 
-
                             </table>
-                        </div>
-
-
+                            
                     </div>
                 </div>
             </div>

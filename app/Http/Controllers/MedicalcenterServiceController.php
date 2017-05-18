@@ -7,6 +7,7 @@ use App\Schedule;
 use App\speciality;
 use App\Userprofile;
 use App\medicalcenter_doctor;
+use App\Usersetting;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Doctor as Authenticatable;
 use App\User;
@@ -17,6 +18,9 @@ use Redirect;
 use Auth;
 use DB;
 use Hash;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 class MedicalcenterServiceController extends Controller
 {
@@ -32,10 +36,8 @@ class MedicalcenterServiceController extends Controller
 
           $doctors[]=$test1;
       }
-
-        return view('medicalcenter.services.doctor',compact('doctors','users','specilaty'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
-
+        return view('medicalcenter.services.doctor',compact('doctors','specilaty'));
+        
     }
 
 
@@ -250,7 +252,9 @@ public function insert_specilaty(Request $request){
         return redirect()->route('add-doctor.index');
     }
 public function show_setting_page(){
-        return view('medicalcenter.settings');
+    $id= Auth::user()->id;
+     $schedules= Usersetting::where('user_id','=',$id)->get();
+        return view('medicalcenter.settings',compact('schedules'));
 }
     public function pwdchange(Request $request)
     {
@@ -315,7 +319,53 @@ public function show_setting_page(){
         }
     }
 public function assign_service_to_doctor($id){
-return view('medicalcenter.services.add-services',compact('id'));
+    $schedule= Usersetting::where('user_id','=',$id)->get();
+return view('medicalcenter.services.add-services',compact('id','schedule'));
+}
+
+
+
+
+
+
+
+  public function insertschedule(Request $request){
+
+$user_id=$request['user_id'];
+    
+
+    
+                $schedule = new Usersetting;
+                $schedule->user_id=$request['user_id'];
+                $schedule->day=$request['days'];
+                $schedule->time_in=Carbon::now()->todatestring()." ".$request['from_time'];
+                $schedule->time_out=Carbon::now()->todatestring()." ".$request['to_time'];
+                $schedule->save();
+                return  redirect(route('assign.doctor.service' ,$user_id));
+           
+     }
+
+
+
+
+public function deleteschedule($id){
+ 
+  $delschedule = Usersetting::where('user_id','=',$id)->delete();
+  
+     return redirect()->back();
+}
+
+public function editschedule(Request $request , $id){
+   
+     
+     $delschedule = Usersetting::where('user_id','=',$id)->first();
+     $day = $delschedule->day;
+  
+     $delschedule->time_in=$request['from_time'];
+     $delschedule->time_out=$request['to_time'];
+      $delschedule->save();
+     return redirect()->back();
+
 }
 
 

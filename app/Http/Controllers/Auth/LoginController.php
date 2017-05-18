@@ -53,6 +53,7 @@ class LoginController extends Controller
         //print_r($_POST);
         $email=$_POST['email'];
         $password=$_POST['password'];
+      
         //dd($_POST);
         if (Auth::attempt(array('email' => $email, 'password' => $password)))
             {
@@ -68,7 +69,7 @@ class LoginController extends Controller
                 }
                 if(Auth::user()->role_id == 4)
                 {
-                    // $status2=Userprofile::where('user_id','=',Auth::user()->id)->first();
+                    $status2=Userprofile::where('user_id','=',Auth::user()->id)->first();
 
                     if( $status2->plan_payment_status == 0){
                         return redirect()->route('medical.center.subscription.form')
@@ -78,6 +79,14 @@ class LoginController extends Controller
                         return redirect(route('medical.center.dashboard'));
                     }
                 }
+            }
+            else{
+               $notification = array(
+                            'message' => 'Your Email and Password not correct login again',
+                            'alert-type' => 'warning'
+                        );
+                        \Session::flash('notification',$notification);
+                return redirect()->route('home1.home1');
             }
     }
 

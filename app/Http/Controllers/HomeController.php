@@ -29,5 +29,9 @@ class HomeController extends Controller
         return view('index');
     }
 
-    
+    public function show_404(){
+        return view('error.404');
+    }
+      
+        
 }

@@ -152,14 +152,7 @@
                                                             <span class="help-inline" ng-show="loginsubmitted && loginForm.password.$error.required">Password Required</span>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-offset-2 col-sm-10">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                        <input type="checkbox"> Remember me </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                   
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
                                                             <button type="submit" class="btn btn-primary" ng-click="loginsubmitted=true">Login</button>
@@ -194,6 +187,17 @@
         </nav>
         </div>
     </header>
+
+@if(Session::has('message'))
+                        <p class="alert alert-info">{{ Session::get('message') }}</p>
+    @endif 
+                        <!--  check if any error -->
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{  $message }}</p>
+                            </div>
+                        @endif
+                        
     <!--Banner and search portion--><img class="imgs" src="img\doctorteam.png">
     <section class="search text-center">
         <div class="container">
@@ -405,14 +409,7 @@
                                 <span class="help-inline" ng-show="submitted && regForm.conform_password.$error.required">Conform Password Required</span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label>
-                                                        <input type="checkbox"> Remember me </label>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success" ng-click="submitted=true">Submit</button>
@@ -528,6 +525,26 @@
     });
 
 </script>
+ <script>
+                @if(Session::has('notification'))
+        var type = "{{ Session::get('notification.alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('notification.message') }}");
+                break;
+
+            case 'warning':
+                toastr.warning("{{ Session::get('notification.message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('notification.message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('notification.message') }}");
+                break;
+        }
+        @endif
+    </script>
 <style type="text/css">
     .display_none {
         display: none;

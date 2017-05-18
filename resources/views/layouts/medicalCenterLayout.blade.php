@@ -45,6 +45,8 @@
     <script src="{{ asset('js/jquery.table2excel.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/angular/custom_angular.js') }}" type="text/javascript"></script>
+<script src="{{ URL::to('js/angular/jquery.twbsPagination.min.js') }}" type="text/javascript"></script>
+    
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzoNF3kifUvuxgwoDSxQlgVgSKu9_ddzc"
             type="text/javascript"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
@@ -184,7 +186,7 @@ $body_class = str_replace(array('medical/'), '',$widget_text);
                         {{--Dr. Booking --}}
                         {{--</h1>--}}
                         <section class="page-header">
-                            <div class="medical-center-logo col-md-2"><img id="logo-img" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></div>
+                            <div class="medical-center-logo col-md-2"><img class="spin" id="logo-img" src="{{asset('/images/profile_pic/'.Auth::user()->is_Profile->images)}}"></div>
                             <div class="medical-center-tagline col-md-10"> <span class="page-tagline">
                             <h1>{{Auth::user()->is_Profile->title}}</h1>
                         </span></div>

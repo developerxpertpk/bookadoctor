@@ -221,9 +221,11 @@ font-size:22px;
 
 }
 .rights{
-color:#fff;
-margin-top: 56px;
-font-size: 15px;
+    color: #fff;
+    float: left;
+    font-size: 15px;
+    margin-top: 56px;
+    width: 100%;
 }
 
 
